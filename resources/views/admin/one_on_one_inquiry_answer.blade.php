@@ -59,7 +59,7 @@
                                        Save
                                     </a>
 
-                                    <a href="one-on-one-inquiry.html" class="btn btn-list mt-3 ml-3">
+                                    <a href="{{route('admin.oneononeinquiry')}}" class="btn btn-list mt-3 ml-3">
                                         List
                                     </a>
                                 </div>

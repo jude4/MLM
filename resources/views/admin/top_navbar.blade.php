@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <a href="index.html">
+            <a href="{{route('admin.administratorlist')}}">
                 <img class="img-fluid" src="{{asset('assets/images/logo01.png')}}" width="58%" />
             </a>
             <a class="mobile-options waves-effect waves-light">

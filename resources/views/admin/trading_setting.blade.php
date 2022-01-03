@@ -48,7 +48,7 @@
                                        Save
                                     </a>
 
-                                    <a href="notice-list.html" class="btn btn-list mt-3 ml-3">
+                                    <a href="{{route('admin.noticelist')}}" class="btn btn-list mt-3 ml-3">
                                         List
                                     </a>
                                 </div>

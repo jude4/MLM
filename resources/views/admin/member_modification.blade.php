@@ -170,7 +170,7 @@
                                             Save
                                         </a>
 
-                                        <a href="member_list.html" class="btn btn-list mt-3 ml-3">
+                                        <a href="{{route('admin.memberlist')}}" class="btn btn-list mt-3 ml-3">
                                             List
                                         </a>
                                     </div>

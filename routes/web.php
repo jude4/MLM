@@ -156,17 +156,21 @@ Route::get('/admin/administrator_registration', function () {
     return view('admin.administrator_registration');
 })->name('admin.administratorregistration');
 
-Route::get('/admin/elim_point_application_detail', function () {
-    return view('admin.elim_point_application_detail');
-})->name('admin.elimpointapplicatondetail');
+Route::get('/admin/elim_point_application_details', function () {
+    return view('admin.elim_point_application_details');
+})->name('admin.elimpointapplicatondetails');
 
 Route::get('/admin/elim_point_exchange_history', function () {
     return view('admin.elim_point_exchange_history');
 })->name('admin.elimpointapplicatiionhistory');
 
+Route::get('/admin/elim_point_transfer_history', function () {
+    return view('admin.elim_point_transfer_history');
+})->name('admin.elimpointtransferhistory');
+
 Route::get('/admin/faq_list', function () {
     return view('admin.faq_list');
-})->name('admiin.faqlist');
+})->name('admin.faqlist');
 
 Route::get('/admin/faq_modification', function () {
     return view('admin.faq_modification');
@@ -178,11 +182,19 @@ Route::get('/admin/faq_register', function () {
 
 Route::get('/admin/member_list', function () {
     return view('admin.member_list');
-})->name('admin.faqmemberlist');
+})->name('admin.memberlist');
 
 Route::get('/admin/member_modification', function () {
     return view('admin.member_modification');
 })->name('admin.membermodification');
+
+Route::get('/admin/notice_list', function () {
+    return view('admin.notice_list');
+})->name('admin.noticelist');
+
+Route::get('/admin/notice_modification', function () {
+    return view('admin.notice_modification');
+})->name('admin.noticemodification');
 
 Route::get('/admin/notice_register', function () {
     return view('admin.notice_register');
@@ -206,7 +218,7 @@ Route::get('/admin/pv_accumulation_history', function () {
 
 Route::get('/admin/pv_conversion_applicaton_details', function () {
     return view('admin.pv_conversion_application_details');
-})->name('admin.pvconversionaplicationdetails');
+})->name('admin.pvconversionapplicationdetails');
 
 Route::get('/admin/pv_usage_history', function () {
     return view('admin.pv_usage_history');

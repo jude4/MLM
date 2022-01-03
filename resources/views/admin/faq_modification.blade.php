@@ -75,7 +75,7 @@
                                        Save
                                     </a>
 
-                                    <a href="faq-list.html" class="btn btn-list mt-3 ml-3">
+                                    <a href="{{route('admin.faqlist')}}" class="btn btn-list mt-3 ml-3">
                                         List
                                     </a>
                                 </div>

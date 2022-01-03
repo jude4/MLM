@@ -13,7 +13,7 @@
                 <ul class="pcoded-submenu">
                     <li class="active">
                         
-                        <a href="administator_list.html" class="waves-effect waves-dark d-inline">
+                        <a href="{{route('admin.administratorlist')}}" class="waves-effect waves-dark d-inline">
                             <span class="pcoded-micon pr-1  "><i class="fas fa-circle fa-xs d-inline"></i></span>
                             <span class="pcoded-mtext">Admin List</span>
                         </a>
@@ -28,12 +28,12 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
-                        <a href="member_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.memberlist')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Member List</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="member_avatar_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.mlmusermanagement')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">MLM Membership Management</span>
                         </a>
                     </li>
@@ -47,28 +47,28 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="coin-transaction-list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.pvaccumulationhistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Total PV accumulation history</span>
                         </a>
                     </li>
                    <li class="">
-                        <a href="coin setting.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.pvusagehistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Total PV usage history</span>
                         </a>
                     </li>
                     
                     <li class="">
-                        <a href="coin setting.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.pvwithdrawalrequesthistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">PV withdrawal request history</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="coin setting.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.pvconversionapplicationdetails')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">PV conversion application details</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="coin setting.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.pvtransmissionapplicationdetails')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">PV transmission application details</span>
                         </a>
                     </li>
@@ -82,22 +82,22 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="point_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.elimpointapplicatondetails')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Elim Point Application Details</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="point_management_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.elimpointapplicatiionhistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Elim Point Exchange History</span>
                         </a>
                     </li>
                      <li class="">
-                        <a href="point_management_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.elimpointtransferhistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Elim point transfer history</span>
                         </a>
                     </li>
                      <li class="">
-                        <a href="point_management_list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.tpointdetailsbymember')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">T point details by member</span>
                         </a>
                     </li>
@@ -111,12 +111,12 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="trading-order-history.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.tradingorderhistory')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Trading order history</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="trading-setting.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.tradingsetting')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Trading Settings</span>
                         </a>
                     </li>
@@ -131,17 +131,17 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="notice-list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.noticelist')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Notice</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="faq-list.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.faqlist')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Frequently Asked Questions</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="one-on-one-inquiry.html" class="waves-effect waves-dark">
+                        <a href="{{route('admin.oneononeinquiry')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">One-on-one inquiry</span>
                         </a>
                     </li>
@@ -149,7 +149,7 @@
                 </ul>
             </li>
             <li class="">
-                <a href="profile.html" class="waves-effect waves-dark">
+                <a href="{{route('admin.profile')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon pl-0"><img src="{{asset('assets/images/p07.png')}}" width="30px"><b>BC</b></span>
                     <span class="pcoded-mtext">My Profile</span>
                     <span class="pcoded-mcaret"></span>
@@ -157,7 +157,7 @@
                 
             </li>
              <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="{{route('admin.login')}}" class="waves-effect waves-dark">
                    <span class="pcoded-micon pl-0"><img src="{{asset('assets/images/p06.png')}}" width="30px"><b>BC</b></span>
                     <span class="pcoded-mtext">Log out</span>
                     <span class="pcoded-mcaret"></span>
