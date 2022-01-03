@@ -1,0 +1,115 @@
+/* START COMMON CSS */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --font-roboto: 'Roboto';
+    --font-inter: 'Inter';
+/*    --font-nunito-sans: 'Nunito Sans';
+    --font-noto-sans: 'Noto Sans';*/
+    --font-awesome: 'Font Awesome 5 Brands';
+}
+
+html {
+    width:100%;
+    min-height:100%;
+    margin:0;
+}
+
+ol,ul,li {
+    list-style: none;
+}
+
+a,a:hover {
+    text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+    padding-bottom: 0;
+}
+
+/* END COMMON CSS */
+/* ==========x==========x==========x==========x==========x==========x==========x========== */
+/* START HEADER CSS */
+
+header {
+    background-color: #FFFFFF;
+}
+
+#header .navbar-brand {
+    color: #17A2B7;
+    font-size: 24px;
+    font-family: var(--font-inter);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+#header .navbar-brand span {
+    color: #000000;
+    text-transform: capitalize;
+}
+
+#header .navbar-nav .nav-link {
+    font-size: 16px;
+    font-family: var(--font-inter);
+    font-weight: 600;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+#header .nav-profile img {
+    max-height: 36px;
+}
+
+#header .nav-profile span {
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid #0F5964;
+    border-radius: 6px;
+    padding: 6px 15px;
+    color: #0F5964;
+}
+
+#header .navbar-nav .nav-item {
+    padding: 0 50px;
+}
+
+#header .dropdown .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.65);
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    top: 60%;
+    right: 85%;
+    left: unset;
+}
+
+#header .dropdown .dropdown-menu .dropdown-item {
+    color: #FFFFFF;
+}
+
+#header .dropdown .dropdown-menu .dropdown-item:hover,
+#header .dropdown .dropdown-menu .dropdown-item:focus {
+    color: #FFFFFF;
+    background-color: #16181b;
+}
+
+#header .dropdown .dropdown-menu .dropdown-item:focus-visible {
+    outline-offset: unset;
+    outline: unset;
+}
+
+/* END HEADER CSS */
+/* ==========x==========x==========x==========x==========x==========x==========x========== */
+/* START TITLE-BG CSS */
+
+.title-bg {
+    background-image: url('../img/background/background.png');
+    background-size: cover;
+    padding: 300px 0;
+    background-position: center;
+}
+
+/* END TITLE-BG CSS */
