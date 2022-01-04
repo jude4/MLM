@@ -140,6 +140,10 @@ Route::get('/login', function () {
     return view('auth.user.login');
 })->name('login');
 
+Route::get('/register', function () {
+    return view('auth.user.register');
+})->name('register');
+
 
 
 
@@ -255,3 +259,4 @@ Route::get('/admin/pv_transmission_application_details', function () {
 Route::get('/admin/login', function () {
     return view('auth.admin.login');
 })->name('admin.login');
+
