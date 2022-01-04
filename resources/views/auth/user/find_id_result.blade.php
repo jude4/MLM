@@ -45,7 +45,7 @@
                                </div>
                                                                
                                 <div class="login-sec-btn p-t-25 mt-4">
-                                 	<a href="login.html" class="login-btn-frt">Login</a>
+                                 	<a href="{{route('login')}}" class="login-btn-frt">Login</a>
                                 </div>
                             </form>
                         </div>

@@ -76,7 +76,7 @@
                                  	<button class="login-btn-frt"> Password Reset</button>
                                 </div>
                                 
-                                <div class="log-acc-detail mt-2">return to login page <a href="login.html"class="log-ac-join"><img src="{{asset('image/icon/back.png')}}" class="mr-1" width="23px">Login</a></div>
+                                <div class="log-acc-detail mt-2">return to login page <a href="{{route('login')}}"class="log-ac-join"><img src="{{asset('image/icon/back.png')}}" class="mr-1" width="23px">Login</a></div>
                                
                             </form>
                         </div>

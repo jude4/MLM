@@ -59,10 +59,10 @@
                                 </div>
                                 
                                 <div class="login-sec-btn p-t-25 mt-3">
-                                 	<a href="find-id-result.html" class="login-btn-frt"> Find ID</a>
+                                 	<a href="{{route('user.findidresult')}}" class="login-btn-frt"> Find ID</a>
                                 </div>
                                 
-                                <div class="log-acc-detail mt-2">return to login page <a href="login.html"class="log-ac-join"><img src="{{asset('image/icon/back.png')}}" class="mr-1" width="23px">Login</a></div>
+                                <div class="log-acc-detail mt-2">return to login page <a href="{{route('login')}}"class="log-ac-join"><img src="{{asset('image/icon/back.png')}}" class="mr-1" width="23px">Login</a></div>
                                
                             </form>
                         </div>

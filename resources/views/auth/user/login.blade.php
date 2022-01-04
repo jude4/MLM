@@ -48,12 +48,12 @@
                                     	<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"> 
                                     	<label class="label-checkbox100 "> Automatic login </label>
                                     </div>
-                                    <div class="mt-sm-2 mt-0"> <a href="find-password.html" class="forgot-txt1"> Find ID / Find Password </a> </div>
+                                    <div class="mt-sm-2 mt-0"> <a href="{{route('user.findpassword')}}" class="forgot-txt1"> Find ID / Find Password </a> </div>
                                 </div>
                                 <div class="login-sec-btn p-t-25">
                                  	<a href="index.html" class="login-btn-frt"> Login </a>
                                 </div>
-                                <div class="log-acc-detail mt-2">Don't have an account yet? <a href="sign-up.html"class="log-ac-join">join the membership</a></div>
+                                <div class="log-acc-detail mt-2">Don't have an account yet? <a href="{{route('register')}}"class="log-ac-join">join the membership</a></div>
                                
                             </form>
                         </div>
