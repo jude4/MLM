@@ -18,15 +18,19 @@
                                 <div class="row justify-content-center">
                                     <div class="col-11 p-2">
                                         <div class="sml-scree-box">
-                                            <div class="text-center sp-smd-text">{{Auth::user()->nickname}}</div>
-                                            <div class="text-center sp-smd-texts">{{Auth::user()->nickname}}</div>
+                                            <div class="text-center sp-smd-text">{{Auth::user()->user_id}}</div>
+                                            <div class="text-center sp-smd-texts">{{Auth::user()->user_id}}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between p-4">
                                     <a href="{{route('user.profile')}}" class="my-infos-text">My Info</a>
                                     <a href="{{route('user.krwwithdrawalrequest')}}" class="my-mang-text">PV management</a>
-                                    <a href="{{route('login')}}" class="my-mang-out">Log out</a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();" class="my-mang-out">Log out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                      </form>
                                 </div>
 
                                 <div class="px-4 pt-2">
@@ -75,12 +79,13 @@
                             <div class="rig-menu-dis  d-md-inline-block d-none">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                                 <img class="dropbtn" src="{{asset('image/users-drp01.png')}}" width="40px">
-                                                 <div class="d-inline-block us-name-text ml-2">{{Auth::user()->nickname}}</div>
+                                                 <div class="d-inline-block us-name-text ml-2">{{Auth::user()->user_id}}</div>
                                             </a>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{route('user.profile')}}">My Info</a>
                                                 <a class="dropdown-item" href="{{route('user.krwwithdrawalrequest')}}">PV management</a>
-                                                <a class="dropdown-item" href="{{route('login')}}">Log out</a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">Log out</a>
                                             </div>
                             </div> 
                              <!--  --------------small screen display top menubar----------- -->

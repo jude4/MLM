@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::redirect('/', '/login');
 
 // User Routes
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->name('user.dashboard');
 
@@ -137,9 +143,9 @@ Route::get('/find_password', function () {
     return view('auth.user.find_password');
 })->name('user.findpassword');
 
-Route::get('/login', function () {
-    return view('auth.user.login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('auth.user.login');
+// })->name('login');
 
 
 
@@ -262,6 +268,4 @@ Route::get('/admin/login', function () {
 })->name('admin.login');
 
 
-// Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
