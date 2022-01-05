@@ -32,12 +32,14 @@
                 <div class="row lg-sp">                 
                     <div class="col-lg-6 col-md-7">                       
                         <div class="wrap-login">
-                            <form class="login100-form validate-form " id="sign-up">
+                            <form class="login100-form validate-form " id="sign-up" method="POST" action="{{ route('register') }}">
+                                @csrf
+
                                 <span class="login100-form-subtitle m-b-8 mt-3">V-Elim </span>
                                 <span class="log-sub-title">join the membership</span>
                                 <div class="wrap-input100 validate-input m-b-16" > 
                                     <label  class=" col-form-label lb-txt text-black mb-0 font-weight-bold">ID</label>
-                                    <input class="input100" type="text"  placeholder="Please enter your ID.">                                
+                                    <input class="input100" type="text" name="id"  placeholder="Please enter your ID." value="{{App\Models\User::generateUUID()}}">                                
                                 </div>
                                
                                 <label for="inputMyid" class=" col-form-label lb-txt text-black font-weight-bold mb-0">E-mail
@@ -45,7 +47,7 @@
                                     </label>
                                 <div class=" wrap-input100 validate-input m-b-16 input-group m-b-16">
                                     
-                                    <input type="text " class="form-control input100" placeholder="Please enter your e-mail.">
+                                    <input type="email" class="form-control input100" placeholder="Please enter your e-mail.">
                                     <div class="input-group-append">
                                         <button class=" input-group-text snd-var-code hid-code"> Send verification code</button>
                                     </div>

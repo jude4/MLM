@@ -18,7 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_id',
+        'nickname',
         'email',
         'password',
     ];
@@ -41,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function uuidExists($id){
+        return self::where('user_id', '=', $id)->first()? true : false; 
+    }
+
+    public static function generateUUID(){
+        $unique_id = "ELIM". rand(1000000, 9999999);
+        return self::uuidExists($unique_id)? self::generateUUID(): $unique_id;
+    }
 }

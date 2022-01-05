@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Auth\User\Register;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -140,9 +141,9 @@ Route::get('/login', function () {
     return view('auth.user.login');
 })->name('login');
 
-Route::get('/register', function () {
-    return view('auth.user.register');
-})->name('register');
+
+
+Route::get('/register', Register::class)->name('register');
 
 
 
@@ -260,3 +261,7 @@ Route::get('/admin/login', function () {
     return view('auth.admin.login');
 })->name('admin.login');
 
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
