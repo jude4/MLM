@@ -67,7 +67,7 @@
                                     <a href="{{route('user.krwwithdrawalrequest')}}">Withdrawal Request</a>
                                 </li>
                                 <li class="active">
-                                    <a href="KRW-application-list.html">Application List</a>
+                                    <a href="{{route('user.krwapplicationlist')}}">Application List</a>
                                 </li>
                             </ul>
                         </li>

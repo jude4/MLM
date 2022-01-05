@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Auth\User\FindPassword;
 use App\Http\Livewire\Auth\User\Register;
 use Illuminate\Support\Facades\Route;
 
@@ -139,9 +140,7 @@ Route::get('/find_id_result', function () {
     return view('auth.user.find_id_result');
 })->name('user.findidresult');
 
-Route::get('/find_password', function () {
-    return view('auth.user.find_password');
-})->name('user.findpassword');
+Route::get('/find_password', FindPassword::class)->name('user.findpassword');
 
 // Route::get('/login', function () {
 //     return view('auth.user.login');
