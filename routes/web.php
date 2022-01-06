@@ -261,9 +261,9 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.pv_transmission_application_details');
     })->name('pvtransmissionapplicationdetails');
 
-    Route::get('/logout',[AdminAuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('admin.login')->withoutMiddleware('guest');
 
-Route::post('admin/login',[AdminAuthController::class, 'postLogin'])->name('admin.login.post')->withoutMiddleware('guest');
+Route::post('admin/login', [AdminAuthController::class, 'postLogin'])->name('admin.login.post')->withoutMiddleware('guest');
