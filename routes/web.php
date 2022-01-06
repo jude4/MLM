@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Auth\User\FindId;
 use App\Http\Livewire\Auth\User\FindPassword;
@@ -41,7 +42,7 @@ Route::get('/first-inquiry', function () {
     return view('user.first_inquiry');
 })->name('user.firstinquiry');
 
-Route::get('/faq', function(){
+Route::get('/faq', function () {
     return view('user.faq');
 })->name('user.faq');
 
@@ -74,7 +75,7 @@ Route::get('/my_point_send', function () {
 })->name('mypointsend');
 
 Route::get('/elim_point_charge', function () {
-    return view('user.elim_point_recharge');   
+    return view('user.elim_point_recharge');
 })->name('user.elimpointcharge');
 
 Route::get('/my_point_list', function () {
@@ -106,7 +107,7 @@ Route::get('/krw_withdrawal_request', function () {
 })->name('user.krwwithdrawalrequest');
 
 Route::get('/pv_check_accumulation_history', function () {
-   return view('user.pv_check_accumulation_history'); 
+    return view('user.pv_check_accumulation_history');
 })->name('user.pvcheckaccumulationhistory');
 
 Route::get('/pv_my_tree', function () {
@@ -149,120 +150,120 @@ Route::get('/find_password', FindPassword::class)->name('user.findpassword');
 Route::get('/register', Register::class)->name('register');
 
 
+Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namespace('Admin')->group(function () {
 
+    // Administrator routes
+    Route::get('/dashboard', function () {
+        return view('admin.administrator_list');
+    })->name('administratorlist');
 
-// Administrator routes
-Route::get('/admin/dashboard', function () {
-    return view('admin.administrator_list');
-})->name('admin.administratorlist');
+    Route::get('/admin-management', function () {
+        return view('admin_management');
+    });
 
-Route::get('/admin/admin-management', function () {
-    return view('admin.admin_management');
+    Route::get('/administrator_registration', function () {
+        return view('admin.administrator_registration');
+    })->name('administratorregistration');
+
+    Route::get('/elim_point_application_details', function () {
+        return view('admin.elim_point_application_details');
+    })->name('elimpointapplicatondetails');
+
+    Route::get('/elim_point_exchange_history', function () {
+        return view('admin.elim_point_exchange_history');
+    })->name('elimpointapplicatiionhistory');
+
+    Route::get('/elim_point_transfer_history', function () {
+        return view('admin.elim_point_transfer_history');
+    })->name('elimpointtransferhistory');
+
+    Route::get('/faq_list', function () {
+        return view('admin.faq_list');
+    })->name('faqlist');
+
+    Route::get('/faq_modification', function () {
+        return view('admin.faq_modification');
+    })->name('faqmodification');
+
+    Route::get('/faq_register', function () {
+        return view('admin.faq_register');
+    })->name('faqregister');
+
+    Route::get('/member_list', function () {
+        return view('admin.member_list');
+    })->name('memberlist');
+
+    Route::get('/member_modification', function () {
+        return view('admin.member_modification');
+    })->name('membermodification');
+
+    Route::get('/notice_list', function () {
+        return view('admin.notice_list');
+    })->name('noticelist');
+
+    Route::get('/notice_modification', function () {
+        return view('admin.notice_modification');
+    })->name('noticemodification');
+
+    Route::get('/notice_register', function () {
+        return view('admin.notice_register');
+    })->name('noticeregister');
+
+    Route::get('/one_on_one_inquiry_answer', function () {
+        return view('admin.one_on_one_inquiry_answer');
+    })->name('oneononeinquiryregister');
+
+    Route::get('/one_on_one_inquiry', function () {
+        return view('admin.one_on_one_inquiry');
+    })->name('oneononeinquiry');
+
+    Route::get('/profile', function () {
+        return view('admin.profile');
+    })->name('profile');
+
+    Route::get('/pv_accumulation_history', function () {
+        return view('admin.pv_accumulation_history');
+    })->name('pvaccumulationhistory');
+
+    Route::get('/pv_conversion_applicaton_details', function () {
+        return view('admin.pv_conversion_application_details');
+    })->name('pvconversionapplicationdetails');
+
+    Route::get('/pv_usage_history', function () {
+        return view('admin.pv_usage_history');
+    })->name('pvusagehistory');
+
+    Route::get('/pv_withdrawal_request_history', function () {
+        return view('admin.pv_withdrawal_request_history');
+    })->name('pvwithdrawalrequesthistory');
+
+    Route::get('/t_point_details_by_member', function () {
+        return view('admin.t_point_details_by_member');
+    })->name('tpointdetailsbymember');
+
+    Route::get('/trading_order', function () {
+        return view('admin.trading_order_history');
+    })->name('tradingorderhistory');
+
+    Route::get('/trading_setting', function () {
+        return view('admin.trading_setting');
+    })->name('tradingsetting');
+
+    Route::get('/mlm_user_management', function () {
+        return view('admin.mlm_user_management');
+    })->name('mlmusermanagement');
+
+    Route::get('/admin_management_list', function () {
+        return view('admin.admin_management_edit');
+    })->name('adminmanagementedit');
+
+    Route::get('/pv_transmission_application_details', function () {
+        return view('admin.pv_transmission_application_details');
+    })->name('pvtransmissionapplicationdetails');
+
+    Route::get('/logout',[AdminAuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/admin/administrator_registration', function () {
-    return view('admin.administrator_registration');
-})->name('admin.administratorregistration');
+Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('admin.login')->withoutMiddleware('guest');
 
-Route::get('/admin/elim_point_application_details', function () {
-    return view('admin.elim_point_application_details');
-})->name('admin.elimpointapplicatondetails');
-
-Route::get('/admin/elim_point_exchange_history', function () {
-    return view('admin.elim_point_exchange_history');
-})->name('admin.elimpointapplicatiionhistory');
-
-Route::get('/admin/elim_point_transfer_history', function () {
-    return view('admin.elim_point_transfer_history');
-})->name('admin.elimpointtransferhistory');
-
-Route::get('/admin/faq_list', function () {
-    return view('admin.faq_list');
-})->name('admin.faqlist');
-
-Route::get('/admin/faq_modification', function () {
-    return view('admin.faq_modification');
-})->name('admin.faqmodification');
-
-Route::get('/admin/faq_register', function () {
-    return view('admin.faq_register');
-})->name('admin.faqregister');
-
-Route::get('/admin/member_list', function () {
-    return view('admin.member_list');
-})->name('admin.memberlist');
-
-Route::get('/admin/member_modification', function () {
-    return view('admin.member_modification');
-})->name('admin.membermodification');
-
-Route::get('/admin/notice_list', function () {
-    return view('admin.notice_list');
-})->name('admin.noticelist');
-
-Route::get('/admin/notice_modification', function () {
-    return view('admin.notice_modification');
-})->name('admin.noticemodification');
-
-Route::get('/admin/notice_register', function () {
-    return view('admin.notice_register');
-})->name('admin.noticeregister');
-
-Route::get('/admin/one_on_one_inquiry_answer', function () {
-    return view('admin.one_on_one_inquiry_answer');
-})->name('admin.oneononeinquiryregister');
-
-Route::get('/admin/one_on_one_inquiry', function () {
-    return view('admin.one_on_one_inquiry');
-})->name('admin.oneononeinquiry');
-
-Route::get('/admin/profile', function () {
-    return view('admin.profile');
-})->name('admin.profile');
-
-Route::get('/admin/pv_accumulation_history', function () {
-    return view('admin.pv_accumulation_history');
-})->name('admin.pvaccumulationhistory');
-
-Route::get('/admin/pv_conversion_applicaton_details', function () {
-    return view('admin.pv_conversion_application_details');
-})->name('admin.pvconversionapplicationdetails');
-
-Route::get('/admin/pv_usage_history', function () {
-    return view('admin.pv_usage_history');
-})->name('admin.pvusagehistory');
-
-Route::get('/admin/pv_withdrawal_request_history', function () {
-    return view('admin.pv_withdrawal_request_history');
-})->name('admin.pvwithdrawalrequesthistory');
-
-Route::get('/admin/t_point_details_by_member', function () {
-    return view('admin.t_point_details_by_member');
-})->name('admin.tpointdetailsbymember');
-
-Route::get('/admin/trading_order', function () {
-    return view('admin.trading_order_history');
-})->name('admin.tradingorderhistory');
-
-Route::get('/admin/trading_setting', function () {
-    return view('admin.trading_setting');
-})->name('admin.tradingsetting');
-
-Route::get('/admin/mlm_user_management', function () {
-    return view('admin.mlm_user_management');
-})->name('admin.mlmusermanagement');
-
-Route::get('/admin/admin_management_list', function () {
-    return view('admin.admin_management_edit');
-})->name('admin.adminmanagementedit');
-
-Route::get('/admin/pv_transmission_application_details', function () {
-    return view('admin.pv_transmission_application_details');
-})->name('admin.pvtransmissionapplicationdetails');
-
-Route::get('/admin/login', function () {
-    return view('auth.admin.login');
-})->name('admin.login');
-
-
-
+Route::post('admin/login',[AdminAuthController::class, 'postLogin'])->name('admin.login.post')->withoutMiddleware('guest');

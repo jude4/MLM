@@ -50,30 +50,50 @@
                     <div class="col-md-5">
                        
                         <div class="wrap-login100">
-                            <form class="login100-form validate-form"> 
+
+                            @if(Session::get('error'))
+                            <center>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong> {{ Session::get('error') }}</strong>
+                                    {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}
+                                  </div>
+                            </center>
+                            @endif 
+                            <form class="login100-form validate-form" method="POST" action="{{ route('admin.login.post') }}"> 
+                                @csrf
                                 <span class="login100-form-title "><img src="{{asset('assets/images/logo01.png')}}" width="28%"> </span> 
                                 <span class="login100-form-subtitle m-b-16 mt-3">Administrator </span>
                                 <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz"> 
                                     <label for="inputMyid" class=" col-form-label lb-txt text-black mb-0 font-weight-bold">ID</label>
-                                    <input class="input100" type="text" name="Username" placeholder="Please enter the administrator ID."> 
+                                    <input class="form-control input100 @error('user_id') is-invalid @enderror" type="text" name="id" value="{{old('id')}}" placeholder="Please enter the administrator ID."> 
                                     <span class="focus-input100"></span> 
                                     <span class="symbol-input100"> 
                                         <span class="glyphicon glyphicon-user"></span> 
                                     </span> 
+                                    @error('id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror 
                                 </div>
                                 <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
                                 <label for="inputMyid" class=" col-form-label lb-txt text-black font-weight-bold">Password</label>
-                                 <input class="input100" type="password" name="pass" placeholder="Please enter a password."> 
+                                 <input class="form-control input100 @error('user_id') is-invalid @enderror" type="password" name="password" placeholder="Please enter a password."> 
                                  <span class="focus-input100"></span> 
                                  <span class="symbol-input100"> 
                                     <span class="glyphicon glyphicon-lock"></span> 
-                                </span> 
+                                </span>
+                                @error('id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror 
                                 </div>
                                 <!-- <div class="flex-sb-m w-full p-b-30">
                                     <div class="contact100-form-checkbox"> <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"> <label class="label-checkbox100" for="ckb1"> Remember me </label> </div>
                                     <div> <a href="#" class="txt1"> Forgot Password? </a> </div>
                                 </div> -->
-                                <div class="container-login100-form-btn p-t-25"> <a class="login100-form-btn" href="{{route('admin.administratorlist')}}"> Login </a> </div>
+                                <div class="container-login100-form-btn p-t-25"> <button class="login100-form-btn" > Login </button> </div>
                             </form>
                         </div>
                     </div>

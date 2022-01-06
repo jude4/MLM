@@ -157,7 +157,7 @@
                 
             </li>
              <li class="">
-                <a href="{{route('admin.login')}}" class="waves-effect waves-dark">
+                <a href="{{route('admin.logout')}}" class="waves-effect waves-dark">
                    <span class="pcoded-micon pl-0"><img src="{{asset('assets/images/p06.png')}}" width="30px"><b>BC</b></span>
                     <span class="pcoded-mtext">Log out</span>
                     <span class="pcoded-mcaret"></span>

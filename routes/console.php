@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Admin;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,19 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+
+Artisan::command('create superadmin', function () {
+    $admin = Admin::create([
+        'admin_id' => 'administrator',
+        'password' => Hash::make('password'),
+        'name' => 'super admin',
+        'department' => 'Management',
+        'status' => true,
+        'mobile' => '+2348160262187',
+        'is_super' => true,
+    ]);
+    $this->comment('first administrator has been setup');
+})->purpose('Setup the admin');
+
+
