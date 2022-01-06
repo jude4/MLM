@@ -30,7 +30,7 @@
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                                @enderror
                             </div>
                             @if($emailMessage!='')
                                     <div>
@@ -38,7 +38,7 @@
                                             <small><strong>{{ $emailMessage }}</strong></small>
                                         </span>
                                     </div>
-                                @endif
+                            @endif
                             <div class=" wrap-input100 validate-input m-b-16 input-group m-b-16">
                                 <input type="text " class="form-control input100 @error('code') is-invalid @enderror" placeholder="Please enter the verification code." wire:model.defer='code'>
                                 <div class="input-group-append">

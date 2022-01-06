@@ -39,7 +39,11 @@
                                <div class=" justify-content-center wdn-sp mt-5" >
                                     <div class="col-12 px-0">
                                          <div class="bor-box-id">
-                                            <div class="user-id-text align-self-center">gyewang01</div>
+                                            @if ($user_id)
+                                            <div class="user-id-text align-self-center">{{$user_id}}</div>
+                                            @else
+                                            <div class="user-id-text align-self-center text-danger">No Record Found</div>
+                                            @endif
                                         </div>
                                     </div>
                                </div>

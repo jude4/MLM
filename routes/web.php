@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Livewire\Auth\User\FindId;
 use App\Http\Livewire\Auth\User\FindPassword;
 use App\Http\Livewire\Auth\User\Register;
 use Illuminate\Support\Facades\Route;
@@ -132,13 +134,9 @@ Route::get('/pv_exchange_accumulation_elim_point', function () {
 })->name('user.pvexchangeaccumulaionelimpoint');
 
 //User Auth routes
-Route::get('/find_id', function () {
-    return view('auth.user.find_id');
-})->name('user.findid');
+Route::get('/find_id', FindId::class)->name('user.findid');
 
-Route::get('/find_id_result', function () {
-    return view('auth.user.find_id_result');
-})->name('user.findidresult');
+Route::post('/find_id_result', [UserController::class, 'findResult'])->name('user.findidresult');
 
 Route::get('/find_password', FindPassword::class)->name('user.findpassword');
 
