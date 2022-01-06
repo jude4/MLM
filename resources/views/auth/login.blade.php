@@ -59,7 +59,7 @@
                                     	<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 
                                     	<label class="label-checkbox100 "> Automatic login </label>
                                     </div>
-                                    <div class="mt-sm-2 mt-0"> <a href="{{route('user.findpassword')}}" class="forgot-txt1"> Find ID / Find Password </a> </div>
+                                    <div class="mt-sm-2 mt-0 d-flex"><a href="{{route('user.findid')}}" class="forgot-txt1"> Find ID /  </a> <a href="{{route('user.findpassword')}}" class="forgot-txt1">&nbsp; Find Password </a> </div>
                                 </div>
                                 <div class="login-sec-btn p-t-25">
                                  	<button class="login-btn-frt"> Login </button>
