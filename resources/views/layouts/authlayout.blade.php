@@ -20,6 +20,8 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('font/noto-sans/noto-sans.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('font/font-awesome-pro-master/css/all.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('font/bootstrap-icons/bootstrap-icon.css')}}">
+	@include('sweetalert::alert')
+
     @livewireStyles
 <!-- ==========x==========x========== END FONT ==========x==========x========== -->
 </head>

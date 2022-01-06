@@ -46,14 +46,14 @@ class AdminAuthController extends Controller
             'id' => 'required|string',
             'password' => 'required|string',
         ]);
-        
+
         if (auth()->guard('admin')->attempt(['admin_id' => $request->input('id'), 'password' => $request->input('password')]))
         {
             $admin = auth()->guard('admin')->user();
             $admin->createLoginLog();
             
             Session::put('success','You are Login successfully!!');
-            return redirect()->route('admin.administratorlist');
+            return redirect()->route('admin.administratorlist')->with('success', 'Logged In');
             
         } else {
             return back()->with('error','your username and password are wrong.');
