@@ -52,7 +52,6 @@ class AdminAuthController extends Controller
             $admin = auth()->guard('admin')->user();
             $admin->createLoginLog();
             
-            Session::put('success','You are Login successfully!!');
             return redirect()->route('admin.administratorlist')->with('toast_success', 'Logged In');
             
         } else {
@@ -70,8 +69,7 @@ class AdminAuthController extends Controller
     { 
         Admin::saveLogoutTransaction(Auth::guard('admin')->user()->id);
         auth()->guard('admin')->logout();
-        Session::flush();
-        Session::put('toast_success','You are logout successfully');        
-        return redirect(route('admin.login'));
+        Session::flush();        
+        return redirect(route('admin.login'))->with('toast_success', 'You are logged out successfully');
     }
 }

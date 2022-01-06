@@ -23,12 +23,12 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Id</label>
-                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="admin04">
+                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="admin04" value="{{auth()->guard('admin')->user()->admin_id}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Name</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" value="{{auth()->guard('admin')->user()->name}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -44,7 +44,7 @@
                                                         </ul>
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
-                                                    <input type="text" name="phone[1][number]" class="form-control " placeholder="01012345678" />
+                                                    <input type="text" name="phone[1][number]" class="form-control " placeholder="01012345678" value="{{auth()->guard('admin')->user()->mobile}}" />
                                                 </div>
                                                 
                                             </div>
@@ -56,7 +56,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Manager's Department</label>
-                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="operation team">
+                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="operation team" value="{{auth()->guard('admin')->user()->department}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
