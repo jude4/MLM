@@ -21,25 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-4 row justify-content-center mb-5">
-            <div class="col-lg-8 col-md-10 col-sm-11 col-12 ">
-                <div class="row">
-                    <div class="col-4 text-left">
-                        <div class="pro-user-img">
-                            <img src="{{asset('image/icon/user.png')}}" width="85px">
-                        </div>
-                    </div>
-                    <div class="col-8 text-right">
-                        <div class="btn-section mb-4">
-                            <a href="#" class="img-exchange-btn">Image Change</a>
-                        </div>
-                        <div class="mt-4">
-                            <a href="#" class="img-initial-btn">Image initialization</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @livewire('user.profile-picture')
         <div class="row justify-content-center">
 
             <div class="col-lg-8 col-md-10 col-sm-11 col-12 ">
@@ -52,8 +34,8 @@
 
                         </div>
                         <div class="col-5 text-right">
-                            <div class="elm-pon-title">25,000</div>
-                            <div class="elm-pon-title">87,000</div>
+                            <div class="elm-pon-title">{{Auth::user()->elim_points}}</div>
+                            <div class="elm-pon-title">{{Auth::user()->t_points}}</div>
                         </div>
                     </div>
                 </div>
@@ -62,39 +44,42 @@
                 </div>
             </div>
         </div>
+        <form method="POST" action="{{route('user.profile.update')}}">
+            @csrf
         <div class="row justify-content-center mt-4">
            <div class="col-lg-8 col-md-10 col-sm-11 col-12 ">
                 <div class="form-group">
                     <label class="txt-td" for="usr">ID</label>
-                    <input type="text" class="form-control pro-pg-input" placeholder="Gyewang01">
+                    <input type="text" class="form-control pro-pg-input" placeholder="{{Auth::user()->user_id}}" disabled>
                 </div>
                 <div class="form-group">
                     <label  class="txt-td" for="usr">Email</label>
-                    <input type="text" class="form-control pro-pg-input" placeholder="Gyewang01@gmail.com">
+                    <input type="text" class="form-control pro-pg-input" placeholder="{{Auth::user()->email}}" disabled>
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">password</label>
-                    <input type="password" class="form-control pro-pg-inputs" >
+                    <input type="password" class="form-control pro-pg-inputs" name="password" >
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">nickname</label>
-                    <input type="password" class="form-control pro-pg-inputs" placeholder="Gyewang01">
+                    <input type="text" class="form-control pro-pg-inputs" name="nickname" placeholder="{{Auth::user()->nickname}}" value="{{Auth::user()->nickname}}">
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">Upbit ACCESS KEY</label>
-                    <input type="password" class="form-control pro-pg-inputs" >
+                    <input type="text" class="form-control pro-pg-inputs" name="upbit_access_key" value="{{Auth::user()->upbit_access_key}}" >
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">Upbit SECRET KEY</label>
-                    <input type="password" class="form-control pro-pg-inputs" >
+                    <input type="text" class="form-control pro-pg-inputs" name="upbit_secret_key" value="{{Auth::user()->upbit_secret_key}}" >
                 </div>
             </div>
         </div>
         <div class="row justify-content-center mb-5 mt-4">
-            <a href="#" class="pro-save-btn mr-2">Save</a>
+            <button class="pro-save-btn mr-2">Save</button>
             <a href="#" class="pro-close-btn ml-2">To Close</a>
         </div>   
         <div class="mb-21"></div>
+    </form>
     </div>
 </div>
 

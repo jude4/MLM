@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,5 +18,47 @@ class UserController extends Controller
         $user = User::firstWhere('email', $email);
         $context = ['user_id' => $user?$user->user_id:null];
         return view('auth.user.find_id_result', $context);
+    }
+
+    public function profile()
+    {
+        return view('user.profile');
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($request->password) { 
+            $validator = Validator::make($request->all(), [
+                'password' => 'required|alpha_dash|min:8',
+            ]);
+            if ($validator->fails()) {
+                return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+            }
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        
+        if ($request->nickname != $user->nickname ) {
+            $validator = Validator::make($request->all(), [
+                'nickname' => 'required|min:5|unique:users,nickname',
+            ]);
+            if ($validator->fails()) {
+                return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+            }
+        }
+
+        $user->upbit_access_key = $request->upbit_access_key;
+        $user->upbit_secret_key = $request->upbit_secret_key;
+        $user->nickname = $request->nickname;
+        $user->save();
+        return back()->with('toast_success', 'Profile Updated Successfully!');
+    }
+
+    public function updateProfilePicture(Request $request)
+    {
+        
     }
 }

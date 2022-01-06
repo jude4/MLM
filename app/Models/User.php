@@ -52,4 +52,15 @@ class User extends Authenticatable
         $unique_id = "ELIM". rand(1000000, 9999999);
         return self::uuidExists($unique_id)? self::generateUUID(): $unique_id;
     }
+
+    public function profilePicture()
+    {
+        return !empty($this->image)? $this->image: 'image/icon/user.png';
+    }
+
+    public function clearProfilePicture()
+    {
+        $this->image = null;
+        $this->save();
+    }
 }

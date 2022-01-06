@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Auth\User\FindId;
 use App\Http\Livewire\Auth\User\FindPassword;
@@ -98,9 +99,9 @@ Route::get('/elim_point_deposit_information', function () {
     return view('user.elim_point_deposit_information');
 })->name('user.elimpointdepositinformation');
 
-Route::get('/profile', function () {
-    return view('user.profile');
-})->name('user.profile');
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('user.profile.update');
+
 
 Route::get('/krw_withdrawal_request', function () {
     return view('user.krw_withdrawal_request');
@@ -153,9 +154,7 @@ Route::get('/register', Register::class)->name('register');
 Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namespace('Admin')->group(function () {
 
     // Administrator routes
-    Route::get('/dashboard', function () {
-        return view('admin.administrator_list');
-    })->name('administratorlist');
+    Route::get('/dashboard', [AdminController::class, 'administratorList'])->name('administratorlist');
 
     Route::get('/admin-management', function () {
         return view('admin_management');
@@ -217,9 +216,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.one_on_one_inquiry');
     })->name('oneononeinquiry');
 
-    Route::get('/profile', function () {
-        return view('admin.profile');
-    })->name('profile');
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
 
     Route::get('/pv_accumulation_history', function () {
         return view('admin.pv_accumulation_history');

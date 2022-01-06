@@ -25,6 +25,16 @@ class CreateUsersTable extends Migration
             $table->boolean('activated')->default(false);
             $table->string('referred_by')->nullable();
             $table->string('user_id')->nullable();
+            $table->boolean('status')->default(false);
+            $table->integer('type')->default(0);
+            $table->integer('pk')->nullable();
+            $table->integer('elim_points')->default(0);
+            $table->integer('t_points')->default(0);
+            $table->integer('earned_pv')->default(0);
+            $table->integer('available_pv')->default(0);
+            $table->string('upbit_access_key')->nullable();
+            $table->string('upbit_secret_key')->nullable();
+            $table->string('image')->nullable();
         });
     }
 
