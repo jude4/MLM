@@ -27,7 +27,6 @@
    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >   
 <!-- ==========x==========x========== END DATA TABLE ==========x==========x========= -->
-@include('sweetalert::alert')
 
   @livewireStyles
 
@@ -49,6 +48,7 @@
 @livewireScripts
 <!-- ==========x==========x========== START JS ==========x==========x========== -->
 	
+@include('sweetalert::alert')
 <script src="{{asset('js/jquery-latest.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>

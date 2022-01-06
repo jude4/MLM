@@ -53,10 +53,10 @@ class AdminAuthController extends Controller
             $admin->createLoginLog();
             
             Session::put('success','You are Login successfully!!');
-            return redirect()->route('admin.administratorlist')->with('success', 'Logged In');
+            return redirect()->route('admin.administratorlist')->with('toast_success', 'Logged In');
             
         } else {
-            return back()->with('error','your username and password are wrong.');
+            return back()->with('toast_error','your username and password are wrong.');
         }
 
     }
@@ -71,7 +71,7 @@ class AdminAuthController extends Controller
         Admin::saveLogoutTransaction(Auth::guard('admin')->user()->id);
         auth()->guard('admin')->logout();
         Session::flush();
-        Session::put('success','You are logout successfully');        
+        Session::put('toast_success','You are logout successfully');        
         return redirect(route('admin.login'));
     }
 }

@@ -37,11 +37,13 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style2.css')}}">
+    
 
 
 </head>
 
 <body >
+
     <div class="limiter" id="login">
         <div class="container-login100">
             <div class="container">
@@ -105,7 +107,7 @@
 
 
 
-
+    @include('sweetalert::alert')
     <!-- Required Jquery -->
 
     <script type="text/javascript" src="{{asset('assets/js/jquery/jquery.min.js')}}"></script>
