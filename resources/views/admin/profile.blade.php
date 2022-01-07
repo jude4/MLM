@@ -18,17 +18,18 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="col-12 px-5">
-                                <form>
+                                <form method="POST" action="{{route('admin.profile.update')}}">
+                                    @csrf
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Id</label>
-                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="admin04" value="{{auth()->guard('admin')->user()->admin_id}}">
+                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="admin04" name="id" value="{{auth()->guard('admin')->user()->admin_id}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Name</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" value="{{auth()->guard('admin')->user()->name}}">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" name="name" value="{{auth()->guard('admin')->user()->name}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -44,7 +45,8 @@
                                                         </ul>
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
-                                                    <input type="text" name="phone[1][number]" class="form-control " placeholder="01012345678" value="{{auth()->guard('admin')->user()->mobile}}" />
+                                                    <input type="text" name="mobile" class="form-control " placeholder="01012345678" name="mobile" value="{{auth()->guard('admin')->user()->mobile}}" />
+                                                    {{-- phone[1][number] --}}
                                                 </div>
                                                 
                                             </div>
@@ -56,19 +58,19 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Manager's Department</label>
-                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="operation team" value="{{auth()->guard('admin')->user()->department}}">
+                                        <input type="text" class="form-control inp-sp-tx inp-bg-sp" id="inputMyid" placeholder="operation team" name="department" value="{{auth()->guard('admin')->user()->department}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Password</label>
-                                        <input type="Password" class="form-control inp-sp-tx" id="inputMyid" placeholder="">
+                                        <input type="Password" class="form-control inp-sp-tx" id="inputMyid" placeholder="" name="password">
                                     </div>
                                 </div>
                                 
                                 <div class="mb-5 mt-4">
-                                    <a href="#" class="btn ad-btn-save mt-3">
+                                    <button  class="btn ad-btn-save mt-3">
                                        Save
-                                    </a>
+                                    </button>
 
                                     <a href="#" class="btn btn-list mt-3 ml-3">
                                         List

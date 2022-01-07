@@ -217,6 +217,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     })->name('oneononeinquiry');
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
 
     Route::get('/pv_accumulation_history', function () {
         return view('admin.pv_accumulation_history');
