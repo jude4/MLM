@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -122,6 +123,18 @@ class AdminController extends Controller
         $admin->save();
 
         return back()->with('toast_success', 'Profile Updated Successfully!');
+    }
+
+    public function memberList()
+    {
+        $users = User::all();
+        return view('admin.member_list', compact('users'));
+    }
+
+    public function memberModification($id)
+    {   
+        $user = User::findOrFail($id);
+        return view('admin.member_modification', compact('user'));
     }
 
 }

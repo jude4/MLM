@@ -87,7 +87,7 @@
                                                 ID</label>
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp"
-                                                id="inputMyid" placeholder="USER01">
+                                                id="inputMyid" placeholder="USER01" value="{{$user->user_id}}">
                                         </div>
                                         <div class="col-xl-3 col-lg-4 col-md-4">
                                             <i class="fas fa-caret-right"></i>

@@ -187,13 +187,9 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.faq_register');
     })->name('faqregister');
 
-    Route::get('/member_list', function () {
-        return view('admin.member_list');
-    })->name('memberlist');
+    Route::get('/member_list', [AdminController::class, 'memberList'])->name('memberlist');
 
-    Route::get('/member_modification', function () {
-        return view('admin.member_modification');
-    })->name('membermodification');
+    Route::get('/member_modification/{id}', [AdminController::class, 'memberModification'])->name('membermodification');
 
     Route::get('/notice_list', function () {
         return view('admin.notice_list');
