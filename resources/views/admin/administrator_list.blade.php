@@ -99,172 +99,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>  
-                                         <tr>
-                                            <td>1</td>
+                                        @foreach ($admins as $index => $admin)
+                                        <tr>
+                                            <td>{{$index+1}}</td>
                                             <td>30</td>
-                                            <td>admin01</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-10 10:35:52</td> 
-                                             <td>2020-12-10 10:35:52</td>                                          
+                                            <td>{{$admin->admin_id}}</td>                    
+                                            <td>{{$admin->name}}</td> 
+                                            <td>{{$admin->department}}</td> 
+                                             <td>{{$admin->status?'active':'inactive'}}</td>  
+                                             <td>{{$admin->last_login}}</td> 
+                                             <td>{{$admin->created_at}}</td>                                          
                                             <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
+                                                <a href="{{route('admin.adminmanagement', ['id' => $admin->id])}}" class="btn  btn-correction">
                                                    Correction
                                                 </a>
                                             </td>                   
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>29</td>
-                                            <td>admin02</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-14 16:19:22</td> 
-                                             <td>2020-12-14 16:19:22</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>28</td>
-                                            <td>admin03</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>planning team</td> 
-                                             <td>activation</td>  
-                                             <td>2021-06-29 17:49:20</td> 
-                                             <td>2021-06-29 17:49:20</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>27</td>
-                                            <td>admin04</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>planning team</td> 
-                                             <td>inactive</td>  
-                                             <td>2021-06-29 17:49:20</td> 
-                                             <td>2021-06-29 17:49:20</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                  Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>30</td>
-                                            <td>admin01</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-10 10:35:52</td> 
-                                             <td>2020-12-10 10:35:52</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>29</td>
-                                            <td>admin02</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-14 16:19:22</td> 
-                                             <td>2020-12-14 16:19:22</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>28</td>
-                                            <td>admin03</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>planning team</td> 
-                                             <td>activation</td>  
-                                             <td>2021-06-29 17:49:20</td> 
-                                             <td>2021-06-29 17:49:20</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>27</td>
-                                            <td>admin04</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>planning team</td> 
-                                             <td>inactive</td>  
-                                             <td>2021-06-29 17:49:20</td> 
-                                             <td>2021-06-29 17:49:20</td>                                          
-                                            <td class="">
-                                               <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>30</td>
-                                            <td>admin01</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-10 10:35:52</td> 
-                                             <td>2020-12-10 10:35:52</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>29</td>
-                                            <td>admin02</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>operation team</td> 
-                                             <td>activation</td>  
-                                             <td>2020-12-14 16:19:22</td> 
-                                             <td>2020-12-14 16:19:22</td>                                          
-                                            <td class="">
-                                               <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>28</td>
-                                            <td>admin03</td>                    
-                                            <td>Hong Gil Dong</td> 
-                                            <td>planning team</td> 
-                                             <td>activation</td>  
-                                             <td>2021-06-29 17:49:20</td> 
-                                             <td>2021-06-29 17:49:20</td>                                          
-                                            <td class="">
-                                                <a href="admin-management-edit.html" class="btn  btn-correction">
-                                                   Correction
-                                                </a>
-                                            </td>                   
-                                        </tr>
-                                        <tr>
+                                        @endforeach
+                                        {{-- <tr>
                                             <td>12</td>
                                             <td>27</td>
                                             <td>admin04</td>                    
@@ -278,7 +130,7 @@
                                                   Correction
                                                 </a>
                                             </td>                   
-                                        </tr>
+                                        </tr> --}}
                                                                      
                                         </tbody>  
                                         <tfoot>  

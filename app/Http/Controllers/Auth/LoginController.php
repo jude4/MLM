@@ -52,10 +52,10 @@ class LoginController extends Controller
     //     return array_merge($request->only('id', 'password'));
     // }
 
-    public function username()
-{
-    return 'user_id';
-}
+//     public function username()
+// {
+//     return 'user_id';
+// }
 }
 
 

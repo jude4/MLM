@@ -18,17 +18,19 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="col-12 px-5">
-                                <form>
+                                <form method="POST" action="{{route('admin.edit.admin')}}">
+                                    @csrf
+                                    <input hidden type="text" name="id" id="" value="{{auth()->guard('admin')->user()->id}}">
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Id</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="admin04">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="admin04" name="admin_id" value="{{auth()->guard('admin')->user()->admin_id}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Name</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" name="name" value="{{auth()->guard('admin')->user()->name}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -44,7 +46,8 @@
                                                         </ul>
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
-                                                    <input type="text" name="phone[1][number]" class="form-control" placeholder="01012345678" />
+                                                    <input type="text" name="mobile" value="{{auth()->guard('admin')->user()->mobile}}" class="form-control" placeholder="01012345678" />
+                                                    {{-- phone[1][number] --}}
                                                 </div>
                                                 
                                             </div>
@@ -55,12 +58,12 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Manager's Department</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Team">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Team" name="department" value="{{auth()->guard('admin')->user()->department}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Password</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="" name="password">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
 
@@ -69,14 +72,14 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-7 col-12">
                                                 <div class="custom-control custom-radio ">
-                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
+                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="status" value="active" {{auth()->guard('admin')->user()->status?'checked':''}}>
                                                     <label class="custom-control-label" for="defaultGroupExample1">Active</label>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-12">
                                                 <div class="custom-control custom-radio ">
-                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="groupOfDefaultRadios" >
-                                          <label class="custom-control-label" for="defaultGroupExample2">Inactive</label>
+                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="status" value="inactive" {{auth()->guard('admin')->user()->status?'':'checked'}} >
+                                          <label class="custom-control-label" for="defaultGroupExample2" >Inactive</label>
                                         </div>
                                             </div>
                                         </div>
@@ -91,15 +94,15 @@
                                     <div class="col-md-6">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">admin notes</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Department Team Leader / Hong Gil-dong">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Department Team Leader / Hong Gil-dong" name="notes" value="{{auth()->guard('admin')->user()->notes}}">
                                     </div>
                                     
                                 
                                 </div>
                                 <div class="mb-5 mt-4">
-                                    <a href="#" class="btn ad-btn-save mt-3">
+                                    <button href="#" class="btn ad-btn-save mt-3">
                                        Save
-                                    </a>
+                                    </button>
 
                                     <a href="{{route('admin.administratorlist')}}" class="btn btn-list mt-3 ml-3">
                                         List

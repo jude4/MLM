@@ -18,8 +18,8 @@
                                 <div class="row justify-content-center">
                                     <div class="col-11 p-2">
                                         <div class="sml-scree-box">
-                                            <div class="text-center sp-smd-text">{{Auth::user()->user_id}}</div>
-                                            <div class="text-center sp-smd-texts">{{Auth::user()->user_id}}</div>
+                                            <div class="text-center sp-smd-text">{{Auth::user()->nickname}}</div>
+                                            <div class="text-center sp-smd-texts">{{Auth::user()->nickname}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="rig-menu-dis  d-md-inline-block d-none">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                                 <img class="dropbtn" src="{{asset('image/users-drp01.png')}}" width="40px">
-                                                 <div class="d-inline-block us-name-text ml-2">{{Auth::user()->user_id}}</div>
+                                                 <div class="d-inline-block us-name-text ml-2">{{Auth::user()->nickname}}</div>
                                             </a>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{route('user.profile')}}">My Info</a>

@@ -25,6 +25,7 @@ class CreateAdminsTable extends Migration
             $table->string('mobile')->nullable();
             $table->boolean('is_super')->default(false);
             $table->timestamp('last_login')->nullable();
+            $table->string('notes')->nullable();
         });
     }
 

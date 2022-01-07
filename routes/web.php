@@ -156,9 +156,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     // Administrator routes
     Route::get('/dashboard', [AdminController::class, 'administratorList'])->name('administratorlist');
 
-    Route::get('/admin-management', function () {
-        return view('admin_management');
-    });
+    Route::get('/admin-management/{id}', [AdminController::class, 'adminManagement'])->name('adminmanagement');
+    Route::post('/admin-management/edit/profile', [AdminController::class, 'editAdmin'])->name('edit.admin');
 
     Route::get('/administrator_registration', function () {
         return view('admin.administrator_registration');
