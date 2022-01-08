@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inquiry;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,5 +61,34 @@ class UserController extends Controller
     public function updateProfilePicture(Request $request)
     {
         
+    }
+
+    public function serviceCenterRegistration()
+    {
+        return view('user.service_center_registration');
+    }
+
+    public function createInquiry(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required|string|min:8',
+            'inquiry' => 'required|string|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        Auth::user()->inquiries()->create([
+            'subject' => $request->subject,
+            'inquiry' => $request->inquiry,
+        ]);
+        return redirect()->route('user.firstinquiry')->with('toast_success', 'Inquiry Created Successfully!');
+    }
+
+    public function firstInquiry()
+    {
+        $inquiries = Auth::user()->inquiries;
+        return view('user.first_inquiry', compact('inquiries'));
     }
 }

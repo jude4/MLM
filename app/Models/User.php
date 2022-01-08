@@ -63,4 +63,9 @@ class User extends Authenticatable
         $this->image = null;
         $this->save();
     }
+
+    public function inquiries()
+    {
+        return $this->hasMany(Inquiry::class);
+    }
 }

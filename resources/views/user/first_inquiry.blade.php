@@ -76,49 +76,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($inquiries as $inquiry)
                                     <tr>
                                         <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>unanswered</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
+                                        <td>{{$inquiry->subject}}</td>
+                                        <td>{{$inquiry->status()}}</td> 
+                                        <td>{{$inquiry->user->nickname}}</td>                   
+                                        <td>{{$inquiry->created_at}}</td>          
                                     </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>Answer complete</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
-                                    </tr>
-                                   
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>unanswered</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>Answer complete</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>unanswered</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Please contact us.</td>
-                                        <td>Answer complete</td> 
-                                        <td>Sane*</td>                   
-                                        <td>2021-10-07</td>          
-                                    </tr>                 
+                                    @endforeach                
                                 </tbody> 
 
                                 <tfoot>  

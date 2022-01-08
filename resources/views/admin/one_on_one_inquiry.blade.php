@@ -100,99 +100,21 @@
                                         </thead>
                                         <tbody>
 
+                                            @foreach ($inquiries as $index => $inquiry)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{$index+1}}</td>
                                                 <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
+                                                <td>{{$inquiry->user->user_id}}</td>                   
+                                                <td>{{$inquiry->user->nickname}}</td>                   
+                                                <td>{{$inquiry->inquiry}}</td>
                                                 <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">    look
+                                                    <a href="{{route('admin.oneononeinquiryanswer', ['id' => $inquiry->id])}}" class="btn  btn-correction">    look
                                                     </a>
                                                 </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
+                                                <td>{{$inquiry->answer?'Answer done':'Answer undone'}}</td>  
+                                                <td>{{$inquiry->created_at}}</td>               
                                             </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">    look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">  look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">  look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">  look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">  look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>USER01</td>                   
-                                                <td>Hong Gil Dong</td>                   
-                                                <td>Question.</td>
-                                                <td class="">
-                                                    <a href="one-on-one-inquiry-answer.html" class="btn  btn-correction">  look
-                                                    </a>
-                                                </td>  
-                                                <td>Answer done</td>  
-                                                <td>2021-07-02 08:34:34</td>               
-                                            </tr>
-                                                        
+                                            @endforeach 
                                         </tbody>  
                                         <tfoot>  
                                           

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Faq;
+use App\Models\Inquiry;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -195,5 +196,34 @@ class AdminController extends Controller
 
         return redirect()->route('admin.faqlist')->with('toast_success', 'Faq Added Successfully');
     }
+
+    public function oneOnOneInquiry()
+    {
+        $inquiries = Inquiry::all();
+        return view('admin.one_on_one_inquiry', compact('inquiries'));
+    }
+
+    public function oneOnOneInquiryAnswer($id)
+    {
+        $inquiry = Inquiry::findOrFail($id);
+        return view('admin.one_on_one_inquiry_answer', compact('inquiry'));
+    }
+
+    public function replyOneOnOneInquiry(Request $request)
+    {
+        $inquiry = Inquiry::findOrFail($request->id);
+        $validator = Validator::make($request->all(), [
+            'answer' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $inquiry->answer = $request->answer;
+        $inquiry->save();
+        return redirect()->route('admin.oneononeinquiry')->with('toast_success', 'Inquiry Answered Successfully!');
+    }
+    
 
 }

@@ -30,20 +30,20 @@
                                                     <div class="custom-control custom-radio ">
                                                         <input type="radio"
                                                             class="custom-control-input"
-                                                            id="defaultGroupExample1"
+                                                            id="defaultGroupExample10"
                                                             name="groupOfDefaultRadios" checked="">
                                                         <label class="custom-control-label"
-                                                            for="defaultGroupExample1">Normal</label>
+                                                            for="defaultGroupExample10">Normal</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-4 col-12">
                                                     <div class="custom-control custom-radio ">
                                                         <input type="radio"
                                                             class="custom-control-input "
-                                                            id="defaultGroupExample2"
+                                                            id="defaultGroupExample20"
                                                             name="groupOfDefaultRadios">
                                                         <label class="custom-control-label"
-                                                            for="defaultGroupExample2">MLM</label>
+                                                            for="defaultGroupExample20">MLM</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,7 +59,9 @@
                                                         <input type="radio"
                                                             class="custom-control-input"
                                                             id="defaultGroupExample1"
-                                                            name="status" @if ()@endif value="active">
+                                                            name="status" @if ($user->status)
+                                                                checked
+                                                            @endif value="active">
                                                         <label class="custom-control-label"
                                                             for="defaultGroupExample1">Active</label>
                                                     </div>
@@ -68,8 +70,12 @@
                                                     <div class="custom-control custom-radio ">
                                                         <input type="radio"
                                                             class="custom-control-input "
+                                                            name="status"
                                                             id="defaultGroupExample2"
-                                                            name="status" value="active">
+                                                            @if (!$user->status)
+                                                            checked
+                                                        @endif
+                                                            value="inactive">
                                                         <label class="custom-control-label"
                                                             for="defaultGroupExample2">Inactive</label>
                                                     </div>
@@ -153,7 +159,7 @@
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp pos-sv"
                                                 id="inputMyid" placeholder="" value="{{$user->upbit_access_key}}">
-                                            <img src="assets/images/post.png" class="pos-scg"
+                                            <img src="{{asset('assets/images/post.png')}}" class="pos-scg"
                                                 width="30px">
                                         </div>
                                         <div class="col-xl-3 col-lg-4 col-md-4">
@@ -163,7 +169,7 @@
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp pos-sv"
                                                 id="inputMyid" placeholder="" value="{{$user->upbit_secret_key}}">
-                                            <img src="assets/images/post.png" class="pos-scg"
+                                            <img src="{{asset('assets/images/post.png')}}" class="pos-scg"
                                                 width="30px" >
                                         </div>
                                     </div>

@@ -40,17 +40,15 @@ Route::get('/trading-history', function () {
     return view('user.trading_history');
 })->name('tradinghistory');
 
-Route::get('/first-inquiry', function () {
-    return view('user.first_inquiry');
-})->name('firstinquiry');
+Route::get('/first-inquiry', [UserController::class, 'firstInquiry'])->name('firstinquiry');
 
 Route::get('/faq', function () {
     return view('user.faq');
 })->name('faq');
 
-Route::get('/service_center_registration', function () {
-    return view('user.service_center_registration');
-})->name('servicecenterregistration');
+Route::get('/service_center_registration', [UserController::class, 'serviceCenterRegistration'])->name('servicecenterregistration');
+
+Route::post('/inquiry/create', [UserController::class, 'createInquiry'])->name('create.inquiry');
 
 Route::get('/service_center_detail', function () {
     return view('user.service_center_detail');
@@ -210,13 +208,10 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.notice_register');
     })->name('noticeregister');
 
-    Route::get('/one_on_one_inquiry_answer', function () {
-        return view('admin.one_on_one_inquiry_answer');
-    })->name('oneononeinquiryregister');
+    Route::get('/one_on_one_inquiry_answer/{id}', [AdminController::class, 'oneOnOneInquiryAnswer'])->name('oneononeinquiryanswer');
+    Route::post('/one_on_one_inquiry_answer/reply', [AdminController::class, 'replyOneOnOneInquiry'])->name('reply.oneononeinquiry');
 
-    Route::get('/one_on_one_inquiry', function () {
-        return view('admin.one_on_one_inquiry');
-    })->name('oneononeinquiry');
+    Route::get('/one_on_one_inquiry', [AdminController::class, 'oneOnOneInquiry'])->name('oneononeinquiry');
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
@@ -253,7 +248,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.mlm_user_management');
     })->name('mlmusermanagement');
 
-    Route::get('/admin_management_list', function () {
+    Route::get('/admin_management_edit', function () {
         return view('admin.admin_management_edit');
     })->name('adminmanagementedit');
 
