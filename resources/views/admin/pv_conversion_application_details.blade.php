@@ -11,7 +11,7 @@
                     <!-- Basic table card start -->
                     <div class="card ml-md-5">
                         <div class="card-header">
-                            <h5>PV withdrawal request history</h5>
+                            <h5>PV conversion application details</h5>
                             <div class="">
                                 <a href="#" class="btn btn-enrollment mt-3">Exel download</a>
                             </div>
@@ -45,10 +45,27 @@
                                             <div class="first-select-option mr-1 float-left mb-2">
                                                 <select class="custom-select">
                                                     <option value="status" selected>
-                                                      =Status=
+                                                     =TYPE=
                                                     </option>
                                                     <option value="activation" class="text-left">
-                                                    Approval
+                                                   Available PV
+                                                    </option>
+                                                    <option value="inactive" class="text-left">
+                                                    resale
+                                                    </option>
+                                                    
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="select-main-group ml-1 ">
+                                            <div class="first-select-option mr-1 float-left mb-2">
+                                                <select class="custom-select">
+                                                    <option value="status" selected>
+                                                     =Status=
+                                                    </option>
+                                                    <option value="activation" class="text-left">
+                                                   Approval
                                                     </option>
                                                     <option value="inactive" class="text-left">
                                                     atmosphere
@@ -56,6 +73,7 @@
                                                     <option value="inactive" class="text-left">
                                                     cancellation
                                                     </option>
+                                                    
                                                     
                                                 </select>
                                             </div>
@@ -72,7 +90,7 @@
                                                             Id
                                                         </option>
                                                         <option value="inactive" class="text-left">
-                                                           name
+                                                           nickname
                                                         </option>
                                                         
                                                     </select>
@@ -99,63 +117,74 @@
                                                 <th class="border-bottom-0">PK</th>
                                                 <th class="border-bottom-0">ID</th>                         
                                                 <th class="border-bottom-0">Nickname</th>
-                                                <th class="border-bottom-0">Price</th>
+                                                <th class="border-bottom-0">TYPE</th>
+                                                <th class="border-bottom-0">conversion quantity</th>
                                                 <th class="border-bottom-0">state</th>
-                                                <th class="border-bottom-0">Approval </th>
-                                                <th class="border-bottom-0"> Confirmation</th>
+                                                <th class="border-bottom-0">Approval Confirmation</th>
                                                 <th class="border-bottom-0">Application date and time</th>
+                                                <th class="border-bottom-0">Detail</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                         <tr>
+                                        <tr>
                                             <td>1</td>
                                             <td>30</td>
                                             <td>USER01</td>               
-                                            <td>Hong Gil Dong</td> 
+                                            <td>Hong Gil Dong</td>
+                                            <td>Available PV</td>  
                                             <td>500,000</td> 
                                             <td class="incas-text-changes">Approval</td>
                                             <td>-</td>   
                                             <td>2020-12-10 10:35:52</td>                                                    
                                             <td class="">
-                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-detail-modal">
+                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-conversion-application-modal">
                                                   Look
                                                 </a>
                                             </td> 
-                                            <!-- <td class="">
-                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-approval-modal">
-                                                Approval                                                               </a>
-                                                <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#Elim-point-cancel-modal">
-                                                cancellation
-                                                </a>
-                                            </td>   -->                                   
-                                            
-                                                              
+                                                                                               
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>30</td>
                                             <td>USER02</td>               
-                                            <td>Hong Gil Dong</td> 
-                                            <td>500,000</td> 
-                                            <td class="inc-text-change1">atmosphere</td>
+                                            <td>Um Hong-gil</td>
+                                             <td>resale</td>     
+                                            <td>1,00,000</td> 
+                                             <td class="inc-text-change1">atmosphere</td>
                                              <td class="">
-                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-approval-modal">
+                                                <a href="#" class="btn  btn-correction" >
                                                 Approval                                                               </a>
-                                                <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#pv-withdrawal-cancel-modal">
+                                                <a href="#" class="btn  btn-ends" >
                                                 cancellation
                                                 </a>
                                             </td>     
                                             <td>2020-12-10 10:35:52</td>                                                    
                                             <td class="">
-                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-detail-modal">
+                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-conversion-application-modal">
+                                                  Look
+                                                </a>
+                                            </td>                                                                                                                           
+                                        </tr>
+                                           <tr>
+                                            <td>1</td>
+                                            <td>30</td>
+                                            <td>USER01</td>               
+                                            <td>Hong Gil Dong</td>
+                                            <td>Available PV</td>  
+                                            <td>500,000</td> 
+                                            <td class="incas-text-changes">Approval</td>
+                                            <td>-</td>   
+                                            <td>2020-12-10 10:35:52</td>                                                    
+                                            <td class="">
+                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-conversion-application-modal">
                                                   Look
                                                 </a>
                                             </td> 
-                                                                              
-                                            
-                                                              
-                                        </tr>                                                                           
+                                                                                               
+                                        </tr>
+
+
+                                                                                                                   
                                         </tbody>  
                                         <tfoot>  
                                           
@@ -174,112 +203,9 @@
     </div>
 </div>
 
+<!-- ------------pv-conversion detail modal----------------- -->
 
-
-<!-- ------------cancel modal----------------- -->
-
-<div class="modal fade" id="pv-withdrawal-cancel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header mod-disp">
-         
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row justify-content-center">
-              <div class="col-11 text-center">
-                  <h4 class="modal-title trd-top-end text-center" id="exampleModalLongTitle">Cancel Confirmation</h4>
-              </div>
-          </div>
-          <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
-                  <div class="row justify-content-center">
-                     <div class="col-11">
-                          <div class="trd-pass-text">After the administrator cancels, the user application is immediately withdrawn.</div>
-                          <div class="trd-pass-text">After final confirmation, please re-enter the administrator password.</div>
-                     </div>
-                  </div>  
-                  
-                  <div class="form-group row justify-content-center mt-5 mb-0">
-                      <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
-                  </div>
-                  <div class="form-group row justify-content-center mt-4">
-                      <div class="col-11 text-left pl-4">
-                          <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
-                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5"></textarea>
-                      </div>
-                  </div>
-                  <div class="row justify-content-center mt-8">
-                      <div class="col-6">
-                            <a href="#" class="btn-mod-end">Cancel</a>
-                         </a>
-                      </div>
-                  </div>
-                      
-                 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <!-- ------------Approval modal----------------- -->
-  
-  <div class="modal fade" id="pv-withdrawal-approval-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header mod-disp text-center">
-          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-         <div class="row justify-content-center">
-              <div class="col-11 text-center">
-                  <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">Confirm Approval</h4>
-              </div>
-          </div>
-          <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
-                  <div class="row justify-content-center">
-                     <div class="col-11">
-                          <div class="trd-pass-text">For final approval, please re-enter the administrator password.</div>
-                     </div>
-                  </div>  
-                  
-                  <div class="form-group row justify-content-center mt-5 mb-0">
-                      <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
-                  </div>
-  
-                  <div class="form-group row justify-content-center mt-4">
-                      <div class="col-11 text-left pl-4">
-                          <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
-                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5"></textarea>
-                      </div>
-                  </div>
-  
-                  <div class="row justify-content-center mt-8">
-                      <div class="col-6">
-                            <a href="#" class="btn-mod-conf">To Approve</a>
-                         </a>
-                      </div>
-                  </div>
-                      
-                 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  
-  
-  <div class="modal fade" id="pv-withdrawal-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="pv-conversion-application-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header mod-disp">
@@ -291,7 +217,7 @@
         <div class="modal-body">
           <div class="row justify-content-center">
               <div class="col-11 text-center">
-                  <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">Withdrawal details</h4>
+                  <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">Conversion Details</h4>
               </div>
           </div>
          
@@ -303,78 +229,24 @@
                               <div>ID</div>
                               <div>nickname</div>
                               <div>Application amount</div>
-                              <div>Account Number</div>
-                              <div>Name of bank </div>
-                              <div>Name of account  </div>
-                              <div>holder</div>
+                              <div>conversion fee</div>
+                              <div>Quantity after </div>
+                              <div>Quantity after conversion </div>
+                              
                               
                           </div>
                           <div class="lft-sid-detail text-right">
                               <div>USER01</div>
                               <div>Hong Gil Dong</div>
-                              <div>123-456-78910</div>
+                              <div>10,000 won</div>
                               <div>500,000 won</div>
-                              <div>Our bank</div>
-                               <div>Hong Gil Dong</div>
+                              <div>500,000 ELIM POINTs</div>
+                               
                           </div>
                       </div>
                   </div>
               </div>
-          </div>
-          <div class="row justify-content-center mb-5">
-              <div class="col-6 text-center">
-                   <a href="#" class="btn-mod-conf">Confirm</a>
-              </div>
-          </div>
-                         
-                         
-                      
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ------------pv-conversion detail modal----------------- -->
-
-<div class="modal fade" id="pv-trasmission-application-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header mod-disp">
-          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row justify-content-center">
-              <div class="col-11 text-center">
-                  <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">transmission details</h4>
-              </div>
-          </div>
-         
-          <div class="row justify-content-center mt-2">
-              <div class="col-12">
-                  <div class="">
-                      <div class="d-flex justify-content-between p-md-3 p-2 mb-5">
-                          <div class="lft-sid-detail text-left">
-                              <div>ID</div>
-                              <div>nickname</div>
-                              <div>Incoming ID</div>
-                              <div>receiving nickname</div>
-                              <div>transfer quantity</div>
-                              <div>transfer fee </div>
-                         </div>
-                          <div class="lft-sid-detail text-right">
-                              <div>USER01</div>
-                              <div>Hong Gil Dong</div>
-                              <div>Um Hong-gil</div>
-                              <div>USER02</div>
-                              <div>500,000 won</div>
-                               <div>10,000 won</div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+  
           </div>
           <div class="row justify-content-center mb-5">
               <div class="col-6 text-center">

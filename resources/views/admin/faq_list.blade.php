@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>FAQ list</h5>
                             <div class="">
-                                <a href="faq-register.html" class="btn btn-enrollment mt-3">Enrollment</a>
+                                <a href="{{route('admin.faqregister')}}" class="btn btn-enrollment mt-3">Enrollment</a>
                             </div>
 
                         </div>
@@ -117,127 +117,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
 
+                                            @foreach ($faqs as $index => $faq)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{$index+1}}</td>
                                                 <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
+                                                <td>{{$faq->category}}</td>                   
+                                                <td>{{$faq->question}}</td>                   
+                                                <td>{{$faq->used?'used':'not used'}}</td>
+                                                <td>{{$faq->created_at}}</td>
                                                 <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
+                                                    <a href="{{route('admin.faqmodification', ['id' => $faq->id])}}" class="btn  btn-correction">    correction
                                                     </a>
                                                 </td>                 
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>Normal</td>                   
-                                                <td>blahblahblah</td>                   
-                                                <td>used.</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="faq-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
+                                            @endforeach
                                                         
                                         </tbody>  
                                         <tfoot>  

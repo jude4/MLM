@@ -26,14 +26,15 @@ Auth::routes();
 
 Route::redirect('/', '/login');
 
+Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->group(function () {
 // User Routes
 Route::get('/dashboard', function () {
     return view('user.dashboard');
-})->name('user.dashboard');
+})->name('dashboard');
 
 Route::get('/trading', function () {
     return view('user.trading');
-})->name('user.trading');
+})->name('trading');
 
 Route::get('/trading-history', function () {
     return view('user.trading_history');
@@ -41,35 +42,35 @@ Route::get('/trading-history', function () {
 
 Route::get('/first-inquiry', function () {
     return view('user.first_inquiry');
-})->name('user.firstinquiry');
+})->name('firstinquiry');
 
 Route::get('/faq', function () {
     return view('user.faq');
-})->name('user.faq');
+})->name('faq');
 
 Route::get('/service_center_registration', function () {
     return view('user.service_center_registration');
-})->name('user.servicecenterregistration');
+})->name('servicecenterregistration');
 
 Route::get('/service_center_detail', function () {
     return view('user.service_center_detail');
-})->name('user.servicecenterdetail');
+})->name('servicecenterdetail');
 
 Route::get('/service_center_view_answer', function () {
     return view('user.service_center_view_answer');
-})->name('user.serviccenterviewname');
+})->name('serviccenterviewname');
 
 Route::get('/service_center', function () {
     return view('user.service_center');
-})->name('user.servicecenter');
+})->name('servicecenter');
 
 Route::get('/ranking', function () {
     return view('user.ranking');
-})->name('user.ranking');
+})->name('ranking');
 
 Route::get('/my_point', function () {
     return view('user.my_point');
-})->name('user.mypoint');
+})->name('mypoint');
 
 Route::get('/my_point_send', function () {
     return view('user.my_point_send');
@@ -77,63 +78,67 @@ Route::get('/my_point_send', function () {
 
 Route::get('/elim_point_charge', function () {
     return view('user.elim_point_recharge');
-})->name('user.elimpointcharge');
+})->name('elimpointcharge');
 
 Route::get('/my_point_list', function () {
     return view('user.my_point_list');
-})->name('user.mypointlist');
+})->name('mypointlist');
 
 Route::get('/my_point_t_list', function () {
     return view('user.my_point_t_list');
-})->name('user.mypointtlist');
+})->name('mypointtlist');
 
 Route::get('/my_point_exchange', function () {
     return view('user.my_point_exchange');
-})->name('user.mypointexchange');
+})->name('mypointexchange');
 
 Route::get('/elim_point_view_detail', function () {
     return view('user.elim_point_view_detail');
-})->name('user.elimpointviewdetail');
+})->name('elimpointviewdetail');
 
 Route::get('/elim_point_deposit_information', function () {
     return view('user.elim_point_deposit_information');
-})->name('user.elimpointdepositinformation');
+})->name('elimpointdepositinformation');
 
-Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('user.profile.update');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
 
 Route::get('/krw_withdrawal_request', function () {
     return view('user.krw_withdrawal_request');
-})->name('user.krwwithdrawalrequest');
+})->name('krwwithdrawalrequest');
 
 Route::get('/pv_check_accumulation_history', function () {
     return view('user.pv_check_accumulation_history');
-})->name('user.pvcheckaccumulationhistory');
+})->name('pvcheckaccumulationhistory');
 
 Route::get('/pv_my_tree', function () {
     return view('user.pv_my_tree');
-})->name('user.pvmytree');
+})->name('pvmytree');
 
 Route::get('/krw_application_list', function () {
     return view('user.krw_application_list');
-})->name('user.krwapplicationlist');
+})->name('krwapplicationlist');
 
 Route::get('/pv_transfer', function () {
     return view('user.pv_transfer');
-})->name('user.pvtransfer');
+})->name('pvtransfer');
 
 Route::get('/pv_transfer_request_list', function () {
     return view('user.pv_transfer_request_list');
-})->name('user.pvtransferrequestlist');
+})->name('pvtransferrequestlist');
 
 Route::get('/pv_exchange_available_elim_point', function () {
     return view('user.pv_exchange_available_elim_point');
-})->name('user.pvexchangeavailableelimpoint');
+})->name('pvexchangeavailableelimpoint');
 
 Route::get('/pv_exchange_accumulation_elim_point', function () {
     return view('user.pv_exchange_accumulation_elim_point');
-})->name('user.pvexchangeaccumulaionelimpoint');
+})->name('pvexchangeaccumulaionelimpoint');
+
+
+
+});
 
 //User Auth routes
 Route::get('/find_id', FindId::class)->name('user.findid');
@@ -141,6 +146,8 @@ Route::get('/find_id', FindId::class)->name('user.findid');
 Route::post('/find_id_result', [UserController::class, 'findResult'])->name('user.findidresult');
 
 Route::get('/find_password', FindPassword::class)->name('user.findpassword');
+
+
 
 // Route::get('/login', function () {
 //     return view('auth.user.login');
@@ -175,13 +182,13 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.elim_point_transfer_history');
     })->name('elimpointtransferhistory');
 
-    Route::get('/faq_list', function () {
-        return view('admin.faq_list');
-    })->name('faqlist');
+    Route::get('/faq_list', [AdminController::class, 'faqList'])->name('faqlist');
 
-    Route::get('/faq_modification', function () {
-        return view('admin.faq_modification');
-    })->name('faqmodification');
+    Route::post('/faq/create', [AdminController::class, 'createFaq'])->name('create.faq');
+
+    Route::post('/faq/modify', [AdminController::class, 'modifyFaq'])->name('modify.faq');
+
+    Route::get('/faq_modification/{id}', [AdminController::class, 'faqModification'])->name('faqmodification');
 
     Route::get('/faq_register', function () {
         return view('admin.faq_register');

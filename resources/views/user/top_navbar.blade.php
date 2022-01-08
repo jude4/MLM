@@ -50,7 +50,7 @@
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Trading</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="{{route('user.trading')}}">Trading</a>
-                                            <a class="dropdown-item" href="{{route('tradinghistory')}}">Trading History</a>  
+                                            <a class="dropdown-item" href="{{route('user.tradinghistory')}}">Trading History</a>  
                                         </div>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0  bor-mob-sec">
@@ -102,7 +102,7 @@
                                         <a  class="nav-link dropdown-toggle nn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Trading</a>
                                         <div class="dropdown-menu drb-spcs">
                                             <a class="dropdown-item drb-spc p-2" href="{{route('user.trading')}}">Trading</a>
-                                            <a class="dropdown-item drb-spd p-2" href="{{route('tradinghistory')}}">Trading History</a>  
+                                            <a class="dropdown-item drb-spd p-2" href="{{route('user.tradinghistory')}}">Trading History</a>  
                                         </div>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 bor-mob-sec mt-3">

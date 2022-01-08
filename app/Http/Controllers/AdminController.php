@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Faq;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -135,6 +136,64 @@ class AdminController extends Controller
     {   
         $user = User::findOrFail($id);
         return view('admin.member_modification', compact('user'));
+    }
+
+    public function createFaq(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'question' => 'required|string|min:5|',
+            'answer' => 'required|string|min:20',
+            'category' => 'required|string',
+            'used' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $faq = new Faq();
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->category = $request->category;
+        $faq->used = $request->used == '1';
+        $faq->save();
+
+        return redirect()->route('admin.faqlist')->with('toast_success', 'Faq Added Successfully');
+    }
+
+    public function faqList()
+    {
+        $faqs = Faq::all();
+        return view('admin.faq_list', compact('faqs'));
+    }
+
+    public function faqModification($id)
+    {
+        $faq = Faq::findOrFail($id);
+        return view('admin.faq_modification', compact('faq'));
+    }
+
+    public function modifyFaq(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'question' => 'required|string|min:5|',
+            'answer' => 'required|string|min:20',
+            'category' => 'required|string',
+            'used' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $faq = Faq::findOrFail($request->id);
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->category = $request->category;
+        $faq->used = $request->used == '1';
+        $faq->save();
+
+        return redirect()->route('admin.faqlist')->with('toast_success', 'Faq Added Successfully');
     }
 
 }

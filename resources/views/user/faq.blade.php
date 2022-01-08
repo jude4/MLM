@@ -83,80 +83,22 @@
                                 <div id="normal" role="tabpanel" aria-labelledby="normal-tab" class="tab-pane fade px-2 pt-2 pb-5 show active">
                                     <div class="wrapper center-block">
                                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default mb-3">
-                                                <div class="panel-heading  active" role="tab" id="headingOne">
-                                                    <h4 class="panel-title mb-0">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">                                                         
-                                                            What is V-Elim?
-
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
-                                                    <div class="panel-body d-block">
-                                                        V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingTwo">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
+                                          @foreach (App\Models\Faq::thatHasCategory('normal') as $index => $faq)
+                                          <div class="panel panel-default mb-3">
+                                            <div class="panel-heading  @if ($loop->first) active @endif" role="tab" id="heading{{$faq->category.$index}}">
+                                                <h4 class="panel-title mb-0">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$faq->category.$index}}" aria-expanded="@if ($loop->first)true @else false @endif" aria-controls="collapse{{$faq->category.$index}}">                                                         
+                                                        {{$faq->question}}
                                                     </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse{{$faq->category.$index}}" class="panel-collapse collapse @if ($loop->first) in show @endif" role="tabpanel" aria-labelledby="heading{{$faq->category.$index}}">
+                                                <div class="panel-body d-block">
+                                                  {{$faq->answer}}
                                                 </div>
                                             </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFour">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                     What assets does V-Elim trade with?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingFive">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                     What do I need to get started with V-Elim?
-
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </div>
+                                          @endforeach  
                                         </div>
                                     </div>
                                 </div>
@@ -164,80 +106,23 @@
                                   <div id="normal" role="tabpanel" aria-labelledby="normal-tab" class="tab-pane fade px-2 pt-2 pb-5 show active">
                                     <div class="wrapper center-block">
                                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                            @foreach (App\Models\Faq::thatHasCategory('support') as $index => $faq)
                                             <div class="panel panel-default mb-3">
-                                                <div class="panel-heading  active" role="tab" id="headingOne">
-                                                    <h4 class="panel-title mb-0">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">                                                         
-                                                            What is V-Elim?
-
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
-                                                    <div class="panel-body d-block">
-                                                        V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                              <div class="panel-heading  @if ($loop->first) active @endif" role="tab" id="heading{{$faq->category.$index}}">
                                                   <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
+                                                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$faq->category.$index}}" aria-expanded="@if ($loop->first)true @else false @endif" aria-controls="collapse{{$faq->category.$index}}">                                                         
+                                                          {{$faq->question}}
+                                                      </a>
                                                   </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                              </div>
+                                              <div id="collapseOne" class="panel-collapse collapse @if ($loop->first) in show @endif" role="tabpanel" aria-labelledby="heading{{$faq->category.$index}}">
+                                                  <div class="panel-body d-block">
+                                                      {{$faq->answer}}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                            @endforeach
 
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFour">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                     What assets does V-Elim trade with?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingFive">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                     What do I need to get started with V-Elim?
-
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -246,80 +131,23 @@
                                      <div id="normal" role="tabpanel" aria-labelledby="normal-tab" class="tab-pane fade px-2 pt-2 pb-5 show active">
                                     <div class="wrapper center-block">
                                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                            @foreach (App\Models\Faq::thatHasCategory('deal') as $index => $faq)
                                             <div class="panel panel-default mb-3">
-                                                <div class="panel-heading  active" role="tab" id="headingOne">
-                                                    <h4 class="panel-title mb-0">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">                                                         
-                                                            What is V-Elim?
-
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
-                                                    <div class="panel-body d-block">
-                                                        V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                              <div class="panel-heading @if ($loop->first) active @endif" role="tab" id="heading{{$faq->category.$index}}">
                                                   <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$faq->category.$index}}" aria-expanded="@if ($loop->first)true @else false @endif" aria-controls="collapse{{$faq->category.$index}}">                                                         
+                                                          {{$faq->question}}
 
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFour">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                     What assets does V-Elim trade with?
-                                                    </a>
+                                                      </a>
                                                   </h4>
-                                                </div>
-                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingFive">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                     What do I need to get started with V-Elim?
-
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                              </div>
+                                              <div id="collapse{{$faq->category.$index}}" class="panel-collapse collapse @if ($loop->first) in show @endif" role="tabpanel" aria-labelledby="heading{{$faq->category.$index}}">
+                                                  <div class="panel-body d-block">
+                                                      {{$faq->answer}}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -328,80 +156,23 @@
                                      <div id="normal" role="tabpanel" aria-labelledby="normal-tab" class="tab-pane fade px-2 pt-2 pb-5 show active">
                                     <div class="wrapper center-block">
                                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default mb-3">
-                                                <div class="panel-heading  active" role="tab" id="headingOne">
-                                                    <h4 class="panel-title mb-0">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">                                                         
-                                                            What is V-Elim?
-
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
-                                                    <div class="panel-body d-block">
-                                                        V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingTwo">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                                      What can you do on the V-Elim platform?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFour">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                     What assets does V-Elim trade with?
-                                                    </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-default  mb-3">
-                                                <div class="panel-heading" role="tab" id="headingFive">
-                                                  <h4 class="panel-title mb-0">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                     What do I need to get started with V-Elim?
+                                           @foreach (App\Models\Faq::thatHasCategory('fees') as $index => $faq)
+                                           <div class="panel panel-default mb-3">
+                                            <div class="panel-heading  @if ($loop->first) active @endif" role="tab" id="heading{{$faq->category.$index}}">
+                                                <h4 class="panel-title mb-0">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$faq->category.$index}}" aria-expanded="@if ($loop->first)true @else false @endif" aria-controls="collapse{{$faq->category.$index}}">                                                         
+                                                        {{$faq->question}}
 
                                                     </a>
-                                                  </h4>
-                                                </div>
-                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                                    <div class="panel-body">
-                                                    V-Elim is an automatic trading system that automatically sets up a buying section and a selling section to enable users to make smart investments. We aim to improve the quality of the user's investment life through convenient and intuitive services.
-                                                    </div>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse{{$faq->category.$index}}" class="panel-collapse collapse @if ($loop->first) in show @endif" role="tabpanel" aria-labelledby="heading{{$faq->category.$index}}">
+                                                <div class="panel-body d-block">
+                                                    {{$faq->answer}}
                                                 </div>
                                             </div>
+                                        </div>
+                                           @endforeach
                                         </div>
                                     </div>
                                 </div>

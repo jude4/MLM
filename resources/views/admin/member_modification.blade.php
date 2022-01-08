@@ -59,7 +59,7 @@
                                                         <input type="radio"
                                                             class="custom-control-input"
                                                             id="defaultGroupExample1"
-                                                            name="groupOfDefaultRadios" checked="">
+                                                            name="status" @if ()@endif value="active">
                                                         <label class="custom-control-label"
                                                             for="defaultGroupExample1">Active</label>
                                                     </div>
@@ -69,7 +69,7 @@
                                                         <input type="radio"
                                                             class="custom-control-input "
                                                             id="defaultGroupExample2"
-                                                            name="groupOfDefaultRadios">
+                                                            name="status" value="active">
                                                         <label class="custom-control-label"
                                                             for="defaultGroupExample2">Inactive</label>
                                                     </div>
@@ -103,7 +103,7 @@
                                                 class=" col-form-label ">nickname</label>
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp"
-                                                id="inputMyid" placeholder="Hong Gil Dong">
+                                                id="inputMyid" placeholder="Hong Gil Dong" value="{{$user->nickname}}">
                                         </div>
 
 
@@ -117,7 +117,9 @@
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp"
                                                 id="inputMyid"
-                                                placeholder="0x7636541260B944A4238D50687daB3418585a3536">
+                                                placeholder="0x7636541260B944A4238D50687daB3418585a3536"
+                                                value="{{$user->email}}"
+                                                >
                                         </div>
                                         <div class=" col-xl-3 col-lg-6 col-md-6 ">
                                             <i class="fas fa-caret-right"></i>
@@ -150,7 +152,7 @@
                                                 ACCESS KEY</label>
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp pos-sv"
-                                                id="inputMyid" placeholder="">
+                                                id="inputMyid" placeholder="" value="{{$user->upbit_access_key}}">
                                             <img src="assets/images/post.png" class="pos-scg"
                                                 width="30px">
                                         </div>
@@ -160,9 +162,9 @@
                                                 SECRET KEY</label>
                                             <input type="text"
                                                 class="form-control inp-sp-tx inp-bg-sp pos-sv"
-                                                id="inputMyid" placeholder="">
+                                                id="inputMyid" placeholder="" value="{{$user->upbit_secret_key}}">
                                             <img src="assets/images/post.png" class="pos-scg"
-                                                width="30px">
+                                                width="30px" >
                                         </div>
                                     </div>
                                     <div class="mb-5 mt-4">

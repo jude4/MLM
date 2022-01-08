@@ -15,29 +15,31 @@
                         </div>
                         <div class="card-block table-border-style overflow-auto">
                             <div class="col-12 px-5">
-                                <form>
+                                <form method="POST" action="{{route('admin.modify.faq')}}">
+                                    @csrf
+                                    <input type="text" name="id" id="" hidden value="{{$faq->id}}">
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Questions</label>
                                         <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="
-                                        Question.">
+                                        Question." name="question" value="{{$faq->question}}">
                                     </div>                                                    
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">category</label>
-                                        <select class="custom-select">
-                                            <option value="used" selected>                              Normal
+                                        <select class="custom-select" name="category">
+                                            <option value="normal" selected>                              Normal
                                             </option>
-                                            <option value="notused" class="text-left">
+                                            <option value="support" class="text-left">
                                              support
                                             </option>
-                                            <option value="notused" class="text-left">
+                                            <option value="deal" class="text-left">
                                              deal
                                             </option>
-                                            <option value="notused" class="text-left">
+                                            <option value="fees" class="text-left">
                                              fees
                                             </option>
                                         </select>
@@ -48,7 +50,9 @@
                                   <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Answer </label>
-                                       <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10" placeholder="Answer."></textarea>
+                                       <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" name="answer" rows="10" placeholder="Answer.">
+                                           {{$faq->answer}}
+                                       </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-4">
@@ -57,13 +61,13 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-7 col-12">
                                             <div class="custom-control custom-radio ">
-                                                <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
+                                                <input type="radio" class="custom-control-input" id="defaultGroupExample1" value="1" name="used" {{$faq->used?'checked':''}}>
                                                 <label class="custom-control-label" for="defaultGroupExample1">used</label>
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12">
                                             <div class="custom-control custom-radio ">
-                                                <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="groupOfDefaultRadios" >
+                                                <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="used" value="0" {{$faq->used?'':'checked'}} >
                                                 <label class="custom-control-label" for="defaultGroupExample2">not used</label>
                                             </div>
                                         </div>
@@ -71,9 +75,9 @@
                                 </div>
 
                                 <div class="mb-5 mt-4">
-                                    <a href="#" class="btn ad-btn-save mt-3">
+                                    <button  class="btn ad-btn-save mt-3">
                                        Save
-                                    </a>
+                                    </button>
 
                                     <a href="{{route('admin.faqlist')}}" class="btn btn-list mt-3 ml-3">
                                         List
