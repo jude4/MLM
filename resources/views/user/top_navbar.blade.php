@@ -69,7 +69,7 @@
                                     <li class="nav-item pl-4 pl-md-0   bor-mob-sec">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customer Service Center</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('user.servicecenterdetail')}}">Notice</a>
+                                            <a class="dropdown-item" href="{{route('user.servicecenter')}}">Notice</a>
                                             <a class="dropdown-item" href="{{route('user.faq')}}">Frequently Asked Questions</a>
                                             <a class="dropdown-item" href="{{route('user.firstinquiry')}}">1:1 inquiry</a>
                                         </div>
@@ -124,7 +124,7 @@
                                         <img src="{{asset('image/menu-icon/m05.png')}}" width="35px">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customer Service Center</a>
                                         <div class="dropdown-menu drb-spcs">
-                                            <a class="dropdown-item drb-spc p-2" href="{{route('user.servicecenterdetail')}}">Notice</a>
+                                            <a class="dropdown-item drb-spc p-2" href="{{route('user.servicecenter')}}">Notice</a>
                                             <a class="dropdown-item drb-spc p-2" href="{{route('user.faq')}}">Frequently Asked Questions</a>
                                             <a class="dropdown-item drb-spd p-2" href="{{route('user.firstinquiry')}}">1:1 inquiry</a>
                                             

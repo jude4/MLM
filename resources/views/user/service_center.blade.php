@@ -72,57 +72,28 @@
                                     <th class="border-bottom-0">Title</th>
                                     <th class="border-bottom-0">Views</th>
                                     <th class="border-bottom-0">Registration Date</th>
+                                    <th class="border-bottom-0">View</th>
                                 </tr>
                             </thead>
                             <tbody>
+                             @foreach ($notices as $index => $notice)
                              <tr>
-                                <td>10</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>           
+                                <td>{{$index+1}}</td>
+                                <td>{{$notice->title}}</td>
+                                <td>{{$notice->views}}</td>                    
+                                <td>{{$notice->created_at}}</td>  
+                                <td>
+                                    <a href="{{route('user.servicecenterdetail', ['id' => $notice->id])}}" class="btn-service-listd">    view
+                                    </a>    
+                                </td>         
                             </tr>
-                            <tr>
+                             @endforeach
+                            {{-- <tr>
                                 <td>09</td>
                                 <td>This is the notice page.</td>
                                 <td>71,464</td>                    
                                 <td>2021-10-07</td>                            
-                            </tr> 
-                            <tr>
-                                <td>08</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr> 
-                            <tr>
-                                <td>07</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr> 
-                            <tr>
-                                <td>06</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr> 
-                            <tr>
-                                <td>05</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr>  
-                            <tr>
-                                <td>04</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr>  
-                            <tr>
-                                <td>03</td>
-                                <td>This is the notice page.</td>
-                                <td>71,464</td>                    
-                                <td>2021-10-07</td>                            
-                            </tr>                           
+                            </tr>                           --}}
                             </tbody>  
                             <tfoot>  
                               

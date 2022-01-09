@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>Notice list</h5>
                             <div class="">
-                                <a href="notice-register.html" class="btn btn-enrollment mt-3">Enrollment</a>
+                                <a href="{{route('admin.noticeregister')}}" class="btn btn-enrollment mt-3">Enrollment</a>
                             </div>
 
                         </div>
@@ -96,127 +96,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($notices as $index => $notice)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{$index+1}}</td>
                                                 <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
+                                                <td>{{$notice->title}}</td>
+                                                <td>{{$notice->used?'used':'not used'}}</td>                               
+                                                <td>{{$notice->views}}</td>
+                                                <td>{{$notice->created_at}}</td>
                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
+                                                    <a href="{{route('admin.noticemodification', ['id' => $notice->id])}}" class="btn  btn-correction">    correction
                                                     </a>
                                                 </td>                 
                                             </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>3235</td>
-                                                <td>blahblahblah</td>
-                                                <td>used</td>                               
-                                                <td>25,053</td>
-                                                <td>2021-07-02 08:34:34</td>
-                                                 <td class="">
-                                                    <a href="notice-modification.html" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
+                                            @endforeach
                                                         
                                         </tbody>  
                                         <tfoot>  

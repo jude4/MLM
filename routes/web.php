@@ -50,17 +50,13 @@ Route::get('/service_center_registration', [UserController::class, 'serviceCente
 
 Route::post('/inquiry/create', [UserController::class, 'createInquiry'])->name('create.inquiry');
 
-Route::get('/service_center_detail', function () {
-    return view('user.service_center_detail');
-})->name('servicecenterdetail');
+Route::get('/service_center_detail/{id}', [UserController::class, 'serviceCenterDetail'])->name('servicecenterdetail');
 
 Route::get('/service_center_view_answer', function () {
     return view('user.service_center_view_answer');
 })->name('serviccenterviewname');
 
-Route::get('/service_center', function () {
-    return view('user.service_center');
-})->name('servicecenter');
+Route::get('/service_center',[UserController::class, 'serviceCenter'])->name('servicecenter');
 
 Route::get('/ranking', function () {
     return view('user.ranking');
@@ -196,17 +192,13 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
     Route::get('/member_modification/{id}', [AdminController::class, 'memberModification'])->name('membermodification');
 
-    Route::get('/notice_list', function () {
-        return view('admin.notice_list');
-    })->name('noticelist');
+    Route::get('/notice_list', [AdminController::class, 'noticeList'])->name('noticelist');
+    Route::post('/notice/create', [AdminController::class, 'createNotice'])->name('create.notice');
 
-    Route::get('/notice_modification', function () {
-        return view('admin.notice_modification');
-    })->name('noticemodification');
+    Route::get('/notice_modification/{id}', [AdminController::class, 'noticeModification'])->name('noticemodification');
+    Route::post('/notice/modify', [AdminController::class, 'modifyNotice'])->name('modify.notice');
 
-    Route::get('/notice_register', function () {
-        return view('admin.notice_register');
-    })->name('noticeregister');
+    Route::get('/notice_register', [AdminController::class, 'noticeRegister'])->name('noticeregister');
 
     Route::get('/one_on_one_inquiry_answer/{id}', [AdminController::class, 'oneOnOneInquiryAnswer'])->name('oneononeinquiryanswer');
     Route::post('/one_on_one_inquiry_answer/reply', [AdminController::class, 'replyOneOnOneInquiry'])->name('reply.oneononeinquiry');

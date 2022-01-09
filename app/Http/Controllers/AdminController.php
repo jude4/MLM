@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Faq;
 use App\Models\Inquiry;
+use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -223,6 +224,66 @@ class AdminController extends Controller
         $inquiry->answer = $request->answer;
         $inquiry->save();
         return redirect()->route('admin.oneononeinquiry')->with('toast_success', 'Inquiry Answered Successfully!');
+    }
+
+    public function noticeList()
+    {
+        $notices = Notice::all();
+        return view('admin.notice_list', compact('notices'));
+    }
+    
+    public function noticeRegister()
+    {
+        return view('admin.notice_register');
+    }
+
+    public function createNotice(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|min:10',
+            'content' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $notice = new Notice();
+        $notice->title = $request->title;
+        $notice->content = $request->content;
+        $notice->views = $request->views;
+        $notice->used = $request->used == '1';
+        $notice->save();
+
+        return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
+
+    }
+
+    public function noticeModification($id)
+    {
+        $notice = Notice::findOrFail($id);
+        return view('admin.notice_modification', compact('notice'));
+    }
+
+    public function modifyNotice(Request $request)
+    {
+        $notice = Notice::findOrFail($request->id);
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|min:10',
+            'content' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+        $notice->title = $request->title;
+        $notice->content = $request->content;
+        $notice->views = $request->views;
+        $notice->used = $request->used == '1';
+        $notice->save();
+
+        return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
     }
     
 

@@ -22,13 +22,13 @@
             <div class="top-head-charge text-center mb-5">Notice</div> 
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
-                    <div class="ser-star-txt mb-3">V-Elim Service Started.</div>
+                    <div class="ser-star-txt mb-3">{{$notice->title}}</div>
                     <div class="d-flex justify-content-between bor-box">
                         <div class="detail-man d-flex justify-content-between">
                             <div class="mr-md-5 mr-2">Manager</div>
-                            <div>2021-10-07</div>
+                            <div>{{$notice->created_at}}</div>
                         </div>
-                        <div class="detail-views text-right">71,464 views</div>                         
+                        <div class="detail-views text-right">{{$notice->views}} views</div>                         
                     </div>
                 </div>
             </div>
@@ -37,7 +37,9 @@
                     <div class="form-outline">
                         
                         <textarea class="form-control enter-area" id="textAreaExample2" rows="8" placeholder="
-Please enter your details."></textarea>
+Please enter your details.">
+{{$notice->content}}
+</textarea>
                        
                     </div>   
                 </div>
@@ -49,7 +51,7 @@ Please enter your details."></textarea>
             </div>
 
             <div class="text-right mb-20">
-                <a href="service-center.html" class="btn-service-listd">List</a>
+                <a href="{{route('user.servicecenter')}}" class="btn-service-listd">List</a>
             </div>
             <div class="mt-21"></div>
         </div>

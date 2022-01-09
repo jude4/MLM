@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
+use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,5 +91,19 @@ class UserController extends Controller
     {
         $inquiries = Auth::user()->inquiries;
         return view('user.first_inquiry', compact('inquiries'));
+    }
+
+    public function serviceCenter()
+    {
+        $notices = Notice::where('used', true)->get();
+        return view('user.service_center', compact('notices'));
+    }
+
+    public function serviceCenterDetail($id)
+    {
+        $notice = Notice::findOrFail($id);
+        $notice->views++;
+        $notice->save();
+        return view('user.service_center_detail', compact('notice'));
     }
 }

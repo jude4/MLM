@@ -19,6 +19,7 @@ class CreateNoticesTable extends Migration
             $table->string('title');
             $table->boolean('used')->default(true);
             $table->integer('views')->default(0);
+            $table->text('content')->nullable();
         });
     }
 
