@@ -20,22 +20,22 @@
                                 <img src="{{asset('image/bg03.png')}}" width="100%">
                             </div>
                             <div class="tot-sub-pos1">
-                                 <div class="total-text1">TOTAL PV </div>
-                                 <div class="total-text2 "> 10,000 won</div>
+                                <div class="total-text1">TOTAL PV </div>
+                                <div class="total-text2 "> 10,000 won</div>
                             </div>
                             <div class="tot-sub-pos2">
-                                 <div class="total-text1">Available PV </div> 
-                                 <div class="total-text2 "> 7,000 won</div>
+                                <div class="total-text1">Available PV </div>
+                                <div class="total-text2 "> 7,000 won</div>
                             </div>
                             <div class="tot-sub-pos3">
-                                 <div class="total-text1">Earned PV </div> 
-                                 <div class="total-text2 "> 3,000 won</div>
+                                <div class="total-text1">Earned PV </div>
+                                <div class="total-text2 "> 3,000 won</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 
@@ -54,16 +54,17 @@
                             </div>
                             <div class="user-nm pt-2">Gyewang01</div>
                             <div class="user-sub-nm ">Gyewang01</div>
-                            <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My Information</a></div>
+                            <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My
+                                    Information</a></div>
                         </div>
                     </div>
                     <ul class="list-unstyled components ">
                         <li class="active disn">
-                            <a href="{{route('user.pvmytree')}}" >My Tree</a>
-                            
+                            <a href="{{route('user.pvmytree')}}">My Tree</a>
+
                         </li>
-                       
-                        
+
+
                     </ul>
                 </nav>
                 <div id="content">
@@ -96,21 +97,21 @@
                     </nav>
                     <div class="row">
                         <div class="col-4 text-center">
-                            <a href="{{route('user.krwwithdrawalrequest')}}"class="pv-img">
+                            <a href="{{route('user.krwwithdrawalrequest')}}" class="pv-img">
                                 <img src="{{asset('image/icon/top04.png')}}">
                                 <div class="pv-sub-text py-2">MY PV</div>
                             </a>
                         </div>
 
                         <div class="col-4 text-center">
-                            <a href="{{route('user.pvcheckaccumulationhistory')}}"class="pv-img">
-                                <img src="{{asset('image/icon/top02.png')}}" >
+                            <a href="{{route('user.pvcheckaccumulationhistory')}}" class="pv-img">
+                                <img src="{{asset('image/icon/top02.png')}}">
                                 <div class="pv-sub-text py-2">Check History</div>
                             </a>
                         </div>
                         <div class="col-4 text-center">
-                            <a href="{{route('user.pvmytree')}}"class="pv-img">
-                                <img src="{{asset('image/icon/top06.png')}}" >
+                            <a href="{{route('user.pvmytree')}}" class="pv-img">
+                                <img src="{{asset('image/icon/top06.png')}}">
                                 <div class="pv-sub-text py-2">MY TREE</div>
                             </a>
                         </div>
@@ -122,299 +123,26 @@
                             </div>
                         </div>
                     </div>
+                    
+                    @livewire('user.my-tree')
 
-                    <div class="pvm-application" id="tree-structure">
-                    <div class="card-block table-border-style table-responsive">
-                        <div class="container-fluid px-5">           
-                            <div class="row">  
-                                <div class="col-12 table-start">
-                                    <div class="table-top-head mb-5">MY TREE</div>
-                                </div>  
-                            </div>  
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="container-fluid box-tree">
-                                        <div class="btn-pluse p-5">
-                                            <div class="col-1 pls-min-sp">
-                                            <button type="button" class="  btn-number btn-spd" data-type="plus" data-field="quant[1]">
-                                              <span class="glyphicon glyphicon-plus "></span>
-                                            </button>
-                                            <button type="button" class="  btn-number btn-spd2" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                            <span class="glyphicon glyphicon-minus"></span>
-                                            </button>
-                                        </div>
-                                        </div>
-                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                              <li data-target="#myCarousel" data-slide-to="1"></li>
-                                              <li data-target="#myCarousel" data-slide-to="2"></li>
-                                            </ol>   
-                                             <ol class="carousel-indicators">
-                                                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                                                <li data-target="#multi-item-example" data-slide-to="1"></li>
-                                                <li data-target="#multi-item-example" data-slide-to="2"></li>
-                                            </ol>
-                                            
-                                            <div class="carousel-inner">
-                                                <div class="item active">
-                                                    <div class="main-tree-structure mt-5">        
-                                                        <div class="level-1 rectangle">
-                                                            <div class="level-header"></div>
-                                                            <div class="level-content">
-                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale">Resale</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <ol class="level-2-wrapper p-0">
-                                                            <li>
-                                                                <div class="level-2 rectangle">
-                                                                    <div class="level-header"></div>
-                                                                    <div class="level-content">
-                                                                        <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <ol class="level-3-wrapper p-0">
-                                                                    <li>
-                                                                        <div class="level-3 rectangle">
-                                                                            <div class="level-header"></div>
-                                                                            <div class="level-content">
-                                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <ol class="level-4-wrapper p-0">
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ol>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="level-3 rectangle">
-                                                                            <div class="level-header"></div>
-                                                                            <div class="level-content">
-                                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <ol class="level-4-wrapper p-0">
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ol>
-                                                                    </li>
-                                                                </ol>
-                                                            </li>
-                                                            <li>
-                                                                <div class="level-2 rectangle">
-                                                                    <div class="level-header"></div>
-                                                                    <div class="level-content">
-                                                                        <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <ol class="level-3-wrapper p-0">
-                                                                    <li>
-                                                                        <div class="level-3 rectangle">
-                                                                            <div class="level-header"></div>
-                                                                            <div class="level-content">
-                                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <ol class="level-4-wrapper p-0">
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>                                    
-                                                                            </li>
-                                                                        </ol>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="level-3 rectangle">
-                                                                            <div class="level-header"></div>
-                                                                            <div class="level-content">
-                                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                                    <a href="#" class="btn-resale">Resale</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <ol class="level-4-wrapper p-0">
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="level-4 rectangle">
-                                                                                    <div class="level-header"></div>
-                                                                                    <div class="level-content">
-                                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>                            
-                                                                            </li>
-                                                                        </ol>
-                                                                    </li>
-                                                                </ol>
-                                                            </li>
-                                                        </ol>
-                                                    </div>
-                                                </div>
-                                                <div class="item">
-                                                    <div class="main-tree-structure mt-5">
-                                                        <div class="level-2 rectangle">
-                                                            <div class="level-header"></div>
-                                                            <div class="level-content">
-                                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale">Resale</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <ol class="level-6-wrapper p-0">
-                                                            <li>
-                                                                <div class="level-6 rectangle">
-                                                                    <div class="level-header"></div>
-                                                                    <div class="level-content">
-                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="level-6 rectangle">
-                                                                    <div class="level-header"></div>
-                                                                    <div class="level-content">
-                                                                        <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>                                    
-                                                            </li>
-                                                        </ol>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="item">
-                                                   
-                                                </div>
-                                                <div class="item">
-                                                    
-                                                </div> -->
-                                            </div>
-                                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="mt-21"></div>
-                        </div>  
-                    </div>
                 </div>
-                 
-                </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
-    
+
 <!-- -----------add button modal start----------------- -->
 
-<div class="modal fade pr-0" id="add-mlm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade pr-0" id="add-mlm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content " id="search-modal">
             <div class="modal-header border-bottom-0 mord-head">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>    
+            </div>
             <div id="serch-modal" class="modal-body">
                 <div class="form-with-title text-center">
                     <h4>Add MLM Member</h4>
@@ -441,7 +169,7 @@
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-8 col-8 ml-md-2 ml-sm-0 pr-1 pl-0">
-                           <input type="text" class="form-control search-pro-pv-input" placeholder="USER">
+                            <input type="text" class="form-control search-pro-pv-input" placeholder="USER">
                         </div>
                         <div class="col-2 px-0 text-right mt-2">
                             <a href="#" class="search-modal-btn">Search</a>
@@ -450,78 +178,87 @@
                     <div class="row justify-content-center">
                         <div class=col-12>
                             <div class="card-block table-border-style ">
-                                <div class="container-fluid px-2">           
-                                    <div class="row">  
+                                <div class="container-fluid px-2">
+                                    <div class="row">
                                         <div class="col-12 table-start">
-                                            <table class="table modal-table-transfer dt-responsive ">  
+                                            <table class="table modal-table-transfer dt-responsive ">
                                                 <thead class="table-header-bg">
-                                                    <tr >
+                                                    <tr>
                                                         <th class="borders-0">ID</th>
-                                                        <th class="border-bottom-0">nickname</th>                                           
+                                                        <th class="border-bottom-0">nickname</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox" value="" id="defaultCheck1" checked>
-                                                                <label class="form-check-label ml-4 add-mod" for="defaultCheck1">
+                                                                <input class="form-check-input mr-4" type="checkbox"
+                                                                    value="" id="defaultCheck1" checked>
+                                                                <label class="form-check-label ml-4 add-mod"
+                                                                    for="defaultCheck1">
                                                                     USER01
                                                                 </label>
                                                             </div>
-                                                       </td>
-                                                        <td>moonlight angel</td>                                                                
-                                                    </tr> 
+                                                        </td>
+                                                        <td>moonlight angel</td>
+                                                    </tr>
                                                     <tr>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox" value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4" for="defaultCheck1">
+                                                                <input class="form-check-input mr-4" type="checkbox"
+                                                                    value="" id="defaultCheck1">
+                                                                <label class="form-check-label add-mod ml-4"
+                                                                    for="defaultCheck1">
                                                                     USER02
                                                                 </label>
                                                             </div>
-                                                       </td>
-                                                        <td>Conan</td>                                                                
+                                                        </td>
+                                                        <td>Conan</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox" value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4" for="defaultCheck1">
+                                                                <input class="form-check-input mr-4" type="checkbox"
+                                                                    value="" id="defaultCheck1">
+                                                                <label class="form-check-label add-mod ml-4"
+                                                                    for="defaultCheck1">
                                                                     USER03
                                                                 </label>
                                                             </div>
-                                                       </td>
-                                                        <td>Frog medium sake</td>                                                                
+                                                        </td>
+                                                        <td>Frog medium sake</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox" value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4" for="defaultCheck1">
+                                                                <input class="form-check-input mr-4" type="checkbox"
+                                                                    value="" id="defaultCheck1">
+                                                                <label class="form-check-label add-mod ml-4"
+                                                                    for="defaultCheck1">
                                                                     USER04
                                                                 </label>
                                                             </div>
-                                                       </td>
-                                                        <td>happy girl muscle man</td>                                                                
+                                                        </td>
+                                                        <td>happy girl muscle man</td>
                                                     </tr>
-                                                    
 
-                                                </tbody> 
-                                            </table>  
-                                        </div>  
-                                    </div>  
-                                </div>  
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row justify-content-center mb-4 mt-3">
                         <div class="col-11">
                             <div class="mod-btn d-flex justify-content-between">
-                                <a href="#" class="btn-model-register" >New registration</a> 
-                                <a href="#" class="btn-model-select" >Addition</a> 
-                                <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">To Close</a>
+                                <a href="#" class="btn-model-register">New registration</a>
+                                <a href="#" class="btn-model-select">Addition</a>
+                                <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">To
+                                    Close</a>
                             </div>
                         </div>
                     </div>
@@ -535,12 +272,13 @@
 <!-- -----------add button modal end----------------- -->
 
 <!--resale Modal start -->
-<div class="modal fade pr-0" id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade pr-0" id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content resale-modal">
             <div class="modal-header border-bottom-0 top-reas-modal">
-            
-            </div>    
+
+            </div>
             <div class="modal-body">
                 <div class=" text-center">
                     <h4 class="to-re-chang">To Resell</h4>
@@ -553,27 +291,27 @@
                                     <div class="left-side text-left">
                                         <div class="left-text">ELIM points</div>
                                         <div class="left-text">Earned PV</div>
-                                        
+
                                     </div>
                                     <div class="right-side text-right">
                                         <div class="left-text">250,000 won</div>
                                         <div class="left-text">250,000 won</div>
-                                     
+
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-11">
-                                         <div class="box-bord text-center"></div>
+                                        <div class="box-bord text-center"></div>
                                     </div>
                                 </div>
-                               <div class="left-righ d-flex justify-content-between mb-3 p-3">
+                                <div class="left-righ d-flex justify-content-between mb-3 p-3">
                                     <div class="left-side text-left">
                                         <div class="left-text">Remaining accumulated PV</div>
                                     </div>
                                     <div class="right-side text-right">
                                         <div class="left-text">50,000 won</div>
                                     </div>
-                               </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -582,7 +320,8 @@
                             <a href="#" class="btn-model-resd">To Resell</a>
                         </div>
                         <div class="col-md-4 col-sm-5 col-6">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">Cancellation</a>
+                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
+                                data-dismiss="modal">Cancellation</a>
                         </div>
                     </div>
                 </div>
@@ -596,12 +335,13 @@
 
 
 <!--add MLM Member  Modal end -->
-<div class="modal fade pr-0" id="add-mlm-member-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade pr-0" id="add-mlm-member-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content resale-modal">
             <div class="modal-header border-bottom-0 top-reas-modal">
-            
-            </div>    
+
+            </div>
             <div class="modal-body">
                 <div class=" text-center">
                     <h4 class="to-re-chang">Add New MLM Members</h4>
@@ -612,23 +352,28 @@
                             <form>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ID</label>
-                                    <input type="email" class="form-control add-mod-inp"  placeholder="Please enter your ID.">
-                                    
+                                    <input type="email" class="form-control add-mod-inp"
+                                        placeholder="Please enter your ID.">
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nickname</label>
-                                    <input type="email" class="form-control add-mod-inp"  placeholder="Please enter your nickname.">
-                                    
+                                    <input type="email" class="form-control add-mod-inp"
+                                        placeholder="Please enter your nickname.">
+
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Password <span class="psw-mds-text">(8 or more digits, including special characters, including numbers)</span></label>
-                                    <input type="email" class="form-control add-mod-inp"  placeholder="Please enter a password.">
-                                    
+                                    <label for="exampleInputEmail1">Password <span class="psw-mds-text">(8 or more
+                                            digits, including special characters, including numbers)</span></label>
+                                    <input type="email" class="form-control add-mod-inp"
+                                        placeholder="Please enter a password.">
+
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control add-mod-inp"  placeholder="Please re-enter your password.">
+                                    <input type="email" class="form-control add-mod-inp"
+                                        placeholder="Please re-enter your password.">
                                 </div>
-                            </from>
+                                </from>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-5 mt-5">
@@ -636,7 +381,8 @@
                             <a href="#" class="btn-model-resd">Addition</a>
                         </div>
                         <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">Cancellation</a>
+                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
+                                data-dismiss="modal">Cancellation</a>
                         </div>
                     </div>
                 </div>
@@ -649,28 +395,30 @@
 <!--add MLM Member  Modal end -->
 
 
-<div class="modal fade pr-0" id="add-user-mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade pr-0" id="add-user-mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content ">
             <div class="modal-header border-bottom-0 ">
-            
-            </div>    
+
+            </div>
             <div class="modal-body">
                 <div class=" text-center">
                     <h4 class="to-re-chang">The member is added to MY TREE.</h4>
                 </div>
                 <div class="d-flex flex-column  mt-4 ">
-                   <div class="row justify-content-center">
+                    <div class="row justify-content-center">
                         <div class="col-11 text-center">
                             <div class="conf-texts-mod">Are you sure you want to register?</div>
                         </div>
-                   </div>
+                    </div>
                     <div class="row justify-content-center mb-5 mt-5">
                         <div class="col-md-3 col-sm-3 col-5">
                             <a href="#" class="btn-model-resd">Confirm</a>
                         </div>
                         <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">Cancellation</a>
+                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
+                                data-dismiss="modal">Cancellation</a>
                         </div>
                     </div>
                 </div>
@@ -682,14 +430,14 @@
 @endsection
 
 @section('scripts')
-    
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
-    <!-- ==========x==========x========== Start sidebar JS ==========x==========x========== -->
-       <script>
-           $(document).ready(()=>{
+<!-- ==========x==========x========== Start sidebar JS ==========x==========x========== -->
+<script>
+    $(document).ready(()=>{
          
          $('#open-sidebar').click(()=>{
             
@@ -713,27 +461,27 @@
           });
          
        });
-       </script>
+</script>
 
 
-<!--  ==========x==========x========== START DATATABLE  JS ==========x==========x========== --> 
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>   -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>  
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
+<!--  ==========x==========x========== START DATATABLE  JS ==========x==========x========== -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
 
 
- <script>  
-$('table').DataTable();  
+<script>
+    $('table').DataTable();  
 </script>
 
 <!-- ==========x==========x========== END DATATABLE  JS ==========x==========x========== -->
-   <!-- ==========x==========x==========  END SIDEBAR JS==========x==========x========== -->
+<!-- ==========x==========x==========  END SIDEBAR JS==========x==========x========== -->
 
 
-   <!-- ---------------sidebar script start-------------- -->
+<!-- ---------------sidebar script start-------------- -->
 <script>
-   $(document).ready(function () {
+    $(document).ready(function () {
            $('#sidebarCollapse').on('click', function () {
                $('#sidebar').toggleClass('active');
            });

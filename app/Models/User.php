@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public const MAX_CHILDREN = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -67,5 +70,36 @@ class User extends Authenticatable
     public function inquiries()
     {
         return $this->hasMany(Inquiry::class);
+    }
+
+    public function parent() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'referred_by') ;
+    }
+
+    public function children() : HasMany
+    {
+        return $this->hasMany(User::class, 'referred_by');
+    }
+
+    public function referById($id)
+    {
+        $user = self::find($id);
+        if(!$user->children->count() >= $this->MAX_CHILDREN){
+            $this->referred_by = $id;
+            return $this->save();
+        } else {
+            return false;
+        }
+    }
+
+    public function firstChild()
+    {
+        return $this->children->first();
+    }
+
+    public function lastChild()
+    {       
+        return $this->children()->latest()->first();
     }
 }
