@@ -52,11 +52,13 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->firstChild() )
-                                                        <div class="box-cen-text pt-4"> {{ auth()->user()->firstChild()->nickname }}
+                                                        <div class="box-cen-text pt-4"> {{
+                                                            auth()->user()->firstChild()->nickname }}
                                                         </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->firstChild()->nickname
+                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                            auth()->user()->firstChild()->nickname
                                                             }}
-                                                         </h3>
+                                                        </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
                                                             <a href="#" class="btn-resale">Resale</a>
                                                         </div>
@@ -73,13 +75,24 @@
                                                         <div class="level-3 rectangle">
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
-                                                                <div class="box-cen-text pt-4">
-                                                                    Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2">
-                                                                    Gyewang 01 </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale-sec">Resale</a>
+                                                                @if ( auth()->user()->firstChild()->firstChild() )
+                                                                <div class="box-cen-text pt-4"> {{
+                                                                    auth()->user()->firstChild()->firstChild()->nickname }}
                                                                 </div>
+                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                    auth()->user()->firstChild()->firstChild()->nickname
+                                                                    }}
+                                                                </h3>
+                                                                <div class="box-btn py-4 d-flex justify-content-center">
+                                                                    <a href="#" class="btn-resale">Resale</a>
+                                                                </div>
+                                                                @else
+                                                                <div class="box-btn d-flex justify-content-center py-5">
+                                                                    <a href="#" class="btn-resale-secs"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <ol class="level-4-wrapper p-0">
@@ -160,11 +173,13 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->lastChild() )
-                                                        <div class="box-cen-text pt-4"> {{ auth()->user()->lastChild()->nickname }}
+                                                        <div class="box-cen-text pt-4"> {{
+                                                            auth()->user()->lastChild()->nickname }}
                                                         </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->lastChild()->nickname
+                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                            auth()->user()->lastChild()->nickname
                                                             }}
-                                                         </h3>
+                                                        </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
                                                             <a href="#" class="btn-resale">Resale</a>
                                                         </div>
