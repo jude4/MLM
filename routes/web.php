@@ -157,12 +157,19 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     // Administrator routes
     Route::get('/dashboard', [AdminController::class, 'administratorList'])->name('administratorlist');
 
+    // Add Admin
+    Route::post('/administrator_registration', [AdminController::class, 'administrator_registration'])->name('add.administrator_registration');
+    // Search Admin
+    Route::get('/administrator_search', [AdminController::class, 'administrator_search'])->name('search.administrator');
+
+
     Route::get('/admin-management/{id}', [AdminController::class, 'adminManagement'])->name('adminmanagement');
     Route::post('/admin-management/edit/profile', [AdminController::class, 'editAdmin'])->name('edit.admin');
 
     Route::get('/administrator_registration', function () {
         return view('admin.administrator_registration');
     })->name('administratorregistration');
+
 
     Route::get('/elim_point_application_details', function () {
         return view('admin.elim_point_application_details');

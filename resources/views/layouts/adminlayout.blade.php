@@ -16,6 +16,7 @@
 
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="Codedthemes" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
@@ -42,6 +43,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
   
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
    @livewireStyles
 
@@ -143,13 +145,13 @@
     <script type="text/javascript" src="{{asset('assets/js/script.js')}}"></script>
 
     <script src="{{asset('assets/js/data-table/bootstrap-table.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/tableExport.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/data-table-active.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/bootstrap-table-editable.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/bootstrap-editable.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/bootstrap-table-resizable.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/colResizable-1.5.source.js')}}"></script>
-                    <script src="{{asset('assets/js/data-table/bootstrap-table-export.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/tableExport.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/data-table-active.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/bootstrap-table-editable.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/bootstrap-editable.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/bootstrap-table-resizable.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/colResizable-1.5.source.js')}}"></script>
+    <script src="{{asset('assets/js/data-table/bootstrap-table-export.js')}}"></script>
 
 
 <!-- ---------------data table script-------------- -->
@@ -157,11 +159,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
   <script>  
-$('table').DataTable();  
+//$('table').DataTable();  
+
+$('table').dataTable({
+    "pageLength": 30
+});
 </script>
+
 
 
 <script>

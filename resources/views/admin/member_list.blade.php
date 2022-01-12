@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>Member List</h5>
                             <div class="">
-                                <a href="#" class="btn btn-enrollment mt-3">Exel download</a>
+                                <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">Exel download</a>
                             </div>
 
                         </div>
@@ -23,19 +23,15 @@
                                 <form>
                                     <div class="row justify-content-md-end px-2">
                                         <div class="">
-                                            <div
-                                                class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
+                                            <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                                                 <div class="start-date-input">
-                                                    <input type="date" class="form-control" id="pure-date"
-                                                        aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
                                                 </div>
-                                                <div
-                                                    class="exchage-icon align-items-center d-flex justify-content-center">
+                                                <div class="exchage-icon align-items-center d-flex justify-content-center">
                                                     ~
                                                 </div>
                                                 <div class="end-date-input">
-                                                    <input type="date" class="form-control" id="pure-date"
-                                                        aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -90,8 +86,7 @@
 
                                                         </select>
                                                     </div>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Please select a search option.">
+                                                    <input type="text" class="form-control" placeholder="Please select a search option.">
                                                 </div>
 
                                                 <div class="btn-group mb-2 ml-2">
@@ -106,8 +101,7 @@
                                 <div class="row">
                                     <div class="col-12 table-start">
                                         <p class="count-list">Total : 14 Count (1/1)Page</p>
-                                        <table
-                                            class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove">
+                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="memberlist">
                                             <thead class="table-header-bg">
                                                 <tr>
                                                     <th class="border-bottom-0">No.</th>
@@ -147,26 +141,6 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                                {{-- <tr>
-                                                    <td>1</td>
-                                                    <td>30</td>
-                                                    <td>Normal</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>USER01@GMAIL.COM</td>
-                                                    <td>1,542,830</td>
-                                                    <td>1,542,830</td>
-                                                    <td>-</td>
-                                                    <td>-</td>
-                                                    <td>activation</td>
-                                                    <td>2020-12-10 10:35:52</td>
-                                                    <td class="">
-                                                        <a href="member-modification.html" class="btn  btn-correction">
-                                                            Correction
-                                                        </a>
-                                                    </td>
-                                                </tr> --}}
-
 
                                             </tbody>
                                             <tfoot>
@@ -188,8 +162,7 @@
 
 <!-- ------------coin holding modal----------------- -->
 
-<div class="modal fade" id="coin_holding" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="coin_holding" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content mod-sub">
             <div class="modal-header border-bottom-0">
@@ -211,8 +184,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="1.2345678">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
                             </div>
                         </div>
 
@@ -223,8 +195,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="1.2345678">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -234,8 +205,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="51">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="51">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -245,8 +215,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="1.2345678">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -256,8 +225,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="1.2345678">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -267,8 +235,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="1.2345678">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -278,8 +245,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="5000">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="5000">
                             </div>
                         </div>
                         <div class="form-group  row justify-content-center mb-2 mt-2">
@@ -289,8 +255,7 @@
 
                             </div>
                             <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid"
-                                    placeholder="25000">
+                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="25000">
                             </div>
                         </div>
                     </form>
@@ -314,3 +279,53 @@
     </div>
 </div>
 @endsection
+
+
+<script>
+    function exportData() {
+        var table = document.getElementById("memberlist");
+        var rows = [];
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            column1 = row.cells[0].innerText;
+            column2 = row.cells[1].innerText;
+            column3 = row.cells[2].innerText;
+            column4 = row.cells[3].innerText;
+            column5 = row.cells[4].innerText;
+            column6 = row.cells[5].innerText;
+            column7 = row.cells[6].innerText;
+            column8 = row.cells[7].innerText;
+            column9 = row.cells[8].innerText;
+            column10 = row.cells[9].innerText;
+            column11 = row.cells[10].innerText;
+
+            /* add a new records in the array */
+            rows.push(
+                [
+                    column1,
+                    column2,
+                    column3,
+                    column4,
+                    column5,
+                    column6,
+                    column7,
+                    column8,
+                    column9,
+                    column10,
+                    column11
+                ]
+            );
+
+        }
+        csvContent = "data:text/csv;charset=utf-8,";
+        rows.forEach(function(rowArray) {
+            row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Member_list.csv");
+        document.body.appendChild(link);
+        link.click();
+    }
+</script>

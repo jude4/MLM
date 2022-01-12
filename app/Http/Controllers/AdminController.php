@@ -20,8 +20,61 @@ class AdminController extends Controller
     {
 
         $admins = Admin::all();
+        $admincount = $admins->count();
 
-        return view('admin.administrator_list', compact('admins'));
+        return view('admin.administrator_list', compact('admins', 'admincount'));
+    }
+
+    public function administrator_search(Request $request)
+    {
+        $status = $request->status;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+
+        $admins = Admin::
+            when($field != '', function ($query) use ($request) {
+                $query->where($request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($status != '', function ($query) use ($request) {
+                $query->where('status', '=', $request->status);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('created_at', '<=', $request->enddate);
+            })
+            ->get();
+        
+        $admindata = view('admin.ajax_administrator_list', compact('admins'))->render();
+        return response()->json(['status' => '200', 'msg' => $admindata]);
+    }
+
+    public function administrator_registration(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'adminid' => 'required|min:5|unique:admins,admin_id',
+        ]);
+        if ($validator->fails()) {
+            $msg =  $validator->errors()->first();
+            return response()->json(['status' => '500', 'msg' => $msg]);
+        }
+
+        $admin = new Admin;
+        $admin->admin_id = $request->adminid;
+        $admin->name = $request->adminname;
+        $admin->mobile = $request->phoneno;
+        $admin->department = $request->department;
+        $admin->password = Hash::make($request->password);
+        $admin->status = $request->adminstatus;
+        $admin->notes = $request->adminnotes;
+        $admin->save();
+
+        return response()->json(['status' => '200', 'msg' => 'Added successfully']);
     }
 
     public function profile()
@@ -135,7 +188,7 @@ class AdminController extends Controller
     }
 
     public function memberModification($id)
-    {   
+    {
         $user = User::findOrFail($id);
         return view('admin.member_modification', compact('user'));
     }
@@ -231,7 +284,7 @@ class AdminController extends Controller
         $notices = Notice::all();
         return view('admin.notice_list', compact('notices'));
     }
-    
+
     public function noticeRegister()
     {
         return view('admin.notice_register');
@@ -256,7 +309,6 @@ class AdminController extends Controller
         $notice->save();
 
         return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
-
     }
 
     public function noticeModification($id)
@@ -285,6 +337,4 @@ class AdminController extends Controller
 
         return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
     }
-    
-
 }
