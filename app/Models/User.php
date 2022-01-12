@@ -93,13 +93,23 @@ class User extends Authenticatable
         }
     }
 
+    public function firstChildExists()
+    {
+        return !is_a($this->firstChild(), FakeUser::class);
+    }
+
+    public function lastChildExists()
+    {
+        return !is_a($this->lastChild(), FakeUser::class);
+    }
+
     public function firstChild()
     {
-        return $this->children->first();
+        return $this->children()->first() ?? new FakeUser;
     }
 
     public function lastChild()
     {       
-        return $this->children()->latest()->first();
+        return $this->children->count() >= 2? $this->children()->get()[1]: new FakeUser;
     }
 }

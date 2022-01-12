@@ -1,5 +1,8 @@
 @extends('layouts.userlayout')
-
+@section('styles')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- ==========x==========x========== START DATA TABLE ==========x==========x========= -->
+@endsection
 @section('content')
 
 <div id="pvm-req-pg">

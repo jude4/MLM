@@ -51,7 +51,7 @@
                                                 <div class="level-2 rectangle">
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
-                                                        @if ( auth()->user()->firstChild() )
+                                                        @if ( auth()->user()->firstChildExists() )
                                                         <div class="box-cen-text pt-4"> {{
                                                             auth()->user()->firstChild()->nickname }}
                                                         </div>
@@ -75,7 +75,7 @@
                                                         <div class="level-3 rectangle">
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
-                                                                @if ( auth()->user()->firstChild()->firstChild() )
+                                                                @if ( auth()->user()->firstChild()->firstChildExists() )
                                                                 <div class="box-cen-text pt-4"> {{
                                                                     auth()->user()->firstChild()->firstChild()->nickname }}
                                                                 </div>
@@ -100,12 +100,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
-                                                                        </div>
+                                                                        @if ( auth()->user()->firstChild()->firstChild()->firstChildExists() )
+                                                                <div class="box-cen-text pt-4"> {{
+                                                                    auth()->user()->firstChild()->firstChild()->firstChild()->nickname }}
+                                                                </div>
+                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                    auth()->user()->firstChild()->firstChild()->firstChild()->nickname
+                                                                    }}
+                                                                </h3>
+                                                                <div class="box-btn py-4 d-flex justify-content-center">
+                                                                    <a href="#" class="btn-resale">Resale</a>
+                                                                </div>
+                                                                @else
+                                                                <div class="box-btn d-flex justify-content-center py-5">
+                                                                    <a href="#" class="btn-resale-secs"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                </div>
+                                                                @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -113,12 +125,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->firstChild()->firstChild()->lastChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->firstChild()->firstChild()->lastChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->firstChild()->firstChild()->lastChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -128,13 +152,24 @@
                                                         <div class="level-3 rectangle">
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
-                                                                <div class="box-cen-text pt-4">
-                                                                    Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2">
-                                                                    Gyewang 01 </h3>
+                                                                @if ( auth()->user()->firstChild()->lastChildExists() )
+                                                                <div class="box-cen-text pt-4"> {{
+                                                                    auth()->user()->firstChild()->lastChild()->nickname }}
+                                                                </div>
+                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                    auth()->user()->firstChild()->lastChild()->nickname
+                                                                    }}
+                                                                </h3>
                                                                 <div class="box-btn py-4 d-flex justify-content-center">
                                                                     <a href="#" class="btn-resale-sec">Resale</a>
                                                                 </div>
+                                                                @else
+                                                                <div class="box-btn d-flex justify-content-center py-5">
+                                                                    <a href="#" class="btn-resale-secs"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <ol class="level-4-wrapper p-0">
@@ -142,12 +177,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->firstChild()->lastChild()->firstChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->firstChild()->lastChild()->firstChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->firstChild()->lastChild()->firstChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -155,12 +202,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->firstChild()->lastChild()->lastChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->firstChild()->lastChild()->lastChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->firstChild()->lastChild()->lastChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -172,7 +231,7 @@
                                                 <div class="level-2 rectangle">
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
-                                                        @if ( auth()->user()->lastChild() )
+                                                        @if ( auth()->user()->lastChildExists() )
                                                         <div class="box-cen-text pt-4"> {{
                                                             auth()->user()->lastChild()->nickname }}
                                                         </div>
@@ -196,13 +255,24 @@
                                                         <div class="level-3 rectangle">
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
-                                                                <div class="box-cen-text pt-4">
-                                                                    Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2">
-                                                                    Gyewang 01 </h3>
+                                                                @if ( auth()->user()->lastChild()->firstChildExists() )
+                                                                <div class="box-cen-text pt-4"> {{
+                                                                    auth()->user()->lastChild()->firstChild()->nickname }}
+                                                                </div>
+                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                    auth()->user()->lastChild()->firstChild()->nickname
+                                                                    }}
+                                                                </h3>
                                                                 <div class="box-btn py-4 d-flex justify-content-center">
                                                                     <a href="#" class="btn-resale-sec">Resale</a>
                                                                 </div>
+                                                                @else
+                                                                <div class="box-btn d-flex justify-content-center py-5">
+                                                                    <a href="#" class="btn-resale-secs"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <ol class="level-4-wrapper p-0">
@@ -210,12 +280,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->lastChild()->firstChild()->firstChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->lastChild()->firstChild()->firstChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->lastChild()->firstChild()->firstChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -223,12 +305,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->lastChild()->firstChild()->lastChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->lastChild()->firstChild()->lastChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->lastChild()->firstChild()->lastChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -238,13 +332,24 @@
                                                         <div class="level-3 rectangle">
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
-                                                                <div class="box-cen-text pt-4">
-                                                                    Gyewang01 </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2">
-                                                                    Gyewang 01 </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale">Resale</a>
+                                                                @if ( auth()->user()->lastChild()->lastChildExists() )
+                                                                <div class="box-cen-text pt-4"> {{
+                                                                    auth()->user()->lastChild()->lastChild()->nickname }}
                                                                 </div>
+                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                    auth()->user()->lastChild()->lastChild()->nickname
+                                                                    }}
+                                                                </h3>
+                                                                <div class="box-btn py-4 d-flex justify-content-center">
+                                                                    <a href="#" class="btn-resale-sec">Resale</a>
+                                                                </div>
+                                                                @else
+                                                                <div class="box-btn d-flex justify-content-center py-5">
+                                                                    <a href="#" class="btn-resale-secs"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <ol class="level-4-wrapper p-0">
@@ -252,12 +357,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->lastChild()->lastChild()->firstChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->lastChild()->lastChild()->firstChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->lastChild()->lastChild()->firstChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -265,12 +382,24 @@
                                                                 <div class="level-4 rectangle">
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
-                                                                        <div
-                                                                            class="box-btn d-flex justify-content-center py-5">
+                                                                        @if ( auth()->user()->lastChild()->lastChild()->lastChildExists() )
+                                                                        <div class="box-cen-text pt-4"> {{
+                                                                            auth()->user()->lastChild()->lastChild()->lastChild()->nickname }}
+                                                                        </div>
+                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                                            auth()->user()->lastChild()->lastChild()->lastChild()->nickname
+                                                                            }}
+                                                                        </h3>
+                                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
                                                                                 data-target="#add-mlm-modal">Add</a>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -286,8 +415,8 @@
                                         <div class="level-2 rectangle">
                                             <div class="level-header"></div>
                                             <div class="level-content">
-                                                <div class="box-cen-text pt-4"> Gyewang01 </div>
-                                                <h3 class="box-rect-sub m-0 pt-2"> Gyewang 01 </h3>
+                                                <div class="box-cen-text pt-4"> {{ auth()->user()->nickname }} </div>
+                                                <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
                                                 <div class="box-btn py-4 d-flex justify-content-center">
                                                     <a href="#" class="btn-resale">Resale</a>
                                                 </div>
@@ -298,10 +427,23 @@
                                                 <div class="level-6 rectangle">
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
+                                                        @if ( auth()->user()->firstChildExists() )
+                                                        <div class="box-cen-text pt-4"> {{
+                                                            auth()->user()->firstChild()->nickname }}
+                                                        </div>
+                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                            auth()->user()->firstChild()->nickname
+                                                            }}
+                                                        </h3>
+                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                            <a href="#" class="btn-resale">Resale</a>
+                                                        </div>
+                                                        @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
                                                                 data-target="#add-mlm-modal">Add</a>
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </li>
@@ -309,10 +451,23 @@
                                                 <div class="level-6 rectangle">
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
+                                                        @if ( auth()->user()->lastChildExists() )
+                                                        <div class="box-cen-text pt-4"> {{
+                                                            auth()->user()->lastChild()->nickname }}
+                                                        </div>
+                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
+                                                            auth()->user()->lastChild()->nickname
+                                                            }}
+                                                        </h3>
+                                                        <div class="box-btn py-4 d-flex justify-content-center">
+                                                            <a href="#" class="btn-resale">Resale</a>
+                                                        </div>
+                                                        @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
                                                                 data-target="#add-mlm-modal">Add</a>
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </li>
