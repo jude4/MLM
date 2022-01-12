@@ -258,8 +258,8 @@
                     <div class="row justify-content-center mb-4 mt-3">
                         <div class="col-11">
                             <div class="mod-btn d-flex justify-content-between">
-                                <a href="#" class="btn-model-register">New registration</a>
-                                <a href="#" class="btn-model-select">Addition</a>
+                                <a href="#" class="btn-model-register" data-toggle="modal" data-target="#add-mlm-member-modal">New registration</a>
+                                <a href="#" class="btn-model-select" data-toggle="modal" data-target="#add-user-mod">Addition</a>
                                 <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">To
                                     Close</a>
                             </div>
@@ -376,12 +376,12 @@
                                     <input type="email" class="form-control add-mod-inp"
                                         placeholder="Please re-enter your password.">
                                 </div>
-                                </from>
+                                </form>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-5 mt-5">
                         <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-resd">Addition</a>
+                            <a href="#" class="btn-model-resd" data-toggle="modal" data-target="#add-user-mod">Addition</a>
                         </div>
                         <div class="col-md-3 col-sm-3 col-5">
                             <a href="#" class="btn-model-close btn-close" aria-label="Close"

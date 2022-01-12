@@ -42,7 +42,7 @@
                                                 <div class="box-cen-text pt-4"> {{ auth()->user()->nickname }} </div>
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale">Resale</a>
+                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@
                                                             }}
                                                         </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale">Resale</a>
+                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                         </div>
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -84,7 +84,7 @@
                                                                     }}
                                                                 </h3>
                                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale">Resale</a>
+                                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                 </div>
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
@@ -109,7 +109,7 @@
                                                                     }}
                                                                 </h3>
                                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale">Resale</a>
+                                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                 </div>
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
@@ -134,7 +134,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -186,7 +186,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -211,7 +211,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -240,7 +240,7 @@
                                                             }}
                                                         </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale">Resale</a>
+                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                         </div>
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -289,7 +289,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -314,7 +314,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -366,7 +366,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -391,7 +391,7 @@
                                                                             }}
                                                                         </h3>
                                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale">Resale</a>
+                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                                         </div>
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -418,7 +418,7 @@
                                                 <div class="box-cen-text pt-4"> {{ auth()->user()->nickname }} </div>
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale">Resale</a>
+                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -436,7 +436,7 @@
                                                             }}
                                                         </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale">Resale</a>
+                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                         </div>
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
@@ -460,12 +460,11 @@
                                                             }}
                                                         </h3>
                                                         <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale">Resale</a>
+                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                         </div>
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                            <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal">Add</a>
+                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
