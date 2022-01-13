@@ -14,34 +14,60 @@
                         <div class="col-11">
                             <form>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">ID</label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter your ID.">
+                                    {{-- <label for="exampleInputEmail1">ID</label> --}}
+                                        <input class="form-control add-mod-inp @error('uuid') is-invalid @enderror" disabled type="text" name="id"  placeholder="Please enter your ID." wire:model.defer='uuid'>
+                                @error('uuid')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror  
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                        <input type="email" class="form-control add-mod-inp @error('email') is-invalid @enderror" placeholder="Please enter your e-mail." wire:model.defer='email'>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nickname</label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter your nickname.">
+                                        <input class="form-control add-mod-inp @error('nickname') is-invalid @enderror" type="text"  placeholder="Please enter your nickname." wire:model.defer='nickname'>
+                                @error('nickname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror                                
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Password <span class="psw-mds-text">(8 or more
                                             digits, including special characters, including numbers)</span></label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter a password.">
+                                <input class="form-control add-mod-inp @error('password') is-invalid @enderror" type="Password"  placeholder="Please enter a password." wire:model.defer='password'> 
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
 
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please re-enter your password.">
+                                        <input class="form-control add-mod-inp mt-2 @error('password_confirmation') is-invalid @enderror" type="text"  placeholder="Please re-enter your password." wire:model.defer='password_confirmation'>
+                                        @error('password_confirmation')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
                                 </form>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-5 mt-5">
                         <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-resd" data-toggle="modal" data-target="#add-user-mod">Addition</a>
+                            <a href="#" class="btn-model-resd" data-toggle="modal" data-target="#add-user-mod" wire:click='addMember'>Addition</a>
                         </div>
                         <div class="col-md-3 col-sm-3 col-5">
                             <a href="#" class="btn-model-close btn-close" aria-label="Close"
