@@ -82,10 +82,10 @@ class User extends Authenticatable
         return $this->hasMany(User::class, 'referred_by');
     }
 
-    public function referById($id)
+    public function giveParentById($id)
     {
         $user = self::find($id);
-        if(!$user->children->count() >= $this->MAX_CHILDREN){
+        if($user->children()->count() < self::MAX_CHILDREN){
             $this->referred_by = $id;
             return $this->save();
         } else {
@@ -96,7 +96,7 @@ class User extends Authenticatable
     public function makeChildById($id)
     {
         $child = self::find($id);
-        if (empty($child->referred_by)) {
+        if (empty($child->referred_by) && $this->children()->count() < self::MAX_CHILDREN) {
             $child->referred_by = $this->id;
             return $child->save();
         } else {
