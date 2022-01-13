@@ -12398,10 +12398,15 @@ span.badge {
 	color: #C92222 !important;
 }
 
-
-
 .pt-10 {
 	padding-top: 20px;
+}
+
+.custom-select{
+	color:#000 !important;
+}
+.mt-12{
+	margin-top:12px;
 }
 
 /*.page-item .page-link {

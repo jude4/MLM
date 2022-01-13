@@ -7,6 +7,9 @@ use App\Models\Faq;
 use App\Models\Inquiry;
 use App\Models\Notice;
 use App\Models\User;
+use App\Models\PvAccumulationHistory;
+use App\Models\PvUsageHistory;
+use App\Models\PvWithDrawalRequestHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -184,13 +187,106 @@ class AdminController extends Controller
     public function memberList()
     {
         $users = User::all();
-        return view('admin.member_list', compact('users'));
+        $usercount = $users->count();
+        return view('admin.member_list', compact('users', 'usercount'));
     }
+
+  
 
     public function memberModification($id)
     {
         $user = User::findOrFail($id);
         return view('admin.member_modification', compact('user'));
+    }
+
+    public function member_update(Request $request){
+        $User = User::findOrFail($request->id);
+
+        $validator = Validator::make($request->all(), [
+            'memberid' => 'required',
+            'nickname' => 'required',
+            'email' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $msg =  $validator->errors()->first();
+            return back()->with('toast_error',  $msg);
+        }
+
+        $memberidexists = User::where('user_id','=',$request->memberid)->where('id','!=',$request->id)->get();  
+        if(!$memberidexists->isEmpty() ){
+            $msg = 'Member ID already exists';
+            return back()->with('toast_error',  $msg);
+        }
+
+        $emailidexists = User::where('email','=',$request->email)->where('id','!=',$request->id)->get();  
+        if(!$emailidexists->isEmpty() ){
+            $msg = 'Member Email already exists';
+            return back()->with('toast_error',  $msg);
+        }
+
+        $accesskeyexists = User::where('upbit_access_key','=',$request->upbitaccesskey)->where('id','!=',$request->id)->get(); 
+        if(!$accesskeyexists->isEmpty() ){
+            $msg = 'Upbit ACCESS KEY already exists';
+            return back()->with('toast_error',  $msg);
+        }
+        
+        $secretkeyexists = User::where('upbit_secret_key','=',$request->upbitsecretkey)->where('id','!=',$request->id)->get(); 
+        if(!$secretkeyexists->isEmpty() ){
+            $msg = 'Upbit SECRET KEY already exists';
+            return back()->with('toast_error',  $msg);
+        }
+
+        if($request->image){
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('image'), $imageName);
+        }else{
+            $imageName = $request->old_image;
+        }
+        
+
+        $User->type = $request->membertype;
+        $User->status = $request->status;
+        $User->user_id = $request->memberid;
+        $User->password = Hash::make($request->password);
+        $User->nickname = $request->nickname;
+        $User->email = $request->email;
+        $User->upbit_access_key = $request->upbitaccesskey;
+        $User->upbit_secret_key = $request->upbitsecretkey;
+        $User->image = $imageName;
+        $User->save();
+
+        return back()->with('toast_success', 'Profile Updated Successfully!');
+
+    }
+
+    public function member_search(Request $request){
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $users = User::
+            when($field != '', function ($query) use ($request) {
+                $query->where($request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($status != '', function ($query) use ($request) {
+                $query->where('status', '=', $request->status);
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('created_at', '<=', $request->enddate);
+            })
+            ->get();
+        
+        $userdata = view('admin.ajax_member_list', compact('users'))->render();
+        return response()->json(['status' => '200', 'msg' => $userdata]);
     }
 
     public function createFaq(Request $request)
@@ -336,5 +432,111 @@ class AdminController extends Controller
         $notice->save();
 
         return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
+    }
+
+    public function pvaccumulation_history(){
+
+        $historydatas = PvAccumulationHistory::with(['user'])->get();
+        $historycount = $historydatas->count();
+              
+        return view('admin.pv_accumulation_history',compact('historydatas','historycount'));
+    }
+
+    public function pv_accumulation_history_search(Request $request){
+       
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        
+        $historydatas = PvAccumulationHistory::join('users', 'users.id', '=', 'pv_accumulation_histories.user_id')->
+            when($field != '', function ($query) use ($request) {
+                $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('pv_accumulation_histories.earning_type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('pv_accumulation_histories.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('pv_accumulation_histories.created_at', '<=', $request->enddate);
+            })
+            ->get();
+           
+           
+        $hdata = view('admin.ajax_pv_accumulation_history', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_usage_history(){
+        $historydatas = PvUsageHistory::with(['user'])->get();
+        $historycount = $historydatas->count();
+        return view('admin.pv_usage_history',compact('historydatas','historycount'));
+    }
+
+    public function pv_usage_history_search(Request $request){
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = PvUsageHistory::join('users', 'users.id', '=', 'pv_usage_histories.user_id')->
+            when($field != '', function ($query) use ($request) {
+                $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+            })
+            ->when($status != '', function ($query) use ($request) {
+                $query->where('pv_usage_histories.type', '=', $request->status);
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('pv_usage_histories.pv_type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('pv_usage_histories.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('pv_usage_histories.created_at', '<=', $request->enddate);
+            })
+            ->get();
+
+        $hdata = view('admin.ajax_pv_usage_history', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_withdrawal_request_history(){
+        $historydatas = PvWithDrawalRequestHistory::with(['user'])->get();
+        $historycount = $historydatas->count();
+        return view('admin.pv_withdrawal_request_history',compact('historydatas','historycount'));
+    }
+
+    public function pv_withdrawal_request_history_search(Request $request){
+        $status = $request->status;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = PvWithDrawalRequestHistory::join('users', 'users.id', '=', 'pv_with_drawal_request_histories.user_id')->
+        when($field != '', function ($query) use ($request) {
+            $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('pv_with_drawal_request_histories.status', '=', $request->status);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('pv_with_drawal_request_histories.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('pv_with_drawal_request_histories.created_at', '<=', $request->enddate);
+        })
+        ->get(['pv_with_drawal_request_histories.*','users.nickname', 'users.user_id']);
+
+        $hdata = view('admin.ajax_pv_withdrawal_request_history', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+
     }
 }

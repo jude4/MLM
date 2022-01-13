@@ -25,13 +25,13 @@
                                         <div class="">
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                                                 <div class="start-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">
                                                 </div>
                                                 <div class="exchage-icon align-items-center d-flex justify-content-center">
                                                     ~
                                                 </div>
                                                 <div class="end-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="enddate" aria-describedby="date-design-prepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -43,14 +43,14 @@
                                         <div class="col-12 d-flex justify-content-md-end">
                                             <div class="select-main-group ml-1 ">
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected>
+                                                    <select class="custom-select" id="type">
+                                                        <option value="" selected>
                                                             =Member Type=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="0" class="text-left">
                                                             General Membership
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="1" class="text-left">
                                                             MLM member
                                                         </option>
                                                     </select>
@@ -58,14 +58,14 @@
                                             </div>
                                             <div class="select-main-group">
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected>
+                                                    <select class="custom-select" id="status">
+                                                        <option value="" selected>
                                                             =Status=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="1" class="text-left">
                                                             activation
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="0" class="text-left">
                                                             inactive
                                                         </option>
                                                     </select>
@@ -73,25 +73,25 @@
 
                                                 <div class="input-group float-left w-auto mb-2">
                                                     <div class="input-group-prepend">
-                                                        <select class="custom-select">
-                                                            <option value="status" selected>
+                                                        <select class="custom-select" id="field">
+                                                            <option value="" selected>
                                                                 =Search Options=
                                                             </option>
-                                                            <option value="activation" class="text-left">
+                                                            <option value="user_id" class="text-left">
                                                                 Id
                                                             </option>
-                                                            <option value="inactive" class="text-left">
+                                                            <option value="nickname" class="text-left">
                                                                 nickname
                                                             </option>
 
                                                         </select>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Please select a search option.">
+                                                    <input type="text" class="form-control" placeholder="Please select a search option." id="fieldvalue">
                                                 </div>
 
                                                 <div class="btn-group mb-2 ml-2">
-                                                    <button type="button" class="btn btn-search">Search</button>
-                                                    <button type="button" class="btn btn-reset">Initialization</button>
+                                                    <button type="button" class="btn btn-search" onclick="searchuser()">Search</button>
+                                                    <button type="button" class="btn btn-reset" onclick="clearsearchfield()">Initialization</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -100,11 +100,11 @@
 
                                 <div class="row">
                                     <div class="col-12 table-start">
-                                        <p class="count-list">Total : 14 Count (1/1)Page</p>
-                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="memberlist">
+                                        <p class="count-list">Total : {{$usercount}} Count (1/1)Page</p>
+                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove">
                                             <thead class="table-header-bg">
                                                 <tr>
-                                                    <th class="border-bottom-0">No.</th>
+                                                    <th>No.</th>
                                                     <th class="border-bottom-0">PK</th>
                                                     <th class="border-bottom-0">Member type</th>
                                                     <th class="border-bottom-0">ID</th>
@@ -119,7 +119,7 @@
                                                     <th class="border-bottom-0">Correction</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="memberlistdata">
                                                 @foreach ($users as $index => $user)
                                                 <tr>
                                                     <td>{{$index+1}}</td>
@@ -141,7 +141,6 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-
                                             </tbody>
                                             <tfoot>
 
@@ -160,124 +159,7 @@
     </div>
 </div>
 
-<!-- ------------coin holding modal----------------- -->
 
-<div class="modal fade" id="coin_holding" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content mod-sub">
-            <div class="modal-header border-bottom-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-title text-left">
-                    <div class="mod-head ml-3">Coin and point holdings by member</div>
-                </div>
-                <div class="d-flex flex-column text-center">
-
-                    <form>
-                        <div class="form-group  row justify-content-center mb-2 mt-4">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">BTC</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
-                            </div>
-                        </div>
-
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">ETH</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">USDT</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="51">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">BSC</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">GRB</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">GNBP</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="1.2345678">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3 text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">A POINT</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="5000">
-                            </div>
-                        </div>
-                        <div class="form-group  row justify-content-center mb-2 mt-2">
-                            <div class="col-3  text-left">
-
-                                <label for="inputMyid" class=" col-form-label excd-txts">B POINT</label>
-
-                            </div>
-                            <div class="col-8  text-right">
-                                <input type="text" class="form-control inp-sp-tx  text-right excd" id="inputMyid" placeholder="25000">
-                            </div>
-                        </div>
-                    </form>
-
-
-
-                    <div class="row mt-3 mb-2 btn-spn justify-content-center">
-                        <div class="col-md-6 col-sm-6 col-6 ">
-                            <a href="#" class="btn  btn-close mt-3"> Close
-                            </a>
-                        </div>
-
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 
@@ -328,4 +210,60 @@
         document.body.appendChild(link);
         link.click();
     }
+
+
+    function searchuser() {
+        var status = $("#status").val();
+        var type = $("#type").val();
+        var field = $("#field").val();
+        var fieldvalue = $("#fieldvalue").val();
+        var startdate = $("#startdate").val();
+        var enddate = $("#enddate").val();
+
+        if (startdate != '' && enddate == '') {
+            toastr.error("Please select to date");
+            return false;
+        } else if (enddate != '' && startdate == '') {
+            toastr.error("Please select from date");
+            return false;
+        }
+
+        if (fieldvalue != '' && field == '') {
+            toastr.error("Please select search option");
+            return false;
+        } else if (field != '' && fieldvalue == '') {
+            toastr.error("Please add search value");
+            return false;
+        }
+
+        _data = {};
+        _data['status'] = status;
+        _data['type'] = type;
+        _data['field'] = field;
+        _data['fieldvalue'] = fieldvalue;
+        _data['startdate'] = startdate;
+        _data['enddate'] = enddate;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.search.member')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#memberlistdata").html(response.msg);
+                }
+            }
+        });
+    }
+
+    function clearsearchfield(){
+        $("#status").val('');
+        $("#type").val('');
+        $("#field").val('');
+        $("#fieldvalue").val('');
+        $("#startdate").val('');
+        $("#enddate").val('');
+    }
+
 </script>

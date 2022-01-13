@@ -199,7 +199,12 @@ $('#minMaxExample').datepicker({
         multipleDates: true,
         multipleDatesSeparator: " - "
 })
+
+$("#file-upload").change(function(){
+  $("#filename").val(this.files[0].name);
+});
 </script>
+
 
 </body>
 

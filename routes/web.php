@@ -199,6 +199,11 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
     Route::get('/member_modification/{id}', [AdminController::class, 'memberModification'])->name('membermodification');
 
+    // Member Update
+    Route::post('/member_update', [AdminController::class, 'member_update'])->name('update.member');
+    // Member Search
+    Route::get('/member_search', [AdminController::class, 'member_search'])->name('search.member');
+
     Route::get('/notice_list', [AdminController::class, 'noticeList'])->name('noticelist');
     Route::post('/notice/create', [AdminController::class, 'createNotice'])->name('create.notice');
 
@@ -215,9 +220,11 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
 
-    Route::get('/pv_accumulation_history', function () {
-        return view('admin.pv_accumulation_history');
-    })->name('pvaccumulationhistory');
+    Route::get('/pv_accumulation_history', [AdminController::class, 'pvaccumulation_history'])->name('pvaccumulationhistory');
+
+    // pv accumulation history Search
+    Route::get('/pv_accumulation_history_search', [AdminController::class, 'pv_accumulation_history_search'])->name('search.pvaccumulationhistory');
+
 
     Route::get('/pv_conversion_applicaton_details', function () {
         return view('admin.pv_conversion_application_details');
@@ -227,9 +234,15 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.pv_usage_history');
     })->name('pvusagehistory');
 
-    Route::get('/pv_withdrawal_request_history', function () {
-        return view('admin.pv_withdrawal_request_history');
-    })->name('pvwithdrawalrequesthistory');
+    Route::get('/pv_usage_history', [AdminController::class, 'pv_usage_history'])->name('pvusagehistory');
+    // pv usage history Search
+    Route::get('/pv_usage_history_search', [AdminController::class, 'pv_usage_history_search'])->name('search.pvusagehistory');
+
+  
+    Route::get('/pv_withdrawal_request_history', [AdminController::class, 'pv_withdrawal_request_history'])->name('pvwithdrawalrequesthistory');
+
+    // pv withdrawal request history search
+    Route::get('/pv_withdrawal_request_history_search', [AdminController::class, 'pv_withdrawal_request_history_search'])->name('search.pvwithdrawalrequesthistory');
 
     Route::get('/t_point_details_by_member', function () {
         return view('admin.t_point_details_by_member');

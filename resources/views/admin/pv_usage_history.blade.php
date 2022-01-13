@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>Total PV usage history</h5>
                             <div class="">
-                                <a href="#" class="btn btn-enrollment mt-3">Exel  download</a>
+                                <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">Exel  download</a>
                             </div>
 
                         </div>
@@ -25,13 +25,13 @@
                                         <div class="">
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                                                 <div class="start-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">    
+                                                    <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">    
                                                 </div>
                                                 <div class="exchage-icon align-items-center d-flex justify-content-center">
                                                     ~        
                                                 </div>
                                                 <div class="end-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">    
+                                                    <input type="date" class="form-control" id="enddate" aria-describedby="date-design-prepend">    
                                                 </div>
                                             </div>
                                         </div>
@@ -43,34 +43,34 @@
                                         <div class="col-12 d-flex justify-content-md-end">
                                             <div class="select-main-group">
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected="">
+                                                    <select class="custom-select" id="type">
+                                                        <option value="" selected="">
                                                             =PV Type=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="available" class="text-left">
                                                             available
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="accumulate" class="text-left">
                                                             accumulate
                                                         </option>
                                                         
                                                     </select>
                                                 </div>
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected>
+                                                    <select class="custom-select" id="status">
+                                                        <option value="" selected>
                                                            =Type of use=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="1" class="text-left">
                                                           withdraw
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="2" class="text-left">
                                                          send
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="3" class="text-left">
                                                             transform
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="4" class="text-left">
                                                            repurchase
                                                         </option>
                                                        
@@ -81,24 +81,24 @@
 
                                                 <div class="input-group float-left w-auto mb-2">
                                                   <div class="input-group-prepend">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected>
+                                                    <select class="custom-select" id="field">
+                                                        <option value="" selected>
                                                             =Search Options=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="user_id" class="text-left">
                                                             ID 
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="nickname" class="text-left">
                                                           nickname
                                                         </option>
                                                     </select>
                                                   </div>
-                                                  <input type="text" class="form-control" placeholder="Please select a search option.">
+                                                  <input type="text" class="form-control" placeholder="Please select a search option." id="fieldvalue">
                                                 </div>
 
                                                 <div class="btn-group mb-2 ml-2">
-                                                    <button type="button" class="btn btn-search">Search</button>
-                                                    <button type="button" class="btn btn-reset">Initialization</button>
+                                                    <button type="button" class="btn btn-search" onclick="searchhistory()">Search</button>
+                                                    <button type="button" class="btn btn-reset" onclick="clearsearchfield()">Initialization</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,8 +107,8 @@
                                 
                                 <div class="row">  
                                     <div class="col-12 table-start">
-                                    <p class="count-list">Total : 14 Count (1/1)Page</p>   
-                                      <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size">  
+                                    <p class="count-list">Total : {{ $historycount }} Count (1/1)Page</p>   
+                                      <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="pvusagehistorylist">  
                                         <thead class="table-header-bg">
                                             <tr>
                                                 <th class="border-bottom-0">No.</th>
@@ -121,67 +121,29 @@
                                                 <th class="border-bottom-0">Date of use</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="pvusagehistorydata">
+                                            @foreach($historydatas as $index => $history)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{ $index+1 }}</td>
                                                 <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
+                                                <td>{{$history->pv_type}}</td>
+                                                <td>{{$history->user->user_id}}</td>                    
+                                                <td>{{$history->user->nickname}}</td> 
+                                                <td>
+                                                    @if($history->type == '1')
+                                                        withdraw
+                                                    @elseif($history->type == '2')
+                                                        send
+                                                    @elseif($history->type == '3')
+                                                        transform
+                                                    @else
+                                                        repurchase
+                                                    @endif
+                                                </td> 
+                                                <td>{{$history->price}}</td>
+                                                <td>{{$history->created_at}}</td>            
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>30</td>
-                                                <td>available</td>
-                                                <td>USER01</td>                    
-                                                <td>Hong Gil Dong</td> 
-                                                <td>withdraw</td> 
-                                                <td>50,000</td>
-                                                <td>2020-12-10 10:35:52</td>            
-                                            </tr>
+                                            @endforeach
                                         </tbody>  
                                         <tfoot>  
                                           
@@ -200,3 +162,104 @@
     </div>
 </div>
 @endsection
+
+
+<script>
+    function exportData() {
+        var table = document.getElementById("pvusagehistorylist");
+        var rows = [];
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            column1 = row.cells[0].innerText;
+            column2 = row.cells[1].innerText;
+            column3 = row.cells[2].innerText;
+            column4 = row.cells[3].innerText;
+            column5 = row.cells[4].innerText;
+            column6 = row.cells[5].innerText;
+            column7 = row.cells[6].innerText;
+            column8 = row.cells[7].innerText;
+
+            /* add a new records in the array */
+            rows.push(
+                [
+                    column1,
+                    column2,
+                    column3,
+                    column4,
+                    column5,
+                    column6,
+                    column7,
+                    column8
+                ]
+            );
+
+        }
+        csvContent = "data:text/csv;charset=utf-8,";
+        rows.forEach(function(rowArray) {
+            row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "pvusagehistory.csv");
+        document.body.appendChild(link);
+        link.click();
+    }
+
+
+    function searchhistory() {
+        var status = $("#status").val();
+        var type = $("#type").val();
+        var field = $("#field").val();
+        var fieldvalue = $("#fieldvalue").val();
+        var startdate = $("#startdate").val();
+        var enddate = $("#enddate").val();
+
+        if (startdate != '' && enddate == '') {
+            toastr.error("Please select to date");
+            return false;
+        } else if (enddate != '' && startdate == '') {
+            toastr.error("Please select from date");
+            return false;
+        }
+
+        if (fieldvalue != '' && field == '') {
+            toastr.error("Please select search option");
+            return false;
+        } else if (field != '' && fieldvalue == '') {
+            toastr.error("Please add search value");
+            return false;
+        }
+
+        _data = {};
+        _data['status'] = status;
+        _data['type'] = type;
+        _data['field'] = field;
+        _data['fieldvalue'] = fieldvalue;
+        _data['startdate'] = startdate;
+        _data['enddate'] = enddate;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.search.pvusagehistory')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#pvusagehistorydata").html(response.msg);
+                }
+            }
+        });
+    }
+
+    function clearsearchfield(){
+        $("#status").val('');
+        $("#type").val('');
+        $("#field").val('');
+        $("#fieldvalue").val('');
+        $("#startdate").val('');
+        $("#enddate").val('');
+    }
+
+
+</script>

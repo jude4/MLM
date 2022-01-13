@@ -102,4 +102,22 @@ class User extends Authenticatable
     {       
         return $this->children()->latest()->first();
     }
+
+    public function PvAccumulationHistory()
+    {
+        return $this->hasOne(PvAccumulationHistory::class);
+    }
+
+    public function PvUsageHistory()
+    {
+        return $this->hasOne(PvUsageHistory::class);
+    }
+
+    public function PvWithDrawalRequestHistory()
+    {
+        return $this->hasOne(PvWithDrawalRequestHistory::class);
+    }
+
+
+    
 }
