@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FakeUser
 {
-    private $id;
+    public $id;
 
     public function __construct()
     {
