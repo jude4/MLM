@@ -106,4 +106,9 @@ class UserController extends Controller
         $notice->save();
         return view('user.service_center_detail', compact('notice'));
     }
+
+    public function pvMyTree()
+    {
+        return view('user.pv_my_tree');
+    }
 }

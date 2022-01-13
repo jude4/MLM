@@ -65,7 +65,7 @@
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal">Add</a>
+                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -90,7 +90,7 @@
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
                                                                         data-toggle="modal"
-                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -115,7 +115,7 @@
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
                                                                         data-toggle="modal"
-                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                                     </div>
@@ -140,7 +140,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -167,7 +167,7 @@
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
                                                                         data-toggle="modal"
-                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -192,7 +192,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -217,7 +217,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -245,7 +245,7 @@
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal">Add</a>
+                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -270,7 +270,7 @@
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
                                                                         data-toggle="modal"
-                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -295,7 +295,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -320,7 +320,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -347,7 +347,7 @@
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
                                                                         data-toggle="modal"
-                                                                        data-target="#add-mlm-modal">Add</a>
+                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -372,7 +372,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')" >Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -397,7 +397,7 @@
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
                                                                                 data-toggle="modal"
-                                                                                data-target="#add-mlm-modal">Add</a>
+                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -441,7 +441,7 @@
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal">Add</a>
+                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -464,7 +464,7 @@
                                                         </div>
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal">Add</a>
+                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>

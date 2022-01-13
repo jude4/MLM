@@ -93,6 +93,17 @@ class User extends Authenticatable
         }
     }
 
+    public function makeChildById($id)
+    {
+        $child = self::find($id);
+        if (empty($child->referred_by)) {
+            $child->referred_by = $this->id;
+            return $child->save();
+        } else {
+            return false;
+        }
+    }
+
     public function firstChildExists()
     {
         return !is_a($this->firstChild(), FakeUser::class);

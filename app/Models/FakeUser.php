@@ -2,8 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
+
 class FakeUser
 {
+    private $id;
+
+    public function __construct()
+    {
+        $this->id = Auth::user()->id;
+    }
+
     public function firstChildExists()
     {
         return false;

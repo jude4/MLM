@@ -106,9 +106,7 @@ Route::get('/pv_check_accumulation_history', function () {
     return view('user.pv_check_accumulation_history');
 })->name('pvcheckaccumulationhistory');
 
-Route::get('/pv_my_tree', function () {
-    return view('user.pv_my_tree');
-})->name('pvmytree');
+Route::get('/pv_my_tree', [UserController::class, 'pvMyTree'])->name('pvmytree');
 
 Route::get('/krw_application_list', function () {
     return view('user.krw_application_list');
