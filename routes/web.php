@@ -170,9 +170,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.elim_point_exchange_history');
     })->name('elimpointapplicatiionhistory');
 
-    Route::get('/elim_point_transfer_history', function () {
-        return view('admin.elim_point_transfer_history');
-    })->name('elimpointtransferhistory');
+    Route::get('/elim_point_transfer_history', [\App\Http\Livewire\Admin\ElimPointTransferHistory::class, 'render']    )->name('elimpointtransferhistory');
 
     Route::get('/faq_list', [AdminController::class, 'faqList'])->name('faqlist');
 
