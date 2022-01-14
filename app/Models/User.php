@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Attribute;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,8 @@ class User extends Authenticatable
         'user_id',
         'nickname',
         'email',
+        'elim_points',
+        't_points',
         'password',
     ];
 
@@ -46,6 +49,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'status' => 'boolean',
     ];
+
+    protected function getElimPointsAttribute($value)
+    {
+        return number_format($value);
+    }
+    
+
+    protected function getTPointsAttribute($value)
+    {
+        return number_format($value);
+    }
+
 
     public static function uuidExists($id){
         return self::where('user_id', '=', $id)->first()? true : false; 
