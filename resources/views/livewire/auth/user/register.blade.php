@@ -74,7 +74,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <input class="form-control input100 mt-2 @error('password_confirmation') is-invalid @enderror" type="text"  placeholder="Please re-enter your password." wire:model.defer='password_confirmation'>
+                                <input class="form-control input100 mt-2 @error('password_confirmation') is-invalid @enderror" type="password"  placeholder="Please re-enter your password." wire:model.defer='password_confirmation'>
                                 @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

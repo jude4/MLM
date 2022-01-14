@@ -51,29 +51,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="wrapper">
-                <nav id="sidebar" class="box-shad ">
-                    <div class="sub-sp">
-                        <div class="user-icons">
-                            <div class="user-imgs text-center pt-4">
-                                <img src="{{asset('image/icon/user02.png')}}" width="65px">
-                            </div>
-                            <div class="user-nm pt-2">Gyewang01</div>
-                            <div class="user-sub-nm ">Gyewang01</div>
-                            <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My Information</a></div>
-                        </div>
-                    </div>
-                    <ul class="list-unstyled components">
-                        <li class="active">
-                            <a href="{{route('user.pvcheckaccumulationhistory')}}" >PV Accumulation History</a>
-                            
-                        </li>
-                        <li>
-                            <a href="pv-check-usage-history.html">PV Usage History</a>
-                            
-                        </li>
-                        
-                    </ul>
-                </nav>
+                @include('user.pv_sidebar')
                 <div id="content">
                     <nav class="navbar navbar-expand-lg navbar-light ">
                         <div class="container-fluid mb-3">

@@ -74,7 +74,7 @@ class User extends Authenticatable
 
     public function parent() : BelongsTo
     {
-        return $this->belongsTo(User::class, 'referred_by') ;
+        return $this->belongsTo(User::class, 'referred_by') ?? new FakeUser();
     }
 
     public function children() : HasMany
@@ -85,12 +85,7 @@ class User extends Authenticatable
     public function giveParentById($id)
     {
         $user = self::find($id);
-        if($user->children()->count() < self::MAX_CHILDREN){
-            $this->referred_by = $id;
-            return $this->save();
-        } else {
-            return false;
-        }
+        $user->makeChildById($this->id);
     }
 
     public function makeChildById($id)
@@ -100,8 +95,15 @@ class User extends Authenticatable
             $child->referred_by = $this->id;
             return $child->save();
         } else {
-            return false;
+            return $child->passToChild($id);
         }
+    }
+
+
+
+    public function passToChild($id)
+    {
+        $this->children[rand(0,1)]->makeChildById($id);
     }
 
     public function firstChildExists()
@@ -116,11 +118,11 @@ class User extends Authenticatable
 
     public function firstChild()
     {
-        return $this->children()->first() ?? new FakeUser;
+        return $this->children()->latest()->first() ?? new FakeUser;
     }
 
     public function lastChild()
     {       
-        return $this->children->count() >= 2? $this->children()->get()[1]: new FakeUser;
+        return $this->children->count() >= 2? $this->children()->latest()->get()[1]: new FakeUser;
     }
 }

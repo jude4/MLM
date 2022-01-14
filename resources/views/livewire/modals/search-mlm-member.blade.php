@@ -83,7 +83,7 @@
                     <div class="row justify-content-center mb-4 mt-3">
                         <div class="col-11">
                             <div class="mod-btn d-flex justify-content-between">
-                                <a href="#" class="btn-model-register" data-toggle="modal" data-target="#add-mlm-member-modal">New registration</a>
+                                <a href="#" class="btn-model-register" data-toggle="modal" data-target="#add-mlm-member-modal" wire:click="$emit('addUser', '{{$addId}}')">New registration</a>
                                 <a href="#" class="btn-model-select" data-toggle="modal" data-target="#add-user-mod" wire:click='addUsers'>Addition</a>
                                 <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">To
                                     Close</a>

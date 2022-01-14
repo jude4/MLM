@@ -32,4 +32,9 @@ class FakeUser
     {
         return new self;
     }
+
+    public function parernt()
+    {
+        return new self;
+    }
 }
