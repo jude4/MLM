@@ -3,21 +3,18 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Traits\Stateable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ElimPointApplication extends Model
 {
-    use HasFactory;
+    use HasFactory, Stateable;
 
     protected $guarded = [];
 
  
-
-    const PENDING = 0;
-    const CANCELLATION = 1;
-    const APPROVED = 2;
 
 
     public function getAmountAttribute($value)
@@ -37,4 +34,7 @@ class ElimPointApplication extends Model
                 ->orWhere('user_id', 'like', '%' . $search . '%');
         });
     }
+
+
+
 }

@@ -10,21 +10,27 @@ use Livewire\Component;
 class ViewElimRechargeDetail extends Component
 {
     use Toggleable;
-    public $user;
+    public $recharge;
 
     protected $listeners = ['viewDetail'];
 
     public function mount()
     {
-        $this->user = ElimPointApplication::first();
+        $this->recharge = ElimPointApplication::first();
     }
 
 
     public function viewDetail($id)
     {
-        $this->user = User::findOrFail($id);
-       
+        $this->reaharge = ElimPointApplication::findOrFail($id);
         $this->editMode = true;
+    }
+
+    public function confirm()
+    {
+        $this->recharge->status = 2;
+        $this->recharge->save();
+        return redirect()->route('admin.elimpointapplicatondetails')->with('toast_success', 'Successfully Approed!');
     }
 
     public function render()

@@ -22,7 +22,9 @@ class CreateElimPointApplicationsTable extends Migration
             $table->string('bank_name');
             $table->string('virtual_account_number')->nullable();
             $table->string('account_number');
+            $table->string('name_of_depositor');
             $table->string('our_bank')->nullable();
+            $table->string('comment')->nullable();
         });
     }
 

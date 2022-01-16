@@ -122,12 +122,12 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>{{ ++$count }}</td>
-                                                        <td>{{ $item->user->pk }}</td>
-                                                        <td>MLM member</td>
+                                                        <td>{{ $item->user->id }}</td>
+                                                        <td>{{$item->user->type}}</td>
                                                         <td>{{ $item->user->user_id }}</td>
                                                         <td>{{ $item->user->nickname }}</td>
                                                         <td>{{ $item->amount }}</td>
-                                                        <td class="inc-text-changes">atmosphere</td>
+                                                        <td class="inc-text-changes">{{$item->status}}</td>
 
                                                         <td class="">
                                                             <a href="#" wire:click="$emit('viewDetail', {{ $item->id }})" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-transfer-detail-modal">
@@ -135,10 +135,10 @@
                                                             </a>
                                                         </td>
                                                         <td class="">
-                                                            @if ($item->status == $pending)
-                                                            <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-approval-modal">
+                                                            @if ($item->status != 'approved')
+                                                            <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-approval-modal" wire:click="$emit('approval', {{ $item->id }})">
                                                                 Approval </a>
-                                                            <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#Elim-point-cancel-modal">
+                                                            <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#Elim-point-cancel-modal" wire:click="$emit('declinal', {{ $item->id }})">
                                                                 cancellation
                                                             </a>
                                                             @else
@@ -177,4 +177,7 @@
             <!-- Main-body end -->
         </div>
     </div>
+
+    @livewire('admin.modals.elim-point-application-approve')
+    @livewire('admin.modals.elim-point-application-decline')
 </div>

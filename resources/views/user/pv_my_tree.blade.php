@@ -92,9 +92,11 @@
                             </div>
                         </div>
                     </div>
-                    
+                    @if (auth()->user()->type == 'General Member')
+                    <p class="text-center h3 text-danger">NOT AN MLM MEMEBER</p>
+                    @else
                     @livewire('user.my-tree')
-
+                    @endif
                 </div>
             </div>
         </div>

@@ -10,9 +10,9 @@
                             <div class="left-side-sub-text"> ELIM POINT </div>
                         </div>
                         <div class="align-self-center pr-4 d-flex d-inline-block ">
-                            @if ($item->status == $PENDING)
+                            @if ($item->status == 'pending')
                             <div class="tab-atmo-text">Pending</div>
-                            @elseif ($item->status == $CACELLATION)
+                            @elseif ($item->status == 'cancelled')
                             <div class="tab-can-text">Cancellation</div>
                             @else
                             <div class="tab-approval-text">Approval</div>
@@ -22,10 +22,8 @@
                     </div>
                 </div>
             </div>
-
-
             @empty
-
+                <p>No Record</p>
             @endforelse
         </div>
 
