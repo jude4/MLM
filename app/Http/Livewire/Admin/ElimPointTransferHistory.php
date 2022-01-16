@@ -36,7 +36,6 @@ class ElimPointTransferHistory extends Component
             ->orWhereBetween('created_at', [$this->startDate, $this->endDate])
             ->latest()
             ->get();
-// dd($histories);
            
         return view('livewire.admin.elim-point-transfer-history', compact('histories', 'count'));
     }

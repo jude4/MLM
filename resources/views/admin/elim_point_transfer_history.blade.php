@@ -18,7 +18,7 @@
 
                         </div>
 
-                       @livewire('admin.elim-point-transfer-history')
+                        @livewire('admin.elim-point-transfer-history')
                     </div>
                 </div>
                 <!-- Page-body end -->
@@ -31,6 +31,6 @@
 
 <!-- ------------Elim point exchange detail modal----------------- -->
 
-@livewire('modals.view-elim-point-transfer-history')
+@livewire('admin.modals.view-elim-recharge-detail')
 
 @endsection
