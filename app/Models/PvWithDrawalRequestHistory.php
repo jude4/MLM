@@ -10,6 +10,7 @@ class PvWithDrawalRequestHistory extends Model
 {
     use HasFactory;
 
+
     const PENDING = 0;
     const COMPLETED = 1;
 

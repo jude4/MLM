@@ -1,5 +1,6 @@
-<div class="modal fade pr-0" id="add-mlm-member-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div  id="add-mlm-member-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    @if ($editMode == true) style="display: none" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true"@endif
+    >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content resale-modal">
             <div class="modal-header border-bottom-0 top-reas-modal">
@@ -55,7 +56,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                        <input class="form-control add-mod-inp mt-2 @error('password_confirmation') is-invalid @enderror" type="text"  placeholder="Please re-enter your password." wire:model.defer='password_confirmation'>
+                                        <input class="form-control add-mod-inp mt-2 @error('password_confirmation') is-invalid @enderror" type="password"  placeholder="Please re-enter your password." wire:model.defer='password_confirmation'>
                                         @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -67,7 +68,7 @@
                     </div>
                     <div class="row justify-content-center mb-5 mt-5">
                         <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-resd" data-toggle="modal" data-target="#add-user-mod" wire:click='addMember'>Addition</a>
+                            <a href="#" class="btn-model-resd"  wire:click='addMember'>Addition</a>
                         </div>
                         <div class="col-md-3 col-sm-3 col-5">
                             <a href="#" class="btn-model-close btn-close" aria-label="Close"

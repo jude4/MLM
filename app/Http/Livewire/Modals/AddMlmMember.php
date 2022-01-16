@@ -3,17 +3,29 @@
 namespace App\Http\Livewire\Modals;
 
 use App\Models\User;
+use App\Traits\Toggleable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class AddMlmMember extends Component
 {
+    use Toggleable;
+
     public $uuid;
     public $email;
     public $password;
     public $password_confirmation;
     public $nickname;
+    public $user_id;
+
+    protected $listeners = ['addUser'];
+
+    public function addUser($id)
+    {
+        $this->user_id = $id;
+        $this->editMode = true;
+    }
 
     protected $rules = [
         'uuid' => 'required|string|max:255',
@@ -31,6 +43,7 @@ class AddMlmMember extends Component
 
     public function addMember()
     {
+        $this->editMode = true;
         $this->validate();
 
         $user = User::create([
@@ -40,7 +53,7 @@ class AddMlmMember extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        $user->giveParentById(Auth::user()->id);
+        $user->giveParentById($this->user_id);
 
         return redirect()->route('user.pvmytree')->with('toast_success', 'New Member Added!');
     }

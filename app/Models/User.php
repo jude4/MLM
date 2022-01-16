@@ -54,6 +54,11 @@ class User extends Authenticatable
         'status' => 'boolean',
     ];
 
+    public function totalPv()
+    {
+        return number_format($this->available_pv + $this->earned_pv);
+    }
+
     protected function getElimPointsAttribute($value)
     {
         return number_format($value);
@@ -95,14 +100,32 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function resale()
+    {
+        $value = 200000;
+        if ($this->isEligibleForResale()) {
+            $this->earned_pv = (int) $this->earned_pv - $value;
+            $this->available_pv = (int) $this->available_pv + $value;
+            $this->resale = true;
+            return $this->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function isEligibleForResale()
+    {
+        return $this->resale == false && $this->earned_pv >= 250000;
+    }
+
     public function inquiries()
     {
         return $this->hasMany(Inquiry::class);
     }
 
-    public function parent() : BelongsTo
+    public function parent()
     {
-        return $this->belongsTo(User::class, 'referred_by') ;
+        return $this->referred_by? self::findOrFail($this->referred_by): new FakeUser;
     }
 
     public function children() : HasMany
@@ -113,12 +136,7 @@ class User extends Authenticatable
     public function giveParentById($id)
     {
         $user = self::find($id);
-        if($user->children()->count() < self::MAX_CHILDREN){
-            $this->referred_by = $id;
-            return $this->save();
-        } else {
-            return false;
-        }
+        $user->makeChildById($this->id);
     }
 
     public function makeChildById($id)
@@ -126,10 +144,35 @@ class User extends Authenticatable
         $child = self::find($id);
         if (empty($child->referred_by) && $this->children()->count() < self::MAX_CHILDREN) {
             $child->referred_by = $this->id;
+            $child->rewardParents();
             return $child->save();
         } else {
-            return false;
+            return $child->passToChild($id);
         }
+    }
+
+    public function rewardParents()
+    {
+        $value= 400000;
+        $this->nthParent(1)->rewardPv($value*0.5);
+        $this->nthParent(2)->rewardPv($value*0.1);
+        $this->nthParent(3)->rewardPv($value*0.05);
+        $this->nthParent(4)->rewardPv($value*0.04);
+        $this->nthParent(5)->rewardPv($value*0.03);
+        $this->nthParent(6)->rewardPv($value*0.02);
+        $this->nthParent(7)->rewardPv($value*0.01);
+    }
+
+    public function rewardPv($value)
+    {
+        $this->earned_pv = (int) $this->earned_pv + (int) $value;
+        return $this->save();
+    }
+
+
+    public function passToChild($id)
+    {
+        $this->children[rand(0,1)]->makeChildById($id);
     }
 
     public function firstChildExists()
@@ -144,11 +187,19 @@ class User extends Authenticatable
 
     public function firstChild()
     {
-        return $this->children()->first() ?? new FakeUser;
+        return $this->children()->latest()->first() ?? new FakeUser;
     }
 
     public function lastChild()
     {       
-        return $this->children->count() >= 2? $this->children()->get()[1]: new FakeUser;
+        return $this->children->count() >= 2? $this->children()->latest()->get()[1]: new FakeUser;
+    }
+
+    public function nthParent(int $n)
+    {
+        if($n <= 1){
+            return $this->parent();
+        } 
+        return $this->parent()->nthParent($n - 1);
     }
 }

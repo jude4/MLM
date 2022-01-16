@@ -5,42 +5,7 @@
 
 
 
-<div id="pvm-req-pg">
-    <div class="bg05">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-2 col-md-0">
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-12">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 align-self-center mb-4">
-                            <div class="header-title text-center">
-                                <h3 class="mb-0 ">PV management</h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-md-6 col-sm-9 col-10">
-                            <div class="bg03">
-                                <img src="{{asset('image/bg03.png')}}" width="100%">
-                            </div>
-                            <div class="tot-sub-pos1">
-                                 <div class="total-text1">TOTAL PV </div>
-                                 <div class="total-text2 "> 10,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos2">
-                                 <div class="total-text1">Available PV </div> 
-                                 <div class="total-text2 "> 7,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos3">
-                                 <div class="total-text1">Earned PV </div> 
-                                 <div class="total-text2 "> 3,000 won</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-    </div>
-</div>
+@include('user.pv_header')
 
 
 
@@ -48,58 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="wrapper">
-                <nav id="sidebar" class="box-shad ">
-                    <div class="sub-sp">
-                        <div class="user-icons">
-                            <div class="user-imgs text-center pt-4">
-                                <img src="{{asset('image/icon/user02.png')}}" width="65px">
-                            </div>
-                            <div class="user-nm pt-2">Gyewang01</div>
-                            <div class="user-sub-nm ">Gyewang01</div>
-                            <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My Information</a></div>
-                        </div>
-                    </div>
-                    <ul class="list-unstyled components">
-                        <li class="active">
-                            <a href="#WithdrawalSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Withdrawal in Korean Won</a>
-                            <ul class="collapse list-unstyled sub-display" id="WithdrawalSubmenu">
-                                <li >
-                                    <a href="{{route('user.krwwithdrawalrequest')}}">Withdrawal Request</a>
-                                </li>
-                                <li class="active">
-                                    <a href="{{route('user.krwapplicationlist')}}">Application List</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#MemberSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Member-To-Member Transfer</a>
-                            <ul class="collapse list-unstyled" id="MemberSubmenu">
-                                <li>
-                                    <a href="pv-transfer.html">Request for transmission</a>
-                                </li>
-                                <li>
-                                    <a href="pv-transfer-request-list.html">Application list</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#ELIMSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ELIM point conversion</a>
-                            <ul class="collapse list-unstyled" id="ELIMSubmenu">
-                                <li>
-                                    <a href="pv-exchange-available-ELIM-point.html">Available PV sales application</a>
-                                </li>
-                                <li>
-                                    <a href="pv-exchange-accumulation-ELIM-point.html">Apply for resale of accumulated PV</a>
-                                </li>
-                                <li>
-                                    <a href="pv-transfer-request-list.html">Application list</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                @include('user.pv_sidebar')
                 <div id="content">
                     <nav class="navbar navbar-expand-lg navbar-light ">
                         <div class="container-fluid mb-3">
@@ -166,6 +80,51 @@
 
 
 <!-- end PV Management (MY PV) - KRW Application list section-->
+
+
+
+<!--LOOK  Modal -->
+<div class="modal fade pr-0" id="look" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content look-modal">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>    
+            <div class="modal-body">
+                <div class="form-with-title text-center">
+                    <h4>Withdrawal Details</h4>
+                </div>
+                <div class="d-flex flex-column text-center mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-6 text-left">
+                            <div class="app-list-amount">Application Amount</div>
+                            <div class="app-list-amount">Account Number</div>
+                            <div class="app-list-amount">Name of bank</div>
+                            <div class="app-list-amount">Name of account holder</div>  
+                        </div>
+                        <div class="col-5 text-right">
+                            <div class="app-list-amount ">500,000 won</div>
+                            <div class="app-list-amount ">123-456-78910</div>
+                            <div class="app-list-amount "> Our bank</div>
+                            <div class="app-list-amount ">Hong Gil Dong</div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center my-5">
+                        <div class="col-11">
+                           <a href="#" class="btn-mod-confirm">Confirm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Look modal end -->
 @endsection
 
 @section('scripts')

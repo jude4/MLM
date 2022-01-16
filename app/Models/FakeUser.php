@@ -10,7 +10,7 @@ class FakeUser
 
     public function __construct()
     {
-        $this->id = Auth::user()->id;
+        $this->id = Auth::user()->id?? null;
     }
 
     public function firstChildExists()
@@ -31,5 +31,29 @@ class FakeUser
     public function lastChild()
     {
         return new self;
+    }
+
+    public function parent()
+    {
+        return new self;
+    }
+
+    public function nthParent(int $n)
+    {
+        if($n <= 1){
+            return $this->parent();
+        }
+
+        return $this->parent()->nthParent($n - 1);
+    }
+
+    public function rewardPv()
+    {
+        return true;
+    }
+
+    public function rewardParents()
+    {
+
     }
 }

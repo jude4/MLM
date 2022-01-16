@@ -1,13 +1,8 @@
 @extends('layouts.userlayout')
 
 @section('content')
-    <!-- Start PV Management (MY PV) - KRW  Application list section-->
-
-
-
+    
 @include('user.pv_header')
-
-
 
 
 
@@ -84,72 +79,58 @@
                                             <thead class="table-header-bg">
                                                 <tr >
                                                     <th class="borders-0">No</th>
-                                                    <th class="borders-0">ID</th>
-                                                    <th class="borders-0">Nickname</th>
-                                                    <th class="borders-0">Earning type</th>
-                                                    <th class="borders-0">Reserves</th>
-                                                    <th class="borders-0">Accumulation date</th>                                      
+                                                    <th class="border-bottom-0">type of use</th>
+                                                    <th class="borders-0">Price</th>
+                                                    <th class="borders-0">Date of use</th>                                        
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>ELIM point conversion</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
                                                 </tr> 
-                                                 <tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>send</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
                                                 </tr> 
-                                                 <tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>withdraw</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
                                                 </tr> 
-                                                 <tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>withdraw</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
                                                 </tr> 
-                                                 <tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
+                                                    <td>withdraw</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
+                                                </tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
+                                                    <td>ELIM point conversion</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
+                                                </tr>
+                                                <tr>
                                                     <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>ELIM point conversion</td>
+                                                    <td>50,000</td>
+                                                    <td>2021.11.09 17:45</td>       
                                                 </tr> 
+
                                             </tbody>  
                                             <tfoot>  
+                                              
                                             </tfoot>  
                                         </table>  
                                     </div>  
@@ -163,71 +144,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-<!-- end PV Management (MY PV) - KRW Application list section-->
-@endsection
-
-@section('scripts')
-
-        <!-- ==========x==========x========== Start sidebar JS ==========x==========x========== -->
-        <script>
-            $(document).ready(()=>{
-          
-          $('#open-sidebar').click(()=>{
-             
-              // add class active on #sidebar
-              $('#sidebar').addClass('active');
-              
-              // show sidebar overlay
-              $('#sidebar-overlay').removeClass('d-none');
-            
-           });
-          
-          
-           $('#sidebar-overlay').click(function(){
-             
-              // add class active on #sidebar
-              $('#sidebar').removeClass('active');
-              
-              // show sidebar overlay
-              $(this).addClass('d-none');
-            
-           });
-          
-        });
-        </script>
-
-        <!-- ==========x==========x==========  END SIDEBAR JS==========x==========x========== -->
-<!-- ==========x==========x========== END JS ==========x==========x========== -->
-
-    <!-- ==========x==========x========== START DATATABLE  JS ==========x==========x========== -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>   -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>  
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
-  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
-
-
-  <script>  
-$('table').DataTable();  
-</script>
-
-<!-- ==========x==========x========== END DATATABLE  JS ==========x==========x========== -->
-
-
-
-<!-- ---------------sidebar script start-------------- -->
-<script>
-    $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-</script>
-
-
-<!-- ---------------sidebar script end-------------- -->
 @endsection

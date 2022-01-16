@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,8 @@ Artisan::command('create superadmin', function () {
         'mobile' => '+2348160262187',
         'is_super' => true,
     ]);
+
+    User::factory(10)->create();
     $this->comment('first administrator has been setup');
 })->purpose('Setup the admin');
 
