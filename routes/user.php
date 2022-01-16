@@ -84,6 +84,10 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
         return view('user.pv_check_accumulation_history');
     })->name('pvcheckaccumulationhistory');
 
+    Route::get('/pv_check_usage_history', function () {
+        return view('user.pv_check_usage_history');
+    })->name('pvcheckusagehistory');
+
     Route::get('/pv_my_tree', [UserController::class, 'pvMyTree'])->name('pvmytree');
 
     Route::get('/krw_application_list', function () {

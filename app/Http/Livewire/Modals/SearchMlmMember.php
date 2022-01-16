@@ -20,7 +20,7 @@ class SearchMlmMember extends Component
 
     public function mount()
     {
-        $this->users=User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->get();
+        $this->users=User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->limit(5)->get();
     }
 
     public function setAddId($id)
@@ -32,7 +32,7 @@ class SearchMlmMember extends Component
     public function search()
     {
         $this->editMode = true;
-        $this->users = User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->where($this->by, 'LIKE', "%$this->search%")->get();
+        $this->users = User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->where($this->by, 'LIKE', "%$this->search%")->limit(5)->get();
     }
 
     public function addUsers()

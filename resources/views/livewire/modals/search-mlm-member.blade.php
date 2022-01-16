@@ -95,6 +95,8 @@
         </div>
     </div>
     <script>
-        $('table').DataTable();  
+        // setInterval(() => {
+        //     $('table').DataTable();
+        // }, 500);  
     </script>
 </div>
