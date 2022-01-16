@@ -22,7 +22,7 @@
                         <div class="box-shad-arou">
                             <div class="d-flex justify-content-between p-md-3 p-2 ">
                                 <div class="lft-sid-detail text-left">
-                                    {{ $user->nickname ?? null }}
+                                    <div>{{ $user->nickname ?? null }}</div>
                                     <div>recharge amount</div>
                                     <div>virtual account number</div>
                                     <div>name of bank</div>
