@@ -79,7 +79,7 @@
                             <div class="container-fluid px-md-5 px-2">           
                                 <div class="row mb-20">  
                                     <div class="col-12 table-start">
-                                        <div class="table-top-head mb-5">PV Usage Historys</div>
+                                        <div class="table-top-head mb-5">PV Accumulation History</div>
                                         <table class="table table-hover dt-responsive  ">  
                                             <thead class="table-header-bg">
                                                 <tr >

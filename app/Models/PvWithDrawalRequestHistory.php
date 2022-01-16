@@ -14,6 +14,11 @@ class PvWithDrawalRequestHistory extends Model
     const PENDING = 0;
     const COMPLETED = 1;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected $guarded = [];
 
     public function getStatusAttribute($value)
@@ -28,6 +33,7 @@ class PvWithDrawalRequestHistory extends Model
                 ->orWhere('user_id', 'like', '%' . $search . '%');
         });
     }
+
 
 
 }
