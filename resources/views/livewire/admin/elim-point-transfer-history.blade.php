@@ -91,7 +91,7 @@
 
                             <td>{{ $history->pk }}</td>
                             <td>
-                           {{ $item->type }}
+                           {{ $history->type }}
                             </td>
                             <td>{{ $history->user->user_id }}</td>
                             <td>{{ $history->user->nickname }}</td>
