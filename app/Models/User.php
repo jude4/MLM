@@ -53,6 +53,11 @@ class User extends Authenticatable
         'status' => 'boolean',
     ];
 
+    public function totalPv()
+    {
+        return number_format($this->available_pv + $this->earned_pv);
+    }
+
     protected function getElimPointsAttribute($value)
     {
         return number_format($value);
