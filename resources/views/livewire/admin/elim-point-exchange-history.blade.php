@@ -5,13 +5,13 @@
                 <div class="">
                     <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                         <div class="start-date-input">
-                            <input type="date" wire:model="startDate" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                            <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
                         </div>
                         <div class="exchage-icon align-items-center d-flex justify-content-center">
                             ~
                         </div>
                         <div class="end-date-input">
-                            <input type="date" wire:model="endDate" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                            <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
                         </div>
                     </div>
                 </div>
@@ -42,21 +42,20 @@
 
                         <div class="input-group float-left w-auto mb-2">
                             <div class="input-group-prepend">
-                                <select class="custom-select" wire:model.defer="searchBy">
+                                <select class="custom-select">
                                     <option value="status" selected>
                                         =Search Options=
                                     </option>
-                                    <option value="id" class="text-left">
+                                    <option value="activation" class="text-left">
                                         Id
                                     </option>
-                                    <option value="name" class="text-left">
+                                    <option value="inactive" class="text-left">
                                         name
                                     </option>
 
                                 </select>
-
                             </div>
-                            <input type="text" wire:model="search" class="form-control" placeholder="Please select a search option.">
+                            <input type="search" wire:model="search" class="form-control" placeholder="Please select a search option.">
                         </div>
 
                         <div class="btn-group mb-2 ml-2">
@@ -79,43 +78,43 @@
                             <th class="border-bottom-0">Member type</th>
                             <th class="border-bottom-0">ID</th>
                             <th class="border-bottom-0">Nickname</th>
-                            <th class="border-bottom-0">transfer quantity</th>
+                            <th class="border-bottom-0">Quantity before exchange (ELIM)</th>
+                            <th class="border-bottom-0">Quantity after exchange (T)</th>
                             <th class="border-bottom-0">Detail</th>
                             <th class="border-bottom-0">Exchange date and time</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($histories as $history)
+                        @forelse($histories as $item)
                         <tr>
                             <td>{{ ++$count }}</td>
+                            <td>{{ $item->user->available_pv }}</td>
+                            <td>{{ $item->user->type }}</td>
+                            <td>{{ $item->user->user_id }}</td>
+                            <td>{{ $item->user->nickname }}</td>
+                            <td>{{ $item->elim_quantity_before_exhange }}</td>
 
-                            <td>{{ $history->pk }}</td>
-                            <td>
-                           {{ $history->user->type }}
-                            </td>
-                            <td>{{ $history->user->user_id }}</td>
-                            <td>{{ $history->user->nickname }}</td>
-                            <td>{{ $history->exchange_quantity }}</td>
+                            <td>{{ $item->tp_quantity_after_exhange }}</td>
+
                             <td class="">
-                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-transfer-detail-modal">
+                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-exchange-detail-modal">
                                     Look
                                 </a>
                             </td>
-                            <td>{{ $history->created_at }}</td>
+                            <td>{{ $item->created_at }}</td>
+
                         </tr>
 
                         @empty
-                        <tr>
-                        <td colspan="8">No Record</td>
-                        </tr>
+                            <tr>
+                            <td colspan="9">No Record</td>
+                            </tr>
                         @endforelse
-
                     </tbody>
                     <tfoot>
 
                     </tfoot>
                 </table>
-
             </div>
         </div>
     </div>

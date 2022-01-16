@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email',
         'elim_points',
         't_points',
+        'available_pv',
         'password',
     ];
 

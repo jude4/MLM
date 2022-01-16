@@ -27,6 +27,7 @@ aria-hidden="true"
                         <div class="box-shad-arou">
                             <div class="d-flex justify-content-between p-md-3 p-2 ">
                                 <div class="lft-sid-detail text-left">
+                                
                                     <div>Transmission ID</div>
                                     <div>transfer nickname</div>
                                 </div>

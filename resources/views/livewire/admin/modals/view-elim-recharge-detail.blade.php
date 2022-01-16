@@ -1,4 +1,3 @@
-{{-- <div id="Elim-point-transfer-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" @if ($editMode==true) style="display: flex" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true" @endif> --}}
 
 
 
@@ -22,7 +21,11 @@
                         <div class="box-shad-arou">
                             <div class="d-flex justify-content-between p-md-3 p-2 ">
                                 <div class="lft-sid-detail text-left">
-                                    <div>{{ $user->nickname ?? null }}</div>
+
+                                    
+
+                               
+
                                     <div>recharge amount</div>
                                     <div>virtual account number</div>
                                     <div>name of bank</div>

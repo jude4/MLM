@@ -17,9 +17,10 @@ class CreateElimPointExchangeHistoriesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
-            $table->integer('elim_points');
-            $table->integer('t_points');
-            $table->integer('fee');
+            $table->double('elim_quantity_before_exhange');
+            $table->double('tp_quantity_after_exhange');
+            $table->longText('detail')->nullable();
+            $table->double('exchange_fee');
         });
     }
 
