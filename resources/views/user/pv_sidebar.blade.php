@@ -2,7 +2,7 @@
     <div class="sub-sp">
         <div class="user-icons">
             <div class="user-imgs text-center pt-4">
-                <img src="{{asset('image/icon/user02.png')}}" width="65px">
+                <img src="{{asset(Auth::user()->profilePicture())}}" width="65px">
             </div>
             <div class="user-nm pt-2">Gyewang01</div>
             <div class="user-sub-nm ">Gyewang01</div>

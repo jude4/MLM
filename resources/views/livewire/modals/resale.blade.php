@@ -1,5 +1,5 @@
-<div class="modal fade pr-0" id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+@if ($editMode == true) style="display: none" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true"@endif >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content resale-modal">
             <div class="modal-header border-bottom-0 top-reas-modal">
@@ -20,8 +20,8 @@
 
                                     </div>
                                     <div class="right-side text-right">
-                                        <div class="left-text">250,000 won</div>
-                                        <div class="left-text">250,000 won</div>
+                                        <div class="left-text">{{$reseller->elim_points+200000}} won</div>
+                                        <div class="left-text">{{$reseller->earned_pv}}won</div>
 
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                         <div class="left-text">Remaining accumulated PV</div>
                                     </div>
                                     <div class="right-side text-right">
-                                        <div class="left-text">50,000 won</div>
+                                        <div class="left-text">{{$reseller->earned_pv - 200000}} won</div>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="row justify-content-center mb-5 mt-5">
                         <div class="col-md-3 col-sm-4 col-6">
-                            <a href="#" class="btn-model-resd">To Resell</a>
+                            <a href="#" class="btn-model-resd" wire:click='resale'>To Resell</a>
                         </div>
                         <div class="col-md-4 col-sm-5 col-6">
                             <a href="#" class="btn-model-close btn-close" aria-label="Close"

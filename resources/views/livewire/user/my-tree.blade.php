@@ -39,11 +39,17 @@
                                         <div class="level-1 rectangle">
                                             <div class="level-header"></div>
                                             <div class="level-content">
-                                                <div class="box-cen-text pt-4"> {{ auth()->user()->nickname }} </div>
+                                                <div class="box-cen-text pt-4"> {{ auth()->user()->user_id }} </div>
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
+                                                @if (!auth()->user()->isEligibleForResale())
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
+                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal" >Resale</a>
                                                 </div>
+                                                @else
+                                                <div class="box-btn py-4 d-flex justify-content-center">
+                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal" wire:click="$emit('prepareForResale', '{{auth()->user()->id}}')">Resale</a>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <ol class="level-2-wrapper p-0">
@@ -52,16 +58,7 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->firstChildExists() )
-                                                        <div class="box-cen-text pt-4"> {{
-                                                            auth()->user()->firstChild()->nickname }}
-                                                        </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                            auth()->user()->firstChild()->nickname
-                                                            }}
-                                                        </h3>
-                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                        </div>
+                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild() ])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
@@ -76,16 +73,7 @@
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
                                                                 @if ( auth()->user()->firstChild()->firstChildExists() )
-                                                                <div class="box-cen-text pt-4"> {{
-                                                                    auth()->user()->firstChild()->firstChild()->nickname }}
-                                                                </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                    auth()->user()->firstChild()->firstChild()->nickname
-                                                                    }}
-                                                                </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                </div>
+                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
@@ -101,16 +89,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->firstChild()->firstChild()->firstChildExists() )
-                                                                <div class="box-cen-text pt-4"> {{
-                                                                    auth()->user()->firstChild()->firstChild()->firstChild()->nickname }}
-                                                                </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                    auth()->user()->firstChild()->firstChild()->firstChild()->nickname
-                                                                    }}
-                                                                </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                </div>
+                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild()->firstChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
@@ -126,16 +105,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->firstChild()->firstChild()->lastChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->firstChild()->firstChild()->lastChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->firstChild()->firstChild()->lastChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild()->lastChild() ])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -153,16 +123,7 @@
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
                                                                 @if ( auth()->user()->firstChild()->lastChildExists() )
-                                                                <div class="box-cen-text pt-4"> {{
-                                                                    auth()->user()->firstChild()->lastChild()->nickname }}
-                                                                </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                    auth()->user()->firstChild()->lastChild()->nickname
-                                                                    }}
-                                                                </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                </div>
+                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
@@ -178,16 +139,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->firstChild()->lastChild()->firstChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->firstChild()->lastChild()->firstChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->firstChild()->lastChild()->firstChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild()->firstChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -203,16 +155,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->firstChild()->lastChild()->lastChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->firstChild()->lastChild()->lastChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->firstChild()->lastChild()->lastChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -232,16 +175,7 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->lastChildExists() )
-                                                        <div class="box-cen-text pt-4"> {{
-                                                            auth()->user()->lastChild()->nickname }}
-                                                        </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                            auth()->user()->lastChild()->nickname
-                                                            }}
-                                                        </h3>
-                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                        </div>
+                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
@@ -256,16 +190,7 @@
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
                                                                 @if ( auth()->user()->lastChild()->firstChildExists() )
-                                                                <div class="box-cen-text pt-4"> {{
-                                                                    auth()->user()->lastChild()->firstChild()->nickname }}
-                                                                </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                    auth()->user()->lastChild()->firstChild()->nickname
-                                                                    }}
-                                                                </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                </div>
+                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
@@ -281,16 +206,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->lastChild()->firstChild()->firstChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->lastChild()->firstChild()->firstChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->lastChild()->firstChild()->firstChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()->firstChild() ])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -306,16 +222,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->lastChild()->firstChild()->lastChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->lastChild()->firstChild()->lastChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->lastChild()->firstChild()->lastChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -333,16 +240,7 @@
                                                             <div class="level-header"></div>
                                                             <div class="level-content">
                                                                 @if ( auth()->user()->lastChild()->lastChildExists() )
-                                                                <div class="box-cen-text pt-4"> {{
-                                                                    auth()->user()->lastChild()->lastChild()->nickname }}
-                                                                </div>
-                                                                <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                    auth()->user()->lastChild()->lastChild()->nickname
-                                                                    }}
-                                                                </h3>
-                                                                <div class="box-btn py-4 d-flex justify-content-center">
-                                                                    <a href="#" class="btn-resale-sec">Resale</a>
-                                                                </div>
+                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
                                                                     <a href="#" class="btn-resale-secs"
@@ -358,16 +256,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->lastChild()->lastChild()->firstChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->lastChild()->lastChild()->firstChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->lastChild()->lastChild()->firstChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild()->firstChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -383,16 +272,7 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->lastChild()->lastChild()->lastChildExists() )
-                                                                        <div class="box-cen-text pt-4"> {{
-                                                                            auth()->user()->lastChild()->lastChild()->lastChild()->nickname }}
-                                                                        </div>
-                                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                                            auth()->user()->lastChild()->lastChild()->lastChild()->nickname
-                                                                            }}
-                                                                        </h3>
-                                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                                        </div>
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                                             <a href="#" class="btn-resale-secs"
@@ -417,9 +297,15 @@
                                             <div class="level-content">
                                                 <div class="box-cen-text pt-4"> {{ auth()->user()->nickname }} </div>
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
+                                                @if (!auth()->user()->isEligibleForResale())
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
+                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal" >Resale</a>
                                                 </div>
+                                                @else
+                                                <div class="box-btn py-4 d-flex justify-content-center">
+                                                    <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal" wire:click="$emit('prepareForResale', '{{auth()->user()->id}}')">Resale</a>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <ol class="level-6-wrapper p-0">
@@ -428,16 +314,7 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->firstChildExists() )
-                                                        <div class="box-cen-text pt-4"> {{
-                                                            auth()->user()->firstChild()->nickname }}
-                                                        </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                            auth()->user()->firstChild()->nickname
-                                                            }}
-                                                        </h3>
-                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                        </div>
+                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal"
@@ -452,16 +329,7 @@
                                                     <div class="level-header"></div>
                                                     <div class="level-content">
                                                         @if ( auth()->user()->lastChildExists() )
-                                                        <div class="box-cen-text pt-4"> {{
-                                                            auth()->user()->lastChild()->nickname }}
-                                                        </div>
-                                                        <h3 class="box-rect-sub m-0 pt-2"> {{
-                                                            auth()->user()->lastChild()->nickname
-                                                            }}
-                                                        </h3>
-                                                        <div class="box-btn py-4 d-flex justify-content-center">
-                                                            <a href="#" class="btn-resale" data-toggle="modal" data-target="#resale-modal">Resale</a>
-                                                        </div>
+                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
                                                             <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>

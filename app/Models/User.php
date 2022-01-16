@@ -82,14 +82,32 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function resale()
+    {
+        $value = 200000;
+        if ($this->isEligibleForResale()) {
+            $this->earned_pv = (int) $this->earned_pv - $value;
+            $this->available_pv = (int) $this->available_pv + $value;
+            $this->resale = true;
+            return $this->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function isEligibleForResale()
+    {
+        return $this->resale == false && $this->earned_pv >= 250000;
+    }
+
     public function inquiries()
     {
         return $this->hasMany(Inquiry::class);
     }
 
-    public function parent() : BelongsTo
+    public function parent()
     {
-        return $this->belongsTo(User::class, 'referred_by') ?? new FakeUser();
+        return $this->referred_by? self::findOrFail($this->referred_by): new FakeUser;
     }
 
     public function children() : HasMany
@@ -108,12 +126,30 @@ class User extends Authenticatable
         $child = self::find($id);
         if (empty($child->referred_by) && $this->children()->count() < self::MAX_CHILDREN) {
             $child->referred_by = $this->id;
+            $child->rewardParents();
             return $child->save();
         } else {
             return $child->passToChild($id);
         }
     }
 
+    public function rewardParents()
+    {
+        $value= 400000;
+        $this->nthParent(1)->rewardPv($value*0.5);
+        $this->nthParent(2)->rewardPv($value*0.1);
+        $this->nthParent(3)->rewardPv($value*0.05);
+        $this->nthParent(4)->rewardPv($value*0.04);
+        $this->nthParent(5)->rewardPv($value*0.03);
+        $this->nthParent(6)->rewardPv($value*0.02);
+        $this->nthParent(7)->rewardPv($value*0.01);
+    }
+
+    public function rewardPv($value)
+    {
+        $this->earned_pv = (int) $this->earned_pv + (int) $value;
+        return $this->save();
+    }
 
 
     public function passToChild($id)
@@ -139,5 +175,13 @@ class User extends Authenticatable
     public function lastChild()
     {       
         return $this->children->count() >= 2? $this->children()->latest()->get()[1]: new FakeUser;
+    }
+
+    public function nthParent(int $n)
+    {
+        if($n <= 1){
+            return $this->parent();
+        } 
+        return $this->parent()->nthParent($n - 1);
     }
 }

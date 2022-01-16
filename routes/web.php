@@ -106,7 +106,9 @@ Route::get('/pv_check_accumulation_history', function () {
     return view('user.pv_check_accumulation_history');
 })->name('pvcheckaccumulationhistory');
 
-Route::get('/pv_my_tree', [UserController::class, 'pvMyTree'])->name('pvmytree');
+Route::get('/pv_my_tree', function () {
+    return view('user.pv_my_tree');
+})->name('pvmytree');
 
 Route::get('/krw_application_list', function () {
     return view('user.krw_application_list');
@@ -155,12 +157,19 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     // Administrator routes
     Route::get('/dashboard', [AdminController::class, 'administratorList'])->name('administratorlist');
 
+    // Add Admin
+    Route::post('/administrator_registration', [AdminController::class, 'administrator_registration'])->name('add.administrator_registration');
+    // Search Admin
+    Route::get('/administrator_search', [AdminController::class, 'administrator_search'])->name('search.administrator');
+
+
     Route::get('/admin-management/{id}', [AdminController::class, 'adminManagement'])->name('adminmanagement');
     Route::post('/admin-management/edit/profile', [AdminController::class, 'editAdmin'])->name('edit.admin');
 
     Route::get('/administrator_registration', function () {
         return view('admin.administrator_registration');
     })->name('administratorregistration');
+
 
     Route::get('/elim_point_application_details', function () {
         return view('admin.elim_point_application_details');
@@ -252,3 +261,4 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('admin.login')->withoutMiddleware('guest');
 
 Route::post('/admin/login', [AdminAuthController::class, 'postLogin'])->name('admin.login.post')->withoutMiddleware('guest');
+
