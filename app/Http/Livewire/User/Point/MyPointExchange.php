@@ -9,7 +9,7 @@ use Livewire\Component;
 class MyPointExchange extends Component
 {
     public $exchange_quantity, $exchange_fee = 1, $conversion_quantity = 2, $balance_after_exchange = 0;
-    
+
     protected $rules = [
         'exchange_quantity' => ['required'],
         'exchange_fee' => ['required'],
@@ -20,12 +20,12 @@ class MyPointExchange extends Component
     public function updatedExchangeQuantity($value)
     {
         $value = empty($value) ? 0 : $value;
-         $this->balance_after_exchange = empty($value) ? 0 :  auth()->user()->elim_points -  $this->conversion_quantity - $value;
+        $this->balance_after_exchange = empty($value) ? 0 : $this->getUserElimPoint(auth()->user()->elim_points) -  $this->conversion_quantity - $value;
     }
 
     public function getMaxElimPoint()
     {
-        return $this->exchange_quantity = auth()->user()->elim_points;
+        return $this->exchange_quantity = $this->getUserElimPoint(auth()->user()->elim_points);
     }
 
     public function transferPoint()
@@ -57,7 +57,7 @@ class MyPointExchange extends Component
     public function updateUserElimPoint($exchangeFee)
     {
         $user = User::find(auth()->id());
-        $user->elim_points = $this->getUserElimPoint($user->elim_points) - $exchangeFee;
+        $user->elim_points = $this->balance_after_exchange;
         $user->save();
     }
 
