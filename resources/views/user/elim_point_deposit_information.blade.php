@@ -35,12 +35,12 @@
                                     <div>Name of bank to deposit</div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>500,000 won</div>
-                                    <div>123-456-78910</div>
-                                    <div>Our bank</div>
-                                    <div>Hong Gil Dong</div>
-                                    <div>111-122-3333</div>
-                                    <div>Our bank</div>
+                                    <div>{{ $elimPointApplication->amount }} won</div>
+                                    <div>{{ $elimPointApplication->virtual_account_number }}</div>
+                                    <div>{{ $elimPointApplication->bank_name }}</div>
+                                    <div>{{ auth()->user()->nickname }}</div>
+                                    <div>{{ $elimPointApplication->account_number }}</div>
+                                    <div>{{ $elimPointApplication->our_bank }}</div>
                                 </div>
                             </div>
                         </div>

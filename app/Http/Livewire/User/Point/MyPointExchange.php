@@ -8,14 +8,25 @@ use Livewire\Component;
 
 class MyPointExchange extends Component
 {
-    public $exchange_quantity, $exchange_fee, $conversion_quantity, $balance_after_exchange;
-
+    public $exchange_quantity, $exchange_fee = 1, $conversion_quantity = 2, $balance_after_exchange = 0;
+    
     protected $rules = [
         'exchange_quantity' => ['required'],
         'exchange_fee' => ['required'],
         'conversion_quantity' => ['required'],
         'balance_after_exchange' => ['required'],
     ];
+
+    public function updatedExchangeQuantity($value)
+    {
+        $value = empty($value) ? 0 : $value;
+         $this->balance_after_exchange = empty($value) ? 0 :  auth()->user()->elim_points -  $this->conversion_quantity - $value;
+    }
+
+    public function getMaxElimPoint()
+    {
+        return $this->exchange_quantity = auth()->user()->elim_points;
+    }
 
     public function transferPoint()
     {
