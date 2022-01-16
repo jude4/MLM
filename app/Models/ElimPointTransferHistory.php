@@ -16,4 +16,13 @@ class ElimPointTransferHistory extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->orWhereHas('user', function ($query) use ($search) {
+            $query->where('nickname', 'like', '%' . $search . '%')
+                ->orWhere('user_id', 'like', '%' . $search . '%');
+               
+        });
+    }
 }

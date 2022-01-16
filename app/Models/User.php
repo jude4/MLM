@@ -16,6 +16,9 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     public const MAX_CHILDREN = 2;
 
+    public const GENERAL_MEMBER = 0;
+    public const MLM_MEMBER = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,6 +62,15 @@ class User extends Authenticatable
     protected function getTPointsAttribute($value)
     {
         return number_format($value);
+    }
+
+    public function getTypeAttribute($value)
+    {
+        if ($value == self::GENERAL_MEMBER) {
+            return 'General Member';
+        } else {
+            return 'MLM Member';
+        }
     }
 
 

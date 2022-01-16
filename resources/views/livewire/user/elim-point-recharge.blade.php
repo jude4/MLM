@@ -10,15 +10,15 @@
                           <div class="text-center top-elm-text my-4">500,000 <span class="ml-2"> ELIM POINT</span></div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Amount to be deposited</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="500,000 won">
+                              <input type="number" wire:model.defer="amount" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="500,000 won">
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Our account number</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="123-456-78910">
+                              <input type="number" wire:model.defer="virtual_account_number" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="123-456-78910">
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-5">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Name of bank</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="Our bank">
+                              <input wire:model.defer="our_bank" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="Our bank">
                           </div>
 
                       </div>
@@ -36,15 +36,18 @@
 
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Name of depositor</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+                              <input wire:model.defer="depositor_name" value="{{ $depositor_name }}" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Deposit account number</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+                              <input type="number" wire:model.defer="account_number" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+
+
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-5">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Name of bank to deposit</label>
-                              <input type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+                              <input type="text" wire:model.defer="bank_name" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+
                           </div>
 
                       </div>
@@ -62,8 +65,10 @@
               <div class="row justify-content-center">
                   <div class="col-lg-4 col-md-6 col-sm-8 col-12">
                       <div class="d-flex justify-content-between  my-5">
-                          <a href="#" class="btn-bottom-change">To Charge</a>
-                          <a href="#" class="btn-bottom-back">Go Back</a>
+                          <button type="submit" class="btn-bottom-change" wire:click="submit">To Charge</button>
+                          <a href="{{ route('user.elimpointcharge') }}" class="btn-bottom-back">Go Back</a>
+
+
                       </div>
                   </div>
               </div>
