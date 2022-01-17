@@ -36,7 +36,9 @@
 
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Name of depositor</label>
-                              <input wire:model.defer="depositor_name" value="{{ $depositor_name }}" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+                              <input wire:model.defer="name_of_depositor" value="{{ $name_of_depositor }}" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="">
+
+
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Deposit account number</label>

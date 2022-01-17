@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User\Point;
 
+use App\Models\ElimPointExchangeHistory;
 use App\Models\ElimPointTransferHistory;
 use App\Models\User;
 use Livewire\Component;
@@ -20,6 +21,7 @@ class MyPointExchange extends Component
     public function updatedExchangeQuantity($value)
     {
         $value = empty($value) ? 0 : $value;
+        $this->conversion_quantity = $value * 2;
         $this->balance_after_exchange = empty($value) ? 0 : $this->getUserElimPoint(auth()->user()->elim_points) -  $this->conversion_quantity - $value;
     }
 
@@ -38,11 +40,20 @@ class MyPointExchange extends Component
 
         if ($userElimPoint > $exchangeFee) {
 
-            $this->updateUserElimPoint($attributes['exchange_fee']);
-
+            
             $attributes['user_id'] = auth()->id();
-
+            
+            ElimPointExchangeHistory::create([
+                'user_id' => auth()->id(),
+                'elim_quantity_before_exhange' => $this->getUserElimPoint(),
+                'tp_quantity_after_exhange' => $this->conversion_quantity,
+                'detail' => 'Send',
+                'exchange_fee' => $this->exchange_fee
+            ]);
+            
+            $this->updateUserElimPoint($attributes['exchange_fee']);
             ElimPointTransferHistory::create($attributes);
+
 
             return redirect()->route('user.mypointexchange')->with('toast_success', 'Elim point exchange transaction was successful!');
         }

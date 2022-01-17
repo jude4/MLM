@@ -84,7 +84,7 @@
 
 
 <!--LOOK  Modal -->
-<div class="modal fade pr-0" id="look" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade pr-0" id="look" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content look-modal">
             <div class="modal-header border-bottom-0">
@@ -121,7 +121,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+@livewire('user.modals.view-withdrawal-detail')
 
 
 <!--Look modal end -->

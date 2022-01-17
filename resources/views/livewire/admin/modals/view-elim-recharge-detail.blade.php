@@ -1,10 +1,4 @@
-
-
-
-    <div id="Elim-point-transfer-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" 
-    @if ($editMode == true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" 
-    @else class="modal fade pr-0 in" aria-hidden="true"
-    @endif>
+<div id="Elim-point-transfer-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" @if ($editMode==true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true" @endif>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header mod-disp">
@@ -29,9 +23,9 @@
                                     <div>name of bank</div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{$recharge->amount}} won</div>
-                                    <div>{{$recharge->virtual_account_number}}</div>
-                                    <div>{{$recharge->bank_name}}</div>
+                                    <div>{{$recharge->amount ?? null}} won</div>
+                                    <div>{{$recharge->virtual_account_number ?? null}}</div>
+                                    <div>{{$recharge->bank_name ?? null}}</div>
 
                                 </div>
                             </div>
@@ -51,11 +45,11 @@
 
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{$recharge->user->user_id}}</div>
-                                    <div>{{$recharge->user->nickname}}</div>
-                                    <div>{{$recharge->user->name_of_depositor}}</div>
-                                    <div>{{$recharge->account_number}}</div>
-                                    <div>{{$recharge->bank_name}}</div>
+                                    <div>{{$recharge->user->user_id ?? null}}</div>
+                                    <div>{{$recharge->user->nickname ?? null}}</div>
+                                    <div>{{$recharge->user->name_of_depositor ?? null}}</div>
+                                    <div>{{$recharge->account_number ?? null}}</div>
+                                    <div>{{$recharge->bank_name ?? null}}</div>
                                 </div>
                             </div>
                         </div>
@@ -63,14 +57,10 @@
                 </div>
                 <div class="row justify-content-center mb-5">
                     <div class="col-6 text-center">
-                        <a href="#" class="btn-mod-conf" data-dismiss="modal" >Confirm</a>
+                        <a href="#" class="btn-mod-conf" data-dismiss="modal">Confirm</a>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 </div>
-

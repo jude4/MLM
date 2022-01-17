@@ -63,6 +63,11 @@ class User extends Authenticatable
     {
         return number_format($value);
     }
+
+    protected function setElimPointsAttribute($value)
+    {
+        return intval(str_replace(',','',$value));
+    }
     
 
     protected function getTPointsAttribute($value)

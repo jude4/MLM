@@ -1,3 +1,4 @@
+ 
   <div class="pvm-request">
       <div class="pvm-application">
           <div class="card-block table-border-style table-responsive">
@@ -23,7 +24,7 @@
                                           <td>{{ $item->amount }}</td>
                                           <td>{{ $item->status }}</td>
                                           <td>{{ $item->created_at }}</td>
-                                          <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>
+                                          <td><a href="#" wire:click="$emit('viewDetail', {{ $item->id }})" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>
                                       </tr>
 
                                 @empty

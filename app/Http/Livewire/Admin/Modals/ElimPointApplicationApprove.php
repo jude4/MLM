@@ -29,7 +29,7 @@ class ElimPointApplicationApprove extends Component
         $attributes = $this->validate();
         if(Hash::check($this->password, Auth::guard('admin')->user()->password)){
             $this->recharge->status =2;
-            // $this->recharge->comment = $this->comment;
+            $this->recharge->comment = $this->comment;
             $this->recharge->save();
             $this->recharge->user->type = 1;
             $this->recharge->user->save();

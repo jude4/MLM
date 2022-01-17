@@ -12,7 +12,7 @@ class PvWithDrawalRequestHistory extends Model
 
 
     const PENDING = 0;
-    const COMPLETED = 1;
+    const APPROVE = 2;
 
     public function user()
     {
@@ -23,7 +23,13 @@ class PvWithDrawalRequestHistory extends Model
 
     public function getStatusAttribute($value)
     {
-        return $value == self::PENDING ? 'pending' : 'completed';
+        if ($value == self::PENDING) {
+            return 'pending';
+        } elseif ($value == self::APPROVE) {
+            return 'approved';
+        } else {
+            return 'cancelled';
+        }
     }
 
     public function scopeSearch($query, $search)

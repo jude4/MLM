@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ElimPointRecharge extends Component
 {
-    public $amount, $account_number, $bank_name, $depositor_name;
+    public $amount, $account_number, $bank_name, $name_of_depositor;
 
     public $virtual_account_number = '3000234342' , $our_bank = 'Korean-Zenith Bank';
     
@@ -17,12 +17,14 @@ class ElimPointRecharge extends Component
         'our_bank' => ['required', 'string'],
         'bank_name' => ['required', 'string'],
         'account_number' => ['required', 'numeric'],
+        'name_of_depositor' => ['required', 'string']
     ];
 
     public function mount($amount)
     {
-        $this->depositor_name = auth()->user()->nickname;
-        $this->amount = $amount;
+
+        $this->name_of_depositor = auth()->user()->nickname;
+
     }
 
     public function submit()

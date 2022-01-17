@@ -10,6 +10,7 @@ use Livewire\Component;
 class ViewElimRechargeDetail extends Component
 {
     use Toggleable;
+    
     public $recharge;
 
     protected $listeners = ['viewDetail'];
