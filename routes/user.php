@@ -66,11 +66,12 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
         return view('user.my_point_exchange');
     })->name('mypointexchange');
 
-    Route::get('/elim_point_view_detail', function () {
-        return view('user.elim_point_view_detail');
+    Route::get('/elim_point_view_detail/{amount}', function ($amount) {
+        return view('user.elim_point_view_detail', compact('amount'));
     })->name('elimpointviewdetail');
 
     Route::get('/elim_point_deposit_information/{id}', [ElimPointDepositInformationController::class, 'show'])->name('elimpointdepositinformation');
+    Route::get('/cancel/elim_point_deposit/{id}', [ElimPointDepositInformationController::class, 'cancel'])->name('cancel.elimpointdepositinformation');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');

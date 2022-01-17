@@ -42,7 +42,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 500000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 1000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 2000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-1">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 10000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>

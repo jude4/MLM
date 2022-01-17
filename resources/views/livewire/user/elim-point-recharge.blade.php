@@ -7,18 +7,18 @@
               <div class="row justify-content-center">
                   <div class="col-12">
                       <div class="box-bor">
-                          <div class="text-center top-elm-text my-4">500,000 <span class="ml-2"> ELIM POINT</span></div>
+                          <div class="text-center top-elm-text my-4">{{number_format($amount)}} <span class="ml-2"> ELIM POINT</span></div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Amount to be deposited</label>
-                              <input type="number" wire:model.defer="amount" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="500,000 won">
+                              <input disabled type="number" wire:model.defer="amount" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="500,000 won">
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-0">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Our account number</label>
-                              <input type="number" wire:model.defer="virtual_account_number" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="123-456-78910">
+                              <input disabled type="number" wire:model.defer="virtual_account_number" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="123-456-78910">
                           </div>
                           <div class="form-group row justify-content-center mt-4 mb-5">
                               <label class="lbl-chrg-inp col-lg-3 col-md-10 col-sm-10 col-10 align-self-center pl-0 p-lg-1">Name of bank</label>
-                              <input wire:model.defer="our_bank" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="Our bank">
+                              <input disabled wire:model.defer="our_bank" type="text" class="form-control inp-chrg-box col-lg-8 col-md-10 col-sm-10 col-10" placeholder="Our bank">
                           </div>
 
                       </div>

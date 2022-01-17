@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    @livewire('user.elim-point-recharge')
+    @livewire('user.elim-point-recharge', ['amount' => $amount])
 </div>
 
 <!-- End ELIM Point view detail  section-->

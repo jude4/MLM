@@ -14,4 +14,17 @@ class ElimPointDepositInformationController extends Controller
         
         return view('user.elim_point_deposit_information', compact('elimPointApplication'));
     }
+
+    public function cancel($id)
+    {
+        $elimPointApplication = ElimPointApplication::findOrFail($id);
+        if ($elimPointApplication->status == 'pending') {
+            $elimPointApplication->status = 1;
+            $elimPointApplication->save();
+            return back()->with('toast_success', 'successfully cancelled emim point application!');
+        } else {
+            return back()->with('toast_error', 'Cannot cancel application!');
+        }
+                
+    }
 }
