@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PvTransmissionApplicationController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
@@ -100,6 +101,9 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.pv_transmission_application_details');
     })->name('pvtransmissionapplicationdetails');
 
+    Route::get('/pv_transmission_application_details/approve/{id}',[PvTransmissionApplicationController::class, 'approve'])->name('pvtransmissionapplicationdetails.approve');
+    Route::get('/pv_transmission_application_details/decline/{id}',[PvTransmissionApplicationController::class, 'decline'])->name('pvtransmissionapplicationdetails.decline');
+    
     Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 

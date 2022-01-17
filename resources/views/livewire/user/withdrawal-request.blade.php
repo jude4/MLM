@@ -12,7 +12,7 @@
                   <label class="inp-pv col-xl-3 col-lg-12  col-md-12 col-12 pr-0 align-self-center">Withdrawal request amount</label>
 
                   <input wire:model="amount" type="number" class="form-control pro-pv-input col-xl-7 col-lg-9 col-md-9 col-9 ml-2" placeholder="">
-                  <a href="#" class="btn-max">MAX</a>
+                  <button wire:click="getMaxPv()" class="btn-max">MAX</button>
                   @error('amount')
                   <p class="error-msg mx-auto">{{ $message }}</p>
                   @enderror
