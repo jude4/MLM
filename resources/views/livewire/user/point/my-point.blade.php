@@ -15,7 +15,7 @@
                         <a href="{{route('user.mypointexchange')}}" class="btn-point-exchange">To Exchange</a>
                     </div>
                     <div class="my-point-send">
-                        <a href="my-point-send.html" class="btn-point-send">Send</a>
+                        <a href="{{route('user.mypointsend')}}" class="btn-point-send">Send</a>
                     </div>
                 </div>
             </div>
