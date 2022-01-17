@@ -41,11 +41,7 @@
                 </li>
                 <li class="{{Route::is('user.pvexchangeaccumulaionelimpoint')?'active':''}}">
                     <a href="{{route('user.pvexchangeaccumulaionelimpoint')}}">Apply for resale of accumulated PV</a>
-                </li>
-                <li>
-                    <a href="pv-transfer-request-list.html">Application list</a>
-                </li>
-                
+                </li>                
             </ul>
         </li>
     </ul>
