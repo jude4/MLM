@@ -21,6 +21,7 @@ class CreatePvWithDrawalRequestHistoriesTable extends Migration
             $table->integer('amount');
             $table->string('account_number');
             $table->string('bank_name');
+            $table->string('comment')->nullable();
             $table->string('name_of_account');
         });
     }

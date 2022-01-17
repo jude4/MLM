@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class WithdrawalRequest extends Component
 {
-    public $amount, $withdrawal_fee, $account_number, $bank_name, $name_of_account;
+    public $amount, $withdrawal_fee = 100, $account_number, $bank_name, $name_of_account;
 
     protected $rules = [
         'amount' => ['required', 'numeric'],
@@ -19,10 +19,21 @@ class WithdrawalRequest extends Component
 
     public function updatedAmount($value)
     {
-        $value = $value ? $value : 0;
-        $this->withdrawal_fee = $value * 2;
+        // $value = $value ? $value : 0;
+        // $this->amount = $value - $this->withdrawal_fee; 
+        // $this->withdrawal_fee = 100;
     }
 
+
+    public function getMaxPv()
+    {
+        if (auth()->user()->available_pv > $this->withdrawal_fee) {
+            $this->amount = auth()->user()->available_pv - $this->withdrawal_fee; 
+        } else {
+            return redirect()->route('user.krwwithdrawalrequest')->with('toast_error', 'Error: Insufficient Pv');
+        }
+    }
+    
     public function withdraw()
     {
         $attributes = $this->validate();

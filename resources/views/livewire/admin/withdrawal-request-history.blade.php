@@ -96,9 +96,9 @@
                              <td>{{ $item->amount }}</td>
                              <td>{{ $item->status }}</td>
                              <td class="">
-                                 <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-approval-modal">
+                                 <a href="#" wire:click="$emit('approval', {{ $item->id }})" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-approval-modal">
                                      Approval </a>
-                                 <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#pv-withdrawal-cancel-modal">
+                                 <a href="#" wire:click="$emit('decline', {{ $item->id }})" class="btn  btn-ends" data-toggle="modal" data-target="#pv-withdrawal-cancel-modal">
                                      cancellation
                                  </a>
                              </td>

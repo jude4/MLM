@@ -20,7 +20,7 @@
 
                                     </div>
                                     <div class="right-side text-right">
-                                        <div class="left-text">{{$reseller->elim_points+200000}} won</div>
+                                        <div class="left-text">{{(int)$reseller->elim_points  + 200000}} won</div>
                                         <div class="left-text">{{$reseller->earned_pv}}won</div>
 
                                     </div>
