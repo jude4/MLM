@@ -88,6 +88,7 @@
                      </thead>
                      <tbody>
                          @forelse($histories as $item)
+
                          <tr>
                              <td>{{ ++$count }}</td>
                              <td>{{ $item->user->available_pv }}</td>
