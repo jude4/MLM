@@ -90,7 +90,7 @@
                         @forelse($histories as $item)
                         <tr>
                             <td>{{ ++$count }}</td>
-                            <td>{{ $item->user->pk }}</td>
+                            <td>{{ $item->user->id }}</td>
                             <td>{{ $item->user->user_id }}</td>
                             <td>{{ $item->user->nickname }}</td>
                             <td>{{ $item->amount }}</td>
