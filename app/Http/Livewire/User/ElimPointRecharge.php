@@ -20,9 +20,11 @@ class ElimPointRecharge extends Component
         'name_of_depositor' => ['required', 'string']
     ];
 
-    public function mount()
+    public function mount($amount)
     {
+
         $this->name_of_depositor = auth()->user()->nickname;
+
     }
 
     public function submit()
@@ -32,7 +34,8 @@ class ElimPointRecharge extends Component
         
         ElimPointApplication::create($attributes);
 
-        return redirect()->route('user.elimpointviewdetail')->with('toast_success', 'Successful!');
+
+        return redirect()->route('user.elimpointviewdetail', ['amount' => $this->amount])->with('toast_success', 'Successful!');
     }
 
     public function render()

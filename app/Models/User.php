@@ -120,7 +120,8 @@ class User extends Authenticatable
 
     public function isEligibleForResale()
     {
-        return $this->resale == false && $this->earned_pv >= 250000;
+        // return $this->resale == false && $this->earned_pv >= 250000;
+        return $this->earned_pv >= 250000;
     }
 
     public function inquiries()

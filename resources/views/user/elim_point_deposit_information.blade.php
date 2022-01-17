@@ -96,7 +96,7 @@
                 <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
                     <div class="row justify-content-center mb-4">
                         <div class="col-12">
-                            <a href="#" class="btn-dep-confirms">Confirm</a>
+                            <a href="{{route('user.cancel.elimpointdepositinformation', ['id' => $elimPointApplication->id ])}}}" class="btn-dep-confirms">Confirm</a>
                             <a href="#" class="btn-dep-close" data-dismiss="modal" aria-label="Close">To Close</a>
                         </div>
                     </div>
