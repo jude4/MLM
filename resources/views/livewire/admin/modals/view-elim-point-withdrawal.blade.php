@@ -28,12 +28,13 @@
 
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{ $withdrawal->user->user_id }}</div>
-                                    <div>{{ $withdrawal->user->nickname }}</div>
-                                    <div>{{ $withdrawal->amount }} won</div>
-                                    <div>{{ $withdrawal->account_number }}</div>
-                                    <div>{{ $withdrawal->bank_name }}</div>
-                                    <div>{{ $withdrawal->name_of_account }}</div>
+                                    <div>{{ $withdrawal->user->user_id ?? null }}</div>
+                                    <div>{{ $withdrawal->user->nickname ?? null }}</div>
+                                    <div>{{ $withdrawal->amount  ?? null }} won</div>
+                                    <div>{{ $withdrawal->account_number ?? null }}</div>
+                                    <div>{{ $withdrawal->bank_name ?? null }}</div>
+                                    <div>{{ $withdrawal->name_of_account ?? null }}</div>
+
                                 </div>
                             </div>
                         </div>

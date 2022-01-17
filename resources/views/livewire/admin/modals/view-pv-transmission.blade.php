@@ -27,12 +27,12 @@
                                     <div>transfer fee </div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{ $data->user->user_id }}</div>
-                                    <div>{{ $data->user->nickname }}</div>
-                                    <div>{{ $data->incoming_id }}</div>
-                                    <div>{{ $data->reciever->nickname}}</div>
-                                    <div>{{ $data->amount }} won</div>
-                                    <div>{{ $data->fee }} won</div>
+                                    <div>{{ $data->user->user_id ?? null }}</div>
+                                    <div>{{ $data->user->nickname ?? null }}</div>
+                                    <div>{{ $data->incoming_id ?? null }}</div>
+                                    <div>{{ $data->reciever->nickname ?? null}}</div>
+                                    <div>{{ $data->amount ?? null }} won</div>
+                                    <div>{{ $data->fee ?? null }} won</div>
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,7 @@ class PvWithDrawalRequestHistory extends Model
     const PENDING = 0;
     const APPROVE = 2;
 
-    public function user()
+    public function user() :BelongsTo
     {
         return $this->belongsTo(User::class);
     }
