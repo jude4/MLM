@@ -21,10 +21,10 @@
                             <div class="app-list-amount">Name of account holder</div>
                         </div>
                         <div class="col-5 text-right">
-                            <div class="app-list-amount ">{{ $withdrawal->amount }} won</div>
-                            <div class="app-list-amount ">{{ $withdrawal->account_number }}</div>
-                            <div class="app-list-amount "> {{ $withdrawal->bank_name }}</div>
-                            <div class="app-list-amount ">{{ $withdrawal->name_of_account }}</div>
+                            <div class="app-list-amount ">{{ $withdrawal->amount ?? null }} won</div>
+                            <div class="app-list-amount ">{{ $withdrawal->account_number ?? null }}</div>
+                            <div class="app-list-amount "> {{ $withdrawal->bank_name ?? null }}</div>
+                            <div class="app-list-amount ">{{ $withdrawal->name_of_account ?? null}}</div>
                         </div>
                     </div>
 

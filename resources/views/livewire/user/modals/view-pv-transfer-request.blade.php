@@ -19,10 +19,10 @@
                             <div class="app-list-amount">Balance after transfer</div>
                         </div>
                         <div class="col-5 text-right">
-                            <div class="app-list-amount ">{{ $data->user->user_id }}</div>
-                            <div class="app-list-amount ">{{ $data->amount }} won</div>
-                            <div class="app-list-amount ">{{ $data->fee }}won</div>
-                            <div class="app-list-amount ">{{ $data->balance_after_transfer }} won</div>
+                            <div class="app-list-amount ">{{ $data->user->user_id ?? null}}</div>
+                            <div class="app-list-amount ">{{ $data->amount ?? null }} won</div>
+                            <div class="app-list-amount ">{{ $data->fee ?? null }}won</div>
+                            <div class="app-list-amount ">{{ $data->balance_after_transfer ?? null }} won</div>
                         </div>
                     </div>
                     <div class="row justify-content-center my-5">
