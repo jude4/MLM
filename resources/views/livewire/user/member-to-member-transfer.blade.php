@@ -36,7 +36,6 @@
            <div class="row mt-3 justify-content-end">
                <div class="col-3 text-center px-0">
                    <button wire:click="transfer()" type="submit" class="btn-max">Application</button>
-
                </div>
            </div>
            <div class="mt-21"></div>

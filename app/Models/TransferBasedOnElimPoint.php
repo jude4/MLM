@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ElimPointTransferHistory extends Model
+class TransferBasedOnElimPoint extends Model
 {
     use HasFactory;
 
@@ -17,17 +17,16 @@ class ElimPointTransferHistory extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function reciever() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeSearch($query, $search)
     {
         return $query->orWhereHas('user', function ($query) use ($search) {
             $query->where('nickname', 'like', '%' . $search . '%')
                 ->orWhere('user_id', 'like', '%' . $search . '%');
-               
         });
-    }
-
-    public function reciever(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'receiver_id');
     }
 }

@@ -25,11 +25,11 @@
                                     <div>Conversion Quantity (T)</div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{ $exchange->id }}</div>
-                                    <div>{{ $exchange->user->nickname }}</div>
-                                    <div>{{ $exchange->elim_quantity_before_exhange }}</div>
-                                    <div>{{ $exchange->exchange_fee }} P</div>
-                                    <div>{{ $exchange->tp_quantity_after_exhange }} won</div>
+                                    <div>{{ $exchange->id ?? null }}</div>
+                                    <div>{{ $exchange->user->nickname ?? null }}</div>
+                                    <div>{{ $exchange->elim_quantity_before_exhange ?? null }}</div>
+                                    <div>{{ $exchange->exchange_fee ?? null }} P</div>
+                                    <div>{{ $exchange->tp_quantity_after_exhange ?? null }} won</div>
 
 
 

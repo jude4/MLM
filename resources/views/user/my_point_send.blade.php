@@ -20,38 +20,7 @@
         <div class="my-point">
             <div class="top-head-poin text-center mb-5">MY POINT</div>
             @livewire('user.point.my-point')
-
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-10 col-12   h-20">
-                    <div class="box-bor-detail ">
-                        <div class="point-chr-text my-3">Send</div>
-
-                        <div class="form-group row mt-4">
-                            <label
-                                class="inp-pv col-xl-3 col-lg-12  col-md-12 col-12 pr-0 align-self-center text-xl-center text-lg-left">ID
-                                to send</label>
-                            <input type="text"
-                                class="form-control pro-pv-input col-xl-7 col-lg-9 col-md-9 col-sm-11 col-11 ml-2 mb-1"
-                                placeholder="">
-                            <a href="#" class="btn-max" data-toggle="modal" data-target="#search-modal">search</a>
-
-                        </div>
-
-                        <div class="form-group row mt-4">
-                            <label
-                                class="inp-pv col-xl-3 col-lg-12  col-md-12 col-12 pr-0 align-self-center text-xl-center text-lg-left">
-                                Transfer quantity</label>
-                            <input type="text"
-                                class="form-control pro-pv-input col-xl-7 col-lg-9 col-md-9 col-sm-11 col-11 ml-2 mb-1"
-                                placeholder="">
-                            <a href="#" class="btn-max ">MAX</a>
-                            <div class="sub-mx-text pl-md-0 pl-3">ELIM POINT</div>
-                        </div>
-                    </div>
-                </div>
-                
                 @livewire('user.send-elim-point')
-            </div>
         </div>
     </div>
 </div>

@@ -32,8 +32,8 @@ aria-hidden="true"
                                     <div>transfer nickname</div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>USER09</div>
-                                    <div>Crayon</div>
+                                    <div>{{ $transfer->user->user_id ?? null }}</div>
+                                    <div>{{ $transfer->user->nickname ?? null }}</div>
 
                                 </div>
                             </div>
@@ -45,17 +45,20 @@ aria-hidden="true"
                         <div class="">
                             <div class="d-flex justify-content-between p-md-3 p-2 mb-5">
                                 <div class="lft-sid-detail text-left">
-                                    <div>Transmission Quantity (ELIM)</div>
-                                    <div>Sent ID</div>
-                                    <div>sent nickname</div>
-                                    <div>Transfer Fee (ELIM)</div>
+                                   
+                                    <div>Reciever ID</div>
+                                   
+                                    <div>Receiver nickame</div>
+                                   
+                                    <div>Reciever Member type</div>
+                                    <div>Transfer Quantity</div>
 
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>USER01</div>
-                                    <div>500,000</div>
-                                    <div>Hong Gil Dong</div>
-                                    <div>10,000 won</div>
+                                    <div>{{ $transfer->reciever->user_id ?? nill }}</div>
+                                    <div>{{ $transfer->reciever->nickname ?? nill }}</div>
+                                    <div>{{ $transfer->reciever->type ?? nill }}</div>
+                                    <div>{{ $transfer->transfer_quantity ?? null }} won</div>
 
                                 </div>
                             </div>
@@ -64,7 +67,8 @@ aria-hidden="true"
                 </div>
                 <div class="row justify-content-center mb-5">
                     <div class="col-6 text-center">
-                        <a href="#" class="btn-mod-conf">Confirm</a>
+                        <a href="#" data-dismiss="modal" class="btn-mod-conf">Confirm</a>
+
                     </div>
                 </div>
 
