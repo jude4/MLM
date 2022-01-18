@@ -24,14 +24,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'user_id',
-        'nickname',
-        'email',
-        'elim_points',
-        't_points',
-        'available_pv',
-        'password',
+    protected $guarded = [
+      
     ];
 
     /**
@@ -296,6 +290,21 @@ class User extends Authenticatable
         if ($this->isEligibleForStarLevel(4)) {
             $this->star_level = 4; $this->save();
         }  
+    }
+
+    public function generateLevelBonus()
+    {
+        
+    }
+
+    public function generateGroupBonus()
+    {
+        
+    }
+
+    public function generateLevelMatching()
+    {
+        
     }
 
 }
