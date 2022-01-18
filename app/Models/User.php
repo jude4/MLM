@@ -208,4 +208,14 @@ class User extends Authenticatable
         } 
         return $this->parent()->nthParent($n - 1);
     }
+
+    public function pvAccumulationHistory() : HasMany
+    {
+        return $this->hasMany(PvAccumulationHistory::class);
+    }
+
+    public function pvUsageHistory() : HasMany
+    {
+        return $this->hasMany(PvUsageHistory::class);
+    }
 }

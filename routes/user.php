@@ -81,13 +81,9 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
         return view('user.krw_withdrawal_request');
     })->name('krwwithdrawalrequest');
 
-    Route::get('/pv_check_accumulation_history', function () {
-        return view('user.pv_check_accumulation_history');
-    })->name('pvcheckaccumulationhistory');
+    Route::get('/pv_check_accumulation_history', [UserController::class, 'pvAccumulationHistory'])->name('pvcheckaccumulationhistory');
 
-    Route::get('/pv_check_usage_history', function () {
-        return view('user.pv_check_usage_history');
-    })->name('pvcheckusagehistory');
+    Route::get('/pv_check_usage_history', [UserController::class, 'pvUsageHistory'])->name('pvcheckusagehistory');
 
     Route::get('/pv_my_tree', [UserController::class, 'pvMyTree'])->name('pvmytree');
 

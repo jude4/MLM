@@ -85,49 +85,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @forelse (auth()->user()->pvUsageHistory as $index => $history)
                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>ELIM point conversion</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{$history->type}}</td>
+                                                    <td>{{$history->price}}</td>
+                                                    <td>{{$history->created_at}}</td>       
                                                 </tr> 
+                                                @empty
                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>send</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
+                                                    <td colspan="4">No data available in table</td>      
                                                 </tr> 
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>withdraw</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
-                                                </tr> 
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>withdraw</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
-                                                </tr> 
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>withdraw</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
-                                                </tr>
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>ELIM point conversion</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
-                                                </tr>
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>ELIM point conversion</td>
-                                                    <td>50,000</td>
-                                                    <td>2021.11.09 17:45</td>       
-                                                </tr> 
-
+                                                @endforelse
                                             </tbody>  
                                             <tfoot>  
                                               

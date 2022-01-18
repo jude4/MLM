@@ -92,62 +92,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach (auth()->user()->pvAccumulationHistory as $index => $history)
                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{auth()->user()->user_id}}</td>
+                                                    <td>{{auth()->user()->nickname}}</td>
+                                                    <td>{{$history->earning_type}}</td>
+                                                    <td>{{$history->amount}}</td>
+                                                    <td>{{$history->created_at}}</td>
                                                 </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
-                                                 <tr>
-                                                    <td>10</td>
-                                                    <td>USER01</td>
-                                                    <td>Hong Gil Dong</td>
-                                                    <td>sale bonus</td>
-                                                    <td>200,000</td>
-                                                    <td>2021.11.09 17:45</td>
-                                                </tr> 
+                                                @endforeach
                                             </tbody>  
                                             <tfoot>  
                                             </tfoot>  

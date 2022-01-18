@@ -111,4 +111,14 @@ class UserController extends Controller
     {
         return view('user.pv_my_tree');
     }
+
+    public function pvAccumulationHistory()
+    {
+        return view('user.pv_check_accumulation_history');
+    }
+
+    public function pvUsageHistory()
+    {
+        return view('user.pv_check_usage_history');
+    }
 }
