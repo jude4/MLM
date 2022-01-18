@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\ElimPointTransferHistory as ModelsElimPointTransferHistory;
-use App\Models\User;
 use Livewire\Component;
 
 class ElimPointTransferHistory extends Component
@@ -31,11 +30,12 @@ class ElimPointTransferHistory extends Component
     public function render()
     {
         $count = $this->count;
-        $histories = ModelsElimPointTransferHistory::with('user')
+       
+        $histories = ModelsElimPointTransferHistory::with('user', 'reciever')
             ->search($this->search)
-            ->orWhereBetween('created_at', [$this->startDate, $this->endDate])
             ->latest()
             ->get();
+
            
         return view('livewire.admin.elim-point-transfer-history', compact('histories', 'count'));
     }

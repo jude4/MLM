@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MemberTreeStructureController;
 use App\Http\Controllers\Admin\PvTransmissionApplicationController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
@@ -100,6 +101,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/pv_transmission_application_details', function () {
         return view('admin.pv_transmission_application_details');
     })->name('pvtransmissionapplicationdetails');
+
+    Route::get('/member-tree-structure/{id}', [MemberTreeStructureController::class, '__invoke'])->name('member-tree-sturcture');
 
     Route::get('/pv_transmission_application_details/approve/{id}',[PvTransmissionApplicationController::class, 'approve'])->name('pvtransmissionapplicationdetails.approve');
     Route::get('/pv_transmission_application_details/decline/{id}',[PvTransmissionApplicationController::class, 'decline'])->name('pvtransmissionapplicationdetails.decline');

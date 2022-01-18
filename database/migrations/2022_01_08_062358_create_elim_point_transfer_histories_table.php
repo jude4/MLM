@@ -17,9 +17,9 @@ class CreateElimPointTransferHistoriesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
-            $table->string('receiver_id')->nullable();
+            $table->foreignId('receiver_id')->constrained('users')->cascadeOnDelete();
             $table->integer('transfer_quantity');
-            $table->integer('conversion_quantity');
+            $table->integer('conversion_quantity')->nullable();
             $table->integer('transmission_fee')->default(0);
             $table->double('balance_after_transfer');
         });

@@ -17,7 +17,7 @@ class User extends Authenticatable
     public const MAX_CHILDREN = 2;
 
     public const GENERAL_MEMBER = 0;
-    public const MLM_MEMBER = 0;
+    public const MLM_MEMBER = 1;
 
     /**
      * The attributes that are mass assignable.
@@ -66,9 +66,9 @@ class User extends Authenticatable
 
     protected function setElimPointsAttribute($value)
     {
-        return intval(str_replace(',','',$value));
+        return intval(str_replace(',', '', $value));
     }
-    
+
 
     protected function getTPointsAttribute($value)
     {
@@ -85,18 +85,20 @@ class User extends Authenticatable
     }
 
 
-    public static function uuidExists($id){
-        return self::where('user_id', '=', $id)->first()? true : false; 
+    public static function uuidExists($id)
+    {
+        return self::where('user_id', '=', $id)->first() ? true : false;
     }
 
-    public static function generateUUID(){
-        $unique_id = "ELIM". rand(1000000, 9999999);
-        return self::uuidExists($unique_id)? self::generateUUID(): $unique_id;
+    public static function generateUUID()
+    {
+        $unique_id = "ELIM" . rand(1000000, 9999999);
+        return self::uuidExists($unique_id) ? self::generateUUID() : $unique_id;
     }
 
     public function profilePicture()
     {
-        return !empty($this->image)? $this->image: 'image/icon/user.png';
+        return !empty($this->image) ? $this->image : 'image/icon/user.png';
     }
 
     public function clearProfilePicture()
@@ -113,7 +115,7 @@ class User extends Authenticatable
             $this->available_pv = (int) $this->available_pv + $value;
             $this->resale = true;
             return $this->save();
-        }else{
+        } else {
             return false;
         }
     }
@@ -131,10 +133,10 @@ class User extends Authenticatable
 
     public function parent()
     {
-        return $this->referred_by? self::findOrFail($this->referred_by): new FakeUser;
+        return $this->referred_by ? self::findOrFail($this->referred_by) : new FakeUser;
     }
 
-    public function children() : HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(User::class, 'referred_by');
     }
@@ -159,14 +161,14 @@ class User extends Authenticatable
 
     public function rewardParents()
     {
-        $value= 400000;
-        $this->nthParent(1)->rewardPv($value*0.5);
-        $this->nthParent(2)->rewardPv($value*0.1);
-        $this->nthParent(3)->rewardPv($value*0.05);
-        $this->nthParent(4)->rewardPv($value*0.04);
-        $this->nthParent(5)->rewardPv($value*0.03);
-        $this->nthParent(6)->rewardPv($value*0.02);
-        $this->nthParent(7)->rewardPv($value*0.01);
+        $value = 400000;
+        $this->nthParent(1)->rewardPv($value * 0.5);
+        $this->nthParent(2)->rewardPv($value * 0.1);
+        $this->nthParent(3)->rewardPv($value * 0.05);
+        $this->nthParent(4)->rewardPv($value * 0.04);
+        $this->nthParent(5)->rewardPv($value * 0.03);
+        $this->nthParent(6)->rewardPv($value * 0.02);
+        $this->nthParent(7)->rewardPv($value * 0.01);
     }
 
     public function rewardPv($value)
@@ -178,7 +180,7 @@ class User extends Authenticatable
 
     public function passToChild($id)
     {
-        $this->children[rand(0,1)]->makeChildById($id);
+        $this->children[rand(0, 1)]->makeChildById($id);
     }
 
     public function firstChildExists()
@@ -197,15 +199,15 @@ class User extends Authenticatable
     }
 
     public function lastChild()
-    {       
-        return $this->children->count() >= 2? $this->children()->latest()->get()[1]: new FakeUser;
+    {
+        return $this->children->count() >= 2 ? $this->children()->latest()->get()[1] : new FakeUser;
     }
 
     public function nthParent(int $n)
     {
-        if($n <= 1){
+        if ($n <= 1) {
             return $this->parent();
-        } 
+        }
         return $this->parent()->nthParent($n - 1);
     }
 
@@ -217,5 +219,14 @@ class User extends Authenticatable
     public function pvUsageHistory() : HasMany
     {
         return $this->hasMany(PvUsageHistory::class);
+    }
+    
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function ($query) use ($search) {
+            $query->where('nickname', 'like', '%' . $search . '%')
+                ->orWhere('user_id', 'like' , '%' . $search . '%')
+                ->orWhere('email', 'like' , '%' . $search . '%');
+        });
     }
 }

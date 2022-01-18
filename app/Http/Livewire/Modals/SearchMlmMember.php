@@ -15,12 +15,14 @@ class SearchMlmMember extends Component
     public $users = [];
     public $selected = [];
     public $addId;
+    public $authUser;
 
     protected $listeners = ['setAddId'];
 
     public function mount()
     {
-        $this->users=User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->limit(5)->get();
+        $this->authUser = Auth::check() ? Auth::user() : User::first();
+        $this->users=User::where('referred_by', null)->where('id', '!=', $this->authUser->id)->limit(5)->get();
     }
 
     public function setAddId($id)
@@ -32,7 +34,7 @@ class SearchMlmMember extends Component
     public function search()
     {
         $this->editMode = true;
-        $this->users = User::where('referred_by', null)->where('id', '!=', Auth::user()->id)->where($this->by, 'LIKE', "%$this->search%")->limit(5)->get();
+        $this->users = User::where('referred_by', null)->where('id', '!=', $this->authUser->id)->where($this->by, 'LIKE', "%$this->search%")->limit(5)->get();
     }
 
     public function addUsers()
