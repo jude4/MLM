@@ -24,11 +24,11 @@ class ViewElimPointTransferHistory extends Component
     {
         $this->transfer = ElimPointTransferHistory::with('user', 'reciever')->findOrFail($id);
         $this->editMode = true;
+
     }
     
     public function render()
     {
-        
         return view('livewire.modals.view-elim-point-transfer-history');
     }
 }

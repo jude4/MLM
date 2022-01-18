@@ -64,7 +64,7 @@ class MemberToMemberTransfer extends Component
                 $sender = User::find(auth()->id());
                 $sender->available_pv = $this->balance_after_exchange;
                 $sender->save();
-                
+                                
                 return redirect()->route('user.pvtransfer')->with('toast_success', 'Transfer Successful!');
                 
             } else {
