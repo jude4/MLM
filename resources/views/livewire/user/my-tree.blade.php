@@ -11,12 +11,10 @@
                     <div class="container-fluid box-tree">
                         <div class="btn-pluse p-5">
                             <div class="col-1 pls-min-sp">
-                                <button type="button" class="  btn-number btn-spd" data-type="plus"
-                                    data-field="quant[1]">
+                                <button type="button" class="  btn-number btn-spd" data-type="plus" data-field="quant[1]">
                                     <span class="glyphicon glyphicon-plus "></span>
                                 </button>
-                                <button type="button" class="  btn-number btn-spd2" disabled="disabled"
-                                    data-type="minus" data-field="quant[1]">
+                                <button type="button" class="  btn-number btn-spd2" disabled="disabled" data-type="minus" data-field="quant[1]">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </div>
@@ -43,7 +41,7 @@
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
                                                 @if (!auth()->user()->isEligibleForResale())
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal" >Resale</a>
+                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                 </div>
                                                 @else
                                                 <div class="box-btn py-4 d-flex justify-content-center">
@@ -61,8 +59,7 @@
                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild() ])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                            <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
+                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -76,9 +73,7 @@
                                                                 @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
-                                                                    <a href="#" class="btn-resale-secs"
-                                                                        data-toggle="modal"
-                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
+                                                                    <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -89,14 +84,12 @@
                                                                     <div class="level-header"></div>
                                                                     <div class="level-content">
                                                                         @if ( auth()->user()->firstChild()->firstChild()->firstChildExists() )
-                                                                @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild()->firstChild() ])
-                                                                @else
-                                                                <div class="box-btn d-flex justify-content-center py-5">
-                                                                    <a href="#" class="btn-resale-secs"
-                                                                        data-toggle="modal"
-                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
-                                                                </div>
-                                                                @endif
+                                                                        @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild()->firstChild() ])
+                                                                        @else
+                                                                        <div class="box-btn d-flex justify-content-center py-5">
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
+                                                                        </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -108,9 +101,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->firstChild()->lastChild() ])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -126,9 +117,7 @@
                                                                 @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
-                                                                    <a href="#" class="btn-resale-secs"
-                                                                        data-toggle="modal"
-                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
+                                                                    <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -142,9 +131,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild()->firstChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -158,9 +145,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()->lastChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->firstChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -178,8 +163,7 @@
                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                            <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
+                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -193,9 +177,7 @@
                                                                 @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
-                                                                    <a href="#" class="btn-resale-secs"
-                                                                        data-toggle="modal"
-                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
+                                                                    <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -209,9 +191,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()->firstChild() ])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -225,9 +205,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->firstChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->firstChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -243,9 +221,7 @@
                                                                 @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild() ])
                                                                 @else
                                                                 <div class="box-btn d-flex justify-content-center py-5">
-                                                                    <a href="#" class="btn-resale-secs"
-                                                                        data-toggle="modal"
-                                                                        data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
+                                                                    <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->id}}')">Add</a>
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -259,9 +235,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild()->firstChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')" >Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -275,9 +249,7 @@
                                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->lastChild()->lastChild()->lastChild()])
                                                                         @else
                                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                                            <a href="#" class="btn-resale-secs"
-                                                                                data-toggle="modal"
-                                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')">Add</a>
+                                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->lastChild()->lastChild()->id}}')">Add</a>
                                                                         </div>
                                                                         @endif
                                                                     </div>
@@ -299,7 +271,7 @@
                                                 <h3 class="box-rect-sub m-0 pt-2"> {{ auth()->user()->nickname }} </h3>
                                                 @if (!auth()->user()->isEligibleForResale())
                                                 <div class="box-btn py-4 d-flex justify-content-center">
-                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal" >Resale</a>
+                                                    <a href="#" class="btn-resale-sec" data-toggle="modal" data-target="#resale-modal">Resale</a>
                                                 </div>
                                                 @else
                                                 <div class="box-btn py-4 d-flex justify-content-center">
@@ -317,8 +289,7 @@
                                                         @livewire('components.mlm.branch', ['child' => auth()->user()->firstChild()])
                                                         @else
                                                         <div class="box-btn d-flex justify-content-center py-5">
-                                                            <a href="#" class="btn-resale-secs" data-toggle="modal"
-                                                                data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
+                                                            <a href="#" class="btn-resale-secs" data-toggle="modal" data-target="#add-mlm-modal" wire:click="$emit('setAddId', '{{auth()->user()->id}}')">Add</a>
                                                         </div>
                                                         @endif
                                                     </div>
