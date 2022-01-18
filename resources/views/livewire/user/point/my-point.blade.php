@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-5">
     <div class="col-lg-6 col-md-8 col-sm-12 col-12 mb-2">
         <div class="box-bor">
             <div class="main-point d-flex justify-content-between">

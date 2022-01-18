@@ -10,11 +10,11 @@
         </div>
     </div>
     <ul class="list-unstyled components">
-        <li class="active">
+        <li class="{{Route::is('user.pvcheckaccumulationhistory')?'active':''}}">
             <a href="{{route('user.pvcheckaccumulationhistory')}}" >PV Accumulation History</a>
             
         </li>
-        <li>
+        <li class="{{Route::is('user.pvcheckusagehistory')?'active':''}}">
             <a href="{{route('user.pvcheckusagehistory')}}">PV Usage History</a>
             
         </li>
