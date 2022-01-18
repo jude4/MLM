@@ -73,6 +73,10 @@ class SendElimPoint extends Component
                 $sender->elim_points = $this->balance_after_transfer;
                 $sender->save();
 
+                $reciever->elim_points = $reciever->elim_points + ($this->transfer_quantity - $this->transmission_fee);
+
+                $reciever->save();
+
                 return redirect()->route('user.mypointsend')->with('toast_success', 'Transfer Successful!');
             } else {
                 return redirect()->route('user.mypointsend')->with('toast_error', 'Error: Insufficient Elim point');

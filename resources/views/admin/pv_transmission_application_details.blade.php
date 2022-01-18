@@ -31,4 +31,5 @@
 <!-- ------------pv-conversion detail modal----------------- -->
 
 @livewire('admin.modals.view-pv-transmission')
+
 @endsection
