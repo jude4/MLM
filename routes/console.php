@@ -33,7 +33,7 @@ Artisan::command('create superadmin', function () {
         'is_super' => true,
     ]);
 
-    // User::factory(10)->create();
+    User::factory(10)->create();
     $this->comment('first administrator has been setup');
 })->purpose('Setup the admin');
 

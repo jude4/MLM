@@ -56,4 +56,22 @@ class FakeUser
     {
 
     }
+
+    public function countChildren(): int
+    {
+        return 0;
+    }
+
+    //recursive
+    public function countAndAddChildren(): int
+    {
+        return 0;
+           
+    }
+
+
+    public function isEligibleForStarLevel(int $starLevel = 1): bool
+    {
+        return false;
+    }
 }

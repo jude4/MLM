@@ -229,4 +229,46 @@ class User extends Authenticatable
                 ->orWhere('email', 'like' , '%' . $search . '%');
         });
     }
+
+    public function countChildren():int
+    {
+        $numberOfChildren = 0;
+        if (!is_a($this->firstChild(), FakeUser::class)) {
+            $numberOfChildren++;
+        }
+        if (!is_a($this->lastChild(), FakeUser::class)) {
+            $numberOfChildren++;
+        }
+        return $numberOfChildren;
+    }
+
+    //recursive
+    public function countAndAddChildren():int
+    {
+        if($this->countChildren() < 2) return 0;
+        return $this->firstChild()->countAndAddChildren() + $this->lastChild()->countAndAddChildren() + $this->countChildren();
+           
+    }
+
+
+    public function isEligibleForStarLevel(int $starLevel = 1): bool
+    {
+        if( $starLevel === 1){
+            return $this->countAndAddChildren() >= 14;
+        }
+
+        if($starLevel === 2){
+            return $this->firstChild()->isEligibleForStarLevel(1) &&  $this->lastChild()->isEligibleForStarLevel(1);
+        }
+
+        if($starLevel === 3){
+            return $this->firstChild()->isEligibleForStarLevel(2) &&  $this->lastChild()->isEligibleForStarLevel(2);
+        }
+
+        if($starLevel === 4){
+            return $this->firstChild()->isEligibleForStarLevel(3) &&  $this->lastChild()->isEligibleForStarLevel(3);
+        }
+
+        return false;
+    }
 }
