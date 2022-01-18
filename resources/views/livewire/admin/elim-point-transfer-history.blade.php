@@ -95,7 +95,7 @@
                             </td>
                             <td>{{ $history->user->user_id }}</td>
                             <td>{{ $history->user->nickname }}</td>
-                            <td>{{ $history->exchange_quantity }}</td>
+                            <td>{{ $history->transfer_qunatity }}</td>
                             <td class="">
                                 <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#Elim-point-transfer-detail-modal">
                                     Look
