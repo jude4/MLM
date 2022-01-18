@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
-use App\Models\TransferBasedOnElimPoint;
+use App\Models\ElimPointTransferHistory;
 use App\Models\User;
 use Livewire\Component;
 
@@ -10,7 +10,7 @@ class SendElimPoint extends Component
 {
     public $user;
     public $user_id;
-    public $transfer_qunatity;
+    public $transfer_quantity;
     public $transmission_fee;
     public $balance_after_transfer;
 
@@ -24,7 +24,7 @@ class SendElimPoint extends Component
 
     public function getMaxElim()
     {
-        $this->transfer_qunatity = $this->getUserElimPoint( auth()->user()->elim_points);
+        $this->transfer_quantity = $this->getUserElimPoint( auth()->user()->elim_points);
        
     }
 
@@ -40,12 +40,12 @@ class SendElimPoint extends Component
 
     protected $rules = [
         'user_id' => ['required'],
-        'transfer_qunatity' => ['nullable'],
+        'transfer_quantity' => ['nullable'],
         'transmission_fee' => ['nullable'],
         'balance_after_transfer' => ['nullable'],
     ];
 
-    public function updatedTransferQunatity($value)
+    public function updatedTransferQuantity($value)
     {
         if ($value) {
             $value = $value;
@@ -65,17 +65,17 @@ class SendElimPoint extends Component
         
         $reciever = User::where('user_id', $this->user_id)->first();
         if ($reciever) {
-            $attributes['reciever_id'] = $reciever->id;
+            $attributes['receiver_id'] = $reciever->id;
             $attributes['user_id'] = auth()->id();
-            if ($this->transfer_qunatity < auth()->user()->elim_points) {
-                TransferBasedOnElimPoint::create($attributes);
+            if ($this->transfer_quantity < $this->getUserElimPoint(auth()->user()->elim_points)) {
+                ElimPointTransferHistory::create($attributes);
                 $sender = User::find(auth()->id());
                 $sender->elim_points = $this->balance_after_transfer;
                 $sender->save();
 
                 return redirect()->route('user.mypointsend')->with('toast_success', 'Transfer Successful!');
             } else {
-                return redirect()->route('user.mypointsend')->with('toast_error', 'Error: Insufficient Pv point');
+                return redirect()->route('user.mypointsend')->with('toast_error', 'Error: Insufficient Elim point');
             }
         } else {
             return $this->addError("user_id", "User ID dosn't exist");

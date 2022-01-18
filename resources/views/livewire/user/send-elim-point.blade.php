@@ -17,7 +17,7 @@
                <div class="form-group row mt-4">
                    <label class="inp-pv col-xl-3 col-lg-12  col-md-12 col-12 pr-0 align-self-center text-xl-center text-lg-left">
                        Transfer quantity</label>
-                   <input type="number" wire:model="transfer_qunatity" class="form-control pro-pv-input col-xl-7 col-lg-9 col-md-9 col-sm-11 col-11 ml-2 mb-1" placeholder="">
+                   <input type="number" wire:model="transfer_quantity" class="form-control pro-pv-input col-xl-7 col-lg-9 col-md-9 col-sm-11 col-11 ml-2 mb-1" placeholder="">
                    <button wire:click="getMaxElim" class="btn-max">MAX</button>
 
                    <div class="sub-mx-text pl-md-0 pl-3">ELIM POINT</div>

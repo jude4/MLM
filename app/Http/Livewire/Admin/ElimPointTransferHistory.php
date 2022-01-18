@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\TransferBasedOnElimPoint;
-use App\Models\User;
+use App\Models\ElimPointTransferHistory as ModelsElimPointTransferHistory;
 use Livewire\Component;
 
 class ElimPointTransferHistory extends Component
@@ -31,10 +30,12 @@ class ElimPointTransferHistory extends Component
     public function render()
     {
         $count = $this->count;
-        $histories = TransferBasedOnElimPoint::with('user')
+       
+        $histories = ModelsElimPointTransferHistory::with('user', 'reciever')
             ->search($this->search)
             ->latest()
             ->get();
+
            
         return view('livewire.admin.elim-point-transfer-history', compact('histories', 'count'));
     }

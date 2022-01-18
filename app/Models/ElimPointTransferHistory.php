@@ -25,4 +25,9 @@ class ElimPointTransferHistory extends Model
                
         });
     }
+
+    public function reciever(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
 }

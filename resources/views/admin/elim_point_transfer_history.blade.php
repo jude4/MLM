@@ -31,6 +31,6 @@
 
 <!-- ------------Elim point exchange detail modal----------------- -->
 
-@livewire('admin.modals.view-elim-recharge-detail')
+@livewire('modals.view-elim-point-transfer-history')
 
 @endsection
