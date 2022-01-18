@@ -101,7 +101,7 @@
                                 <div class="row">
                                     <div class="col-12 table-start">
                                         <p class="count-list">Total : {{$usercount}} Count (1/1)Page</p>
-                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove">
+                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="memberlist">
                                             <thead class="table-header-bg">
                                                 <tr>
                                                     <th>No.</th>

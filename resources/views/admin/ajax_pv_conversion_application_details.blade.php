@@ -4,6 +4,11 @@
     <td>30</td>
     <td>{{$history->user->user_id}}</td>
     <td>{{$history->user->nickname}}</td>
+    @if($history->type == '0')
+    <td>Available PV</td>
+    @else
+    <td>resale</td>
+    @endif
     <td>{{$history->amount}}</td>
 
     @if($history->status == '0')
@@ -13,6 +18,7 @@
     @else
     <td class="incas-text-changes text-danger">Cancellation</td>
     @endif
+
 
     @if($history->status == '0')
     <td class="">
@@ -28,9 +34,10 @@
 
     <td>{{$history->created_at}}</td>
     <td class="">
-        <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-detail-modal">
+        <a href="#" class="btn  btn-correction" onclick="detailmodalopen('{{ $history->id }}')">
             Look
         </a>
     </td>
+
 </tr>
 @endforeach

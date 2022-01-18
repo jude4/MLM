@@ -220,29 +220,27 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
 
-    Route::get('/pv_accumulation_history', [AdminController::class, 'pvaccumulation_history'])->name('pvaccumulationhistory');
 
-    // pv accumulation history Search
+    Route::get('/pv_accumulation_history', [AdminController::class, 'pvaccumulation_history'])->name('pvaccumulationhistory');
     Route::get('/pv_accumulation_history_search', [AdminController::class, 'pv_accumulation_history_search'])->name('search.pvaccumulationhistory');
 
-
-    Route::get('/pv_conversion_applicaton_details', function () {
-        return view('admin.pv_conversion_application_details');
-    })->name('pvconversionapplicationdetails');
-
-    Route::get('/pv_usage_history', function () {
-        return view('admin.pv_usage_history');
-    })->name('pvusagehistory');
-
     Route::get('/pv_usage_history', [AdminController::class, 'pv_usage_history'])->name('pvusagehistory');
-    // pv usage history Search
     Route::get('/pv_usage_history_search', [AdminController::class, 'pv_usage_history_search'])->name('search.pvusagehistory');
 
-  
     Route::get('/pv_withdrawal_request_history', [AdminController::class, 'pv_withdrawal_request_history'])->name('pvwithdrawalrequesthistory');
-
-    // pv withdrawal request history search
     Route::get('/pv_withdrawal_request_history_search', [AdminController::class, 'pv_withdrawal_request_history_search'])->name('search.pvwithdrawalrequesthistory');
+    Route::post('/pv_withdrawal_request_history_action', [AdminController::class, 'pv_withdrawal_request_history_action'])->name('pvwithdrawalaction');
+    Route::get('/pv_withdrawal_request_detail', [AdminController::class, 'pv_withdrawal_request_detail'])->name('pvwithdrawalrequestdetail');
+
+    Route::get('/pv_conversion_applicaton_details', [AdminController::class, 'pv_conversion_applicaton_details'])->name('pvconversionapplicationdetails');
+    Route::get('/particular_pv_conversion_detail', [AdminController::class, 'particular_pv_conversion_detail'])->name('particularpvconversiondetail');
+    Route::get('/particular_pv_conversion_detail_search', [AdminController::class, 'particular_pv_conversion_detail_search'])->name('search.pvconversionapplicationdetail');
+    Route::post('/pv_conversion_application_action', [AdminController::class, 'pv_conversion_application_action'])->name('pvconversionapplicationaction');
+
+
+    Route::get('/pv_transmission_application_details', [AdminController::class, 'pv_transmission_application_details'])->name('pvtransmissionapplicationdetails');
+
+
 
     Route::get('/t_point_details_by_member', function () {
         return view('admin.t_point_details_by_member');
@@ -264,9 +262,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.admin_management_edit');
     })->name('adminmanagementedit');
 
-    Route::get('/pv_transmission_application_details', function () {
-        return view('admin.pv_transmission_application_details');
-    })->name('pvtransmissionapplicationdetails');
+    
 
     Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });

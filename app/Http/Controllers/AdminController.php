@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\PvAccumulationHistory;
 use App\Models\PvUsageHistory;
 use App\Models\PvWithDrawalRequestHistory;
+use App\Models\PvConversionApplication;
+use App\Models\PvTransmissionApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -538,5 +540,108 @@ class AdminController extends Controller
         $hdata = view('admin.ajax_pv_withdrawal_request_history', compact('historydatas'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
 
+    }
+
+    public function pv_withdrawal_request_history_action(Request $request){
+        $id = $request->id;
+        $password = $request->password;
+        $comment = $request->comment;
+        $status = $request->status;
+
+        $admin = Auth::guard('admin')->user();
+        $user = User::find($admin->id);
+        $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
+        if(!Hash::check($password, $user->password)) {   
+             return response()->json(['status'=>500,'msg'=>'password is correct']);
+        } 
+
+        $withdrawalhistory = PvWithDrawalRequestHistory::findOrFail($id);
+        $withdrawalhistory->status = $status;
+        $withdrawalhistory->comment = $comment;
+        $withdrawalhistory->save();
+        
+        $historydatas = PvWithDrawalRequestHistory::with(['user'])->get();
+        $hdata = view('admin.ajax_pv_withdrawal_request_history', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_withdrawal_request_detail(Request $request){
+       $id = $request->id;
+
+       $historydatas = PvWithDrawalRequestHistory::from('pv_with_drawal_request_histories as pwh')
+       ->join('users as u','pwh.user_id','=','u.id')   
+       ->select('pwh.*','u.user_id','u.nickname')
+       ->where('pwh.id',$id)
+       ->get();
+
+       $hdata = view('admin.ajax_pv_withdrawal_request_detail', compact('historydatas'))->render();
+       return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_conversion_applicaton_details(){
+        $historydatas = PvConversionApplication::with(['user'])->get();
+        $historycount = $historydatas->count();
+        return view('admin.pv_conversion_application_details',compact('historydatas','historycount'));
+    }
+
+    public function particular_pv_conversion_detail(Request $request){
+        $id = $request->id;
+        $historydatas = PvConversionApplication::from('pv_conversion_applications as pwh')
+       ->join('users as u','pwh.user_id','=','u.id')   
+       ->select('pwh.*','u.user_id','u.nickname')
+       ->where('pwh.id',$id)
+       ->get();
+
+       $hdata = view('admin.ajax_particular_pv_conversion_detail', compact('historydatas'))->render();
+       return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function particular_pv_conversion_detail_search(Request $request){
+        $type = $request->type;
+        $status = $request->status;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = PvConversionApplication::join('users', 'users.id', '=', 'pv_conversion_applications.user_id')->
+        when($field != '', function ($query) use ($request) {
+            $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+        })
+        ->when($type != '', function ($query) use ($request) {
+            $query->where('pv_conversion_applications.type', '=', $request->type);
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('pv_conversion_applications.status', '=', $request->status);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('pv_conversion_applications.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('pv_conversion_applications.created_at', '<=', $request->enddate);
+        })
+        ->get(['pv_conversion_applications.*','users.nickname', 'users.user_id']);
+
+        $hdata = view('admin.ajax_pv_conversion_application_details', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_conversion_application_action(Request $request){
+        $id = $request->id;
+        $status = $request->status;
+
+        $withdrawalhistory = PvConversionApplication::findOrFail($id);
+        $withdrawalhistory->status = $status;
+        $withdrawalhistory->save();
+        
+        $historydatas = PvConversionApplication::with(['user'])->get();
+        $hdata = view('admin.ajax_pv_conversion_application_details', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_transmission_application_details(){
+        $historydatas = PvTransmissionApplication::with(['user'])->get();
+        $historycount = $historydatas->count();
+        return view('admin.pv_transmission_application_details',compact('historydatas','historycount'));
     }
 }

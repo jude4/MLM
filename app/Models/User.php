@@ -118,6 +118,16 @@ class User extends Authenticatable
         return $this->hasOne(PvWithDrawalRequestHistory::class);
     }
 
+    public function PvConversionApplication()
+    {
+        return $this->hasOne(PvConversionApplication::class);
+    }
+
+    public function PvTransmissionApplication()
+    {
+        return $this->hasOne(PvTransmissionApplication::class);
+    }
+
 
     
 }

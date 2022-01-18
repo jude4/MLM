@@ -125,9 +125,9 @@
 
                                             @if($history->status == '0')
                                                 <td class="">
-                                                    <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-approval-modal">
+                                                    <a href="#" class="btn  btn-correction" onclick="approvalmodalopen('{{ $history->id }}')">
                                                     Approval                                                               </a>
-                                                    <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#pv-withdrawal-cancel-modal">
+                                                    <a href="#" class="btn  btn-ends" onclick="cancelmodalopen('{{ $history->id }}')">
                                                     cancellation
                                                     </a>
                                                 </td> 
@@ -137,7 +137,7 @@
 
                                             <td>{{$history->created_at}}</td>                                                    
                                             <td class="">
-                                                <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-withdrawal-detail-modal">
+                                                <a href="#" class="btn  btn-correction" onclick="detailmodalopen('{{ $history->id }}')">
                                                   Look
                                                 </a>
                                             </td>                                         
@@ -189,17 +189,17 @@
                   
                   <div class="form-group row justify-content-center mt-5 mb-0">
                       <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" id="cancelpassword" name="cancelpassword">
                   </div>
                   <div class="form-group row justify-content-center mt-4">
                       <div class="col-11 text-left pl-4">
                           <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
-                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5"></textarea>
+                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="cancelcomment" rows="5"></textarea>
                       </div>
                   </div>
                   <div class="row justify-content-center mt-8">
                       <div class="col-6">
-                            <a href="#" class="btn-mod-end">Cancel</a>
+                            <button class="btn-mod-end" id="tocancelbtn" onclick="cancelrequest()">Cancel</button>
                          </a>
                       </div>
                   </div>
@@ -238,19 +238,19 @@
                   
                   <div class="form-group row justify-content-center mt-5 mb-0">
                       <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                      <input type="Password" name="password" id="approvepassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
                   </div>
   
                   <div class="form-group row justify-content-center mt-4">
                       <div class="col-11 text-left pl-4">
                           <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
-                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5"></textarea>
+                          <textarea name="comment" class="form-control rounded-0 inp-chrgs-boxd" id="approvecomment" rows="5"></textarea>
                       </div>
                   </div>
   
                   <div class="row justify-content-center mt-8">
                       <div class="col-6">
-                            <a href="#" class="btn-mod-conf">To Approve</a>
+                            <button  class="btn-mod-conf" id="toapprovebtn" onclick="approverequest()">To Approve</button>
                          </a>
                       </div>
                   </div>
@@ -281,35 +281,12 @@
               </div>
           </div>
          
-          <div class="row justify-content-center mt-2">
-              <div class="col-12">
-                  <div class="">
-                      <div class="d-flex justify-content-between p-md-3 p-2 mb-5">
-                          <div class="lft-sid-detail text-left">
-                              <div>ID</div>
-                              <div>nickname</div>
-                              <div>Application amount</div>
-                              <div>Account Number</div>
-                              <div>Name of bank </div>
-                              <div>Name of account  </div>
-                              <div>holder</div>
-                              
-                          </div>
-                          <div class="lft-sid-detail text-right">
-                              <div>USER01</div>
-                              <div>Hong Gil Dong</div>
-                              <div>123-456-78910</div>
-                              <div>500,000 won</div>
-                              <div>Our bank</div>
-                               <div>Hong Gil Dong</div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+          <div class="row justify-content-center mt-2" id="particularhistorydetail">
+              
           </div>
           <div class="row justify-content-center mb-5">
               <div class="col-6 text-center">
-                   <a href="#" class="btn-mod-conf">Confirm</a>
+                   <a href="#" class="btn-mod-conf" data-dismiss="modal" aria-label="Close">Confirm</a>
               </div>
           </div>
                          
@@ -405,13 +382,121 @@
         });
     }
 
-
-
     function clearsearchfield(){
         $("#status").val('');
         $("#field").val('');
         $("#fieldvalue").val('');
         $("#startdate").val('');
         $("#enddate").val('');
+    }
+
+    function approvalmodalopen(id){
+        $("#pv-withdrawal-approval-modal").modal('show');
+        $("#toapprovebtn").attr('data-id',id);
+    }
+
+    function cancelmodalopen(id){
+        $("#pv-withdrawal-cancel-modal").modal('show');
+        $("#tocancelbtn").attr('data-id',id);
+    }
+
+    function approverequest(){
+        var password = $("#approvepassword").val();
+        var comment = $("#approvecomment").val();
+
+        if(password == ''){
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if(comment == ''){
+            toastr.error("Please add comment");
+            return false;
+        }
+        _data = {};
+        _data['id'] = $('#toapprovebtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
+        _data['status'] = 1;
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.pvwithdrawalaction')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#approvepassword").val('');
+                    $("#approvecomment").val('');
+                    $("#pv-withdrawal-approval-modal").modal('hide');
+                    $("#pvwithdrawalrequesthistorydata").html(response.msg);
+                }else{
+                    toastr.error(response.msg);
+                }
+            }
+        });
+    }
+
+    function cancelrequest(){
+        var password = $("#cancelpassword").val();
+        var comment = $("#cancelcomment").val();
+
+        if(password == ''){
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if(comment == ''){
+            toastr.error("Please add comment");
+            return false;
+        }
+        _data = {};
+        _data['id'] = $('#tocancelbtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
+        _data['status'] = 2;
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.pvwithdrawalaction')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#cancelpassword").val('');
+                    $("#cancelcomment").val('');
+                    $("#pv-withdrawal-cancel-modal").modal('hide');
+                    $("#pvwithdrawalrequesthistorydata").html(response.msg);
+                }else{
+                    toastr.error(response.msg);
+                }
+            }
+        });
+    }
+
+    function detailmodalopen(id){
+        _data = {};
+        _data['id'] = id;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.pvwithdrawalrequestdetail')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#pv-withdrawal-detail-modal").modal('show');
+                    $("#particularhistorydetail").html(response.msg);
+                }else{
+                    toastr.error(response.msg);
+                }
+            }
+        });
     }
 </script>
