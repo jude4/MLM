@@ -250,25 +250,52 @@ class User extends Authenticatable
            
     }
 
-
+    // check
     public function isEligibleForStarLevel(int $starLevel = 1): bool
     {
         if( $starLevel === 1){
-            return $this->countAndAddChildren() >= 14;
+            return $this->countAndAddChildren() >= 14 && $this->star_level < 1;
         }
 
         if($starLevel === 2){
-            return $this->firstChild()->isEligibleForStarLevel(1) &&  $this->lastChild()->isEligibleForStarLevel(1);
+            return $this->firstChild()->isEligibleForStarLevel(1) 
+            &&  $this->lastChild()->isEligibleForStarLevel(1) 
+            && $this->star_level < 2;
         }
 
         if($starLevel === 3){
-            return $this->firstChild()->isEligibleForStarLevel(2) &&  $this->lastChild()->isEligibleForStarLevel(2);
+            return $this->firstChild()->isEligibleForStarLevel(2) 
+            &&  $this->lastChild()->isEligibleForStarLevel(2) 
+            && $this->star_level < 3;
         }
 
         if($starLevel === 4){
-            return $this->firstChild()->isEligibleForStarLevel(3) &&  $this->lastChild()->isEligibleForStarLevel(3);
+            return $this->firstChild()->isEligibleForStarLevel(3) 
+            &&  $this->lastChild()->isEligibleForStarLevel(3) 
+            && $this->star_level < 4;
         }
 
         return false;
     }
+
+    
+    public function promoteIfEligible()
+    {
+        if ($this->isEligibleForStarLevel(1)) {
+            $this->star_level = 1; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(2)) {
+            $this->star_level = 2; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(3)) {
+            $this->star_level = 3; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(4)) {
+            $this->star_level = 4; $this->save();
+        }  
+    }
+
 }
