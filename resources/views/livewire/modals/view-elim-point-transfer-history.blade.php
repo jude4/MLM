@@ -3,9 +3,13 @@ id="Elim-point-transfer-detail-modal"
 tabindex="-1" 
 aria-labelledby="exampleModalCenterTitle" 
 role="dialog" 
+@if ($editMode == true) 
+style="display: block" 
+class="modal fade pr-0 show in" 
+aria-modal="true" 
+@else class="modal fade pr-0 in" 
 aria-hidden="true"
-class="modal fade"
-aria-hidden="true"
+@endif
 >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -55,9 +59,9 @@ aria-hidden="true"
 
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>{{ $transfer->reciever->user_id ?? nill }}</div>
-                                    <div>{{ $transfer->reciever->nickname ?? nill }}</div>
-                                    <div>{{ $transfer->reciever->type ?? nill }}</div>
+                                    <div>{{ $transfer->reciever->user_id ?? null }}</div>
+                                    <div>{{ $transfer->reciever->nickname ?? null }}</div>
+                                    <div>{{ $transfer->reciever->type ?? null }}</div>
                                     <div>{{ $transfer->transfer_quantity ?? null }} won</div>
 
                                 </div>

@@ -1,5 +1,12 @@
 <div id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-@if ($editMode == true) style="display: none" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true"@endif >
+@if ($editMode == true) 
+style="display: block" 
+class="modal fade pr-0 show in" 
+aria-modal="true" 
+@else 
+class="modal fade pr-0 in" 
+aria-hidden="true"
+@endif >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content resale-modal">
             <div class="modal-header border-bottom-0 top-reas-modal">
