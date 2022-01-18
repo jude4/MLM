@@ -36,7 +36,7 @@
                             <input type="text" class="form-control search-pro-pv-input" placeholder="USER" wire:model.defer='search'>
                         </div>
                         <div class="col-2 px-0 text-right mt-2">
-                            <button class="search-modal-btn" wire:click='search()'>Search</button>
+                            <button class="search-modal-btn" wire:click.prevent='search()'>Search</button>
                         </div>
                     </div>
                     <div class="row justify-content-center">

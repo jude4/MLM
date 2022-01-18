@@ -51,9 +51,7 @@ class MyPointExchange extends Component
                 'exchange_fee' => $this->exchange_fee
             ]);
             
-            $this->updateUserElimPoint($attributes['exchange_fee']);
-            ElimPointTransferHistory::create($attributes);
-
+ 
 
             return redirect()->route('user.mypointexchange')->with('toast_success', 'Elim point exchange transaction was successful!');
         }

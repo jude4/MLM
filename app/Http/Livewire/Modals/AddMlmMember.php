@@ -18,6 +18,7 @@ class AddMlmMember extends Component
     public $password_confirmation;
     public $nickname;
     public $user_id;
+    public $authUser;
 
     protected $listeners = ['addUser'];
 
@@ -39,6 +40,7 @@ class AddMlmMember extends Component
     public function mount()
     {
         $this->uuid = User::generateUUID();
+        $this->authUser = Auth::check() ? 'user' : 'admin';
     }
 
     public function addMember()
@@ -55,7 +57,8 @@ class AddMlmMember extends Component
 
         $user->giveParentById($this->user_id);
 
-        return redirect()->route('user.pvmytree')->with('toast_success', 'New Member Added!');
+
+        return  redirect()->route('user.pvmytree')->with('toast_success', 'New Member Added!');
     }
 
     public function render()

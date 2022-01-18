@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PvTransmissionApplication;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PvTransmissionApplicationController extends Controller
@@ -14,6 +15,12 @@ class PvTransmissionApplicationController extends Controller
         $data->status = 2;
         $data->save();
 
+        $reciever = User::findOrFail($data->incoming_id);
+
+        $reciever->available_pv = $reciever->available_pv + ($data->amount - $data->fee);
+
+        $reciever->save();
+        
         return redirect()->route('admin.pvtransmissionapplicationdetails')->with('toast_success', 'Successfully Approved!');
 
         return view('admin.pv_transmission_application_details');
