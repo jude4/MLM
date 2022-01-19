@@ -95,7 +95,6 @@ class DailyBonus extends Command
             }
         }
 
-        // \Log::info("Cron is working fine!");
         
     }
 }
