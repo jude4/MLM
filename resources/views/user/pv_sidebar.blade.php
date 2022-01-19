@@ -33,14 +33,14 @@
                 
             </ul>
         </li>
-        <li class="{{Route::is('user.pvexchangeavailableelimpoint', 'user.pvexchangeaccumulaionelimpoint')?'active':''}}">
+        <li class="{{Route::is('user.pvexchangeavailableelimpoint', 'user.pvexchangeaccumulationelimpoint')?'active':''}}">
             <a href="#ELIMSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ELIM point conversion</a>
-            <ul class="collapse list-unstyled {{Route::is('user.pvexchangeavailableelimpoint', 'user.pvexchangeaccumulaionelimpoint')?'sub-display':''}}" id="ELIMSubmenu">
+            <ul class="collapse list-unstyled {{Route::is('user.pvexchangeavailableelimpoint', 'user.pvexchangeaccumulationelimpoint')?'sub-display':''}}" id="ELIMSubmenu">
                 <li class="{{Route::is('user.pvexchangeavailableelimpoint')?'active':''}}">
                     <a href="{{route('user.pvexchangeavailableelimpoint')}}">Available PV sales application</a>
                 </li>
-                <li class="{{Route::is('user.pvexchangeaccumulaionelimpoint')?'active':''}}">
-                    <a href="{{route('user.pvexchangeaccumulaionelimpoint')}}">Apply for resale of accumulated PV</a>
+                <li class="{{Route::is('user.pvexchangeaccumulationelimpoint')?'active':''}}">
+                    <a href="{{route('user.pvexchangeaccumulationelimpoint')}}">Apply for resale of accumulated PV</a>
                 </li>                
             </ul>
         </li>
