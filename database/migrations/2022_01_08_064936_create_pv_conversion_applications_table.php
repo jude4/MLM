@@ -17,7 +17,7 @@ class CreatePvConversionApplicationsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
-            $table->integer('type')->default(0);
+            $table->string('type')->default(0);
             $table->boolean('status')->default(0);
             $table->integer('amount');
             $table->integer('fee');
