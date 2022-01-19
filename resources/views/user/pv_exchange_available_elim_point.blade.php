@@ -72,7 +72,30 @@
                         </div>
                     </div>
 
-                  @livewire('user.apply-for-elim-point-sales')
+
+                    <div class="pvm-request">
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-lg-8 col-md-9 col-sm-10 col-12">
+                                <div class="tab-heading">
+                                    Apply for ELIM Point Conversion
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-xl-4 col-lg-2 col-md-2 col-sm-0 col-0 ">
+                            </div>
+                            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-8 col-10 px-md-0 px-2">
+                                <div class="available-text">
+                                    <div class="available-sub-text">Available PV</div>
+                                    <div class="avl-img align-self-center">
+                                        <img src="{{asset('image/icon/arrow.png')}}" width="50px">
+                                    </div>
+                                    <div class="available-sub-text"> ELIM POINT</div>
+                                </div>
+                            </div>
+                        </div>
+                        @livewire('user.available-pv-to-elim-points')
+                    </div>
                 </div>
             </div> 
         </div>
