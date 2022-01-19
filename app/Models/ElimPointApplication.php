@@ -17,10 +17,10 @@ class ElimPointApplication extends Model
  
 
 
-    public function getAmountAttribute($value)
-    {
-        return number_format($value);
-    }
+    // public function getAmountAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
     public function user() : BelongsTo
     {
