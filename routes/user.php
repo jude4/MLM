@@ -105,7 +105,7 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
 
     Route::get('/pv_exchange_accumulation_elim_point', function () {
         return view('user.pv_exchange_accumulation_elim_point');
-    })->name('pvexchangeaccumulaionelimpoint');
+    })->name('pvexchangeaccumulationelimpoint');
 });
 
 //User Auth routes

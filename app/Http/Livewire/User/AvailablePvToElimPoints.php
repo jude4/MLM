@@ -13,9 +13,10 @@ class AvailablePvToElimPoints extends Component
         'amount' => ['required', 'numeric'],
     ];
 
-    public function updatedAmount($value)
+    public function updatedAmount()
     {
-        $this->quantity_after_conversion = $value - $this->fee;
+        $this->validate();
+        $this->quantity_after_conversion = (int) $this->amount - $this->fee;
         $this->balance_after_conversion = auth()->user()->available_pv - $this->amount;
     }
 
