@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class DailyBonus extends Command
 {
@@ -52,7 +53,8 @@ class DailyBonus extends Command
      */
     public function handle()
     {
-
+        Log::info('Crons work successfully!...');
+        
         $yesterPvAccumulatedHistory = PvAccumulationHistory::whereDate('created_at', Carbon::yesterday())->get();
 
         $totalEarnedPv = !empty($yesterPvAccumulatedHistory) ? $yesterPvAccumulatedHistory->sum('accumulated_earned_bonus') : null;
