@@ -24,14 +24,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'user_id',
-        'nickname',
-        'email',
-        'elim_points',
-        't_points',
-        'available_pv',
-        'password',
+    protected $guarded = [
+      
     ];
 
     /**
@@ -229,4 +223,88 @@ class User extends Authenticatable
                 ->orWhere('email', 'like' , '%' . $search . '%');
         });
     }
+
+    public function countChildren():int
+    {
+        $numberOfChildren = 0;
+        if (!is_a($this->firstChild(), FakeUser::class)) {
+            $numberOfChildren++;
+        }
+        if (!is_a($this->lastChild(), FakeUser::class)) {
+            $numberOfChildren++;
+        }
+        return $numberOfChildren;
+    }
+
+    //recursive
+    public function countAndAddChildren():int
+    {
+        if($this->countChildren() < 2) return 0;
+        return $this->firstChild()->countAndAddChildren() + $this->lastChild()->countAndAddChildren() + $this->countChildren();
+           
+    }
+
+    // check
+    public function isEligibleForStarLevel(int $starLevel = 1): bool
+    {
+        if( $starLevel === 1){
+            return $this->countAndAddChildren() >= 14 && $this->star_level < 1;
+        }
+
+        if($starLevel === 2){
+            return $this->firstChild()->isEligibleForStarLevel(1) 
+            &&  $this->lastChild()->isEligibleForStarLevel(1) 
+            && $this->star_level < 2;
+        }
+
+        if($starLevel === 3){
+            return $this->firstChild()->isEligibleForStarLevel(2) 
+            &&  $this->lastChild()->isEligibleForStarLevel(2) 
+            && $this->star_level < 3;
+        }
+
+        if($starLevel === 4){
+            return $this->firstChild()->isEligibleForStarLevel(3) 
+            &&  $this->lastChild()->isEligibleForStarLevel(3) 
+            && $this->star_level < 4;
+        }
+
+        return false;
+    }
+
+    
+    public function promoteIfEligible()
+    {
+        if ($this->isEligibleForStarLevel(1)) {
+            $this->star_level = 1; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(2)) {
+            $this->star_level = 2; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(3)) {
+            $this->star_level = 3; $this->save();
+        }
+
+        if ($this->isEligibleForStarLevel(4)) {
+            $this->star_level = 4; $this->save();
+        }  
+    }
+
+    public function generateLevelBonus()
+    {
+        
+    }
+
+    public function generateGroupBonus()
+    {
+        
+    }
+
+    public function generateLevelMatching()
+    {
+        
+    }
+
 }
