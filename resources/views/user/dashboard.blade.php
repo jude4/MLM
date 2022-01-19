@@ -22,18 +22,18 @@
                                 <img src="{{asset('image/bg03.png')}}" width="100%">
                             </div>
                             <div class="tot-sub-pos1">
-                                 <div class="total-text1">Elim - Point : 10.000</div>
+                                 <div class="total-text1">Elim - Point : {{number_format(auth()->user()->elim_points)}}</div>
                                  <div class="btn-place"><a href="#">Place an order</a></div>
                                  
                             </div>
                             <div class="tot-sub-pos2">
-                                 <div class="total-text1">T-Point : 87,000 </div>
+                                 <div class="total-text1">T-Point : {{number_format(auth()->user()->t_points)}} </div>
                                  <div class="btn-place"><a href="#">Order History</a></div> 
                                 
                             </div>
                              <div class="tot-sub-pos3">
                                  <div class="total-text1"></div>
-                                 <div class="btn-manage"><a href="#">PV Management</a></div> 
+                                 <div class="btn-manage"><a href="{{route('user.krwwithdrawalrequest')}}">PV Management</a></div> 
                                 
                             </div>
                             
