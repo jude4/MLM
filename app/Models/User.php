@@ -46,6 +46,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'status' => 'boolean',
+        'elim_points' => 'integer',
     ];
 
     public function totalPv()
@@ -53,15 +54,15 @@ class User extends Authenticatable
         return number_format($this->available_pv + $this->earned_pv);
     }
 
-    protected function getElimPointsAttribute($value)
-    {
-        return number_format($value);
-    }
+    // protected function getElimPointsAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
-    protected function setElimPointsAttribute($value)
-    {
-        return intval(str_replace(',', '', $value));
-    }
+    // protected function setElimPointsAttribute($value)
+    // {
+    //     return intval(str_replace(',', '', $value));
+    // }
 
 
     protected function getTPointsAttribute($value)
