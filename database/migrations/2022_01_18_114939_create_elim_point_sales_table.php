@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransferBasedOnElimPointsTable extends Migration
+class CreateElimPointSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTransferBasedOnElimPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transfer_based_on_elim_points', function (Blueprint $table) {
+        Schema::create('elim_point_sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('reciever_id')->constrained('users')->cascadeOnDelete();
-            $table->double('transfer_qunatity');
-            $table->double('transmission_fee');
-            $table->double('balance_after_transfer');
+            $table->double('conversion_quantity')->default(0);
+            $table->double('conversion_fee')->default(0);
+            $table->double('quantity_after_conversion')->default(0);
+            $table->double('balance_after_conversion')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateTransferBasedOnElimPointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transfer_based_on_elim_points');
+        Schema::dropIfExists('elim_point_sales');
     }
 }

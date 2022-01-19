@@ -57,12 +57,11 @@ class AddMlmMember extends Component
 
         $user->giveParentById($this->user_id);
 
-
         if ($this->authUser == 'user') {
             return redirect()->route('user.pvmytree')->with('toast_success', 'MLM Member(s) Successfully Added');
-        } else {            
-             return redirect()->route('admin.mlmusermanagement')->with('toast_success', 'New Member Added!'); 
-         }
+        } else {
+            return redirect()->route('admin.mlmusermanagement')->with('toast_success', 'New Member Added!');
+        }
     }
 
     public function render()

@@ -21,7 +21,7 @@ class MyPointExchange extends Component
     public function updatedExchangeQuantity($value)
     {
         $value = empty($value) ? 0 : $value;
-        $this->conversion_quantity = $value * 2;
+        // $this->conversion_quantity = $value * 2;
         $this->balance_after_exchange = empty($value) ? 0 : $this->getUserElimPoint(auth()->user()->elim_points) -  $this->conversion_quantity - $value;
     }
 
@@ -42,6 +42,11 @@ class MyPointExchange extends Component
 
             
             $attributes['user_id'] = auth()->id();
+            
+            $authUser = User::findOrFail(auth()->id());
+            $authUser->elim_points = $this->getUserElimPoint($authUser->elim_ponts) - ($this->exchange_quantity + $this->exchange_fee);
+            $authUser->t_points = $authUser->t_points + $this->exchange_quantity;
+            $authUser->save();
             
             ElimPointExchangeHistory::create([
                 'user_id' => auth()->id(),
