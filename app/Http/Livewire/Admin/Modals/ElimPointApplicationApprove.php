@@ -32,7 +32,10 @@ class ElimPointApplicationApprove extends Component
             $this->recharge->comment = $this->comment;
             $this->recharge->save();
             $this->recharge->user->type = 1;
+            $this->recharge->user->elim_points = (int)$this->recharge->user->elim_points + (int)$this->recharge->amount;
             $this->recharge->user->save();
+            
+            // $this->re
             return redirect()->route('admin.elimpointapplicatondetails')->with('toast_success', 'Successfully Approved!');
         }else{
             $this->addError('password', 'Incorrect password');
