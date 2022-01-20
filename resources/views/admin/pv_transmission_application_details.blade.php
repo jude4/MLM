@@ -25,13 +25,13 @@
                                         <div class="">
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                                                 <div class="start-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">
                                                 </div>
                                                 <div class="exchage-icon align-items-center d-flex justify-content-center">
                                                     ~
                                                 </div>
                                                 <div class="end-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">
+                                                    <input type="date" class="form-control" id="enddate" aria-describedby="date-design-prepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -43,17 +43,17 @@
                                         <div class="col-12 d-flex justify-content-md-end">
                                             <div class="select-main-group ml-1 ">
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="status" selected>
+                                                    <select class="custom-select" id="status">
+                                                        <option value="" selected>
                                                             =Status=
                                                         </option>
-                                                        <option value="activation" class="text-left">
+                                                        <option value="1" class="text-left">
                                                             Approval
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="0" class="text-left">
                                                             atmosphere
                                                         </option>
-                                                        <option value="inactive" class="text-left">
+                                                        <option value="2" class="text-left">
                                                             cancellation
                                                         </option>
 
@@ -64,25 +64,25 @@
 
                                                 <div class="input-group float-left w-auto mb-2">
                                                     <div class="input-group-prepend">
-                                                        <select class="custom-select">
-                                                            <option value="status" selected>
+                                                        <select class="custom-select" id="field">
+                                                            <option value="" selected>
                                                                 =Search Options=
                                                             </option>
-                                                            <option value="activation" class="text-left">
+                                                            <option value="user_id" class="text-left">
                                                                 Id
                                                             </option>
-                                                            <option value="inactive" class="text-left">
+                                                            <option value="nickname" class="text-left">
                                                                 nickname
                                                             </option>
 
                                                         </select>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Please select a search option.">
+                                                    <input type="text" class="form-control" placeholder="Please select a search option." id="fieldvalue">
                                                 </div>
 
                                                 <div class="btn-group mb-2 ml-2">
-                                                    <button type="button" class="btn btn-search">Search</button>
-                                                    <button type="button" class="btn btn-reset">Initialization</button>
+                                                    <button type="button" class="btn btn-search" onclick="searchhistory()">Search</button>
+                                                    <button type="button" class="btn btn-reset" onclick="clearsearchfield()">Initialization</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                                     <th class="border-bottom-0">Detail</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="pvtransmissionapplicationdetaillist">
                                                 @foreach($historydatas as $index => $history)
                                                 <tr>
                                                     <td>{{ $index+1 }}</td>
@@ -121,7 +121,7 @@
                                                     @else
                                                     <td class="incas-text-changes text-danger">Cancellation</td>
                                                     @endif
-                                                    
+
                                                     @if($history->status == '0')
                                                     <td class="">
                                                         <a href="#" class="btn  btn-correction" onclick="approvalmodalopen('{{ $history->id }}')">
@@ -137,14 +137,14 @@
 
                                                     <td>{{$history->created_at}}</td>
                                                     <td class="">
-                                                        <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#pv-trasmission-application-modal">
+                                                        <a href="#" class="btn  btn-correction" onclick="detailmodalopen('{{ $history->id }}')">
                                                             Look
                                                         </a>
                                                     </td>
 
                                                 </tr>
                                                 @endforeach
-                                                
+
                                             </tbody>
                                             <tfoot>
 
@@ -181,33 +181,12 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center mt-2">
-                    <div class="col-12">
-                        <div class="">
-                            <div class="d-flex justify-content-between p-md-3 p-2 mb-5">
-                                <div class="lft-sid-detail text-left">
-                                    <div>ID</div>
-                                    <div>nickname</div>
-                                    <div>Incoming ID</div>
-                                    <div>receiving nickname</div>
-                                    <div>transfer quantity</div>
-                                    <div>transfer fee </div>
-                                </div>
-                                <div class="lft-sid-detail text-right">
-                                    <div>USER01</div>
-                                    <div>Hong Gil Dong</div>
-                                    <div>Um Hong-gil</div>
-                                    <div>USER02</div>
-                                    <div>500,000 won</div>
-                                    <div>10,000 won</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row justify-content-center mt-2" id="particularhistorydetail">
+
                 </div>
                 <div class="row justify-content-center mb-5">
                     <div class="col-6 text-center">
-                        <a href="#" class="btn-mod-conf">Confirm</a>
+                        <a href="#" class="btn-mod-conf" data-dismiss="modal" aria-label="Close">Confirm</a>
                     </div>
                 </div>
 
@@ -217,6 +196,106 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Model Approval -->
+<div class="modal fade" id="approval" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header mod-disp text-center">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="approvemodalclose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-11 text-center">
+                        <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">Confirm Approval</h4>
+                    </div>
+                </div>
+                <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <div class="trd-pass-text">For final approval, please re-enter the administrator password.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center mt-5 mb-0">
+                        <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
+                        <input type="Password" name="password" id="approvepassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                    </div>
+
+                    <div class="form-group row justify-content-center mt-4">
+                        <div class="col-11 text-left pl-4">
+                            <label class="lble-chrg-inpds  text-left" for="  ">COMMENT</label>
+                            <textarea name="comment" class="form-control rounded-0 inp-chrgs-boxd" id="approvecomment" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center mt-8">
+                        <div class="col-6">
+                            <button class="btn-mod-conf" id="toapprovebtn" onclick="approverequest()">To Approve</button>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Model Cancellation -->
+<div class="modal fade" id="cancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header mod-disp">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="cancelmodalclose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-11 text-center">
+                        <h4 class="modal-title trd-top-end text-center" id="exampleModalLongTitle">Cancel Confirmation</h4>
+                    </div>
+                </div>
+                <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <div class="trd-pass-text">After final confirmation, please re-enter the administrator password.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center mt-5 mb-0">
+                        <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
+                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" id="cancelpassword" name="cancelpassword">
+                    </div>
+                    <div class="form-group row justify-content-center mt-4">
+                        <div class="col-11 text-left pl-4">
+                            <label class="lble-chrg-inpds  text-left" for="  ">COMMENT</label>
+                            <textarea class="form-control rounded-0 inp-chrgs-boxd" id="cancelcomment" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-8">
+                        <div class="col-6">
+                            <button class="btn-mod-end" id="tocancelbtn" onclick="cancelrequest()">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 <script>
@@ -257,5 +336,182 @@
         link.setAttribute("download", "pvtransmissionapplicationdetail.csv");
         document.body.appendChild(link);
         link.click();
+    }
+
+    function approvemodalclose() {
+        $("#approvepassword").val('');
+        $("#approvecomment").val('');
+    }
+
+    function cancelmodalclose() {
+        $("#cancelpassword").val('');
+        $("#cancelcomment").val('');
+    }
+
+
+    function approvalmodalopen(id) {
+        $("#approval").modal('show');
+        $("#toapprovebtn").attr('data-id', id);
+    }
+
+    function cancelmodalopen(id) {
+        $("#cancellation").modal('show');
+        $("#tocancelbtn").attr('data-id', id);
+    }
+
+    function approverequest() {
+        var password = $("#approvepassword").val();
+        var comment = $("#approvecomment").val();
+
+        if (password == '') {
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if (comment == '') {
+            toastr.error("Please add comment");
+            return false;
+        }
+        _data = {};
+        _data['id'] = $('#toapprovebtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
+        _data['status'] = 1;
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.pvtransmissionapplicationaction')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#approval").modal('hide');
+                    $("#pvtransmissionapplicationdetaillist").html(response.msg);
+                    approvemodalclose();
+                } else {
+                    toastr.error(response.msg);
+                }
+            }
+        });
+    }
+
+
+    function cancelrequest() {
+
+        var password = $("#cancelpassword").val();
+        var comment = $("#cancelcomment").val();
+
+        if (password == '') {
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if (comment == '') {
+            toastr.error("Please add comment");
+            return false;
+        }
+        _data = {};
+        _data['id'] = $('#tocancelbtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
+        _data['status'] = 2;
+
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.pvtransmissionapplicationaction')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#cancellation").modal('hide');
+                    $("#pvtransmissionapplicationdetaillist").html(response.msg);
+                    cancelmodalclose();
+                } else {
+                    toastr.error(response.msg);
+                }
+            }
+        });
+    }
+
+
+
+
+    function searchhistory() {
+        var status = $("#status").val();
+        var field = $("#field").val();
+        var fieldvalue = $("#fieldvalue").val();
+        var startdate = $("#startdate").val();
+        var enddate = $("#enddate").val();
+
+        if (startdate != '' && enddate == '') {
+            toastr.error("Please select to date");
+            return false;
+        } else if (enddate != '' && startdate == '') {
+            toastr.error("Please select from date");
+            return false;
+        }
+
+        if (fieldvalue != '' && field == '') {
+            toastr.error("Please select search option");
+            return false;
+        } else if (field != '' && fieldvalue == '') {
+            toastr.error("Please add search value");
+            return false;
+        }
+
+        _data = {};
+        _data['status'] = status;
+        _data['field'] = field;
+        _data['fieldvalue'] = fieldvalue;
+        _data['startdate'] = startdate;
+        _data['enddate'] = enddate;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.search.transmissionapplicationdetail')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#pvtransmissionapplicationdetaillist").html(response.msg);
+                }
+            }
+        });
+    }
+
+
+    function clearsearchfield() {
+        $("#status").val('');
+        $("#field").val('');
+        $("#fieldvalue").val('');
+        $("#startdate").val('');
+        $("#enddate").val('');
+    }
+
+    function detailmodalopen(id) {
+        _data = {};
+        _data['id'] = id;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.particultransmissionapplicationdetail')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#pv-trasmission-application-modal").modal('show');
+                    $("#particularhistorydetail").html(response.msg);
+                } else {
+                    toastr.error(response.msg);
+                }
+            }
+        });
     }
 </script>

@@ -25,13 +25,13 @@
                                         <div class="px-3">
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                                                 <div class="start-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">    
+                                                    <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">    
                                                 </div>
                                                 <div class="exchage-icon align-items-center d-flex justify-content-center">
                                                     ~        
                                                 </div>
                                                 <div class="end-date-input">
-                                                    <input type="date" class="form-control" id="pure-date" aria-describedby="date-design-prepend">    
+                                                    <input type="date" class="form-control" id="enddate" aria-describedby="date-design-prepend">    
                                                 </div>
                                             </div>
                                         </div>
@@ -41,33 +41,33 @@
                                         <div class="col-12 d-flex justify-content-md-end">
                                             <div class="select-main-group">
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="used" selected>                              =Category=
+                                                    <select class="custom-select" id="status">
+                                                        <option value="" selected>=Category=
                                                         </option>
-                                                        <option value="used1" class="text-left">
+                                                        <option value="normal" class="text-left">
                                                         Normal
                                                         </option>
-                                                        <option value="notused" class="text-left">
+                                                        <option value="support" class="text-left">
                                                          support
                                                         </option>
-                                                        <option value="notused" class="text-left">
+                                                        <option value="deal" class="text-left">
                                                          deal
                                                         </option>
-                                                        <option value="notused" class="text-left">
+                                                        <option value="fees" class="text-left">
                                                          fees
                                                         </option>
                                                     </select>
                                                 </div>
 
                                                 <div class="first-select-option mr-1 float-left mb-2">
-                                                    <select class="custom-select">
-                                                        <option value="used" selected>
+                                                    <select class="custom-select" id="type">
+                                                        <option value="" selected>
                                                             =Used=
                                                         </option>
-                                                        <option value="used1" class="text-left">
-                                                        used
+                                                        <option value="1" class="text-left">
+                                                         used
                                                         </option>
-                                                        <option value="notused" class="text-left">
+                                                        <option value="0" class="text-left">
                                                           not used
                                                         </option>
                                                     </select>
@@ -76,25 +76,25 @@
 
                                                 <div class="input-group float-left w-auto mb-2">
                                                   <div class="input-group-prepend">
-                                                    <select class="custom-select">
-                                                        <option value="searchoption" selected>
+                                                    <select class="custom-select" id="field">
+                                                        <option value="" selected>
                                                            =Search Options=
                                                         </option>
-                                                        <option value="noticelist" class="text-left">
+                                                        <option value="question" class="text-left">
                                                           title
                                                         </option>
-                                                        <option value="noticelist" class="text-left">
+                                                        <option value="question" class="text-left">
                                                           Contents
                                                         </option>
                                                         
                                                     </select>
                                                   </div>
-                                                  <input type="text" class="form-control" placeholder="Please select a search option.">
+                                                  <input type="text" class="form-control" placeholder="Please select a search option." id="fieldvalue">
                                                 </div>
 
                                                 <div class="btn-group mb-2 ml-2">
-                                                    <button type="button" class="btn btn-search">Search</button>
-                                                    <button type="button" class="btn btn-reset">Initialization</button>
+                                                    <button type="button" class="btn btn-search" onclick="searchfaq()">Search</button>
+                                                    <button type="button" class="btn btn-reset"  onclick="clearsearchfield()">Initialization</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                 
                                 <div class="row">  
                                     <div class="col-12 table-start">
-                                    <p class="count-list">Total : 14 Count (1/1)Page</p>   
+                                    <p class="count-list">Total : {{ $faqcount }} Count (1/1)Page</p>   
                                       <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size">  
                                         <thead class="table-header-bg">
                                             <tr>
@@ -116,7 +116,7 @@
                                                 <th class="border-bottom-0">correction</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="faqdetail">
 
                                             @foreach ($faqs as $index => $faq)
                                             <tr>
@@ -151,3 +151,61 @@
     </div>
 </div>
 @endsection
+
+
+<script>
+    function clearsearchfield() {
+        $("#status").val('');
+        $("#type").val('');
+        $("#field").val('');
+        $("#fieldvalue").val('');
+        $("#startdate").val('');
+        $("#enddate").val('');
+    }
+
+
+    function searchfaq() {
+        var status = $("#status").val();
+        var type = $("#type").val();
+        var field = $("#field").val();
+        var fieldvalue = $("#fieldvalue").val();
+        var startdate = $("#startdate").val();
+        var enddate = $("#enddate").val();
+
+        if (startdate != '' && enddate == '') {
+            toastr.error("Please select to date");
+            return false;
+        } else if (enddate != '' && startdate == '') {
+            toastr.error("Please select from date");
+            return false;
+        }
+
+        if (fieldvalue != '' && field == '') {
+            toastr.error("Please select search option");
+            return false;
+        } else if (field != '' && fieldvalue == '') {
+            toastr.error("Please add search value");
+            return false;
+        }
+
+        _data = {};
+        _data['status'] = status;
+        _data['type'] = type;
+        _data['field'] = field;
+        _data['fieldvalue'] = fieldvalue;
+        _data['startdate'] = startdate;
+        _data['enddate'] = enddate;
+
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.search.faq')}}",
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#faqdetail").html(response.msg);
+                }
+            }
+        });
+    }
+</script>

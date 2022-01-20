@@ -12,10 +12,12 @@ use App\Models\PvUsageHistory;
 use App\Models\PvWithDrawalRequestHistory;
 use App\Models\PvConversionApplication;
 use App\Models\PvTransmissionApplication;
+use App\Models\Permissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class AdminController extends Controller
 {
@@ -133,7 +135,32 @@ class AdminController extends Controller
     public function adminManagement($id)
     {
         $admin = Admin::findOrFail($id);
-        return view('admin.admin_management', compact('admin'));
+
+
+        $permissions = Permissions::leftjoin("user_permissions",function($join) use($id){
+            $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=',  $id);
+        })
+        ->select('permissions.*', 'user_permissions.id as user_permission_id','user_permissions.admin_id as admin_id', 'user_permissions.permission_id as permission_id','user_permissions.is_write as is_write', 'user_permissions.status as user_permission_status')
+        ->get()
+        ->toArray();
+
+        $allocated_permissions = $unallocated_permissions = [];
+
+        foreach($permissions as $permission){
+            if($permission['user_permission_id'] == ''){
+                $unallocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }else{
+                $allocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }
+        }
+        $datas['unallocated_permissions'] = $unallocated_permissions;
+        $datas['allocated_permissions'] = $allocated_permissions;
+
+        // echo "<pre>";
+        // print_r($datas);
+        // die;
+
+        return view('admin.admin_management', compact('admin', 'datas'));
     }
 
     public function editAdmin(Request $request)
@@ -317,7 +344,8 @@ class AdminController extends Controller
     public function faqList()
     {
         $faqs = Faq::all();
-        return view('admin.faq_list', compact('faqs'));
+        $faqcount = $faqs->count();
+        return view('admin.faq_list', compact('faqs','faqcount'));
     }
 
     public function faqModification($id)
@@ -349,10 +377,42 @@ class AdminController extends Controller
         return redirect()->route('admin.faqlist')->with('toast_success', 'Faq Added Successfully');
     }
 
+    function faq_search(Request $request){
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $faqs = Faq::select()->
+        when($field != '', function ($query) use ($request) {
+            $query->where($request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('category', '=', $request->status);
+        })
+        ->when($type != '', function ($query) use ($request) {
+            $query->where('used', '=', $request->type);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('created_at', '<=', $request->enddate);
+        })
+        ->get();
+
+        $faqdata = view('admin.ajax_faq_list', compact('faqs'))->render();
+        return response()->json(['status' => '200', 'msg' => $faqdata]);
+    }
+
     public function oneOnOneInquiry()
     {
+        
         $inquiries = Inquiry::all();
-        return view('admin.one_on_one_inquiry', compact('inquiries'));
+        $inquiriescount = $inquiries->count();
+        return view('admin.one_on_one_inquiry', compact('inquiries','inquiriescount'));
     }
 
     public function oneOnOneInquiryAnswer($id)
@@ -377,10 +437,47 @@ class AdminController extends Controller
         return redirect()->route('admin.oneononeinquiry')->with('toast_success', 'Inquiry Answered Successfully!');
     }
 
+    public function one_on_one_inquiry_search(Request $request){
+        $status = $request->status;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        
+
+        $inquiries = Inquiry::join('users', 'users.id', '=', 'inquiries.user_id')->
+        when($field != '', function ($query) use ($request) {
+            if($request->field == 'inquiry'){
+                $query->where($request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+            }else{
+                $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+            } 
+        })
+        ->when( $status != '', function ($query) use ($request) {
+            if($request->status == 'AC'){
+                $query->where('inquiries.answer', '!=', '');
+            }else{
+                $query->where('inquiries.answer', '=', '');
+            }
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('inquiries.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('inquiries.created_at', '<=', $request->enddate);
+        }) 
+        ->get('inquiries.*', 'users.user_id', 'users.nickname', 'users.created_at as cdate');
+
+        $inquiry = view('admin.ajax_one_on_one_inquiry', compact('inquiries'))->render();
+        return response()->json(['status' => '200', 'msg' => $inquiry]);
+    }
+
     public function noticeList()
     {
         $notices = Notice::all();
-        return view('admin.notice_list', compact('notices'));
+        $noticescount = $notices->count();
+        return view('admin.notice_list', compact('notices','noticescount'));
     }
 
     public function noticeRegister()
@@ -434,6 +531,33 @@ class AdminController extends Controller
         $notice->save();
 
         return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
+    }
+
+    public function notice_search(Request $request){
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $notices = Notice::select()->
+        when($field != '', function ($query) use ($request) {
+            $query->where($request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+        })
+        ->when($type != '', function ($query) use ($request) {
+            $query->where('used', '=', $request->type);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('created_at', '<=', $request->enddate);
+        })
+        ->get();
+
+        $notices = view('admin.ajax_notice_list', compact('notices'))->render();
+        return response()->json(['status' => '200', 'msg' => $notices]);
+
     }
 
     public function pvaccumulation_history(){
@@ -537,7 +661,7 @@ class AdminController extends Controller
         })
         ->get(['pv_with_drawal_request_histories.*','users.nickname', 'users.user_id']);
 
-        $hdata = view('admin.ajax_pv_withdrawal_request_history', compact('historydatas'))->render();
+        $hdata = view('admin.ajax_pv_withdrawal_request_history_search', compact('historydatas'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
 
     }
@@ -552,7 +676,7 @@ class AdminController extends Controller
         $user = User::find($admin->id);
         $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
         if(!Hash::check($password, $user->password)) {   
-             return response()->json(['status'=>500,'msg'=>'password is correct']);
+             return response()->json(['status'=>500,'msg'=>'password is incorrect']);
         } 
 
         $withdrawalhistory = PvWithDrawalRequestHistory::findOrFail($id);
@@ -622,17 +746,28 @@ class AdminController extends Controller
         })
         ->get(['pv_conversion_applications.*','users.nickname', 'users.user_id']);
 
-        $hdata = view('admin.ajax_pv_conversion_application_details', compact('historydatas'))->render();
+        $hdata = view('admin.ajax_pv_conversion_application_details_search', compact('historydatas'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
     }
 
     public function pv_conversion_application_action(Request $request){
+
         $id = $request->id;
+        $password = $request->password;
+        $comment = $request->comment;
         $status = $request->status;
 
-        $withdrawalhistory = PvConversionApplication::findOrFail($id);
-        $withdrawalhistory->status = $status;
-        $withdrawalhistory->save();
+        $admin = Auth::guard('admin')->user();
+        $user = User::find($admin->id);
+        $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
+        if(!Hash::check($password, $user->password)) {   
+             return response()->json(['status'=>500,'msg'=>'password is incorrect']);
+        } 
+
+        $PvConversionApplication = PvConversionApplication::findOrFail($id);
+        $PvConversionApplication->status = $status;
+        $PvConversionApplication->comment = $comment;
+        $PvConversionApplication->save();
         
         $historydatas = PvConversionApplication::with(['user'])->get();
         $hdata = view('admin.ajax_pv_conversion_application_details', compact('historydatas'))->render();
@@ -643,5 +778,66 @@ class AdminController extends Controller
         $historydatas = PvTransmissionApplication::with(['user'])->get();
         $historycount = $historydatas->count();
         return view('admin.pv_transmission_application_details',compact('historydatas','historycount'));
+    }
+
+    public function particul_transmission_application_detail(Request $request){
+        $id = $request->id;
+        $historydatas = PvTransmissionApplication::from('pv_transmission_applications as pwh')
+       ->join('users as u','pwh.user_id','=','u.id')   
+       ->select('pwh.*','u.user_id','u.nickname')
+       ->where('pwh.id',$id)
+       ->get();
+
+       $hdata = view('admin.ajax_particular_transmission_application_detail', compact('historydatas'))->render();
+       return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function transmission_application_detail_search(Request $request){
+        $status = $request->status;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = PvTransmissionApplication::join('users', 'users.id', '=', 'pv_transmission_applications.user_id')->
+        when($field != '', function ($query) use ($request) {
+            $query->where('users.'.$request->field, 'LIKE', '%' .$request->fieldvalue . '%');
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('pv_transmission_applications.status', '=', $request->status);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('pv_transmission_applications.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('pv_transmission_applications.created_at', '<=', $request->enddate);
+        })
+        ->get(['pv_transmission_applications.*','users.nickname', 'users.user_id']);
+
+        $hdata = view('admin.ajax_pv_transmission_application_details_search', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function pv_transmission_application_action(Request $request){
+        $id = $request->id;
+        $password = $request->password;
+        $comment = $request->comment;
+        $status = $request->status;
+
+        $admin = Auth::guard('admin')->user();
+        $user = User::find($admin->id);
+        $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
+        if(!Hash::check($password, $user->password)) {   
+             return response()->json(['status'=>500,'msg'=>'password is incorrect']);
+        } 
+
+        $PvTransmissionApplication = PvTransmissionApplication::findOrFail($id);
+        $PvTransmissionApplication->status = $status;
+        $PvTransmissionApplication->comment = $comment;
+        $PvTransmissionApplication->save();
+        
+        $historydatas = PvTransmissionApplication::with(['user'])->get();
+        $hdata = view('admin.ajax_pv_transmission_application_details', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
     }
 }

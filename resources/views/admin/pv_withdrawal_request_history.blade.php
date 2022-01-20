@@ -169,7 +169,7 @@
       <div class="modal-content">
         <div class="modal-header mod-disp">
          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="cancelmodalclose()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -219,7 +219,7 @@
       <div class="modal-content">
         <div class="modal-header mod-disp text-center">
           
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="approvemodalclose()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -390,6 +390,16 @@
         $("#enddate").val('');
     }
 
+    function approvemodalclose(){
+        $("#approvepassword").val('');
+        $("#approvecomment").val('');
+    }
+
+    function cancelmodalclose(){
+        $("#cancelpassword").val('');
+        $("#cancelcomment").val('');
+    }
+
     function approvalmodalopen(id){
         $("#pv-withdrawal-approval-modal").modal('show');
         $("#toapprovebtn").attr('data-id',id);
@@ -433,6 +443,7 @@
                     $("#approvecomment").val('');
                     $("#pv-withdrawal-approval-modal").modal('hide');
                     $("#pvwithdrawalrequesthistorydata").html(response.msg);
+                    approvemodalclose();
                 }else{
                     toastr.error(response.msg);
                 }
@@ -473,6 +484,7 @@
                     $("#cancelcomment").val('');
                     $("#pv-withdrawal-cancel-modal").modal('hide');
                     $("#pvwithdrawalrequesthistorydata").html(response.msg);
+                    cancelmodalclose();
                 }else{
                     toastr.error(response.msg);
                 }

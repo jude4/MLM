@@ -224,40 +224,120 @@
 
 
 <!-- Model Approval -->
-<div class="modal fade" id="approval" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h3 class="text-center">Are you sure want to approve?</h3>
-            </div>
-            <div class="modal-footer justify-content-around border-top-0">
-                <button type="button" class="btn btn-primary" id="toapprovebtn" onclick="approverequest()">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+<div class="modal fade" id="approval" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header mod-disp text-center">
+          
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="approvemodalclose()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+         <div class="row justify-content-center">
+              <div class="col-11 text-center">
+                  <h4 class="modal-title seg-top-titles " id="exampleModalLongTitle">Confirm Approval</h4>
+              </div>
+          </div>
+          <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
+                  <div class="row justify-content-center">
+                     <div class="col-11">
+                          <div class="trd-pass-text">For final approval, please re-enter the administrator password.</div>
+                     </div>
+                  </div>  
+                  
+                  <div class="form-group row justify-content-center mt-5 mb-0">
+                      <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
+                      <input type="Password" name="password" id="approvepassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                  </div>
+  
+                  <div class="form-group row justify-content-center mt-4">
+                      <div class="col-11 text-left pl-4">
+                          <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
+                          <textarea name="comment" class="form-control rounded-0 inp-chrgs-boxd" id="approvecomment" rows="5"></textarea>
+                      </div>
+                  </div>
+  
+                  <div class="row justify-content-center mt-8">
+                      <div class="col-6">
+                            <button  class="btn-mod-conf" id="toapprovebtn" onclick="approverequest()">To Approve</button>
+                         </a>
+                      </div>
+                  </div>
+                      
+                 
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  
 
 <!-- Model Cancellation -->
-<div class="modal fade" id="cancellation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h3 class="text-center">Are you sure want to cancel?</h3>
-            </div>
-            <div class="modal-footer justify-content-around border-top-0">
-                <button type="button" class="btn btn-primary" id="tocancelbtn" onclick="cancelrequest()">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+<div class="modal fade" id="cancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header mod-disp">
+         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="cancelmodalclose()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="row justify-content-center">
+              <div class="col-11 text-center">
+                  <h4 class="modal-title trd-top-end text-center" id="exampleModalLongTitle">Cancel Confirmation</h4>
+              </div>
+          </div>
+          <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
+                  <div class="row justify-content-center">
+                     <div class="col-11">
+                          <div class="trd-pass-text">After final confirmation, please re-enter the administrator password.</div>
+                     </div>
+                  </div>  
+                  
+                  <div class="form-group row justify-content-center mt-5 mb-0">
+                      <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
+                      <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" id="cancelpassword" name="cancelpassword">
+                  </div>
+                  <div class="form-group row justify-content-center mt-4">
+                      <div class="col-11 text-left pl-4">
+                          <label class="lble-chrg-inpds  text-left"for="  ">COMMENT</label>
+                          <textarea class="form-control rounded-0 inp-chrgs-boxd" id="cancelcomment" rows="5"></textarea>
+                      </div>
+                  </div>
+                  <div class="row justify-content-center mt-8">
+                      <div class="col-6">
+                            <button class="btn-mod-end" id="tocancelbtn" onclick="cancelrequest()">Cancel</button>
+                         </a>
+                      </div>
+                  </div>
+                      
+                 
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
 
 @endsection
 
 <script>
+
+    function approvemodalclose(){
+        $("#approvepassword").val('');
+        $("#approvecomment").val('');
+    }
+
+    function cancelmodalclose(){
+        $("#cancelpassword").val('');
+        $("#cancelcomment").val('');
+    }
+
+
+
     function approvalmodalopen(id) {
         $("#approval").modal('show');
         $("#toapprovebtn").attr('data-id', id);
@@ -269,8 +349,22 @@
     }
 
     function approverequest(){
+        var password = $("#approvepassword").val();
+        var comment = $("#approvecomment").val();
+
+        if(password == ''){
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if(comment == ''){
+            toastr.error("Please add comment");
+            return false;
+        }
         _data = {};
         _data['id'] = $('#toapprovebtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
         _data['status'] = 1;
 
         $.ajax({
@@ -285,6 +379,7 @@
                 if (response.status == 200) {
                     $("#approval").modal('hide');
                     $("#pvconversionapplicationdetaillist").html(response.msg);
+                    approvemodalclose();
                 }else{
                     toastr.error(response.msg);
                 }
@@ -293,10 +388,25 @@
     }
 
     function cancelrequest(){
-       
+
+        var password = $("#cancelpassword").val();
+        var comment = $("#cancelcomment").val();
+
+        if(password == ''){
+            toastr.error("Please add password");
+            return false;
+        }
+
+        if(comment == ''){
+            toastr.error("Please add comment");
+            return false;
+        }
         _data = {};
         _data['id'] = $('#tocancelbtn').attr('data-id');
+        _data['password'] = password;
+        _data['comment'] = comment;
         _data['status'] = 2;
+      
 
         $.ajax({
             type: "POST",
@@ -310,6 +420,7 @@
                 if (response.status == 200) {
                     $("#cancellation").modal('hide');
                     $("#pvconversionapplicationdetaillist").html(response.msg);
+                    cancelmodalclose();
                 }else{
                     toastr.error(response.msg);
                 }

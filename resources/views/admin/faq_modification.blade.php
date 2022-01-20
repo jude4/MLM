@@ -31,15 +31,15 @@
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">category</label>
                                         <select class="custom-select" name="category">
-                                            <option value="normal" selected>                              Normal
+                                            <option value="normal" {{ ($faq->category) == 'normal' ? 'selected' : '' }}>Normal
                                             </option>
-                                            <option value="support" class="text-left">
+                                            <option value="support" class="text-left" {{ ($faq->category) == 'support' ? 'selected' : '' }}>
                                              support
                                             </option>
-                                            <option value="deal" class="text-left">
+                                            <option value="deal" class="text-left" {{ ($faq->category) == 'deal' ? 'selected' : '' }}>
                                              deal
                                             </option>
-                                            <option value="fees" class="text-left">
+                                            <option value="fees" class="text-left" {{ ($faq->category) == 'fees' ? 'selected' : '' }}>
                                              fees
                                             </option>
                                         </select>

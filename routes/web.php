@@ -184,12 +184,10 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     })->name('elimpointtransferhistory');
 
     Route::get('/faq_list', [AdminController::class, 'faqList'])->name('faqlist');
-
     Route::post('/faq/create', [AdminController::class, 'createFaq'])->name('create.faq');
-
     Route::post('/faq/modify', [AdminController::class, 'modifyFaq'])->name('modify.faq');
-
     Route::get('/faq_modification/{id}', [AdminController::class, 'faqModification'])->name('faqmodification');
+    Route::get('/faq_search', [AdminController::class, 'faq_search'])->name('search.faq');
 
     Route::get('/faq_register', function () {
         return view('admin.faq_register');
@@ -209,6 +207,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
     Route::get('/notice_modification/{id}', [AdminController::class, 'noticeModification'])->name('noticemodification');
     Route::post('/notice/modify', [AdminController::class, 'modifyNotice'])->name('modify.notice');
+    Route::get('/notice_search', [AdminController::class, 'notice_search'])->name('search.notice');
 
     Route::get('/notice_register', [AdminController::class, 'noticeRegister'])->name('noticeregister');
 
@@ -216,6 +215,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::post('/one_on_one_inquiry_answer/reply', [AdminController::class, 'replyOneOnOneInquiry'])->name('reply.oneononeinquiry');
 
     Route::get('/one_on_one_inquiry', [AdminController::class, 'oneOnOneInquiry'])->name('oneononeinquiry');
+    Route::get('/one_on_one_inquiry_search', [AdminController::class, 'one_on_one_inquiry_search'])->name('search.oneononeinquiry');
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
@@ -239,7 +239,9 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
 
     Route::get('/pv_transmission_application_details', [AdminController::class, 'pv_transmission_application_details'])->name('pvtransmissionapplicationdetails');
-
+    Route::get('/particul_transmission_application_detail', [AdminController::class, 'particul_transmission_application_detail'])->name('particultransmissionapplicationdetail');
+    Route::get('/transmission_application_detail_search', [AdminController::class, 'transmission_application_detail_search'])->name('search.transmissionapplicationdetail');
+    Route::post('/pv_transmission_application_action', [AdminController::class, 'pv_transmission_application_action'])->name('pvtransmissionapplicationaction');
 
 
     Route::get('/t_point_details_by_member', function () {
