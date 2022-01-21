@@ -20,17 +20,17 @@
                             <div class="col-12 px-5">
                                 <form method="POST" action="{{route('admin.edit.admin')}}">
                                     @csrf
-                                    <input hidden type="text" name="id" id="" value="{{auth()->guard('admin')->user()->id}}">
+                                    <input hidden type="text" name="id" id="" value="{{$admin->id}}">
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Id</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="admin04" name="admin_id" value="{{auth()->guard('admin')->user()->admin_id}}">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="admin04" name="admin_id" value="{{$admin->admin_id}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Name</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" name="name" value="{{auth()->guard('admin')->user()->name}}">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Hong Gil Dong" name="name" value="{{$admin->name}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -46,7 +46,7 @@
                                                         </ul>
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
-                                                    <input type="text" name="mobile" value="{{auth()->guard('admin')->user()->mobile}}" class="form-control" placeholder="01012345678" />
+                                                    <input type="text" name="mobile" value="{{$admin->mobile}}" class="form-control" placeholder="01012345678" />
                                                     {{-- phone[1][number] --}}
                                                 </div>
                                                 
@@ -58,7 +58,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Manager's Department</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Team" name="department" value="{{auth()->guard('admin')->user()->department}}">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Team" name="department" value="{{$admin->department}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -72,13 +72,13 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-7 col-12">
                                                 <div class="custom-control custom-radio ">
-                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="status" value="active" {{auth()->guard('admin')->user()->status?'checked':''}}>
+                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="status" value="active" {{$admin->status?'checked':''}}>
                                                     <label class="custom-control-label" for="defaultGroupExample1">Active</label>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-12">
                                                 <div class="custom-control custom-radio ">
-                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="status" value="inactive" {{auth()->guard('admin')->user()->status?'':'checked'}} >
+                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="status" value="inactive" {{$admin->status?'':'checked'}} >
                                           <label class="custom-control-label" for="defaultGroupExample2" >Inactive</label>
                                         </div>
                                             </div>
@@ -94,7 +94,7 @@
                                     <div class="col-md-6">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">admin notes</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Department Team Leader / Hong Gil-dong" name="notes" value="{{auth()->guard('admin')->user()->notes}}">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Sales Department Team Leader / Hong Gil-dong" name="notes" value="{{$admin->notes}}">
                                     </div>
                                     
                                 
