@@ -18,6 +18,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.administrator_registration');
     })->name('administratorregistration');
 
+    Route::post('/administrator_register_admin', [AdminController::class, 'registerAdmin'])->name('register.admin');
+
     Route::get('/elim_point_application_details', function () {
         return view('admin.elim_point_application_details');
     })->name('elimpointapplicatondetails');

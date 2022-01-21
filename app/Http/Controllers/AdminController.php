@@ -285,6 +285,36 @@ class AdminController extends Controller
 
         return redirect()->route('admin.noticelist')->with('toast_success', 'Notice Created Successfully!');
     }
+
+
+    public function registerAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'admin_id' => 'required|string|min:5|unique:admins,admin_id',
+            'name' => 'required|string|min:5',
+            'department' => 'required|string|min:5',
+            'notes' => 'required|string|min:5',
+            'password' => 'required|string|min:8',
+            'mobile' => 'required|string|min:9',
+            'active' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $admin = Admin::create([
+            'admin_id' => $request->admin_id,
+            'name' => $request->name,
+            'department' => $request->department,
+            'notes' => $request->notes,
+            'mobile' => $request->mobile,
+            'status' => $request->active,
+            'password' => Hash::make($request->password),
+        ]);
+        
+        return redirect()->route('admin.administratorlist')->with('toast_success', 'New Administrator Successfully Created!');
+    }
     
 
 }

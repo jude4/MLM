@@ -18,17 +18,18 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="col-12 px-5">
-                                <form>
+                                <form method="POST" action="{{route('admin.register.admin')}}">
+                                    @csrf
                                 <div class="form-group row">
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Id</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Please enter your ID.">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" name='admin_id' placeholder="Please enter your ID." value="{{old('admin_id')}}">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Name</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Input your name, please.">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" name='name' value="{{old('name')}}" placeholder="Input your name, please.">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
@@ -44,7 +45,7 @@
                                                         </ul>
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
-                                                    <input type="text" name="phone[1][number]" class="form-control" placeholder="Please enter your mobile number" />
+                                                    <input type="text" name="mobile" value="{{old('mobile')}}" class="form-control" placeholder="Please enter your mobile number" />
                                                 </div>
                                                 
                                             </div>
@@ -55,12 +56,12 @@
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Manager's Department</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Please enter your department.">
+                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" name='department' value="{{old('department')}}" placeholder="Please enter your department.">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Password</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="">
+                                        <input type="password" class="form-control inp-sp-tx" id="inputMyid" name='password' placeholder="">
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
 
@@ -69,13 +70,13 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-7 col-12">
                                                 <div class="custom-control custom-radio ">
-                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
+                                                    <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="active" value="1" checked>
                                                     <label class="custom-control-label" for="defaultGroupExample1">Active</label>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-12">
                                                 <div class="custom-control custom-radio ">
-                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="groupOfDefaultRadios" >
+                                          <input type="radio" class="custom-control-input " id="defaultGroupExample2" name="active" value="0" >
                                           <label class="custom-control-label" for="defaultGroupExample2">Inactive</label>
                                         </div>
                                         </div>
@@ -91,15 +92,15 @@
                                     <div class="col-md-6">
                                         <i class="fas fa-caret-right"></i>
                                         <label for="inputMyid" class=" col-form-label ">Admin Notes</label>
-                                        <input type="text" class="form-control inp-sp-tx" id="inputMyid" placeholder="Please enter what you want to remember.">
+                                        <input type="text" name="notes" value="{{old('notes')}}" class="form-control inp-sp-tx" id="inputMyid" placeholder="Please enter what you want to remember.">
                                     </div>
                                     
                                 
                                 </div>
                                 <div class="mb-5 mt-4">
-                                    <a href="#" class="btn ad-btn-save mt-3">
+                                    <button class="btn ad-btn-save mt-3">
                                        Save
-                                    </a>
+                                    </button>
 
                                     <a href="{{route('admin.administratorlist')}}" class="btn btn-list mt-3 ml-3">
                                         List

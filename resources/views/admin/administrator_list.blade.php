@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>Admin List</h5>
                             <div class="">
-                                <a href="administrator-registration.html" class="btn btn-enrollment mt-3">Enrollment</a>
+                                <a href="{{route('admin.administratorregistration')}}" class="btn btn-enrollment mt-3">Enrollment</a>
                             </div>
 
                         </div>
