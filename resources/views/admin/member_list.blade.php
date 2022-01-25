@@ -101,7 +101,7 @@
                                 <div class="row">
                                     <div class="col-12 table-start">
                                         <p class="count-list">Total : {{$usercount}} Count (1/1)Page</p>
-                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="memberlist">
+                                        <table class="table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="memberlist">
                                             <thead class="table-header-bg">
                                                 <tr>
                                                     <th>No.</th>
@@ -120,27 +120,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="memberlistdata">
-                                                @foreach ($users as $index => $user)
-                                                <tr>
-                                                    <td>{{$index+1}}</td>
-                                                    <td>30</td>
-                                                    <td>{{$user->type == 0? 'Normal': 'MLM'}}</td>
-                                                    <td>{{$user->user_id}}</td>
-                                                    <td>{{$user->nickname}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->elim_points}}</td>
-                                                    <td>{{$user->t_points}}</td>
-                                                    <td>{{$user->available_pv == 0? '-': $user->available_pv}}</td>
-                                                    <td>{{$user->earned_pv == 0? '-': $user->earned_pv}}</td>
-                                                    <td>{{$user->status?'active':'inactive'}}</td>
-                                                    <td>{{$user->created_at}}</td>
-                                                    <td class="">
-                                                        <a href="{{route('admin.membermodification', ['id' => $user->id])}}" class="btn  btn-correction">
-                                                            Correction
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
+                                                
                                             </tbody>
                                             <tfoot>
 

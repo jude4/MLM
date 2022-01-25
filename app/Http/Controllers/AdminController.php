@@ -13,6 +13,7 @@ use App\Models\PvWithDrawalRequestHistory;
 use App\Models\PvConversionApplication;
 use App\Models\PvTransmissionApplication;
 use App\Models\Permissions;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,11 +26,57 @@ class AdminController extends Controller
 
     public function administratorList()
     {
+        $admincount = Admin::count();
+        return view('admin.administrator_list', compact('admincount'));
+    }
 
-        $admins = Admin::all();
-        $admincount = $admins->count();
+    public function datatable_administratorlist(Request $request){
+        $totalRecords = Admin::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
 
-        return view('admin.administrator_list', compact('admins', 'admincount'));
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = Admin::select('count(*) as allcount')->where('name', 'like', '%' .$searchValue . '%')->count();
+
+        $records = Admin::skip($start)
+              ->take($rowperpage)
+              ->get();
+              
+            $i=0;
+        foreach($records as $record){
+             $i++;
+            if($record->status == '1'){
+                $status = 'active';
+            }else{
+                $status = 'inactive';
+            }
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+            $correction = '<a href="'.route('admin.adminmanagement',['id' => $record->id]).'" class="btn  btn-correction">Correction</a>';
+
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "ID" => $record->admin_id,
+                "Name" => $record->name,
+                "Dc" => $record->department,
+                "State" => $status,
+                "Last_login" => $record->last_login,
+                "Registration_date" =>  $rdate,
+                "Correction" => $correction
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response); 
     }
 
     public function administrator_search(Request $request)
@@ -135,8 +182,6 @@ class AdminController extends Controller
     public function adminManagement($id)
     {
         $admin = Admin::findOrFail($id);
-
-
         $permissions = Permissions::leftjoin("user_permissions",function($join) use($id){
             $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=',  $id);
         })
@@ -155,12 +200,113 @@ class AdminController extends Controller
         }
         $datas['unallocated_permissions'] = $unallocated_permissions;
         $datas['allocated_permissions'] = $allocated_permissions;
+        $datas['admin_id'] = $id;
 
-        // echo "<pre>";
-        // print_r($datas);
-        // die;
 
         return view('admin.admin_management', compact('admin', 'datas'));
+    }
+
+    public function add_administrator_permission(Request $request){
+       $adminid = $request->adminid;
+       $permissions = $request->permisssion;
+
+       foreach($permissions as $permission){
+            $UserPermissions = new UserPermissions;
+            $UserPermissions->admin_id = $adminid;
+            $UserPermissions->permission_id = $permission;
+            $UserPermissions->is_write = 0;
+            $UserPermissions->status = 1;
+            $UserPermissions->save();
+        }
+
+        $permissions = Permissions::leftjoin("user_permissions",function($join) use($adminid){
+            $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=', $adminid);
+        })
+        ->select('permissions.*', 'user_permissions.id as user_permission_id','user_permissions.admin_id as admin_id', 'user_permissions.permission_id as permission_id','user_permissions.is_write as is_write', 'user_permissions.status as user_permission_status')
+        ->get()
+        ->toArray();
+
+        $allocated_permissions = $unallocated_permissions = [];
+
+        foreach($permissions as $permission){
+            if($permission['user_permission_id'] == ''){
+                $unallocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }else{
+                $allocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }
+        }
+       
+        $unallocatedpermission = view('admin.ajax_unallocated_permissions', compact('unallocated_permissions'))->render();
+        $allocatedpermission = view('admin.ajax_allocated_permissions', compact('allocated_permissions'))->render();
+        return response()->json(['status' => '200', 'msg' => 'Permission provided successfully.', 'up' => $unallocatedpermission, 'ap' => $allocatedpermission]);
+
+    }
+
+    public function remove_administrator_permission(Request $request){
+        $adminid = $request->adminid;
+        $permissions = $request->permisssion;
+
+        foreach($permissions as $permission){
+            $UserPermissions = new UserPermissions;
+            $query = $UserPermissions::where("admin_id",$adminid);
+            $query = $UserPermissions::where("permission_id",$permission);
+            $query->delete();
+        }
+
+        $permissions = Permissions::leftjoin("user_permissions",function($join) use($adminid){
+            $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=', $adminid);
+        })
+        ->select('permissions.*', 'user_permissions.id as user_permission_id','user_permissions.admin_id as admin_id', 'user_permissions.permission_id as permission_id','user_permissions.is_write as is_write', 'user_permissions.status as user_permission_status')
+        ->get()
+        ->toArray();
+
+        $allocated_permissions = $unallocated_permissions = [];
+
+        foreach($permissions as $permission){
+            if($permission['user_permission_id'] == ''){
+                $unallocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }else{
+                $allocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }
+        }
+       
+        $unallocatedpermission = view('admin.ajax_unallocated_permissions', compact('unallocated_permissions'))->render();
+        $allocatedpermission = view('admin.ajax_allocated_permissions', compact('allocated_permissions'))->render();
+        return response()->json(['status' => '200', 'msg' => 'Permission removed successfully.', 'up' => $unallocatedpermission, 'ap' => $allocatedpermission]); 
+    }
+
+    public function change_administrator_permission(Request $request){
+        $adminid = $request->adminid;
+        $permisssion = $request->permisssion;
+        $permissionid = $request->permisssionid;
+
+        $UserPermissions = new UserPermissions;
+        $query = $UserPermissions::where('admin_id', $adminid);
+        $query = $UserPermissions::where('permission_id', $permissionid);
+        $query->update([
+           'is_write' => $permisssion
+        ]);
+
+        $permissions = Permissions::leftjoin("user_permissions",function($join) use($adminid){
+            $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=', $adminid);
+        })
+        ->select('permissions.*', 'user_permissions.id as user_permission_id','user_permissions.admin_id as admin_id', 'user_permissions.permission_id as permission_id','user_permissions.is_write as is_write', 'user_permissions.status as user_permission_status')
+        ->get()
+        ->toArray();
+
+        $allocated_permissions = $unallocated_permissions = [];
+
+        foreach($permissions as $permission){
+            if($permission['user_permission_id'] == ''){
+                $unallocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }else{
+                $allocated_permissions[$permission['guard_name']][$permission['name']] = $permission;
+            }
+        }
+       
+        $unallocatedpermission = view('admin.ajax_unallocated_permissions', compact('unallocated_permissions'))->render();
+        $allocatedpermission = view('admin.ajax_allocated_permissions', compact('allocated_permissions'))->render();
+        return response()->json(['status' => '200', 'msg' => 'Permission updated successfully.', 'up' => $unallocatedpermission, 'ap' => $allocatedpermission]); 
     }
 
     public function editAdmin(Request $request)
@@ -215,11 +361,83 @@ class AdminController extends Controller
 
     public function memberList()
     {
-        $users = User::all();
-        $usercount = $users->count();
-        return view('admin.member_list', compact('users', 'usercount'));
+        $usercount = User::count();
+        return view('admin.member_list', compact('usercount'));
     }
 
+
+    public function datatable_member_list(Request $request){
+        $totalRecords = User::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = User::select('count(*) as allcount')->where('nickname', 'like', '%' .$searchValue . '%')->count();
+
+        $records = User::skip($start)
+              ->take($rowperpage)
+              ->get();
+              
+            $i=0;
+           
+        foreach($records as $record){
+             $i++;
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+             if($record->type == 0){
+                $utype = "Normal";
+             }else{
+                $utype = "MLM";
+             }
+
+             if($record->available_pv != 0){
+                 $ap = $record->available_pv;
+             }else{
+                 $ap = '-';
+             }
+
+             if($record->earned_pv != 0){
+                $ep = $record->earned_pv;
+             }else{
+                 $ep = '-';
+             }
+
+             if($record->status == 1){
+                 $state = 'active';
+             }else{
+                $state = 'inactive';
+             }
+
+             $correction = '<a href="'.route('admin.membermodification',['id' => $record->id]).'" class="btn  btn-correction">Correction</a>';
+            
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "Utype" => $utype,
+                "UserID" => $record->user_id,
+                "Nickname" => $record->nickname,
+                "Email" => $record->email,
+                "Elim_Points" => $record->elim_points,
+                "T_points" => $record->t_points,
+                "Available_PV" => $ap,
+                "Earned_PV" => $ep,
+                "State" => $state,
+                "Registration_Date" => $rdate,
+                "Correction" => $correction,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response); 
+    }
   
 
     public function memberModification($id)
@@ -561,11 +779,51 @@ class AdminController extends Controller
     }
 
     public function pvaccumulation_history(){
+        $historycount =PvAccumulationHistory::count();
+        return view('admin.pv_accumulation_history',compact('historycount'));
+    }
 
-        $historydatas = PvAccumulationHistory::with(['user'])->get();
-        $historycount = $historydatas->count();
+    public function datatable_pv_accumulation_history_list(Request $request){
+        $totalRecords = PvAccumulationHistory::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = PvAccumulationHistory::select('count(*) as allcount')->where('earning_type', 'like', '%' .$searchValue . '%')->count();
+
+        $records = PvAccumulationHistory::with(['user'])->skip($start)
+              ->take($rowperpage)
+              ->get();
+      
               
-        return view('admin.pv_accumulation_history',compact('historydatas','historycount'));
+            $i=0;
+        foreach($records as $record){
+             $i++;
+
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+            
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Earning_Type" => $record->earning_type,
+                "Available_Earned_Bonus" => $record->available_earned_bonus,
+                "Accumulated_Earned_Bonus" => $record->accumulated_earned_bonus,
+                "Accumulation_Date" =>  $rdate
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response); 
     }
 
     public function pv_accumulation_history_search(Request $request){
@@ -598,9 +856,61 @@ class AdminController extends Controller
     }
 
     public function pv_usage_history(){
-        $historydatas = PvUsageHistory::with(['user'])->get();
-        $historycount = $historydatas->count();
-        return view('admin.pv_usage_history',compact('historydatas','historycount'));
+        $historycount = PvUsageHistory::count();
+        return view('admin.pv_usage_history',compact('historycount'));
+    }
+
+    public function datatable_pv_usage_history_list(Request $request){
+        $totalRecords = PvUsageHistory::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = PvUsageHistory::select('count(*) as allcount')->where('pv_type', 'like', '%' .$searchValue . '%')->count();
+
+        $records = PvUsageHistory::with(['user'])->skip($start)
+              ->take($rowperpage)
+              ->get();
+      
+              
+            $i=0;
+        foreach($records as $record){
+             $i++;
+
+             if($record->type == '1'){
+                $tou = 'withdraw';
+             }else if($record->type == '2'){
+                $tou = 'send';
+             }else if($record->type == '3'){
+                $tou = 'transform';
+             }else{
+                $tou = 'repurchase';
+             }
+
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+            
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "PV_Type" => $record->pv_type,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Type_of_use" => $tou,
+                "Price" => $record->price,
+                "Date_of_use" => $rdate,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response);
     }
 
     public function pv_usage_history_search(Request $request){
@@ -637,6 +947,69 @@ class AdminController extends Controller
         $historydatas = PvWithDrawalRequestHistory::with(['user'])->get();
         $historycount = $historydatas->count();
         return view('admin.pv_withdrawal_request_history',compact('historydatas','historycount'));
+    }
+
+    public function datatable_pv_withdrawal_history_list(Request $request){
+        $totalRecords = PvWithDrawalRequestHistory::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = PvWithDrawalRequestHistory::select('count(*) as allcount')->where('bank_name', 'like', '%' .$searchValue . '%')->count();
+
+        $records = PvWithDrawalRequestHistory::with(['user'])->skip($start)
+              ->take($rowperpage)
+              ->get();
+      
+              
+            $i=0;
+        foreach($records as $record){
+             $i++;
+
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+             if($record->status == 0){
+                $status = '<span class="inc-text-change1">atmosphere</span>';
+             }else if($record->status == 1){
+                $status = '<span class="incas-text-changes">Approval</span>';
+             }else{
+                $status = '<span class="incas-text-changes text-danger">Cancellation</span>';
+             }
+
+             if($record->status == 0){
+                $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen('.$record->id.')">
+                Approval</a>
+                <a href="#" class="btn  btn-ends" onclick="cancelmodalopen('.$record->id.')">
+                cancellation</a>';
+             }else{
+                $Approval = '-';
+             }
+
+             $appdatetime = '<a href="#" class="btn  btn-correction" onclick="detailmodalopen('.$record->id.')"> Look</a>';
+            
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Amount" => $record->amount,
+                "Status" => $status,
+                "Approval" => $Approval,
+                "Confirmation" => $rdate,
+                "Application_date_and_time" => $appdatetime
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response); 
     }
 
     public function pv_withdrawal_request_history_search(Request $request){

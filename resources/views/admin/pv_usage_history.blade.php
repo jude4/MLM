@@ -108,7 +108,7 @@
                                 <div class="row">  
                                     <div class="col-12 table-start">
                                     <p class="count-list">Total : {{ $historycount }} Count (1/1)Page</p>   
-                                      <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="pvusagehistorylist">  
+                                      <table class="table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="pvusagehistorylist">  
                                         <thead class="table-header-bg">
                                             <tr>
                                                 <th class="border-bottom-0">No.</th>
@@ -122,28 +122,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="pvusagehistorydata">
-                                            @foreach($historydatas as $index => $history)
-                                            <tr>
-                                                <td>{{ $index+1 }}</td>
-                                                <td>30</td>
-                                                <td>{{$history->pv_type}}</td>
-                                                <td>{{$history->user->user_id}}</td>                    
-                                                <td>{{$history->user->nickname}}</td> 
-                                                <td>
-                                                    @if($history->type == '1')
-                                                        withdraw
-                                                    @elseif($history->type == '2')
-                                                        send
-                                                    @elseif($history->type == '3')
-                                                        transform
-                                                    @else
-                                                        repurchase
-                                                    @endif
-                                                </td> 
-                                                <td>{{$history->price}}</td>
-                                                <td>{{$history->created_at}}</td>            
-                                            </tr>
-                                            @endforeach
+                                            
                                         </tbody>  
                                         <tfoot>  
                                           

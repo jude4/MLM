@@ -156,6 +156,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
     // Administrator routes
     Route::get('/dashboard', [AdminController::class, 'administratorList'])->name('administratorlist');
+    Route::get('/datatable_administratorlist', [AdminController::class, 'datatable_administratorlist'])->name('datatable_administratorlist');
 
     // Add Admin
     Route::post('/administrator_registration', [AdminController::class, 'administrator_registration'])->name('add.administrator_registration');
@@ -165,6 +166,10 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
     Route::get('/admin-management/{id}', [AdminController::class, 'adminManagement'])->name('adminmanagement');
     Route::post('/admin-management/edit/profile', [AdminController::class, 'editAdmin'])->name('edit.admin');
+    Route::post('/add_administrator_permission', [AdminController::class, 'add_administrator_permission'])->name('add.administrator_permission');
+    Route::post('/remove_administrator_permission', [AdminController::class, 'remove_administrator_permission'])->name('remove.administrator_permission');
+    Route::post('/change_administrator_permission', [AdminController::class, 'change_administrator_permission'])->name('change.administrator_permission');
+    
 
     Route::get('/administrator_registration', function () {
         return view('admin.administrator_registration');
@@ -194,6 +199,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     })->name('faqregister');
 
     Route::get('/member_list', [AdminController::class, 'memberList'])->name('memberlist');
+    Route::get('/datatable_member_list', [AdminController::class, 'datatable_member_list'])->name('datatable_member_list');
 
     Route::get('/member_modification/{id}', [AdminController::class, 'memberModification'])->name('membermodification');
 
@@ -222,12 +228,15 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
 
 
     Route::get('/pv_accumulation_history', [AdminController::class, 'pvaccumulation_history'])->name('pvaccumulationhistory');
+    Route::get('/datatable_pv_accumulation_history_list', [AdminController::class, 'datatable_pv_accumulation_history_list'])->name('datatable_pv_accumulation_history_list');\
     Route::get('/pv_accumulation_history_search', [AdminController::class, 'pv_accumulation_history_search'])->name('search.pvaccumulationhistory');
 
     Route::get('/pv_usage_history', [AdminController::class, 'pv_usage_history'])->name('pvusagehistory');
+    Route::get('/datatable_pv_usage_history_list', [AdminController::class, 'datatable_pv_usage_history_list'])->name('datatable_pv_usage_history_list');
     Route::get('/pv_usage_history_search', [AdminController::class, 'pv_usage_history_search'])->name('search.pvusagehistory');
 
     Route::get('/pv_withdrawal_request_history', [AdminController::class, 'pv_withdrawal_request_history'])->name('pvwithdrawalrequesthistory');
+    Route::get('/datatable_pv_withdrawal_history_list', [AdminController::class, 'datatable_pv_withdrawal_history_list'])->name('datatable_pv_withdrawal_history_list');
     Route::get('/pv_withdrawal_request_history_search', [AdminController::class, 'pv_withdrawal_request_history_search'])->name('search.pvwithdrawalrequesthistory');
     Route::post('/pv_withdrawal_request_history_action', [AdminController::class, 'pv_withdrawal_request_history_action'])->name('pvwithdrawalaction');
     Route::get('/pv_withdrawal_request_detail', [AdminController::class, 'pv_withdrawal_request_detail'])->name('pvwithdrawalrequestdetail');

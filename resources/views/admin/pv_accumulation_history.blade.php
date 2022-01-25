@@ -96,7 +96,7 @@
                                 <div class="row">
                                     <div class="col-12 table-start">
                                         <p class="count-list">Total : {{ $historycount }} Count (1/1)Page</p>
-                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="pvaccumulationhistorylist">
+                                        <table class="table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="pvaccumulationhistorylist">
                                             <thead class="table-header-bg">
                                                 <tr>
                                                     <th class="border-bottom-0">No.</th>
@@ -111,18 +111,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="pvaccumulationhistorydata">
-                                                @foreach ($historydatas as $index => $historydata)
-                                                <tr>
-                                                    <td>{{$index+1}}</td>
-                                                    <td>30</td>
-                                                    <td>{{ $historydata->user->user_id }}</td>
-                                                    <td>{{ $historydata->user->nickname }}</td>
-                                                    <td>{{ $historydata->earning_type }}</td>
-                                                    <td>{{ $historydata->available_earned_bonus }}</td>
-                                                    <td>{{ $historydata->accumulated_earned_bonus }}</td>
-                                                    <td>{{ $historydata->created_at }}</td>
-                                                </tr>
-                                                @endforeach
+                                                
                                             </tbody>
                                             <tfoot>
 

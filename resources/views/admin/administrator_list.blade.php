@@ -84,7 +84,7 @@
                                 <div class="row">
                                     <div class="col-12 table-start">
                                         <p class="count-list">Total : {{$admincount}} Count (1/1)Page</p>
-                                        <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove">
+                                        <table class="table-bordered table-hover dt-responsive border-bottom-0 border-remove" id="admin_table">
                                             <thead class="table-header-bg">
                                                 <tr>
                                                     <th class="border-bottom-0">No.</th>
@@ -98,26 +98,7 @@
                                                     <th class="border-bottom-0">correction</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="admindata">
-                                                @foreach ($admins as $index => $admin)
-                                                <tr>
-                                                    <td>{{$index+1}}</td>
-                                                    <td>30</td>
-                                                    <td>{{$admin->admin_id}}</td>
-                                                    <td>{{$admin->name}}</td>
-                                                    <td>{{$admin->department}}</td>
-                                                    <td>{{$admin->status?'active':'inactive'}}</td>
-                                                    <td>{{$admin->last_login}}</td>
-                                                    <td>{{$admin->created_at}}</td>
-                                                    <td class="">
-                                                        <a href="{{route('admin.adminmanagement', ['id' => $admin->id])}}" class="btn  btn-correction">
-                                                            Correction
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-
-
+                                             <tbody id="admindata">
                                             </tbody>
                                             <tfoot>
 
@@ -190,3 +171,5 @@
         $("#enddate").val('');
     }
 </script>
+
+
