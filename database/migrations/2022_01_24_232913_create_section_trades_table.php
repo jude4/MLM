@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTradesTable extends Migration
+class CreateSectionTradesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('trades', function (Blueprint $table) {
+        Schema::create('section_trades', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
             $table->string('subject');
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->integer('state')->default(0);
             $table->integer('starting_price')->nullable();
             $table->integer('amount_by_segment')->nullable();
@@ -31,7 +31,8 @@ class CreateTradesTable extends Migration
             $table->integer('fifth_selling_price')->nullable();
             $table->integer('sixth_selling_price')->nullable();
             $table->string('currency')->nullable();
-
+            $table->integer('segment_bought')->default(0);
+            $table->integer('segment_sold')->default(0);
         });
     }
 
@@ -42,6 +43,6 @@ class CreateTradesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trades');
+        Schema::dropIfExists('section_trades');
     }
 }

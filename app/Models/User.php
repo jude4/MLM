@@ -65,10 +65,10 @@ class User extends Authenticatable
     // }
 
 
-    protected function getTPointsAttribute($value)
-    {
-        return number_format($value);
-    }
+    // protected function getTPointsAttribute($value)
+    // {
+    //     return number_format($value);
+    // }
 
     public function getTypeAttribute($value)
     {
