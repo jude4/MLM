@@ -58,9 +58,9 @@ class SegmentTradingBot extends Command
 
                 $api = new \Binance\API($apiKey, $secretKey);
 
-                $sellingPrice = $api->bookPrices()[$trade->currency]['ask'];
+                $currentPrice = $api->bookPrices()[$trade->currency];
 
-                $buyingPrice = $api->bookPrices()[$trade->currency]['bid'];
+                // $buyingPrice = $api->bookPrices()[$trade->currency];
 
                 $price = $trade->amount_by_segment;
 
@@ -82,10 +82,11 @@ class SegmentTradingBot extends Command
                  * Sell if the starting price is equal to the bookPrice
                  */
 
-                if ($startingPrice == $buyingPrice) {
+                if ($startingPrice == $currentPrice) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
-                } elseif ($firstSellingPrice == $sellingPrice) {
+                    
+                } elseif ($firstSellingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 1) {
 
@@ -100,7 +101,7 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($secondSellingPrice == $buyingPrice) {
+                } elseif ($secondSellingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 2) {
 
@@ -115,7 +116,7 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($thirdSellingPrice == $sellingPrice) {
+                } elseif ($thirdSellingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 3) {
 
@@ -130,7 +131,7 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     };
-                } elseif ($fourthSelingPrice == $buyingPrice) {
+                } elseif ($fourthSelingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 4) {
 
@@ -145,7 +146,7 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($fifthSellingPrice == $sellingPrice) {
+                } elseif ($fifthSellingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 5) {
 
@@ -160,7 +161,7 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($sixthSellingPrice == $buyingPrice) {
+                } elseif ($sixthSellingPrice == $currentPrice) {
 
                     $api->buy($trade->currency, $this->quantity);
 
