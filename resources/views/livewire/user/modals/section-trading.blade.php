@@ -35,17 +35,17 @@ aria-hidden="true"
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Starting Price</label>
-                                <input type="text" class="form-control lbl-inp-mod"  wire:model='starting_price'>
+                                <input type="number" class="form-control lbl-inp-mod"  wire:model.defer='starting_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Transaction amount by segment</label>
-                                <input type="text" class="form-control lbl-inp-mod"  wire:model='amount_by_segment'>
+                                <input type="number" class="form-control lbl-inp-mod"  wire:model.defer='amount_by_segment'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Selling Yield (%)</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="%" wire:model='percentage_yield'> 
+                                <input type="number" class="form-control lbl-inp-mod" placeholder="%" wire:model.defer='percentage_yield'> 
                             </div>
                             <div class="d-flex justify-content-between mt-2">
                                 <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.5)">0.5%</div>
@@ -62,7 +62,7 @@ aria-hidden="true"
                                 <input type="number" max="6" min="1" class="form-control lbl-inp-mod" wire:model='number_of_segments'>
                             </div>
                             <div class="d-flex justify-content-between my-4">
-                                <a href="#" class="btn-mod-place-ord">Place an order</a>
+                                <button wire:click="placeOrder" class="btn-mod-place-ord">Place an order</button>
                                 <a id="closemodal" href="#" class="btn-mod-cancle" data-dismiss="modal" aria-label="Close">Cancellation</a>
                             </div>
                        </div>
@@ -70,37 +70,37 @@ aria-hidden="true"
                             @if ($number_of_segments >= 1)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">1st selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='first_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='first_selling_price'>
                             </div>
                             @endif
                             @if ($number_of_segments >= 2)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">2nd selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='second_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='second_selling_price'>
                             </div>
                             @endif
                             @if ($number_of_segments >= 3)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">3rd selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='third_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='third_selling_price'>
                             </div>
                             @endif
                             @if ($number_of_segments >= 4)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">4th selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='fourth_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='fourth_selling_price'>
                             </div>
                             @endif
                             @if ($number_of_segments >= 5)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">5th selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='fifth_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='fifth_selling_price'>
                             </div>
                             @endif
                             @if ($number_of_segments >= 6)
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">6th selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" wire:model='sixth_selling_price'>
+                                <input type="number" class="form-control lbl-inp-mod-righ" wire:model='sixth_selling_price'>
                             </div>   
                             @endif                           
                        </div>
