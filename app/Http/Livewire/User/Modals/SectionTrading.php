@@ -4,6 +4,8 @@ namespace App\Http\Livewire\User\Modals;
 
 use App\Traits\Toggleable;
 use Livewire\Component;
+use Ramsey\Uuid\Uuid;
+use Firebase\JWT\JWT;
 
 class SectionTrading extends Component
 {
@@ -24,7 +26,13 @@ class SectionTrading extends Component
 
     public function mount()
     {
-            
+         $payload = [
+             'access_key' => '18G0X4653694OPU9RRJMsZbFFBQTjmw0se5p5a4N',
+             'nonce' => Uuid::uuid4()->toString()
+         ];
+
+         $jwt = JWT::encode($payload, '8cv8nb1AzgoMvEXe3w3ZeKaJlAaNLGFi9nvxiI33', 'HS256');
+         $authorization_key = "Bearer $jwt";
     }
 
     
