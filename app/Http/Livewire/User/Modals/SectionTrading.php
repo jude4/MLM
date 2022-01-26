@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\User\Modals;
 
+
+use App\Models\Trade;
 use App\Traits\Toggleable;
 use Livewire\Component;
 use Ramsey\Uuid\Uuid;
@@ -12,7 +14,7 @@ class SectionTrading extends Component
 
     use Toggleable;
 
-    public $starting_price = 0; 
+    public $starting_price = 0;
     public $amount_by_segment = 0;
     public $percentage_yield = 0;
     public $first_selling_price = 0;
@@ -22,20 +24,16 @@ class SectionTrading extends Component
     public $fifth_selling_price = 0;
     public $sixth_selling_price = 0;
     public $percentage = 0;
-    public $number_of_segments =3;
+    public $number_of_segments = 3;
+    public $currency = 'BTC';
+    public $subject = 'segment trading';
 
     public function mount()
     {
-         $payload = [
-             'access_key' => '18G0X4653694OPU9RRJMsZbFFBQTjmw0se5p5a4N',
-             'nonce' => Uuid::uuid4()->toString()
-         ];
-
-         $jwt = JWT::encode($payload, '8cv8nb1AzgoMvEXe3w3ZeKaJlAaNLGFi9nvxiI33', 'HS256');
-         $authorization_key = "Bearer $jwt";
+        
     }
 
-    
+
 
     public function updatedNumberOfSegments($value)
     {
@@ -46,37 +44,62 @@ class SectionTrading extends Component
     {
         $value = $this->number_of_segments;
         if ($value >= 1) {
-            $this->first_selling_price = (int) ($this->starting_price + $this->starting_price*$this->percentage);
+            $this->first_selling_price = (int) ($this->starting_price + $this->starting_price * $this->percentage);
         }
 
         if ($value >= 2) {
-            $this->second_selling_price = (int) ($this->first_selling_price + $this->first_selling_price*$this->percentage);
+            $this->second_selling_price = (int) ($this->first_selling_price + $this->first_selling_price * $this->percentage);
         }
 
         if ($value >= 3) {
-            $this->third_selling_price = (int) ($this->second_selling_price + $this->second_selling_price*$this->percentage);
+            $this->third_selling_price = (int) ($this->second_selling_price + $this->second_selling_price * $this->percentage);
         }
 
         if ($value >= 4) {
-            $this->fourth_selling_price = (int) ($this->third_selling_price + $this->third_selling_price*$this->percentage);
+            $this->fourth_selling_price = (int) ($this->third_selling_price + $this->third_selling_price * $this->percentage);
         }
 
         if ($value >= 5) {
-            $this->fifth_selling_price = (int) ($this->fourth_selling_price + $this->fourth_selling_price*$this->percentage);
+            $this->fifth_selling_price = (int) ($this->fourth_selling_price + $this->fourth_selling_price * $this->percentage);
         }
 
         if ($value >= 6) {
-            $this->sixth_selling_price = (int) ($this->fifth_selling_price + $this->fifth_selling_price*$this->percentage);
+            $this->sixth_selling_price = (int) ($this->fifth_selling_price + $this->fifth_selling_price * $this->percentage);
         }
+    }
+
+    protected $rules = [
+        'starting_price' => ['required', 'numeric'],
+        'amount_by_segment' => ['nullable', 'numeric'],
+        'percentage_yield' => ['nullable', 'numeric'],
+        'first_selling_price' => ['nullable', 'numeric'],
+        'second_selling_price' => ['nullable', 'numeric'],
+        'third_selling_price' => ['nullable', 'numeric'],
+        'fourth_selling_price' => ['nullable', 'numeric'],
+        'fifth_selling_price' => ['nullable', 'numeric'],
+        'sixth_selling_price' => ['nullable', 'numeric'],
+        'number_of_segments' => ['nullable', 'numeric'],
+        'currency' => ['required', 'string'],
+        'subject' => ['required', 'string'],
+        
+    ];
+
+    public function placeOrder()
+    {
+        $attributes = $this->validate();
+        $attributes['user_id'] = auth()->id();
+        Trade::create($attributes);
+
+        return redirect()->route('user.trading')->with('toast_success', 'Successful!');
     }
 
     public function updated()
     {
         $this->editMode = true;
         $this->percentage_yield = (float) $this->percentage_yield;
-        $this->percentage = $this->percentage_yield*(1/100);
+        $this->percentage = $this->percentage_yield * (1 / 100);
         $this->starting_price = (int) $this->starting_price;
-        $this->amount_by_segment = (int) $this->amount_by_segment;        
+        $this->amount_by_segment = (int) $this->amount_by_segment;
         $this->calculateSellingPrices();
     }
 
