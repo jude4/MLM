@@ -16,12 +16,4 @@ require __DIR__ . '/user.php';
 Route::redirect('/', '/login');
 
 
-
-
-// Route::get('/login', function () {
-//     return view('auth.user.login');
-// })->name('login');
-
-
-
 Route::get('/register', Register::class)->name('register');
