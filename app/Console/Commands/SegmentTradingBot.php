@@ -19,7 +19,7 @@ class SegmentTradingBot extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Buy and sell cryptocurrency at a certain price';
 
     const UNGOING = 0;
     const PAUSE = 1;
@@ -43,6 +43,7 @@ class SegmentTradingBot extends Command
      *
      * @return int
      */
+
     public function handle()
     {
         $trades = Trade::with('user')->where('state', self::UNGOING)->get();
@@ -60,8 +61,6 @@ class SegmentTradingBot extends Command
 
                 $currentPrice = $api->bookPrices()[$trade->currency];
 
-                // $buyingPrice = $api->bookPrices()[$trade->currency];
-
                 $price = $trade->amount_by_segment;
 
                 $startingPrice = $trade->start_price;
@@ -78,14 +77,9 @@ class SegmentTradingBot extends Command
 
                 $sixthSellingPrice = $trade->sixth_selling_price;
 
-                /**
-                 * Sell if the starting price is equal to the bookPrice
-                 */
-
                 if ($startingPrice == $currentPrice) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
-                    
                 } elseif ($firstSellingPrice == $currentPrice) {
 
                     if ($trade->number_of_segments == 1) {
@@ -163,7 +157,7 @@ class SegmentTradingBot extends Command
                     }
                 } elseif ($sixthSellingPrice == $currentPrice) {
 
-                    $api->buy($trade->currency, $this->quantity);
+                    $api->buy($trade->currency, $this->quantity, $price);
 
                     $trade->state = self::COMPLETED;
 
