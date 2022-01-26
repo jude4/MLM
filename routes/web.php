@@ -242,12 +242,14 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/pv_withdrawal_request_detail', [AdminController::class, 'pv_withdrawal_request_detail'])->name('pvwithdrawalrequestdetail');
 
     Route::get('/pv_conversion_applicaton_details', [AdminController::class, 'pv_conversion_applicaton_details'])->name('pvconversionapplicationdetails');
+    Route::get('/datatable_pv_conversion_application_detail', [AdminController::class, 'datatable_pv_conversion_application_detail'])->name('datatable_pv_conversion_application_detail');
     Route::get('/particular_pv_conversion_detail', [AdminController::class, 'particular_pv_conversion_detail'])->name('particularpvconversiondetail');
     Route::get('/particular_pv_conversion_detail_search', [AdminController::class, 'particular_pv_conversion_detail_search'])->name('search.pvconversionapplicationdetail');
     Route::post('/pv_conversion_application_action', [AdminController::class, 'pv_conversion_application_action'])->name('pvconversionapplicationaction');
 
 
     Route::get('/pv_transmission_application_details', [AdminController::class, 'pv_transmission_application_details'])->name('pvtransmissionapplicationdetails');
+    Route::get('/datatable_pv_transmission_application_detail', [AdminController::class, 'datatable_pv_transmission_application_detail'])->name('datatable_pv_transmission_application_detail');
     Route::get('/particul_transmission_application_detail', [AdminController::class, 'particul_transmission_application_detail'])->name('particultransmissionapplicationdetail');
     Route::get('/transmission_application_detail_search', [AdminController::class, 'transmission_application_detail_search'])->name('search.transmissionapplicationdetail');
     Route::post('/pv_transmission_application_action', [AdminController::class, 'pv_transmission_application_action'])->name('pvtransmissionapplicationaction');

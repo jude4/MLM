@@ -164,7 +164,7 @@
 
 
 
-    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1')
+    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1')
     <script>
         $('table').dataTable({
             "pageLength": 30
@@ -184,8 +184,7 @@
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_administratorlist") }}',
-                'data': function(data) {
-                }
+                'data': function(data) {}
             },
             columns: [{
                     data: 'No',
@@ -240,8 +239,7 @@
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_member_list") }}',
-                'data': function(data) {
-                }
+                'data': function(data) {}
             },
             columns: [{
                     data: 'No',
@@ -311,8 +309,7 @@
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_pv_accumulation_history_list") }}',
-                'data': function(data) {
-                }
+                'data': function(data) {}
             },
             columns: [{
                     data: 'No',
@@ -346,7 +343,7 @@
                     data: 'Accumulation_Date',
                     name: 'accumulation_date'
                 },
-               
+
             ]
 
         });
@@ -363,8 +360,7 @@
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_pv_usage_history_list") }}',
-                'data': function(data) {
-                }
+                'data': function(data) {}
             },
             columns: [{
                     data: 'No',
@@ -398,13 +394,13 @@
                     data: 'Date_of_use',
                     name: 'date_of_use'
                 },
-               
+
             ]
 
         });
     </script>
 
-<script>
+    <script>
         var table = $('#pvwithdrawalhistorylist').DataTable({
             autoWidth: false,
             ordering: false,
@@ -414,8 +410,7 @@
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_pv_withdrawal_history_list") }}',
-                'data': function(data) {
-                }
+                'data': function(data) {}
             },
             columns: [{
                     data: 'No',
@@ -453,7 +448,118 @@
                     data: 'Application_date_and_time',
                     name: 'application_date_and_time'
                 },
-               
+
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#pvconversionapplicationdetaillistdata').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_pv_conversion_application_detail") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Type',
+                    name: 'type'
+                },
+                {
+                    data: 'Conversion_Quantity',
+                    name: 'conversion_quantity'
+                },
+                {
+                    data: 'State',
+                    name: 'state'
+                },
+                {
+                    data: 'Approval_Confirmation',
+                    name: 'approval_confirmation'
+                },
+                {
+                    data: 'Application_Date_And_Time',
+                    name: 'application_date_and_time'
+                },
+                {
+                    data: 'Detail',
+                    name: 'detail'
+                },
+
+            ]
+
+        });
+    </script>
+
+<script>
+        var table = $('#pvtransmissionapplicationdetailtable').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_pv_transmission_application_detail") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Amount',
+                    name: 'amount'
+                },
+                {
+                    data: 'State',
+                    name: 'state'
+                },
+                {
+                    data: 'Approval_Confirmation',
+                    name: 'approval_confirmation'
+                },
+                {
+                    data: 'Application_Date_And_Time',
+                    name: 'application_date_and_time'
+                },
+                {
+                    data: 'Detail',
+                    name: 'detail'
+                },
             ]
 
         });

@@ -1042,7 +1042,6 @@ class AdminController extends Controller
     public function pv_withdrawal_request_history_action(Request $request){
         $id = $request->id;
         $password = $request->password;
-        $comment = $request->comment;
         $status = $request->status;
 
         $admin = Auth::guard('admin')->user();
@@ -1054,7 +1053,6 @@ class AdminController extends Controller
 
         $withdrawalhistory = PvWithDrawalRequestHistory::findOrFail($id);
         $withdrawalhistory->status = $status;
-        $withdrawalhistory->comment = $comment;
         $withdrawalhistory->save();
         
         $historydatas = PvWithDrawalRequestHistory::with(['user'])->get();
@@ -1076,9 +1074,78 @@ class AdminController extends Controller
     }
 
     public function pv_conversion_applicaton_details(){
-        $historydatas = PvConversionApplication::with(['user'])->get();
-        $historycount = $historydatas->count();
-        return view('admin.pv_conversion_application_details',compact('historydatas','historycount'));
+        $historycount = PvConversionApplication::count();
+        return view('admin.pv_conversion_application_details',compact('historycount'));
+    }
+
+    public function datatable_pv_conversion_application_detail(Request $request){
+        $totalRecords = PvConversionApplication::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = PvConversionApplication::select('count(*) as allcount')->where('type', 'like', '%' .$searchValue . '%')->count();
+
+        $records = PvConversionApplication::with(['user'])->skip($start)
+              ->take($rowperpage)
+              ->get();
+      
+              
+            $i=0;
+        foreach($records as $record){
+             $i++;
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+             if($record->type == 0){
+                 $type = 'Available PV';
+             }else{
+                 $type = 'resale';
+             }
+
+             if($record->status == 0){
+                $status = '<span class="inc-text-change1">atmosphere</span>';
+             }else if($record->status == 1){
+                $status = '<span class="incas-text-changes">Approval</span>';
+             }else{
+                $status = '<span class="incas-text-changes text-danger">Cancellation</span>';
+             }
+
+             if($record->status == 0){
+                $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen('.$record->id.')">
+                Approval </a>
+                <a href="#" class="btn  btn-ends" onclick="cancelmodalopen('.$record->id.')">
+                cancellation</a>';
+             }else{
+                $Approval = '-';
+             }
+
+             $detailmodal = '<a href="#" class="btn  btn-correction" onclick="detailmodalopen('.$record->id.')">Look</a>';
+
+             
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Type" => $type,
+                "Conversion_Quantity" => $record->amount,
+                "State" => $status,
+                "Approval_Confirmation" => $Approval,
+                "Application_Date_And_Time" => $rdate,
+                "Detail" => $detailmodal
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response);
     }
 
     public function particular_pv_conversion_detail(Request $request){
@@ -1127,7 +1194,6 @@ class AdminController extends Controller
 
         $id = $request->id;
         $password = $request->password;
-        $comment = $request->comment;
         $status = $request->status;
 
         $admin = Auth::guard('admin')->user();
@@ -1139,7 +1205,6 @@ class AdminController extends Controller
 
         $PvConversionApplication = PvConversionApplication::findOrFail($id);
         $PvConversionApplication->status = $status;
-        $PvConversionApplication->comment = $comment;
         $PvConversionApplication->save();
         
         $historydatas = PvConversionApplication::with(['user'])->get();
@@ -1151,6 +1216,72 @@ class AdminController extends Controller
         $historydatas = PvTransmissionApplication::with(['user'])->get();
         $historycount = $historydatas->count();
         return view('admin.pv_transmission_application_details',compact('historydatas','historycount'));
+    }
+
+    public function datatable_pv_transmission_application_detail(Request $request){
+        $totalRecords = PvTransmissionApplication::count();
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = PvTransmissionApplication::select('count(*) as allcount')->where('amount', 'like', '%' .$searchValue . '%')->count();
+
+        $records = PvTransmissionApplication::with(['user'])->skip($start)
+              ->take($rowperpage)
+              ->get();
+      
+              
+            $i=0;
+        foreach($records as $record){
+             $i++;
+             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+             if($record->status == 0){
+                $status = '<span class="inc-text-change1">atmosphere</span>';
+             }else if($record->status == 1){
+                $status = '<span class="incas-text-changes">Approval</span>';
+             }else{
+                $status = '<span class="incas-text-changes text-danger">Cancellation</span>';
+             }
+
+             if($record->status == 0){
+                $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen('.$record->id.')">
+                Approval </a>
+                <a href="#" class="btn  btn-ends" onclick="cancelmodalopen('.$record->id.')">
+                cancellation
+                </a>
+                ';
+             }else{
+                $Approval = '-';
+             }
+
+             $detail = '<a href="#" class="btn  btn-correction" onclick="detailmodalopen('.$record->id.')">
+             Look</a>';
+
+             
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => 30,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Amount" => $record->amount,
+                "State" => $status,
+                "Approval_Confirmation" => $Approval,
+                "Application_Date_And_Time" => $rdate,
+                "Detail" => $detail
+                
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+        return response()->json($response);
     }
 
     public function particul_transmission_application_detail(Request $request){
@@ -1194,7 +1325,6 @@ class AdminController extends Controller
     public function pv_transmission_application_action(Request $request){
         $id = $request->id;
         $password = $request->password;
-        $comment = $request->comment;
         $status = $request->status;
 
         $admin = Auth::guard('admin')->user();
@@ -1206,7 +1336,6 @@ class AdminController extends Controller
 
         $PvTransmissionApplication = PvTransmissionApplication::findOrFail($id);
         $PvTransmissionApplication->status = $status;
-        $PvTransmissionApplication->comment = $comment;
         $PvTransmissionApplication->save();
         
         $historydatas = PvTransmissionApplication::with(['user'])->get();
