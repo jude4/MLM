@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Trade;
+use App\Models\SectionTrade;
 use Illuminate\Console\Command;
 
 class SegmentTradingBot extends Command
@@ -46,7 +46,7 @@ class SegmentTradingBot extends Command
 
     public function handle()
     {
-        $trades = Trade::with('user')->where('state', self::UNGOING)->get();
+        $trades = SectionTrade::with('user')->where('state', self::UNGOING)->get();
 
         if ($trades) {
             foreach ($trades as $trade) {
@@ -80,7 +80,7 @@ class SegmentTradingBot extends Command
                 if ($startingPrice == $currentPrice) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
-                } elseif ($firstSellingPrice == $currentPrice) {
+                } elseif ($firstSellingPrice == $currentPrice && $trade->segment_sold == 0) {
 
                     if ($trade->number_of_segments == 1) {
 
@@ -95,7 +95,11 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($secondSellingPrice == $currentPrice) {
+
+                    $trade->segment_sold++;
+
+                    $trade->save();
+                } elseif ($secondSellingPrice == $currentPrice && $trade->segment_sold == 1) {
 
                     if ($trade->number_of_segments == 2) {
 
@@ -110,7 +114,11 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($thirdSellingPrice == $currentPrice) {
+
+                    $trade->segment_sold++;
+
+                    $trade->save();
+                } elseif ($thirdSellingPrice == $currentPrice && $trade->segment_sold == 2) {
 
                     if ($trade->number_of_segments == 3) {
 
@@ -124,8 +132,12 @@ class SegmentTradingBot extends Command
                         $api->sell($trade->currency, $this->quantity, $price);
 
                         $api->buy($trade->currency, $this->quantity, $price);
-                    };
-                } elseif ($fourthSelingPrice == $currentPrice) {
+                    }
+
+                    $trade->segment_sold++;
+
+                    $trade->save();
+                } elseif ($fourthSelingPrice == $currentPrice && $trade->segment_sold == 3) {
 
                     if ($trade->number_of_segments == 4) {
 
@@ -140,7 +152,11 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($fifthSellingPrice == $currentPrice) {
+
+                    $trade->segment_sold++;
+
+                    $trade->save();
+                } elseif ($fifthSellingPrice == $currentPrice && $trade->segment_sold == 4) {
 
                     if ($trade->number_of_segments == 5) {
 
@@ -155,7 +171,11 @@ class SegmentTradingBot extends Command
 
                         $api->buy($trade->currency, $this->quantity, $price);
                     }
-                } elseif ($sixthSellingPrice == $currentPrice) {
+
+                    $trade->segment_sold++;
+
+                    $trade->save();
+                } elseif ($sixthSellingPrice == $currentPrice && $trade->segment_sold == 5) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
 
