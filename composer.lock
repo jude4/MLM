@@ -494,8 +494,6 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "evenement/evenement",
             "version": "v3.0.1",
             "source": {
@@ -543,7 +541,6 @@
             "time": "2017-07-23T21:35:13+00:00"
         },
         {
->>>>>>> 32a81a10d2482f905d8f2ad602ec5dc598c8ac47
             "name": "firebase/php-jwt",
             "version": "v6.0.0",
             "source": {
@@ -9136,5 +9133,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
