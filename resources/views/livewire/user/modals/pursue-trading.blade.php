@@ -35,27 +35,27 @@ aria-hidden="true"
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Total trading and operating capital</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000" wire:model='operating_capital'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Selling Yield (%)</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000 ">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000 " wire:model='percentage_yield'>
                             </div>
                              <div class="d-flex justify-content-between mt-2 mb-4">
-                                <div class="per-sub-text">0.5%</div>
-                                <div class="per-sub-text">0.6%</div>
-                                <div class="per-sub-text">0.7%</div>
-                                <div class="per-sub-text">0.8%</div>
-                                <div class="per-sub-text">0.9%</div>
-                                <div class="per-sub-texts">1%</div>
-                                <div class="per-sub-text">1.5%</div>
-                                <div class="per-sub-text">2%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.5?'s':''}}" wire:click="$set('percentage_yield', 0.5)">0.5%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.6?'s':''}}" wire:click="$set('percentage_yield', 0.6)">0.6%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.7?'s':''}}" wire:click="$set('percentage_yield', 0.7)">0.7%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.8?'s':''}}" wire:click="$set('percentage_yield', 0.8)">0.8%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.9?'s':''}}" wire:click="$set('percentage_yield', 0.9)">0.9%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==1?'s':''}}" wire:click="$set('percentage_yield', 1)">1%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==1.5?'s':''}}" wire:click="$set('percentage_yield', 1.5)">1.5%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==2?'s':''}}" wire:click="$set('percentage_yield', 2)">2%</div>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">1st purchase amount</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000 ">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='first_purchase_amount'>
                             </div>
                              <div class="d-flex justify-content-between mt-2 mb-0">
                                 <div class="per-sub-texts">10%</div>
@@ -66,13 +66,13 @@ aria-hidden="true"
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">1st purchase price</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="73,586,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='first_purchase_price'>
                             </div>
 
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">2nd purchase amount</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="400,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='second_purchase_amount'>
                             </div>
                              <div class="d-flex justify-content-between mt-2 mb-0">
                                 <div class="per-sub-text">10%</div>
@@ -83,12 +83,12 @@ aria-hidden="true"
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">2nd purchase price</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="73,000,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='second_purchase_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">3rd purchase amount</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="600,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='third_purchase_amount'>
                             </div>
                              <div class="d-flex justify-content-between mt-2 mb-0">
                                 <div class="per-sub-text">10%</div>
@@ -99,13 +99,13 @@ aria-hidden="true"
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">3rd purchase price</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="72,820,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='third_purchase_price'>
                             </div>
 
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">4th purchase quantity</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="800,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='fourth_purchase_amount'>
                             </div>
                              <div class="d-flex justify-content-between mt-2 mb-0">
                                 <div class="per-sub-text">10%</div>
@@ -116,7 +116,7 @@ aria-hidden="true"
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">4th purchase price</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="72,300,000">
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='fourth_purchase_price'>
                             </div>                               
                             <div class="d-flex justify-content-between my-4">
                                 <a href="#" class="btn-mod-place-ord">Place an order</a>
@@ -126,38 +126,38 @@ aria-hidden="true"
                         <div class="col-md-6 col-sm-10 col-11">
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">1st average purchase price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="73,586,000">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='first_av_purchase_price'>
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">1st selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="74,321,860">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='first_selling_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Average purchase price in the second chase</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="73,100,000">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='second_av_purchase_price'>
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">2nd selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="73,831,000">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='second_selling_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Average purchase price at the 3rd chase</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="72,940,000">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='third_av_purchase_price'>
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">3rd selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="73,669,400">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='third_selling_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Average purchase price at the 4th chase</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="72,510,000">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='fourth_av_purchase_price'>
                             </div>
                             <div class="form-group  mt-2 mb-4">
                                 <label class="lbl-mod-text">4th selling price</label>
-                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="73,235,100">
+                                <input type="text" class="form-control lbl-inp-mod-righ" placeholder="" wire:model.debounce.1000ms='fourth_selling_price'>
                             </div>
                                                            
                        </div>

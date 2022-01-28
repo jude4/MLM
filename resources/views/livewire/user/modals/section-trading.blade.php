@@ -35,27 +35,27 @@ aria-hidden="true"
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Starting Price</label>
-                                <input type="number" class="form-control lbl-inp-mod"  wire:model.defer='starting_price'>
+                                <input type="number" class="form-control lbl-inp-mod"  wire:model.debounce.1000ms='starting_price'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Transaction amount by segment</label>
-                                <input type="number" class="form-control lbl-inp-mod"  wire:model.defer='amount_by_segment'>
+                                <input type="number" class="form-control lbl-inp-mod"  wire:model.debounce.1000ms='amount_by_segment'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Selling Yield (%)</label>
-                                <input type="number" class="form-control lbl-inp-mod" placeholder="%" wire:model.defer='percentage_yield'> 
+                                <input type="number" class="form-control lbl-inp-mod" placeholder="%" wire:model.debounce.1000ms='percentage_yield'> 
                             </div>
                             <div class="d-flex justify-content-between mt-2">
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.5)">0.5%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.6)">0.6%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.7)">0.7%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.8)">0.8%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 0.9)">0.9%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 1.0)">1%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 1.5)">1.5%</div>
-                                <div style="cursor: pointer" class="per-sub-text" wire:click="$set('percentage_yield', 2.0)">2%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.5?'s':''}}" wire:click="$set('percentage_yield', 0.5)">0.5%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.6?'s':''}}" wire:click="$set('percentage_yield', 0.6)">0.6%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.7?'s':''}}" wire:click="$set('percentage_yield', 0.7)">0.7%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.8?'s':''}}" wire:click="$set('percentage_yield', 0.8)">0.8%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==0.9?'s':''}}" wire:click="$set('percentage_yield', 0.9)">0.9%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==1?'s':''}}" wire:click="$set('percentage_yield', 1.0)">1%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==1.5?'s':''}}" wire:click="$set('percentage_yield', 1.5)">1.5%</div>
+                                <div style="cursor: pointer" class="per-sub-text{{$percentage_yield==2?'s':''}}" wire:click="$set('percentage_yield', 2.0)">2%</div>
                             </div>
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Number Of Segments</label>
