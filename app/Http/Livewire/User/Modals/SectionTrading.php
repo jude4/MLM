@@ -26,11 +26,13 @@ class SectionTrading extends Component
     public $subject = 'segment trading';
     public $symbol;
 
-    protected $listeners = ['setCurrency'];
+    protected $listeners = ['setSectionCurrency'];
 
-    public function setCurrency($symbol)
+    public function setSectionCurrency($value)
     {
-        $this->symbol = $symbol;
+        $this->symbol = $value;
+        $this->currency = $value;
+        $this->editMode = true;
     }
 
     public function mount()

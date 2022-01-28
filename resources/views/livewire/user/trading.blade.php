@@ -8,7 +8,7 @@
                     <ul class="main-axs">
                         <li class="first-cl">{{ $currency['symbol'] }}</li>
                         <li class="{{ str_contains($currency['priceChangePercent'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ $currency['highPrice'] }}</li>
-                        <li class="{{ str_contains($currency['priceChangePercent'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ $currency['priceChangePercent'] }}</li>
+                        <li class="{{ str_contains($currency['priceChangePercent'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ str_contains($currency['priceChangePercent'] , '-') ? $currency['priceChangePercent'] : '+'.$currency['priceChangePercent'] }}</li>
                         <li class="{{ str_contains($currency['priceChangePercent'] , '-') ? 'second-cl' : 'second-cl2' }}">
                             <div class="dropdown">
                                 <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-sort-down"></i>
@@ -39,10 +39,10 @@
             <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-center d-md-block d-none">
                 <div class="smal-box-bor">
                     <div class="smal-spd">
-                        <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-section-mod" wire:click="$emit('setCurrency', {{  $currency['symbol'] ?? 'BTC' }} )">Section Trading</a>
+                        <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-section-mod" wire:click="$emit('setSectionCurrency', '{{  $currency['symbol'] ?? 'BTC' }}' )">Section Trading</a>
                     </div>
                     <div class="smal-spd">
-                        <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-pursue-mod">Pursue Trading</a>
+                        <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-pursue-mod" wire:click="$emit('setPursueCurrency', '{{  $currency['symbol'] ?? 'BTC' }}' )">Pursue Trading</a>
                     </div>
                 </div>
             </div>
@@ -51,10 +51,10 @@
                 <div class="smal-box-bor">
                     <div class="mid-cent">
                         <div class="smal-spd">
-                            <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-section-mod">Section Trading</a>
+                            <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-section-mod" wire:click="$emit('setSectionCurrency', '{{  $currency['symbol'] ?? 'BTC' }}' )">Section Trading</a>
                         </div>
                         <div class="smal-spd">
-                            <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-pursue-mod">Pursue Trading</a>
+                            <a href="" class="btn-section-trad" data-toggle="modal" data-target="#trad-pursue-mod" wire:click="$emit('setPursueCurrency', '{{  $currency['symbol'] ?? 'BTC' }}' )">Pursue Trading</a>
                         </div>
                     </div>
                 </div>
@@ -65,6 +65,4 @@
         
 
     </div>
-    @livewire('user.modals.section-trading')
-    @livewire('user.modals.pursue-trading')
 </div>

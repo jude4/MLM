@@ -36,7 +36,16 @@ class PursueTrading extends Component
     public $percentage = 0;
     public $currency = 'BTC';
     public $subject = 'Pursue Trading';
+    public $symbol;
 
+    protected $listeners = ['setPursueCurrency'];
+
+    public function setPursueCurrency($value)
+    {
+        $this->symbol = $value;
+        $this->currency = $value;
+        $this->editMode = true;
+    }
 
     protected $rules = [
         'operating_capital' => ['required', 'numeric'],
