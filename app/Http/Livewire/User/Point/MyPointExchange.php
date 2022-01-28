@@ -46,6 +46,12 @@ class MyPointExchange extends Component
             $authUser = User::findOrFail(auth()->id());
             $authUser->elim_points = $this->getUserElimPoint($authUser->elim_ponts) - ($this->exchange_quantity + $this->exchange_fee);
             $authUser->t_points = $authUser->t_points + $this->exchange_quantity;
+            $authUser->tPointDetails()->create([
+                'increase' => true,
+                'quantity' => $this->exchange_quantity,
+                'contents' => 'point redemption'
+            ]);
+
             $authUser->save();
             
             ElimPointExchangeHistory::create([

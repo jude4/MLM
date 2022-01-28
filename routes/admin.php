@@ -80,17 +80,14 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.pv_withdrawal_request_history');
     })->name('pvwithdrawalrequesthistory');
 
-    Route::get('/t_point_details_by_member', function () {
-        return view('admin.t_point_details_by_member');
-    })->name('tpointdetailsbymember');
+    Route::get('/t_point_details_by_member', [AdminController::class, 'tPointDetailsByMember'])->name('tpointdetailsbymember');
 
     Route::get('/trading_order', function () {
         return view('admin.trading_order_history');
     })->name('tradingorderhistory');
 
-    Route::get('/trading_setting', function () {
-        return view('admin.trading_setting');
-    })->name('tradingsetting');
+    Route::get('/trading_setting', [AdminController::class, 'tradingSettings'])->name('tradingsetting');
+    Route::post('/set/trading_setting', [AdminController::class, 'setTradingSettings'])->name('settradingsetting');
 
     Route::get('/mlm_user_management', function () {
         return view('admin.mlm_user_management');

@@ -17,6 +17,9 @@
     </div>
 
     @livewire('user.trading')
+    
+    @livewire('user.modals.section-trading')
+    @livewire('user.modals.pursue-trading')
 </div>
                 
 <!-- End trading  section-->

@@ -42,13 +42,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="chg-frs">1</th>
-                                            <td class="chg-frs">buy trading</td>
-                                            <td class="chg-col">100,000</td>
-                                            <td class="chg-frs">2021.11.05 14:59</td>
-                                        </tr>
-                                        <tr>
+                                       @forelse (Auth::user()->tPointDetails as $index => $detail)
+                                       <tr>
+                                        <td class="chg-frs">{{$index+1}}</th>
+                                        <td class="chg-frs">{{$detail->contents}}</td>
+                                        <td class="chg-col{{$detail->increase?'s':''}}">{{number_format($detail->quantity)}}</td>
+                                        <td class="chg-frs">{{$detail->increase?'@':''}}{{$detail->created_at}}</td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="9">No Record</td>
+                                    </tr>
+                                       @endforelse
+                                        {{-- <tr>
                                             <td class="chg-frs">2</th>
                                             <td class="chg-frs">buy trading</td>
                                             <td class="chg-col">5,000</td>
@@ -77,7 +83,7 @@
                                             <td class="chg-frs">Point redemption</td>
                                             <td class="chg-cols">20,000</td>
                                             <td class="chg-frs">@2021.11.05 14:59</td>
-                                        </tr>                                      
+                                        </tr>                                       --}}
                                     </tbody>
                                 </table>
                             </div>

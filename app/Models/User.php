@@ -215,6 +215,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(PvUsageHistory::class);
     }
+
+    public function tPointDetails()
+    {
+        return $this->hasMany(TpointDetailsByMember::class);
+    }
     
     public function scopeSearch($query, $search)
     {
@@ -306,6 +311,11 @@ class User extends Authenticatable
     public function generateLevelMatching()
     {
         
+    }
+
+    public function hasApiKeys()
+    {
+        return (!empty($this->upbit_access_key) && !empty($this->upbit_secret_key));
     }
 
 }
