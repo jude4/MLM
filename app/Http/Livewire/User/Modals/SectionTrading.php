@@ -33,13 +33,6 @@ class SectionTrading extends Component
         $this->symbol = $symbol;
     }
 
-    public function mount()
-    {
-        
-    }
-
-
-
     public function updatedNumberOfSegments($value)
     {
         // $this->calculateSellingPrices();
