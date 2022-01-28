@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\SectionTrade;
+use App\Traits\TradeStatus;
 use Illuminate\Console\Command;
 
 class SegmentTradingBot extends Command
 {
+    use TradeStatus;
     /**
      * The name and signature of the console command.
      *
@@ -21,20 +23,10 @@ class SegmentTradingBot extends Command
      */
     protected $description = 'Buy and sell cryptocurrency at a certain price';
 
-    const UNGOING = 0;
-    const PAUSE = 1;
-    const COMPLETED = 2;
-
-    public $default_api_key;
-    public $default_secret_key;
-
-    public $quantity = 1;
 
     public function __construct()
     {
         parent::__construct();
-        $this->default_api_key = config('app.api_key');
-        $this->default_secret_key = config('app.secret_key');
     }
 
 
@@ -46,9 +38,9 @@ class SegmentTradingBot extends Command
 
     public function handle()
     {
-        $trades = SectionTrade::with('user')->where('state', self::UNGOING)->get();
+        $trades = SectionTrade::with('user')->where('state', $this->processing)->get();
 
-        if ($trades) {
+        if ($trades->isNotEmpty()) {
             foreach ($trades as $trade) {
                 $apiKey = !empty($trade->user->upbit_access_key)
                     ? $trade->user->upbit_access_key
@@ -59,7 +51,7 @@ class SegmentTradingBot extends Command
 
                 $api = new \Binance\API($apiKey, $secretKey);
 
-                $currentPrice = $api->bookPrices()[$trade->currency];
+                $currentPrice = $api->bookPrices()[$trade->currency]['available'];
 
                 $price = $trade->amount_by_segment;
 
@@ -86,9 +78,12 @@ class SegmentTradingBot extends Command
 
                         $api->sell($trade->currency, $this->quantity, $price);
 
-                        $trade->state = self::COMPLETED;
+                        $trade->state = $this->completed;
 
-                        $trade->save();
+                         $trade->save();
+                         
+                        continue;
+                        
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -105,9 +100,11 @@ class SegmentTradingBot extends Command
 
                         $api->sell($trade->currency, $this->quantity, $price);
 
-                        $trade->state = self::COMPLETED;
+                        $trade->state = $this->completed;
 
                         $trade->save();
+
+                        continue;
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -124,9 +121,11 @@ class SegmentTradingBot extends Command
 
                         $api->sell($trade->currency, $this->quantity, $price);
 
-                        $trade->state = self::COMPLETED;
+                        $trade->state = $this->completed;
 
                         $trade->save();
+
+                        continue;
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -143,9 +142,11 @@ class SegmentTradingBot extends Command
 
                         $api->sell($trade->currency, $this->quantity, $price);
 
-                        $trade->state = self::COMPLETED;
+                        $trade->state = $this->completed;
 
                         $trade->save();
+
+                        continue;
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -162,9 +163,11 @@ class SegmentTradingBot extends Command
 
                         $api->sell($trade->currency, $this->quantity, $price);
 
-                        $trade->state = self::COMPLETED;
+                        $trade->state = $this->completed;
 
                         $trade->save();
+
+                        continue;
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -179,9 +182,11 @@ class SegmentTradingBot extends Command
 
                     $api->buy($trade->currency, $this->quantity, $price);
 
-                    $trade->state = self::COMPLETED;
+                    $trade->state = $this->completed;
 
                     $trade->save();
+
+                    continue;
                 }
             }
         }

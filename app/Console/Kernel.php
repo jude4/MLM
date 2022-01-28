@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('daily:bonus')->daily()->withoutOverlapping();
         $schedule->command('segment-trading:bot')->everyMinute()->withoutOverlapping();
+        $schedule->command('pursue-trading:bot')->everyMinute()->withoutOverlapping();
     }
 
     /**

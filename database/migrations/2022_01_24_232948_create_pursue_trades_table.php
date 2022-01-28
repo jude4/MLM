@@ -47,8 +47,6 @@ class CreatePursueTradesTable extends Migration
             $table->string('currency')->nullable();
             $table->integer('segment_bought')->default(0);
             $table->integer('segment_sold')->default(0);
-
-
         });
     }
 

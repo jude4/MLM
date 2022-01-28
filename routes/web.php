@@ -15,5 +15,4 @@ require __DIR__ . '/user.php';
 
 Route::redirect('/', '/login');
 
-
 Route::get('/register', Register::class)->name('register');
