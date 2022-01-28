@@ -3,27 +3,18 @@
 namespace App\Http\Livewire\User;
 
 use App\Traits\TradeStatus;
-use GuzzleHttp\Client;
 use Livewire\Component;
-
+use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 class Trading extends Component
 {
 
     use TradeStatus;
     
     public function render()
-    {   
-        $api = new \Binance\API($this->default_api_key, $this->default_secret_key);
+    {
+        $client = new CoinGeckoClient();
 
-        $url = $api->base . 'v3/ticker/24hr';
-
-        $client = new Client();
-
-        $request = $client->request('GET', $url);
-
-        $currencies = json_decode($request->getBody(), true);
-
-        // dd($currencies);
+        $currencies = $result = $client->coins()->getMarkets('usd');
          
         return view('livewire.user.trading', compact('currencies'));
     }
