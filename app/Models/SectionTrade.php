@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SectionTrade extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

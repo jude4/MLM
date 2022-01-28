@@ -104,12 +104,20 @@ class SectionTrading extends Component
             return redirect()->route('user.profile')->with('toast_error', 'You cannot trade unless you add your access and secret keys from upbit');
         }
 
-        
+
+        $user->tPointDetails()->create([
+            'increase' => false,
+            'quantity' => $tradingSettings->section_transaction_fee,
+            'contents' => 'buy elim bot'
+        ]);
+
+        $user->t_points = $user->t_points - $tradingSettings->section_transaction_fee;
+        $user->save();
 
         $attributes = $this->validate();
         $attributes['user_id'] = auth()->id();
         SectionTrade::create($attributes);
-
+        
         return redirect()->route('user.trading')->with('toast_success', 'Successful!');
     }
 

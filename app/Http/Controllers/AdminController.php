@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Faq;
 use App\Models\Inquiry;
 use App\Models\Notice;
+use App\Models\TpointDetailsByMember;
 use App\Models\TradingSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -352,6 +353,12 @@ class AdminController extends Controller
         }
 
         return back()->with('toast_success', 'Trading Settings Updated Successfully!');
+    }
+
+    public function tPointDetailsByMember()
+    {
+        $histories = TpointDetailsByMember::all();
+        return view('admin.t_point_details_by_member', compact('histories'));
     }
     
 

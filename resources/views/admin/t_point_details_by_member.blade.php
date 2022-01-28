@@ -118,18 +118,22 @@
                                        </thead>
                                         <tbody>
 
+                                         @forelse ($histories as $index => $history)
                                          <tr>
-                                            <td>1</td>
-                                            <td>30</td>
-                                            <td>MLM member</td>
-                                            <td>USER01</td>               
-                                            <td>Hong Gil Dong</td> 
-                                            <td class="inc-text-change">increase </td>
-                                            <td>1,000,000</td>
-                                            <td>transform</td>
-                                            <td>2020-12-14 16:19:22</td>                                                                       
+                                            <td>{{$index+1}}</td>
+                                            <td>{{$history->id}}</td>
+                                            <td>{{$history->user->type == 0? 'Normal member': 'MLM member'}}</td>
+                                            <td>{{$history->user->user_id}}</td>               
+                                            <td>{{$history->user->nickname}}</td> 
+                                            <td class="inc-text-change{{$history->increase? 's': ''}}">{{$history->increase? 'increase': 'decrease'}} </td>
+                                            <td>{{number_format($history->quantity)}}</td>
+                                            <td>{{$history->contents}}</td>
+                                            <td>{{$history->created_at}}</td>                                                                       
                                         </tr>
-                                         <tr>
+                                         @empty
+                                         <td colspan="9">No Record</td>
+                                         @endforelse
+                                         {{-- <tr>
                                             <td>1</td>
                                             <td>30</td>
                                             <td>MLM member</td>
@@ -227,7 +231,7 @@
                                             <td>2,000,000</td>
                                             <td>Buy Elimbot</td>
                                             <td>2020-12-14 16:19:22</td>                                                                       
-                                        </tr>                                                                                 
+                                        </tr>                                                                                  --}}
                                         </tbody>  
                                         <tfoot>  
                                           

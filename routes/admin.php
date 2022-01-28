@@ -80,9 +80,7 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.pv_withdrawal_request_history');
     })->name('pvwithdrawalrequesthistory');
 
-    Route::get('/t_point_details_by_member', function () {
-        return view('admin.t_point_details_by_member');
-    })->name('tpointdetailsbymember');
+    Route::get('/t_point_details_by_member', [AdminController::class, 'tPointDetailsByMember'])->name('tpointdetailsbymember');
 
     Route::get('/trading_order', function () {
         return view('admin.trading_order_history');

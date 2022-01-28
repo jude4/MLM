@@ -215,6 +215,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(PvUsageHistory::class);
     }
+
+    public function tPointDetails()
+    {
+        return $this->hasMany(TpointDetailsByMember::class);
+    }
     
     public function scopeSearch($query, $search)
     {
