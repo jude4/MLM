@@ -2,21 +2,29 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Traits\TradeStatus;
+use GuzzleHttp\Client;
 use Livewire\Component;
 
 class Trading extends Component
 {
-    public $apiKey;
-    public $secretKey;
 
-    public function mount()
-    {
-        $this->apiKey = config('app.api_key');
-        $this->secretKey = config('app.secret_key');
-    }
-
+    use TradeStatus;
+    
     public function render()
-    {
-        return view('livewire.user.trading');
+    {   
+        $api = new \Binance\API($this->default_api_key, $this->default_secret_key);
+
+        $url = $api->base . 'v3/ticker/24hr';
+
+        $client = new Client();
+
+        $request = $client->request('GET', $url);
+
+        $currencies = json_decode($request->getBody(), true);
+
+        // dd($currencies);
+         
+        return view('livewire.user.trading', compact('currencies'));
     }
 }

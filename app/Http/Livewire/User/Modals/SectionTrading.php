@@ -2,12 +2,9 @@
 
 namespace App\Http\Livewire\User\Modals;
 
-
-use App\Models\Trade;
+use App\Models\SectionTrade;
 use App\Traits\Toggleable;
 use Livewire\Component;
-use Ramsey\Uuid\Uuid;
-use Firebase\JWT\JWT;
 
 class SectionTrading extends Component
 {
@@ -27,6 +24,14 @@ class SectionTrading extends Component
     public $number_of_segments = 3;
     public $currency = 'BTC';
     public $subject = 'segment trading';
+    public $symbol;
+
+    protected $listeners = ['setCurrency'];
+
+    public function setCurrency($symbol)
+    {
+        $this->symbol = $symbol;
+    }
 
     public function mount()
     {
@@ -88,7 +93,7 @@ class SectionTrading extends Component
     {
         $attributes = $this->validate();
         $attributes['user_id'] = auth()->id();
-        Trade::create($attributes);
+        SectionTrade::create($attributes);
 
         return redirect()->route('user.trading')->with('toast_success', 'Successful!');
     }
