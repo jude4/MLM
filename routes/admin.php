@@ -88,9 +88,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
         return view('admin.trading_order_history');
     })->name('tradingorderhistory');
 
-    Route::get('/trading_setting', function () {
-        return view('admin.trading_setting');
-    })->name('tradingsetting');
+    Route::get('/trading_setting', [AdminController::class, 'tradingSettings'])->name('tradingsetting');
+    Route::post('/set/trading_setting', [AdminController::class, 'setTradingSettings'])->name('settradingsetting');
 
     Route::get('/mlm_user_management', function () {
         return view('admin.mlm_user_management');

@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Faq;
 use App\Models\Inquiry;
 use App\Models\Notice;
+use App\Models\TradingSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -287,7 +288,8 @@ class AdminController extends Controller
     }
 
 
-    public function registerAdmin(Request $request)
+    public function registerAdmin(Request $request
+    )
     {
         $validator = Validator::make($request->all(), [
             'admin_id' => 'required|string|min:5|unique:admins,admin_id',
@@ -314,6 +316,42 @@ class AdminController extends Controller
         ]);
         
         return redirect()->route('admin.administratorlist')->with('toast_success', 'New Administrator Successfully Created!');
+    }
+
+    public function tradingSettings()
+    {
+        $setting = TradingSetting::first();
+        if(!$setting){
+            $setting = new TradingSetting();
+            $setting->section_transaction_fee = 100;
+            $setting->pursuit_transaction_fee = 100;
+            $setting->save();
+        }
+        
+        return view('admin.trading_setting', compact('setting'));
+    }
+
+    public function setTradingSettings(Request $request)
+    {
+        $params = $validator = Validator::make($request->all(), [
+            'section_transaction_fee' => 'required|numeric',
+            'pursuit_transaction_fee' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        $setting = TradingSetting::first();
+        if($setting){
+            $setting->section_transaction_fee = $request->section_transaction_fee;
+            $setting->pursuit_transaction_fee = $request->pursuit_transaction_fee;
+            $setting->save();
+        }else{
+            $setting = TradingSetting::create($params);
+        }
+
+        return back()->with('toast_success', 'Trading Settings Updated Successfully!');
     }
     
 

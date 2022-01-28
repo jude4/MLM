@@ -308,4 +308,9 @@ class User extends Authenticatable
         
     }
 
+    public function hasApiKeys()
+    {
+        return (!empty($this->upbit_access_key) && !empty($this->upbit_secret_key));
+    }
+
 }

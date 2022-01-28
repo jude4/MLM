@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\User\Modals;
 
 use App\Models\SectionTrade;
+use App\Models\TradingSetting;
 use App\Traits\Toggleable;
 use Livewire\Component;
+use PDO;
 
 class SectionTrading extends Component
 {
@@ -92,7 +94,18 @@ class SectionTrading extends Component
     ];
 
     public function placeOrder()
-    {
+    {   $user = auth()->user();
+
+        $tradingSettings = TradingSetting::first();
+        if($user->t_points < $tradingSettings->section_transaction_fee){
+            return redirect()->route('user.trading')->with('toast_error', 'You do not have enough T Points to trade');
+        }
+        if(!$user->hasApiKeys()){
+            return redirect()->route('user.profile')->with('toast_error', 'You cannot trade unless you add your access and secret keys from upbit');
+        }
+
+        
+
         $attributes = $this->validate();
         $attributes['user_id'] = auth()->id();
         SectionTrade::create($attributes);
