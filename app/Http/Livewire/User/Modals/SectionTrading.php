@@ -37,13 +37,6 @@ class SectionTrading extends Component
         $this->editMode = true;
     }
 
-    public function mount()
-    {
-        
-    }
-
-
-
     public function updatedNumberOfSegments($value)
     {
         // $this->calculateSellingPrices();
