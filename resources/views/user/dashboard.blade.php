@@ -326,7 +326,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr> 
                                         @elseif ($index == 1)
                                         <tr class="cell-1 second-str" >
@@ -337,7 +337,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr> 
                                         @elseif ($index == 2)
                                         <tr class="cell-1 first-str" >
@@ -348,7 +348,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr>
                                         @else
                                             @if ($index%2 != 0)
@@ -360,7 +360,7 @@
                                                     </dl>                                   
                                                 </td>
                                                 <td>{{number_format($ranking->reward)}}</td>
-                                                <td>@{{$ranking->yield}}%</td> 
+                                                <td>@ {{$ranking->yield}}%</td> 
                                             </tr>
                                             @else
                                             <tr class="cell-1 fifth-str" >
@@ -371,7 +371,7 @@
                                                     </dl>                                   
                                                 </td>
                                                 <td>{{number_format($ranking->reward)}}</td>
-                                                <td>@{{$ranking->yield}}%</td> 
+                                                <td>@ {{$ranking->yield}}%</td> 
                                             </tr> 
                                             @endif
                                         @endif                                        
@@ -482,7 +482,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr> 
                                         @elseif ($index == 1)
                                         <tr class="cell-1 second-str" >
@@ -493,7 +493,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr> 
                                         @elseif ($index == 2)
                                         <tr class="cell-1 first-str" >
@@ -504,7 +504,7 @@
                                                 </dl>                                   
                                             </td>
                                             <td>{{number_format($ranking->reward)}}</td>
-                                            <td>@{{$ranking->yield}}%</td> 
+                                            <td>@ {{$ranking->yield}}%</td> 
                                         </tr>
                                         @else
                                             @if ($index%2 != 0)
@@ -516,7 +516,7 @@
                                                     </dl>                                   
                                                 </td>
                                                 <td>{{number_format($ranking->reward)}}</td>
-                                                <td>@{{$ranking->yield}}%</td> 
+                                                <td>@ {{$ranking->yield}}%</td> 
                                             </tr>
                                             @else
                                             <tr class="cell-1 fifth-str" >
@@ -527,7 +527,7 @@
                                                     </dl>                                   
                                                 </td>
                                                 <td>{{number_format($ranking->reward)}}</td>
-                                                <td>@{{$ranking->yield}}%</td> 
+                                                <td>@ {{$ranking->yield}}%</td> 
                                             </tr> 
                                             @endif
                                         @endif                                        
