@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Ranking;
 use App\Models\SectionTrade;
 use App\Traits\TradeStatus;
 use Illuminate\Console\Command;
@@ -50,7 +51,7 @@ class SegmentTradingBot extends Command
                     : $this->default_secret_key;
 
                 $api = new \Binance\API($apiKey, $secretKey);
-
+                $ticker = $api->prices();
                 $currentPrice = $api->bookPrices()[$trade->currency]['available'];
 
                 $price = $trade->amount_by_segment;
@@ -80,10 +81,15 @@ class SegmentTradingBot extends Command
 
                         $trade->state = $this->completed;
 
-                         $trade->save();
-                         
+                        $trade->save();
+
+                        Ranking::create([
+                            'user_id' => $trade->user_id,
+                            'reward' => $trade->percentage_yield,
+                            'yield' => $api->balances($ticker)[$trade->currency],
+                        ]);
+
                         continue;
-                        
                     } else {
 
                         $api->sell($trade->currency, $this->quantity, $price);
@@ -103,6 +109,12 @@ class SegmentTradingBot extends Command
                         $trade->state = $this->completed;
 
                         $trade->save();
+
+                        Ranking::create([
+                            'user_id' => $trade->user_id,
+                            'reward' => $trade->percentage_yield,
+                            'yield' => $api->balances($ticker)[$trade->currency],
+                        ]);
 
                         continue;
                     } else {
@@ -125,6 +137,12 @@ class SegmentTradingBot extends Command
 
                         $trade->save();
 
+                        Ranking::create([
+                            'user_id' => $trade->user_id,
+                            'reward' => $trade->percentage_yield,
+                            'yield' => $api->balances($ticker)[$trade->currency],
+                        ]);
+
                         continue;
                     } else {
 
@@ -146,6 +164,12 @@ class SegmentTradingBot extends Command
 
                         $trade->save();
 
+                        Ranking::create([
+                            'user_id' => $trade->user_id,
+                            'reward' => $trade->percentage_yield,
+                            'yield' => $api->balances($ticker)[$trade->currency],
+                        ]);
+
                         continue;
                     } else {
 
@@ -166,7 +190,11 @@ class SegmentTradingBot extends Command
                         $trade->state = $this->completed;
 
                         $trade->save();
-
+                        Ranking::create([
+                            'user_id' => $trade->user_id,
+                            'reward' => $trade->percentage_yield,
+                            'yield' => $api->balances($ticker)[$trade->currency],
+                        ]);
                         continue;
                     } else {
 
@@ -185,7 +213,11 @@ class SegmentTradingBot extends Command
                     $trade->state = $this->completed;
 
                     $trade->save();
-
+                    Ranking::create([
+                        'user_id' => $trade->user_id,
+                        'reward' => $trade->percentage_yield,
+                        'yield' => $api->balances($ticker)[$trade->currency],
+                    ]);
                     continue;
                 }
             }
