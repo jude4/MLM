@@ -38,9 +38,9 @@
                                 <div class="lft-sid-detail text-right">
                                     <div>{{$application->user->user_id ?? null}}</div>
                                     <div>{{$application->user->nickname ?? null}}</div>
-                                    <div>{{number_format($application->amount) ?? null}} won</div>
-                                    <div>{{number_format($application->fee) ?? null}} won</div>
-                                    <div>{{number_format($application->quantity_after_conversion) ?? null}} ELIM POINTs</div>
+                                    <div>{{number_format($application->amount ?? null) }} won</div>
+                                    <div>{{number_format($application->fee ?? null) }} won</div>
+                                    <div>{{number_format($application->quantity_after_conversion ?? null) }} ELIM POINTs</div>
                                 </div>
                             </div>
                         </div>

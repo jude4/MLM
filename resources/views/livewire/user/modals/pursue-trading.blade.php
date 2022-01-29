@@ -26,9 +26,10 @@ aria-hidden="true"
                                 <div class="d-flex justify-content-between p-3">
                                     <div class="bot-head-text align-self-center">{{$symbol}}</div>
                                     <div class="text-right">
-                                        <div class="bot-head-sub-text">73,586,000</div>
+                                        <div class="bot-head-sub-text">{{ $price }}</div>
                                         <div class="bot-head-sub-text">-0.3</div>
-                                        <div class="bot-head-sub-text">221,000</div>
+                                        <div class="bot-head-sub-text">{{ $volume }}</div>
+
                                     </div>
                                 </div>
                             </div>

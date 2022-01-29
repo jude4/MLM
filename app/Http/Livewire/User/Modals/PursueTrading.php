@@ -37,13 +37,19 @@ class PursueTrading extends Component
     public $currency = 'BTC';
     public $subject = 'Pursue Trading';
     public $symbol;
+    public $price = 73586000;
+    public $pricePercentage = -300;
+    public $volume = 65866;
 
     protected $listeners = ['setPursueCurrency'];
 
-    public function setPursueCurrency($value)
+    public function setPursueCurrency($value, $price, $pricePercentage, $volume)
     {
         $this->symbol = $value;
         $this->currency = $value;
+        $this->price = (double) $price;
+        $this->pricePercentage = (double) $pricePercentage;
+        $this->volumn = (double) $volume;
         $this->editMode = true;
     }
 
@@ -85,27 +91,23 @@ class PursueTrading extends Component
         $this->percentage = $this->percentage_yield * (1 / 100);
 
         $this->first_av_purchase_price = $this->first_purchase_price;
-        $this->second_av_purchase_price = ((int) $this->first_purchase_price + (int) $this->second_purchase_price)/2;
-        $this->third_av_purchase_price = (
-            (int) $this->first_purchase_price + 
-            (int) $this->second_purchase_price + 
-            (int) $this->third_purchase_price)/3;
-        $this->fourth_av_purchase_price = (
-            (int) $this->first_purchase_price + 
-            (int) $this->second_purchase_price + 
+        $this->second_av_purchase_price = ((int) $this->first_purchase_price + (int) $this->second_purchase_price) / 2;
+        $this->third_av_purchase_price = ((int) $this->first_purchase_price +
+            (int) $this->second_purchase_price +
+            (int) $this->third_purchase_price) / 3;
+        $this->fourth_av_purchase_price = ((int) $this->first_purchase_price +
+            (int) $this->second_purchase_price +
             (int) $this->third_purchase_price +
-            (int) $this->fourth_purchase_price)/3;
+            (int) $this->fourth_purchase_price) / 3;
 
         $this->first_selling_price = $this->first_av_purchase_price + $this->first_av_purchase_price * $this->percentage;
         $this->second_selling_price = $this->second_av_purchase_price + $this->second_av_purchase_price * $this->percentage;
         $this->third_selling_price = $this->third_av_purchase_price + $this->third_av_purchase_price * $this->percentage;
         $this->fourth_selling_price = $this->fourth_av_purchase_price + $this->fourth_av_purchase_price * $this->percentage;
-        
     }
 
     public function calculateValues()
     {
-        
     }
 
     public function render()
