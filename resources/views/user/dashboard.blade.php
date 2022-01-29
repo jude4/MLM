@@ -309,65 +309,80 @@
                     <div class="d-flex justify-content-between">
                         <div class="rank-text">This Month's rate of return Rank </div>
                         <div class="btn-more-pluse">
-                            <a href="#">More+</a>
+                            <a href="{{route('user.ranking')}}">More+</a>
                         </div>
                     </div>
                     <div class="p-3">
                         <div class="table-responsive table-borderless ">
                             <table class="table">
                                 <tbody class="table-body ">
-                                    <tr class="cell-1 first-str" >
-                                        <td>
-                                            <img src="{{asset('image/f01.png')}}" width="45px">
-                                            <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
-                                                <dt class="first-strs">Danbi-chan</dt>   
-                                            </dl>                                   
-                                        </td>
-                                        <td>12,725,120</td>
-                                        <td>@0.6%</td> 
-                                    </tr> 
+                                    @foreach ($thisMonthsRanking as $index => $ranking)
+                                        @if ($index == 0)
+                                        <tr class="cell-1 first-str" >
+                                            <td>
+                                                <img src="{{asset('image/f01.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr> 
+                                        @elseif ($index == 1)
+                                        <tr class="cell-1 second-str" >
+                                            <td>
+                                                <img src="{{asset('image/f02.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr> 
+                                        @elseif ($index == 2)
+                                        <tr class="cell-1 first-str" >
+                                            <td>
+                                                <img src="{{asset('image/f03.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr>
+                                        @else
+                                            @if ($index%2 != 0)
+                                            <tr class="cell-1 forth-str" >
+                                                <td>
+                                                    <div class="d-inline-block align-middle forth-strs ml-2">{{$index+1}}</div>
+                                                    <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
+                                                        <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                    </dl>                                   
+                                                </td>
+                                                <td>{{number_format($ranking->reward)}}</td>
+                                                <td>@{{$ranking->yield}}%</td> 
+                                            </tr>
+                                            @else
+                                            <tr class="cell-1 fifth-str" >
+                                                <td>
+                                                    <div class="d-inline-block align-middle forth-strs ml-2">{{$index+1}}</div>
+                                                    <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
+                                                        <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                    </dl>                                   
+                                                </td>
+                                                <td>{{number_format($ranking->reward)}}</td>
+                                                <td>@{{$ranking->yield}}%</td> 
+                                            </tr> 
+                                            @endif
+                                        @endif                                        
+                                    @endforeach
+                                    
 
-                                    <tr class="cell-1 second-str" >
-                                        <td>
-                                            <img src="{{asset('image/f02.png')}}" width="45px">
-                                            <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
-                                                <dt class="first-strs">bot-chan</dt>   
-                                            </dl>                                   
-                                        </td>
-                                        <td>12,725,120</td>
-                                        <td>@0.6%</td> 
-                                    </tr>   
-                                    <tr class="cell-1 first-str" >
-                                        <td>
-                                            <img src="{{asset('image/f03.png')}}" width="45px">
-                                            <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
-                                                <dt class="first-strs">Mirinae Elimbot</dt>   
-                                            </dl>                                   
-                                        </td>
-                                        <td>12,725,120</td>
-                                        <td>@0.6%</td> 
-                                    </tr>
-                                    <tr class="cell-1 forth-str" >
-                                        <td>
-                                            <div class="d-inline-block align-middle forth-strs ml-2">4</div>
-                                            <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
-                                                <dt class="first-strs">rose</dt>   
-                                            </dl>                                   
-                                        </td>
-                                        <td>12,725,120</td>
-                                        <td>@0.6%</td> 
-                                    </tr>
-                                    <tr class="cell-1 fifth-str" >
-                                        <td>
-                                            <div class="d-inline-block align-middle forth-strs ml-2">5</div>
-                                            <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
-                                                <dt class="first-strs">chyle</dt>   
-                                            </dl>                                   
-                                        </td>
-                                        <td>12,725,120</td>
-                                        <td>@0.6%</td> 
-                                    </tr> 
-                                    <tr class="cell-1 forth-str" >
+                                      
+                                    
+                                    
+                                    
+                                    {{-- <tr class="cell-1 forth-str" >
                                         <td>
                                             <div class="d-inline-block align-middle forth-strs ml-2">6</div>
                                             <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
@@ -436,7 +451,7 @@
                                         </td>
                                         <td>12,725,120</td>
                                         <td>@0.6%</td> 
-                                    </tr>
+                                    </tr> --}}
                                </tbody>
                             </table>
                         </div>
@@ -449,14 +464,75 @@
                     <div class="d-flex justify-content-between">
                         <div class="rank-text">Overall Yield Rank </div>
                         <div class="btn-more-pluse">
-                            <a href="#">More+</a>
+                            <a href="{{route('user.ranking')}}">More+</a>
                         </div>
                     </div>
                     <div class="p-3">
                         <div class="table-responsive table-borderless ">
                             <table class="table">
                                 <tbody class="table-body ">
-                                    <tr class="cell-1 first-str" >
+
+                                    @foreach ($overallRanking as $index => $ranking)
+                                        @if ($index == 0)
+                                        <tr class="cell-1 first-str" >
+                                            <td>
+                                                <img src="{{asset('image/f01.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr> 
+                                        @elseif ($index == 1)
+                                        <tr class="cell-1 second-str" >
+                                            <td>
+                                                <img src="{{asset('image/f02.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr> 
+                                        @elseif ($index == 2)
+                                        <tr class="cell-1 first-str" >
+                                            <td>
+                                                <img src="{{asset('image/f03.png')}}" width="45px">
+                                                <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
+                                                    <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                </dl>                                   
+                                            </td>
+                                            <td>{{number_format($ranking->reward)}}</td>
+                                            <td>@{{$ranking->yield}}%</td> 
+                                        </tr>
+                                        @else
+                                            @if ($index%2 != 0)
+                                            <tr class="cell-1 forth-str" >
+                                                <td>
+                                                    <div class="d-inline-block align-middle forth-strs ml-2">{{$index+1}}</div>
+                                                    <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
+                                                        <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                    </dl>                                   
+                                                </td>
+                                                <td>{{number_format($ranking->reward)}}</td>
+                                                <td>@{{$ranking->yield}}%</td> 
+                                            </tr>
+                                            @else
+                                            <tr class="cell-1 fifth-str" >
+                                                <td>
+                                                    <div class="d-inline-block align-middle forth-strs ml-2">{{$index+1}}</div>
+                                                    <dl class="mb-0 ml-4 pl-2 d-inline-block align-middle coin-line">
+                                                        <dt class="first-strs">{{$ranking->user->nickname}}</dt>   
+                                                    </dl>                                   
+                                                </td>
+                                                <td>{{number_format($ranking->reward)}}</td>
+                                                <td>@{{$ranking->yield}}%</td> 
+                                            </tr> 
+                                            @endif
+                                        @endif                                        
+                                    @endforeach
+                                    {{-- <tr class="cell-1 first-str" >
                                         <td>
                                             <img src="{{asset('image/f01.png')}}" width="45px">
                                             <dl class="mb-0 ml-3 d-inline-block align-middle coin-line">
@@ -576,7 +652,7 @@
                                         </td>
                                         <td>12,725,120</td>
                                         <td>@0.6%</td> 
-                                    </tr>
+                                    </tr> --}}
                                </tbody>
                             </table>
                         </div>

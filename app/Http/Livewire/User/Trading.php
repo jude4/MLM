@@ -14,7 +14,7 @@ class Trading extends Component
     {
         $client = new CoinGeckoClient();
 
-        $currencies = $result = $client->coins()->getMarkets('usd');
+        $currencies = $result = $client->coins()->getMarkets('krw');
          
         return view('livewire.user.trading', compact('currencies'));
     }
