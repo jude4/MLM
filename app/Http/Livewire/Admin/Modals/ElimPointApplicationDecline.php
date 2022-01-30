@@ -47,7 +47,7 @@ class ElimPointApplicationDecline extends Component
 
     public function declinal($id)
     {
-        $this->reaharge = ElimPointApplication::findOrFail($id);
+        $this->recharge = ElimPointApplication::findOrFail($id);
         $this->editMode = true;
 
     }
