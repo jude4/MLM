@@ -136,7 +136,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8">No Record</td>
+                        <td colspan="10">No Record</td>
                     </tr>
                     @endforelse                                        
                 </tr>                                                                      

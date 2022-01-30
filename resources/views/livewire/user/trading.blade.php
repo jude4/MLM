@@ -7,8 +7,8 @@
                 <div class="box-bor">
                     <ul class="main-axs">
                         <li class="first-cl">{{ strtoupper($currency['symbol']) }}</li>
-                        <li class="{{ str_contains($currency['price_change_24h'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ $currency['current_price'] }}</li>
-                        <li class="{{ str_contains($currency['price_change_24h'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ $currency['price_change_24h'] }}</li>
+                        <li class="{{ str_contains($currency['price_change_24h'] , '-') ? 'second-cl' : 'second-cl2' }}">{{ number_format($currency['current_price']) }}</li>
+                        <li class="{{ str_contains($currency['price_change_24h'] , '-') ? 'second-cl' : 'second-cl2' }}">{{str_contains($currency['price_change_24h'] , '-') ? '' : '+' }}{{ number_format($currency['price_change_24h']) }}</li>
                         <li class="{{ str_contains($currency['price_change_24h'] , '-') ? 'second-cl' : 'second-cl2' }}">
                             <div class="dropdown">
                                 <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-sort-down"></i>

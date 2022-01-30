@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->group(function () {
     // User Routes
-    Route::get('/dashboard', function () {
-        return view('user.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/trading', function () {
         return view('user.trading');

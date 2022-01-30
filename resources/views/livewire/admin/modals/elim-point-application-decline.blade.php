@@ -1,4 +1,4 @@
-  <div id="Elim-point-cancel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" 
+<div id="Elim-point-cancel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" 
   @if ($editMode == true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" 
   @else class="modal fade pr-0 in" aria-hidden="true"
   @endif>
