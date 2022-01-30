@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\PursueTrade;
+use App\Models\Ranking;
 use App\Traits\TradeStatus;
 use Illuminate\Console\Command;
 
@@ -51,6 +52,7 @@ class PursueTradeingBot extends Command
                     ? $trade->user->upbit_secret_key
                     : $this->default_secret_key;
                 $api = new \Binance\API($apiKey, $secretKey);
+                $ticker = $api->prices();
 
                 $currentPrice = $api->bookPrices()[$trade->currency]['available'];
 
@@ -61,6 +63,12 @@ class PursueTradeingBot extends Command
 
                     $this->sell($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
 
+                    Ranking::create([
+                        'user_id' => $trade->user_id,
+                        'reward' => $trade->percentage_yield,
+                        'yield' => $api->balances($ticker)[$trade->currency],
+                    ]);
+
                     continue;
                 } elseif ($currentPrice == $trade->second_av_purchase_price && $trade->segment_bought == 1) {
 
@@ -69,6 +77,11 @@ class PursueTradeingBot extends Command
 
                     $this->sell($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
 
+                    Ranking::create([
+                        'user_id' => $trade->user_id,
+                        'reward' => $trade->percentage_yield,
+                        'yield' => $api->balances($ticker)[$trade->currency],
+                    ]);
                     continue;
                 } elseif ($currentPrice == $trade->third_av_purchase_price && $trade->segment_bought == 2) {
 
@@ -76,7 +89,11 @@ class PursueTradeingBot extends Command
                 } elseif ($currentPrice == $trade->third_selling_price && $trade->segment_bought == 0) {
 
                     $this->sell($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
-
+                    Ranking::create([
+                        'user_id' => $trade->user_id,
+                        'reward' => $trade->percentage_yield,
+                        'yield' => $api->balances($ticker)[$trade->currency],
+                    ]);
                     continue;
                 } elseif ($currentPrice == $trade->fourth_av_purchase_price && $trade->segment_bought == 3) {
 
@@ -84,7 +101,11 @@ class PursueTradeingBot extends Command
                 } elseif ($currentPrice == $trade->fourth_selling_price && $trade->segment_bought == 0) {
 
                     $this->sell($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
-
+                    Ranking::create([
+                        'user_id' => $trade->user_id,
+                        'reward' => $trade->percentage_yield,
+                        'yield' => $api->balances($ticker)[$trade->currency],
+                    ]);
                     continue;
                 }
             }

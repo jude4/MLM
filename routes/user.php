@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\User\ElimPointDepositInformationController;
+use App\Http\Controllers\User\RestartTradeController;
+use App\Http\Controllers\User\SuspendTradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Auth\User\FindId;
 use App\Http\Livewire\Auth\User\FindPassword;
@@ -17,6 +19,9 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
     Route::get('/trading-history', function () {
         return view('user.trading_history');
     })->name('tradinghistory');
+
+    Route::get('/suspend-trade/{id}/{subject}', [SuspendTradeController::class, 'suspendTrade'])->name('suspend-trade');
+    Route::get('/restart-trade/{id}/{subject}', [RestartTradeController::class, 'restartTrade'])->name('restart-trade');
 
     Route::get('/first-inquiry', [UserController::class, 'firstInquiry'])->name('firstinquiry');
 

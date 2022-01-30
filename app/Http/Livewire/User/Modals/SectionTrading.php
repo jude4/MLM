@@ -27,13 +27,19 @@ class SectionTrading extends Component
     public $currency = 'BTC';
     public $subject = 'segment trading';
     public $symbol;
+    public $price = 73586000;
+    public $pricePercentage = -300;
+    public $volume = 65866;
 
     protected $listeners = ['setSectionCurrency'];
 
-    public function setSectionCurrency($value)
+    public function setSectionCurrency($value, $price, $pricePercentage, $volume)
     {
         $this->symbol = $value;
         $this->currency = $value;
+        $this->price = (double) $price;
+        $this->pricePercentage = (double) $pricePercentage;
+        $this->volumn = (double) $volume;
         $this->editMode = true;
     }
 
@@ -83,17 +89,18 @@ class SectionTrading extends Component
         'number_of_segments' => ['nullable', 'numeric'],
         'currency' => ['required', 'string'],
         'subject' => ['required', 'string'],
-        
+
     ];
 
     public function placeOrder()
-    {   $user = auth()->user();
+    {
+        $user = auth()->user();
 
         $tradingSettings = TradingSetting::first();
-        if($user->t_points < $tradingSettings->section_transaction_fee){
+        if ($user->t_points < $tradingSettings->section_transaction_fee) {
             return redirect()->route('user.trading')->with('toast_error', 'You do not have enough T Points to trade');
         }
-        if(!$user->hasApiKeys()){
+        if (!$user->hasApiKeys()) {
             return redirect()->route('user.profile')->with('toast_error', 'You cannot trade unless you add your access and secret keys from upbit');
         }
 
@@ -110,7 +117,7 @@ class SectionTrading extends Component
         $attributes = $this->validate();
         $attributes['user_id'] = auth()->id();
         SectionTrade::create($attributes);
-        
+
         return redirect()->route('user.trading')->with('toast_success', 'Successful!');
     }
 
