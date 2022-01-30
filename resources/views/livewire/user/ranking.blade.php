@@ -49,7 +49,7 @@
                             <th scope="col">Yield</th>
                         </tr>
                     </thead>
-                    <tbody>\
+                    <tbody>
 
                         @forelse ($rankings as $index => $ranking)
                                         @if ($index == 0)
