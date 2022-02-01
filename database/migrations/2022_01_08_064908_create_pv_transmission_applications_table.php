@@ -21,7 +21,8 @@ class CreatePvTransmissionApplicationsTable extends Migration
             $table->boolean('status')->default(false);
             $table->string('incoming_id')->nullable();
             $table->string('receiving_nickname')->nullable();
-            $table->integer('quantity');
+            $table->string('balance_after_transfer')->nullable();
+            // $table->integer('quantity');
             $table->integer('fee');
         });
     }

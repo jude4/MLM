@@ -18,7 +18,7 @@ class CreateTradesTable extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
             $table->string('subject');
-            $table->boolean('statis')->default(false);
+            $table->boolean('status')->default(false);
             $table->integer('state')->default(0);
             $table->integer('starting_price')->nullable();
             $table->integer('amount_by_segment')->nullable();

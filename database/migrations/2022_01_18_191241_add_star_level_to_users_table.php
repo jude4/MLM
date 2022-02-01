@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCommentToPvTransmissionApplicationsTable extends Migration
+class AddStarLevelToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddCommentToPvTransmissionApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('pv_transmission_applications', function (Blueprint $table) {
-            //
-            $table->longText('comment')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('star_level')->default(0);
         });
     }
 
@@ -26,8 +25,8 @@ class AddCommentToPvTransmissionApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('pv_transmission_applications', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('star_level');
         });
     }
 }

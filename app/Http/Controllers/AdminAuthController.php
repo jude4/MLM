@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Permissions;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class AdminAuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-       
+        
         $this->validate($request, [
             'id' => 'required|string',
             'password' => 'required|string',
@@ -50,7 +51,30 @@ class AdminAuthController extends Controller
 
         if (auth()->guard('admin')->attempt(['admin_id' => $request->input('id'), 'password' => $request->input('password')]))
         {
+
             $admin = auth()->guard('admin')->user();
+            $id = $admin->id;
+            $ses_data = [];
+
+            $permissions = Permissions::leftjoin("user_permissions", function ($join) use ($id) {
+                $join->on('user_permissions.permission_id', '=', 'permissions.id')->where('user_permissions.admin_id', '=',  $id);
+            })
+                ->select('permissions.*', 'user_permissions.id as user_permission_id', 'user_permissions.admin_id as admin_id', 'user_permissions.permission_id as permission_id', 'user_permissions.is_write as is_write', 'user_permissions.status as user_permission_status')
+                ->get()
+                ->toArray();
+    
+                $allowed = array();
+                foreach($permissions as $permission){
+                    if($permission['user_permission_id'] != '' || $id == '1'){
+                        if($id == '1'){
+                            $allowed[$permission['name']] = 1;
+                        }else{
+                            $allowed[$permission['name']] = $permission['is_write'];
+                        }
+                    }
+                }
+            $request->session()->put('allowed_permissions', $allowed);
+
             $admin->createLoginLog();
             
             return redirect()->route('admin.administratorlist')->with('toast_success', 'Logged In');

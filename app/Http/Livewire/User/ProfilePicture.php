@@ -40,12 +40,14 @@ class ProfilePicture extends Component
             $filename = $this->profilePicture->store('photos');
             Auth::user()->image = $filename;
             Auth::user()->save();
+            return redirect()->route('user.profile')->with('toast_success', "Profile Picture Updated!");
         }
     }
 
     public function initialize()
     {
         Auth::user()->clearProfilePicture();
+        return redirect()->route('user.profile')->with('toast_success', "Profile Picture Initialized Successfully!");
     }
 
     public function render()

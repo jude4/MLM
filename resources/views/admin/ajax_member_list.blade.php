@@ -2,7 +2,7 @@
 <tr>
     <td>{{$index+1}}</td>
     <td>30</td>
-    <td>{{$user->type == 0? 'Normal': 'MLM'}}</td>
+    <td>{{$user->type}}</td>
     <td>{{$user->user_id}}</td>
     <td>{{$user->nickname}}</td>
     <td>{{$user->email}}</td>

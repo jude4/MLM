@@ -162,9 +162,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
-
-
-    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1')
+    
+    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1')
     <script>
         $('table').dataTable({
             "pageLength": 30
@@ -172,7 +171,6 @@
     </script>
     @else
     @endif
-
 
     <script>
         var table = $('#admin_table').DataTable({
@@ -227,7 +225,6 @@
 
         });
     </script>
-
 
     <script>
         var table = $('#memberlist').DataTable({
@@ -298,7 +295,6 @@
         });
     </script>
 
-
     <script>
         var table = $('#pvaccumulationhistorylist').DataTable({
             autoWidth: false,
@@ -348,7 +344,6 @@
 
         });
     </script>
-
 
     <script>
         var table = $('#pvusagehistorylist').DataTable({
@@ -512,7 +507,7 @@
         });
     </script>
 
-<script>
+    <script>
         var table = $('#pvtransmissionapplicationdetailtable').DataTable({
             autoWidth: false,
             ordering: false,
@@ -565,6 +560,146 @@
         });
     </script>
 
+    <script>
+        var table = $('#notice-table').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_notice_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Notice_Title',
+                    name: 'notice_title'
+                },
+                {
+                    data: 'Used',
+                    name: 'used'
+                },
+                {
+                    data: 'Views',
+                    name: 'views'
+                },
+                {
+                    data: 'Registration_Date',
+                    name: 'registration_date'
+                },
+                {
+                    data: 'Correction',
+                    name: 'cForrection'
+                }
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#faqlist').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_faq_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Category',
+                    name: 'category'
+                },
+                {
+                    data: 'Notice_Title',
+                    name: 'notice_title'
+                },
+                {
+                    data: 'Used',
+                    name: 'used'
+                },
+                {
+                    data: 'Registration_Date',
+                    name: 'registration_date'
+                },
+                {
+                    data: 'Correction',
+                    name: 'correction'
+                }
+            ]
+
+        });
+    </script>
+
+
+    <script>
+        var table = $('#oneononeinquirytable').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_oneononeinquiry_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Inquiry',
+                    name: 'inquiry'
+                },
+                {
+                    data: 'Contents',
+                    name: 'contents'
+                },
+                {
+                    data: 'Answer',
+                    name: 'answer'
+                },
+                {
+                    data: 'Inquiry_Date',
+                    name: 'inquiry_date'
+                },
+            ]
+
+        });
+    </script>
+
 
     <script>
         var mindate = new Date();
@@ -594,10 +729,6 @@
             multipleDates: true,
             multipleDatesSeparator: " - "
         })
-
-        $("#file-upload").change(function() {
-            $("#filename").val(this.files[0].name);
-        });
     </script>
 
 </body>

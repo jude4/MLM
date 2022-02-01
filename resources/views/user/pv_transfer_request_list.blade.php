@@ -3,42 +3,7 @@
 @section('content')
     <!-- Start PV Management (MY PV) - KRW  Application list section-->
 
-<div id="pvm-req-pg">
-    <div class="bg05">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-2 col-md-0">
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-12">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 align-self-center mb-4">
-                            <div class="header-title text-center">
-                                <h3 class="mb-0 ">PV management</h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-md-6 col-sm-9 col-10">
-                            <div class="bg03">
-                                <img src="{{asset('image/bg03.png')}}" width="100%">
-                            </div>
-                            <div class="tot-sub-pos1">
-                                 <div class="total-text1">TOTAL PV </div>
-                                 <div class="total-text2 "> 10,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos2">
-                                 <div class="total-text1">Available PV </div> 
-                                 <div class="total-text2 "> 7,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos3">
-                                 <div class="total-text1">Earned PV </div> 
-                                 <div class="total-text2 "> 3,000 won</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-    </div>
-</div>
+@include('user.pv_header')
 
 
 
@@ -49,58 +14,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="wrapper">
-                <nav id="sidebar" class="box-shad ">
-                    <div class="sub-sp">
-                        <div class="user-icons">
-                            <div class="user-imgs text-center pt-4">
-                                <img src="{{asset('image/icon/user02.png')}}" width="65px">
-                            </div>
-                            <div class="user-nm pt-2">Gyewang01</div>
-                            <div class="user-sub-nm ">Gyewang01</div>
-                            <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My Information</a></div>
-                        </div>
-                    </div>
-                    <ul class="list-unstyled components">
-                        <li >
-                            <a href="#WithdrawalSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Withdrawal in Korean Won</a>
-                            <ul class="collapse list-unstyled " id="WithdrawalSubmenu">
-                                <li >
-                                    <a href="{{route('user.krwwithdrawalrequest')}}">Withdrawal Request</a>
-                                </li>
-                                <li >
-                                    <a href="{{route('user.krwapplicationlist')}}">Application List</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="active">
-                            <a href="#MemberSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Member-To-Member Transfer</a>
-                            <ul class="collapse list-unstyled sub-display" id="MemberSubmenu">
-                                <li>
-                                    <a href="pv-transfer.html">Request for transmission</a>
-                                </li>
-                                <li class="active">
-                                    <a href="pv-transfer-request-list.html">Application list</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#ELIMSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ELIM point conversion</a>
-                            <ul class="collapse list-unstyled" id="ELIMSubmenu">
-                                <li>
-                                    <a href="pv-exchange-available-ELIM-point.html">Available PV sales application</a>
-                                </li>
-                                <li>
-                                    <a href="pv-exchange-accumulation-ELIM-point.html">Apply for resale of accumulated PV</a>
-                                </li>
-                                <li>
-                                    <a href="pv-transfer-request-list.html">Application list</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                @include('user.pv_sidebar')
                 <div id="content">
                     <nav class="navbar navbar-expand-lg navbar-light ">
                         <div class="container-fluid mb-3">
@@ -158,126 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="pvm-request overflow-auto">
-                        <div class="pvm-application">
-                            <div class="card-block table-border-style table-responsive">
-                                <div class="container-fluid px-lg-5 px-md-0 px-2">           
-                                    <div class="row mb-20">  
-                                        <div class="col-12 table-start">
-                                            <div class="table-top-head mb-5">Transfer request list</div>
-                                            <table class="table table-hover dt-responsive  ">  
-                                                <thead class="table-header-bg">
-                                                    <tr >
-                                                        <th class="borders-0">No</th>
-                                                        <th class="border-bottom-0">Transfer Request Quantity</th>
-                                                        <th class="borders-0">State</th>
-                                                        <th class="borders-0">Application Date</th>
-                                                        <th class="borders-0">Detail</th>                                           
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look-transfer"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>atmosphere</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>cancellation</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                           
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr>
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                            
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                            
-                                                    </tr>   
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr>
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                              
-                                                    </tr> 
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>50,000</td>
-                                                        <td>complete</td>
-                                                        <td>2021.11.09 17:45</td>
-                                                        <td><a href="#" class="look-btn" data-toggle="modal" data-target="#look"><u>Look</u></a></td>                                                            
-                                                    </tr>
-                                                </tbody>  
-                                                <tfoot>  
-                                                  
-                                                </tfoot>  
-                                            </table>  
-                                        </div>  
-                                    </div>  
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
+                   @livewire('user.pv-transfer-request-list')
 
 
                     <div class="mt-21"></div>
@@ -293,44 +88,7 @@
 <!-- end PV Management (MY PV) - KRW Application list section-->
 
 <!--LOOK  Modal -->
-<div class="modal fade pr-0" id="look-transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content look-modal">
-            <div class="modal-header border-bottom-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>    
-            <div class="modal-body">
-                <div class="form-with-title text-center">
-                    <h4>Application Details</h4>
-                </div>
-                <div class="d-flex flex-column text-center mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-6 text-left">
-                            <div class="app-list-amount"> ID to send</div>
-                            <div class="app-list-amount">Quantity to send</div>
-                            <div class="app-list-amount">Transfer Fee</div>
-                            <div class="app-list-amount">Balance after transfer</div>  
-                        </div>
-                        <div class="col-5 text-right">
-                            <div class="app-list-amount ">USER01</div>
-                            <div class="app-list-amount ">500,000 won</div>
-                            <div class="app-list-amount ">1,000 won</div>
-                            <div class="app-list-amount ">100,000 won</div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center my-5">
-                        <div class="col-11">
-                           <a href="#" class="btn-mod-confirm">Confirm</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@livewire('user.modals.view-pv-transfer-request')
 
 <!--Look modal end -->
 @endsection

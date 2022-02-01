@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
 use App\Models\Notice;
+use App\Models\Ranking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
+
+    public function dashboard()
+    {
+        $thisMonthsRanking = Ranking::thisMonthsRanking();
+        $overallRanking = Ranking::overallRanking();
+        return view('user.dashboard', compact('thisMonthsRanking', 'overallRanking'));
+    }
 
     public function findResult(Request $request)
     {
@@ -105,5 +113,20 @@ class UserController extends Controller
         $notice->views++;
         $notice->save();
         return view('user.service_center_detail', compact('notice'));
+    }
+
+    public function pvMyTree()
+    {
+        return view('user.pv_my_tree');
+    }
+
+    public function pvAccumulationHistory()
+    {
+        return view('user.pv_check_accumulation_history');
+    }
+
+    public function pvUsageHistory()
+    {
+        return view('user.pv_check_usage_history');
     }
 }

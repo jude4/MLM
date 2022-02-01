@@ -1,43 +1,11 @@
 @extends('layouts.userlayout')
-
+@section('styles')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- ==========x==========x========== START DATA TABLE ==========x==========x========= -->
+@endsection
 @section('content')
 
-<div id="pvm-req-pg">
-    <div class="bg05">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-2 col-md-0">
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-12">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 align-self-center mb-4">
-                            <div class="header-title text-center">
-                                <h3 class="mb-0 ">PV management</h3>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-md-6 col-sm-9 col-10">
-                            <div class="bg03">
-                                <img src="{{asset('image/bg03.png')}}" width="100%">
-                            </div>
-                            <div class="tot-sub-pos1">
-                                <div class="total-text1">TOTAL PV </div>
-                                <div class="total-text2 "> 10,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos2">
-                                <div class="total-text1">Available PV </div>
-                                <div class="total-text2 "> 7,000 won</div>
-                            </div>
-                            <div class="tot-sub-pos3">
-                                <div class="total-text1">Earned PV </div>
-                                <div class="total-text2 "> 3,000 won</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('user.pv_header')
 
 
 
@@ -50,10 +18,10 @@
                     <div class="sub-sp">
                         <div class="user-icons">
                             <div class="user-imgs text-center pt-4">
-                                <img src="{{asset('image/icon/user02.png')}}" width="65px">
+                                <img src="{{asset(Auth::user()->profilePicture())}}" width="65px">
                             </div>
-                            <div class="user-nm pt-2">Gyewang01</div>
-                            <div class="user-sub-nm ">Gyewang01</div>
+                            <div class="user-nm pt-2">{{Auth::user()->user_id}}</div>
+                            <div class="user-sub-nm ">{{Auth::user()->nickname}}</div>
                             <div class="exchnge-link pt-3 text-center"><a href="{{route('user.profile')}}">Go to My
                                     Information</a></div>
                         </div>
@@ -67,6 +35,7 @@
 
                     </ul>
                 </nav>
+
                 <div id="content">
                     <nav class="navbar navbar-expand-lg navbar-light ">
                         <div class="container-fluid mb-3">
@@ -123,9 +92,11 @@
                             </div>
                         </div>
                     </div>
-                    
+                    @if (auth()->user()->type == 'General Member')
+                    <p class="text-center h3 text-danger">NOT AN MLM MEMEBER</p>
+                    @else
                     @livewire('user.my-tree')
-
+                    @endif
                 </div>
             </div>
         </div>
@@ -134,298 +105,24 @@
 
 <!-- -----------add button modal start----------------- -->
 
-<div class="modal fade pr-0" id="add-mlm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content " id="search-modal">
-            <div class="modal-header border-bottom-0 mord-head">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div id="serch-modal" class="modal-body">
-                <div class="form-with-title text-center">
-                    <h4>Add MLM Member</h4>
-                </div>
-                <div class="d-flex flex-column text-center mt-4">
-                    <div class="row justify-content-center mb-2">
-                        <div class="col-11 text-left">
-                            <div class="first-select-option mr-1  mb-2">
-                                <select name="" id="id">
-                                    <option class="opt" value="ID">ID</option>
-                                    <option value="nickname">Nickname</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mb-4 ">
-                        <div class="col-md-3 col-sm-11 col-11 text-left mr-md-2 mr-0 pl-md-0 pl-3">
-                            <div class="second-select-option mr-1  mb-2">
-                                <select name="" id="id">
-                                    <option class="" value="ID">=Search Options=</option>
-                                    <option class="" value="ID">ID</option>
-                                    <option value="nickname">Nickname</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-8 col-8 ml-md-2 ml-sm-0 pr-1 pl-0">
-                            <input type="text" class="form-control search-pro-pv-input" placeholder="USER">
-                        </div>
-                        <div class="col-2 px-0 text-right mt-2">
-                            <a href="#" class="search-modal-btn">Search</a>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class=col-12>
-                            <div class="card-block table-border-style ">
-                                <div class="container-fluid px-2">
-                                    <div class="row">
-                                        <div class="col-12 table-start">
-                                            <table class="table modal-table-transfer dt-responsive ">
-                                                <thead class="table-header-bg">
-                                                    <tr>
-                                                        <th class="borders-0">ID</th>
-                                                        <th class="border-bottom-0">nickname</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox"
-                                                                    value="" id="defaultCheck1" checked>
-                                                                <label class="form-check-label ml-4 add-mod"
-                                                                    for="defaultCheck1">
-                                                                    USER01
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>moonlight angel</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox"
-                                                                    value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4"
-                                                                    for="defaultCheck1">
-                                                                    USER02
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Conan</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox"
-                                                                    value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4"
-                                                                    for="defaultCheck1">
-                                                                    USER03
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Frog medium sake</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input mr-4" type="checkbox"
-                                                                    value="" id="defaultCheck1">
-                                                                <label class="form-check-label add-mod ml-4"
-                                                                    for="defaultCheck1">
-                                                                    USER04
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>happy girl muscle man</td>
-                                                    </tr>
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center mb-4 mt-3">
-                        <div class="col-11">
-                            <div class="mod-btn d-flex justify-content-between">
-                                <a href="#" class="btn-model-register">New registration</a>
-                                <a href="#" class="btn-model-select">Addition</a>
-                                <a href="#" class="btn-model-close btn-close" aria-label="Close" data-dismiss="modal">To
-                                    Close</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@livewire('modals.search-mlm-member')
 
 
 <!-- -----------add button modal end----------------- -->
 
 <!--resale Modal start -->
-<div class="modal fade pr-0" id="resale-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content resale-modal">
-            <div class="modal-header border-bottom-0 top-reas-modal">
-
-            </div>
-            <div class="modal-body">
-                <div class=" text-center">
-                    <h4 class="to-re-chang">To Resell</h4>
-                </div>
-                <div class="d-flex flex-column text-center mt-4 resel-mod">
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <div class="bor-box">
-                                <div class="left-righ d-flex justify-content-between p-3">
-                                    <div class="left-side text-left">
-                                        <div class="left-text">ELIM points</div>
-                                        <div class="left-text">Earned PV</div>
-
-                                    </div>
-                                    <div class="right-side text-right">
-                                        <div class="left-text">250,000 won</div>
-                                        <div class="left-text">250,000 won</div>
-
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-11">
-                                        <div class="box-bord text-center"></div>
-                                    </div>
-                                </div>
-                                <div class="left-righ d-flex justify-content-between mb-3 p-3">
-                                    <div class="left-side text-left">
-                                        <div class="left-text">Remaining accumulated PV</div>
-                                    </div>
-                                    <div class="right-side text-right">
-                                        <div class="left-text">50,000 won</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mb-5 mt-5">
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <a href="#" class="btn-model-resd">To Resell</a>
-                        </div>
-                        <div class="col-md-4 col-sm-5 col-6">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
-                                data-dismiss="modal">Cancellation</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@livewire('modals.resale')
 
 <!--resale   Modal end -->
 
 
 <!--add MLM Member  Modal end -->
-<div class="modal fade pr-0" id="add-mlm-member-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content resale-modal">
-            <div class="modal-header border-bottom-0 top-reas-modal">
-
-            </div>
-            <div class="modal-body">
-                <div class=" text-center">
-                    <h4 class="to-re-chang">Add New MLM Members</h4>
-                </div>
-                <div class="d-flex flex-column  mt-4 ">
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <form>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">ID</label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter your ID.">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nickname</label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter your nickname.">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Password <span class="psw-mds-text">(8 or more
-                                            digits, including special characters, including numbers)</span></label>
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please enter a password.">
-
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control add-mod-inp"
-                                        placeholder="Please re-enter your password.">
-                                </div>
-                                </from>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mb-5 mt-5">
-                        <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-resd">Addition</a>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
-                                data-dismiss="modal">Cancellation</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@livewire('modals.add-mlm-member')
 
 
 <!--add MLM Member  Modal end -->
 
-
-<div class="modal fade pr-0" id="add-user-mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content ">
-            <div class="modal-header border-bottom-0 ">
-
-            </div>
-            <div class="modal-body">
-                <div class=" text-center">
-                    <h4 class="to-re-chang">The member is added to MY TREE.</h4>
-                </div>
-                <div class="d-flex flex-column  mt-4 ">
-                    <div class="row justify-content-center">
-                        <div class="col-11 text-center">
-                            <div class="conf-texts-mod">Are you sure you want to register?</div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mb-5 mt-5">
-                        <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-resd">Confirm</a>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-5">
-                            <a href="#" class="btn-model-close btn-close" aria-label="Close"
-                                data-dismiss="modal">Cancellation</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@livewire('modals.confirm-mlm-member')
 
 @endsection
 

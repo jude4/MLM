@@ -6,9 +6,9 @@
     <td>{{$history->nickname}}</td>
     <td>{{$history->amount}}</td>
 
-    @if($history->status == '0')
+    @if($history->status == 'pending')
     <td class="inc-text-change1">atmosphere</td>
-    @elseif($history->status == '1')
+    @elseif($history->status == 'approved')
     <td class="incas-text-changes">Approval</td>
     @else
     <td class="incas-text-changes text-danger">Cancellation</td>

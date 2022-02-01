@@ -20,6 +20,7 @@ class CreatePvAccumulationHistoriesTable extends Migration
             $table->string('earning_type')->nullable();
             $table->integer('available_earned_bonus')->default(0);
             $table->integer('accumulated_earned_bonus')->default(0);
+            $table->integer('amount')->default(0);
         });
     }
 

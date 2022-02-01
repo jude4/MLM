@@ -35,6 +35,8 @@ class CreateUsersTable extends Migration
             $table->string('upbit_access_key')->nullable();
             $table->string('upbit_secret_key')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('resale')->default(false);
+            $table->integer('stage')->default(0);
         });
     }
 

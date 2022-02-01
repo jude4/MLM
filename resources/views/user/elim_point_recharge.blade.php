@@ -42,7 +42,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 500000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 1000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-2">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 2000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                             <div class="left-side-sub-text"> ELIM POINT </div>
                                         </div>
                                         <div class="align-self-center pr-md-4 pr-1">
-                                            <a href="{{route('user.elimpointviewdetail')}}" class="btn-right-short-change">Shortcut To Charging</a>
+                                            <a href="{{route('user.elimpointviewdetail', ['amount' => 10000000])}}" class="btn-right-short-change">Shortcut To Charging</a>
                                         </div>
                                     </div>
                                 </div>
@@ -95,59 +95,7 @@
                         </div>
                     </div> 
 
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="row justify-content-center mt-12">
-                            <div class="col-12">
-                                <div class="box-bor">
-                                    <div class="d-flex justify-content-between py-2">
-                                        <div class="">
-                                            <div class="left-side-pon-text">500,000 </div>
-                                            <div class="left-side-sub-text"> ELIM POINT </div>
-                                        </div>
-                                        <div class="align-self-center pr-4 d-flex d-inline-block ">
-                                            <div class="tab-atmo-text">Pending</div>
-                                            <a href="{{route('user.elimpointdepositinformation')}}" class="btn-right-short-change">Deposit Information</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center mt-12">
-                            <div class="col-12">
-                                <div class="box-bor-des">
-                                    <div class="d-flex justify-content-between py-2">
-                                        <div class="">
-                                            <div class="left-des-pon-text">500,000 </div>
-                                            <div class="left-des-sub-text"> ELIM POINT </div>
-                                        </div>
-                                        <div class="align-self-center pr-4 d-flex d-inline-block ">
-                                            <div class="tab-can-text">Cancellation</div>
-                                            <a href="{{route('user.elimpointdepositinformation')}}" class="btn-right-short-change">Deposit Information</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center mt-12">
-                            <div class="col-12 mb-20">
-                                <div class="box-bor-des">
-                                    <div class="d-flex justify-content-between py-2">
-                                        <div class="">
-                                            <div class="left-des-pon-text">500,000 </div>
-                                            <div class="left-des-sub-text"> ELIM POINT </div>
-                                        </div>
-                                        <div class="align-self-center pr-4 d-flex d-inline-block ">
-                                            <div class="tab-approval-text">Approval</div>
-                                            <a href="{{route('user.elimpointdepositinformation')}}" class="btn-right-short-change">Deposit Information</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-20"></div>
-
-                    </div>                              
+                        @livewire('user.elim-point-recharge-details')                            
                 </div>
             </div>
         </div>

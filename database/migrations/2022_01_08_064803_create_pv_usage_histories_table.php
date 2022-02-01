@@ -18,7 +18,7 @@ class CreatePvUsageHistoriesTable extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
             $table->string('pv_type');
-            $table->integer('type');
+            $table->string('type');
             $table->integer('price');
         });
     }

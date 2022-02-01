@@ -35,12 +35,12 @@
                                     <div>Name of bank to deposit</div>
                                 </div>
                                 <div class="lft-sid-detail text-right">
-                                    <div>500,000 won</div>
-                                    <div>123-456-78910</div>
-                                    <div>Our bank</div>
-                                    <div>Hong Gil Dong</div>
-                                    <div>111-122-3333</div>
-                                    <div>Our bank</div>
+                                    <div>{{ $elimPointApplication->amount }} won</div>
+                                    <div>{{ $elimPointApplication->virtual_account_number }}</div>
+                                    <div>{{ $elimPointApplication->bank_name }}</div>
+                                    <div>{{ auth()->user()->nickname }}</div>
+                                    <div>{{ $elimPointApplication->account_number }}</div>
+                                    <div>{{ $elimPointApplication->our_bank }}</div>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                 <div class="d-flex flex-column text-center mt-4 mod-trd-sec">
                     <div class="row justify-content-center mb-4">
                         <div class="col-12">
-                            <a href="#" class="btn-dep-confirms">Confirm</a>
+                            <a href="{{route('user.cancel.elimpointdepositinformation', ['id' => $elimPointApplication->id ])}}}" class="btn-dep-confirms">Confirm</a>
                             <a href="#" class="btn-dep-close" data-dismiss="modal" aria-label="Close">To Close</a>
                         </div>
                     </div>

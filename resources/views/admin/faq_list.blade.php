@@ -20,7 +20,7 @@
 
                         <div class="card-block table-border-style overflow-auto mt-5">
                             <div class="container-fluid">  
-                                <form>
+                            <form>
                                     <div class="row justify-content-md-end">
                                         <div class="px-3">
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
@@ -104,7 +104,7 @@
                                 <div class="row">  
                                     <div class="col-12 table-start">
                                     <p class="count-list">Total : {{ $faqcount }} Count (1/1)Page</p>   
-                                      <table class="table table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size">  
+                                      <table class="table-bordered table-hover dt-responsive border-bottom-0 border-remove img-size" id="faqlist">  
                                         <thead class="table-header-bg">
                                             <tr>
                                                 <th class="border-bottom-0">No.</th>
@@ -117,22 +117,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="faqdetail">
-
-                                            @foreach ($faqs as $index => $faq)
-                                            <tr>
-                                                <td>{{$index+1}}</td>
-                                                <td>3235</td>
-                                                <td>{{$faq->category}}</td>                   
-                                                <td>{{$faq->question}}</td>                   
-                                                <td>{{$faq->used?'used':'not used'}}</td>
-                                                <td>{{$faq->created_at}}</td>
-                                                <td class="">
-                                                    <a href="{{route('admin.faqmodification', ['id' => $faq->id])}}" class="btn  btn-correction">    correction
-                                                    </a>
-                                                </td>                 
-                                            </tr>
-                                            @endforeach
-                                                        
+         
                                         </tbody>  
                                         <tfoot>  
                                           
@@ -151,7 +136,6 @@
     </div>
 </div>
 @endsection
-
 
 <script>
     function clearsearchfield() {

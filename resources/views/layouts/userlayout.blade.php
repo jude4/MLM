@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('font/font-symbols.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('font/bootstrap-icons/bootstrap-icon.css')}}">
 <!-- ==========x==========x========== END FONT ==========x==========x========== -->
-
+@yield('styles')
 <!-- ==========x==========x========== START DATA TABLE ==========x==========x========= -->
    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >   

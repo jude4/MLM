@@ -45,17 +45,17 @@
                                             <div class="row">
                                                 <div class="col-xl-4 col-lg-7 col-12">
                                                     <div class="custom-control custom-radio ">
-                                                        <input type="radio" class="custom-control-input" id="defaultGroupExample10" name="membertype" checked="" value="0" @if (!$user->type)
+                                                        <input type="radio" class="custom-control-input" id="defaultGroupExample10" name="membertype"  @if($user->type == 'General Member')
                                                         checked
-                                                        @endif>
+                                                        @endif value="0">
                                                         <label class="custom-control-label" for="defaultGroupExample10">Normal</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-4 col-12">
                                                     <div class="custom-control custom-radio ">
-                                                        <input type="radio" class="custom-control-input " id="defaultGroupExample20" name="membertype" value="1" @if ($user->type)
+                                                        <input type="radio" class="custom-control-input " id="defaultGroupExample20" name="membertype"  @if($user->type == 'MLM Member')
                                                         checked
-                                                        @endif>
+                                                        @endif value="1">
                                                         <label class="custom-control-label" for="defaultGroupExample20">MLM</label>
                                                     </div>
                                                 </div>

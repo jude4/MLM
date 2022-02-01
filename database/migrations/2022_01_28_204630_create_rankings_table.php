@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCommentToPvConversionApplicationsTable extends Migration
+class CreateRankingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddCommentToPvConversionApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('pv_conversion_applications', function (Blueprint $table) {
-            //
-            $table->longText('comment')->nullable();
+        Schema::create('rankings', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('user_id')->onDelete('cascade');
+            $table->integer('reward');
+            $table->float('yield');
         });
     }
 
@@ -26,8 +29,6 @@ class AddCommentToPvConversionApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('pv_conversion_applications', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('rankings');
     }
 }

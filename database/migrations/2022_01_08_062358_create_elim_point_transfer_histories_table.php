@@ -17,12 +17,11 @@ class CreateElimPointTransferHistoriesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->onDelete('cascade');
-            $table->integer('quantity');
-            $table->string('receiver_id')->nullable();
-            $table->string('receiver_nickname')->nullable();
-            $table->string('sender_id')->nullable();
-            $table->string('sender_nickname')->nullable();
-            $table->integer('fee')->default(0);
+            $table->foreignId('receiver_id')->constrained('users')->cascadeOnDelete();
+            $table->integer('transfer_quantity');
+            $table->integer('conversion_quantity')->nullable();
+            $table->integer('transmission_fee')->default(0);
+            $table->double('balance_after_transfer');
         });
     }
 
