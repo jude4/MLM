@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,23 +39,23 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // protected function validateLogin(Request $request)
-    // {
-    //     $request->validate([
-    //         'id' => 'required',
-    //         'password' => 'required|string',
-    //     ]);
-    // }
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
 
-    // protected function credentials(Request $request)
-    // {
-    //     return array_merge($request->only('id', 'password'));
-    // }
+    protected function credentials(Request $request)
+    {
+        return array_merge($request->only('user_id', 'password'));
+    }
 
-//     public function username()
-// {
-//     return 'user_id';
-// }
+    public function username()
+    {
+        return 'user_id';
+    }
 }
 
 
