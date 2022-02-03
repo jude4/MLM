@@ -34,28 +34,28 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
-    protected function validateLogin(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|string',
-            'password' => 'required|string',
-        ]);
-    }
+    // protected function validateLogin(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required|string',
+    //         'password' => 'required|string',
+    //     ]);
+    // }
 
-    protected function credentials(Request $request)
-    {
-        return array_merge($request->only('user_id', 'password'));
-    }
+    // protected function credentials(Request $request)
+    // {
+    //     return array_merge($request->only('user_id', 'password'));
+    // }
 
-    public function username()
-    {
-        return 'user_id';
-    }
+    // public function username()
+    // {
+    //     return 'user_id';
+    // }
 }
 
 
