@@ -26,22 +26,18 @@
 
                     <div class="form-group row justify-content-center mt-5 mb-0">
                         <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10 @error('password') is-invalid @enderror" placeholder="" wire:model='password'>
-                        @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                        <input type="Password" name="password" id="cancelpassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                        
                         </div>
                     <div class="form-group row justify-content-center mt-4">
                         <div class="col-11 text-left pl-4">
                             <label class="lble-chrg-inpds  text-left" for="  ">COMMENT</label>
-                            <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5" wire:model='comment'></textarea>
+                            <textarea class="form-control rounded-0 inp-chrgs-boxd" id="exampleFormControlTextarea1" rows="5"></textarea>
                         </div>
                     </div>
                     <div class="row justify-content-center mt-8">
                         <div class="col-6">
-                            <button class="btn-mod-end" wire:click='decline'>Cancel</button>
+                            <button class="btn-mod-end" id="tocancelbtn" onclick="cancelrequest()">Cancel</button>
                             </a>
                         </div>
                     </div>

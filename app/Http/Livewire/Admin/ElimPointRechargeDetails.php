@@ -30,10 +30,7 @@ class ElimPointRechargeDetails extends Component
 
     public function render()
     {
-        $rechargeLists = ElimPointApplication::with('user')
-                        ->search($this->search)    
-                        ->latest()
-                        ->get();
-        return view('livewire.admin.elim-point-recharge-details', compact('rechargeLists'));
+        $historycount = ElimPointApplication::count();
+        return view('livewire.admin.elim-point-recharge-details', compact('historycount'));
     }
 }

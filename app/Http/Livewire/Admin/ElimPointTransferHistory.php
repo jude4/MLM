@@ -29,14 +29,8 @@ class ElimPointTransferHistory extends Component
 
     public function render()
     {
-        $count = $this->count;
        
-        $histories = ModelsElimPointTransferHistory::with('user', 'reciever')
-            ->search($this->search)
-            ->latest()
-            ->get();
-
-           
-        return view('livewire.admin.elim-point-transfer-history', compact('histories', 'count'));
+        $historycount = ModelsElimPointTransferHistory::count();
+        return view('livewire.admin.elim-point-transfer-history', compact('historycount'));
     }
 }

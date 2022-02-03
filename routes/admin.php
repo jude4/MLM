@@ -28,14 +28,26 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/elim_point_application_details', function () {
         return view('admin.elim_point_application_details');
     })->name('elimpointapplicatondetails');
+    Route::get('/datatable_point_recharge_list', [AdminController::class, 'datatable_point_recharge_list'])->name('datatable_point_recharge_list');
+    Route::get('/view_elim_recharge_detail', [AdminController::class, 'view_elim_recharge_detail'])->name('view_elim_recharge_detail');
+    Route::post('/elim_recharge_action', [AdminController::class, 'elim_recharge_action'])->name('elim_recharge_action');
+    Route::get('/elim_point_recharge_search', [AdminController::class, 'elim_point_recharge_search'])->name('search.elim_point_recharge_search');
+
 
     Route::get('/elim_point_exchange_history', function () {
         return view('admin.elim_point_exchange_history');
     })->name('elimpointapplicatiionhistory');
+    Route::get('/datatable_point_exchange_list', [AdminController::class, 'datatable_point_exchange_list'])->name('datatable_point_exchange_list');
+    Route::get('/view_elim_point_exchange_detail', [AdminController::class, 'view_elim_point_exchange_detail'])->name('view_elim_point_exchange_detail');
+    Route::get('/elim_point_exchange_search', [AdminController::class, 'elim_point_exchange_search'])->name('search.elim_point_exchange_search');
 
     Route::get('/elim_point_transfer_history', function () {
         return view('admin.elim_point_transfer_history');
     })->name('elimpointtransferhistory');
+    Route::get('/datatable_point_transfer_list', [AdminController::class, 'datatable_point_transfer_list'])->name('datatable_point_transfer_list');
+    Route::get('/view_elim_point_transfer_detail', [AdminController::class, 'view_elim_point_transfer_detail'])->name('view_elim_point_transfer_detail');
+    Route::get('/elim_point_transfer_search', [AdminController::class, 'elim_point_transfer_search'])->name('search.elim_point_transfer_search');
+
 
     Route::get('/faq_list', [AdminController::class, 'faqList'])->name('faqlist');
     Route::get('/datatable_faq_list', [AdminController::class, 'datatable_faq_list'])->name('datatable_faq_list');
@@ -103,6 +115,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/pv_withdrawal_request_detail', [AdminController::class, 'pv_withdrawal_request_detail'])->name('pvwithdrawalrequestdetail');
 
     Route::get('/t_point_details_by_member', [AdminController::class, 'tPointDetailsByMember'])->name('tpointdetailsbymember');
+    Route::get('/datatable_t_point_member', [AdminController::class, 'datatable_t_point_member'])->name('datatable_t_point_member');
+    Route::get('/t_point_member_search', [AdminController::class, 't_point_member_search'])->name('search.t_point_member_search');
 
     Route::get('/trading_order', function () {
         return view('admin.trading_order_history');
@@ -114,6 +128,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/mlm_user_management', function () {
         return view('admin.mlm_user_management');
     })->name('mlmusermanagement');
+    Route::get('/mlm_member_search', [AdminController::class, 'mlm_member_search'])->name('search.mlm_member');
+    Route::get('/datatable_mlmmemberlist', [AdminController::class, 'datatable_mlmmemberlist'])->name('datatable_mlmmemberlist');
 
     Route::get('/admin_management_edit', function () {
         return view('admin.admin_management_edit');

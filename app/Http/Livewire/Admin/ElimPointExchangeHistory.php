@@ -26,8 +26,7 @@ class ElimPointExchangeHistory extends Component
     
     public function render()
     {
-        $histories = ModelsElimPointExchangeHistory::with('user')->search($this->search)->latest()->get();
-        
-        return view('livewire.admin.elim-point-exchange-history', compact('histories'));
+        $historycount = ModelsElimPointExchangeHistory::count();
+        return view('livewire.admin.elim-point-exchange-history', compact('historycount'));
     }
 }

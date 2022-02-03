@@ -1,7 +1,7 @@
 @foreach($historydatas as $index => $history)
 <tr>
     <td>{{ $index+1 }}</td>
-    <td>30</td>
+    <td>{{$history->id}}</td>
     <td>{{$history->user_id}}</td>
     <td>{{$history->nickname}}</td>
     @if($history->type == '0')

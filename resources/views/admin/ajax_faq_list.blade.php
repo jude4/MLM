@@ -1,7 +1,7 @@
 @foreach ($faqs as $index => $faq)
 <tr>
     <td>{{$index+1}}</td>
-    <td>3235</td>
+    <td>{{$faq->id}}</td>
     <td>{{$faq->category}}</td>
     <td>{{$faq->question}}</td>
     <td>{{$faq->used?'used':'not used'}}</td>

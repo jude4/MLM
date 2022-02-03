@@ -1,7 +1,7 @@
 @foreach ($historydatas as $index => $historydata)
 <tr>
     <td>{{$index+1}}</td>
-    <td>30</td>
+    <td>{{ $historydata->id }}</td>
     <td>{{ $historydata->user_id }}</td>
     <td>{{ $historydata->nickname }}</td>
     <td>{{ $historydata->earning_type }}</td>

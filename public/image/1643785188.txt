@@ -1,0 +1,13 @@
+My Gift Voucher List Pagination Done
+Point History List Pagination Done
+Point Exchange History Pagination Done
+Daily Stacking History Pagination Done
+Giftcard List Select Coin Point Lable Change
+Gift Card exchange and stacking minus value validation Done
+Withdraw Time Minus Validation Done
+Point Exchange Minus Quantity Validation Done
+Coin Exchange Cancellation Button Background color set and back to coin page done
+Spell Mistake Changes Done
+
+
+

@@ -1,7 +1,7 @@
 @foreach ($admins as $index => $admin)
 <tr>
     <td>{{$index+1}}</td>
-    <td>30</td>
+    <td>{{$admin->id}}</td>
     <td>{{$admin->admin_id}}</td>
     <td>{{$admin->name}}</td>
     <td>{{$admin->department}}</td>

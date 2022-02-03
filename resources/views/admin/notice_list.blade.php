@@ -12,9 +12,11 @@
                     <div class="card ml-md-5">
                         <div class="card-header">
                             <h5>Notice list</h5>
+                            @if($permission == 1)
                             <div class="">
                                 <a href="{{route('admin.noticeregister')}}" class="btn btn-enrollment mt-3">Enrollment</a>
                             </div>
+                            @endif
 
                         </div>
 

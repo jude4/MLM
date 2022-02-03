@@ -1,4 +1,4 @@
-@foreach ($users as $index => $user)
+@foreach ($historydata as $index => $user)
 <tr>
     <td>{{$index+1}}</td>
     <td>{{$user->id}}</td>
@@ -13,9 +13,10 @@
     <td>{{$user->status?'active':'inactive'}}</td>
     <td>{{$user->created_at}}</td>
     <td class="">
-        <a href="{{route('admin.membermodification', ['id' => $user->id])}}" class="btn  btn-correction">
-            Correction
+        <a href="{{route('admin.member-tree-sturcture', ['id' => $user->id])}}" class="btn  btn-correction">
+            View Tree
         </a>
     </td>
+  
 </tr>
 @endforeach

@@ -12,8 +12,7 @@
                     <div class="card ml-md-5">
                         <div class="card-header">
                             <h5>
-                                Admin Registration & Edit
-
+                                Register & Edit Administrator
                             </h5>
                         </div>
                         <div class="card-block table-border-style">

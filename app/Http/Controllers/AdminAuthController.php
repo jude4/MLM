@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Permissions;
+use App\Models\LoginAttempt;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,13 @@ class AdminAuthController extends Controller
 
             $admin = auth()->guard('admin')->user();
             $id = $admin->id;
+            $status = $admin->status;
+            $is_super = $admin->is_super;
+            
+
+            if($status == 0){
+                return back()->with('toast_error','Your ID will be inactive');
+            }
             $ses_data = [];
 
             $permissions = Permissions::leftjoin("user_permissions", function ($join) use ($id) {
@@ -65,8 +73,8 @@ class AdminAuthController extends Controller
     
                 $allowed = array();
                 foreach($permissions as $permission){
-                    if($permission['user_permission_id'] != '' || $id == '1'){
-                        if($id == '1'){
+                    if($permission['user_permission_id'] != '' || $is_super == 1){
+                        if($is_super == 1){
                             $allowed[$permission['name']] = 1;
                         }else{
                             $allowed[$permission['name']] = $permission['is_write'];
@@ -75,12 +83,52 @@ class AdminAuthController extends Controller
                 }
             $request->session()->put('allowed_permissions', $allowed);
 
+
+            $loginattemptdata = LoginAttempt::where('admin_id', '=', $id)->first();
+            if($loginattemptdata){
+                $loginattemptdata->attempt = 0;
+                $loginattemptdata->save();
+            }else{
+                $loginattemptdata = new LoginAttempt();
+                $loginattemptdata->admin_id = $id;
+                $loginattemptdata->attempt = 0;
+                $loginattemptdata->save();
+            }
             $admin->createLoginLog();
-            
             return redirect()->route('admin.administratorlist')->with('toast_success', 'Logged In');
             
         } else {
-            return back()->with('toast_error','your username and password are wrong.');
+            $logincount = LoginAttempt::count();
+            $admin = Admin::where('admin_id', '=', $request->input('id'))->first();
+            if($admin){
+                $id = $admin->id;
+            }else{
+                $id = 0;
+            }
+
+            $loginattemptdata = LoginAttempt::where('admin_id', '=', $id)->first();
+            if($loginattemptdata){
+                $attempt = $loginattemptdata->attempt;
+                $attempt = $attempt + 1;
+                $loginattemptdata->attempt = $attempt;
+                $loginattemptdata->save();
+            }else{
+                $loginattemptdata = new LoginAttempt();
+                $loginattemptdata->admin_id = $id;
+                $loginattemptdata->attempt = 1;
+                $loginattemptdata->save();
+            }
+            $remain = 10 - $loginattemptdata->attempt;
+
+            if($remain <= 0){
+                if($admin){
+                    $admin->status = 0;
+                    $admin->save();
+                }
+                return back()->with('toast_error','Your ID will be inactive');
+                
+            }
+            return back()->with('toast_error','Your username and password are wrong. Attempts remaining: '.$remain);
         }
 
     }

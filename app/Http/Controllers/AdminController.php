@@ -16,6 +16,9 @@ use App\Models\PvUsageHistory;
 use App\Models\PvWithDrawalRequestHistory;
 use App\Models\PvConversionApplication;
 use App\Models\PvTransmissionApplication;
+use App\Models\ElimPointApplication;
+use App\Models\ElimPointExchangeHistory;
+use App\Models\ElimPointTransferHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,15 +30,15 @@ class AdminController extends Controller
 
     public function administratorList()
     {
-
+        $permission = get_permission('Admin List');
         $admincount = Admin::count();
-        return view('admin.administrator_list', compact('admincount'));
+        return view('admin.administrator_list', compact('admincount','permission'));
     }
 
     public function datatable_administratorlist(Request $request)
     {
+        $permission = get_permission('Admin List');
         $totalRecords = Admin::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -58,11 +61,17 @@ class AdminController extends Controller
             }
 
             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
-            $correction = '<a href="' . route('admin.adminmanagement', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+
+            $correction = '';
+
+            if($permission == 1){
+                $correction = '<a href="' . route('admin.adminmanagement', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            }
+            
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "ID" => $record->admin_id,
                 "Name" => $record->name,
                 "Dc" => $record->department,
@@ -347,8 +356,8 @@ class AdminController extends Controller
 
     public function datatable_member_list(Request $request)
     {
+        $permission = get_permission('Admin List');
         $totalRecords = User::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -387,11 +396,16 @@ class AdminController extends Controller
                 $state = 'inactive';
             }
 
-            $correction = '<a href="' . route('admin.membermodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            $correction = '';
+
+            if($permission == 1){
+                $correction = '<a href="' . route('admin.membermodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            }
+            
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "Utype" => $record->type,
                 "UserID" => $record->user_id,
                 "Nickname" => $record->nickname,
@@ -541,7 +555,7 @@ class AdminController extends Controller
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
                 "Earning_Type" => $record->earning_type,
@@ -624,7 +638,7 @@ class AdminController extends Controller
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "PV_Type" => $record->pv_type,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
@@ -675,8 +689,8 @@ class AdminController extends Controller
 
     public function datatable_pv_withdrawal_history_list(Request $request)
     {
+        $permission = get_permission('PV withdrawal request history');
         $totalRecords = PvWithDrawalRequestHistory::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -706,11 +720,16 @@ class AdminController extends Controller
             }
 
             if ($record->status == 'pending') {
-                $Approval = '<a href="#" onclick="approvalmodalopen(' . $record->id . ')" class="btn  btn-correction">
-                Approval </a>
-                <a href="#"  onclick="cancelmodalopen(' . $record->id . ')" class="btn  btn-ends">
-                    cancellation
-                </a>';
+                if($permission == 1){
+                    $Approval = '<a href="#" onclick="approvalmodalopen(' . $record->id . ')" class="btn  btn-correction">
+                    Approval </a>
+                    <a href="#"  onclick="cancelmodalopen(' . $record->id . ')" class="btn  btn-ends">
+                        cancellation
+                    </a>';
+                }else{
+                    $Approval = '';
+                }
+               
             } else {
                 $Approval = '-';
             }
@@ -719,7 +738,7 @@ class AdminController extends Controller
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
                 "Amount" => $record->amount,
@@ -803,8 +822,8 @@ class AdminController extends Controller
 
     public function datatable_pv_conversion_application_detail(Request $request)
     {
+        $permission = get_permission('PV conversion application details');
         $totalRecords = PvConversionApplication::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -840,10 +859,15 @@ class AdminController extends Controller
             }
 
             if ($record->status == 'pending') {
-                $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen(' . $record->id . ')">
-                Approval </a>
-                <a href="#" class="btn  btn-ends" onclick="cancelmodalopen(' . $record->id . ')">
-                cancellation</a>';
+                if($permission ==  1){
+                    $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen(' . $record->id . ')">
+                    Approval </a>
+                    <a href="#" class="btn  btn-ends" onclick="cancelmodalopen(' . $record->id . ')">
+                    cancellation</a>';
+                }else{
+                    $Approval = '';
+                }
+               
             } else {
                 $Approval = '-';
             }
@@ -853,7 +877,7 @@ class AdminController extends Controller
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
                 "Type" => $type,
@@ -942,8 +966,8 @@ class AdminController extends Controller
 
     public function datatable_pv_transmission_application_detail(Request $request)
     {
+        $permission = get_permission('Admin List');
         $totalRecords = PvTransmissionApplication::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -971,12 +995,18 @@ class AdminController extends Controller
             }
 
             if ($record->status == 0) {
-                $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen(' . $record->id . ')">
-                Approval </a>
-                <a href="#" class="btn  btn-ends" onclick="cancelmodalopen(' . $record->id . ')">
-                cancellation
-                </a>
-                ';
+
+                if($permission == 1){
+                    $Approval = '<a href="#" class="btn  btn-correction" onclick="approvalmodalopen(' . $record->id . ')">
+                    Approval </a>
+                    <a href="#" class="btn  btn-ends" onclick="cancelmodalopen(' . $record->id . ')">
+                    cancellation
+                    </a>
+                    ';
+                }else{
+                    $Approval = '';
+                }
+                
             } else {
                 $Approval = '-';
             }
@@ -987,7 +1017,7 @@ class AdminController extends Controller
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 30,
+                "PK" => $record->id,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
                 "Amount" => $record->amount,
@@ -1095,13 +1125,14 @@ class AdminController extends Controller
 
     public function faqList()
     {
+        $permission = get_permission('Frequently Asked Questions');
         $faqcount = Faq::count();
-        return view('admin.faq_list', compact('faqcount'));
+        return view('admin.faq_list', compact('faqcount','permission'));
     }
 
     public function datatable_faq_list(Request $request){
+        $permission = get_permission('Frequently Asked Questions');
         $totalRecords = Faq::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -1126,11 +1157,16 @@ class AdminController extends Controller
                 $use = "not used";
             }
 
-            $correction = '<a href="' . route('admin.faqmodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            if($permission == 1){
+                $correction = '<a href="' . route('admin.faqmodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            }else{
+                $correction = '';
+            }
+            
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 3235,
+                "PK" => $record->id,
                 "Category" => $record->category,
                 "Notice_Title" => $record->question,
                 "Used" => $use,
@@ -1215,8 +1251,8 @@ class AdminController extends Controller
     }
 
     public function datatable_oneononeinquiry_list(Request $request){
+        $permission = get_permission('One-on-one inquiry');
         $totalRecords = Inquiry::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -1241,12 +1277,17 @@ class AdminController extends Controller
                 $answer = 'Answer undone';
             }
 
-            $content = '<a href='.route('admin.oneononeinquiryanswer', ['id' => $record->id]).' class="btn  btn-correction">look
-            </a>';
+            if($permission == 1){
+                $content = '<a href='.route('admin.oneononeinquiryanswer', ['id' => $record->id]).' class="btn  btn-correction">look
+                </a>';
+            }else{
+                $content = '';
+            }
+            
 
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 3235,
+                "PK" => $record->id,
                 "ID" => $record->user->user_id,
                 "Nickname" => $record->user->nickname,
                 "Inquiry" => $record->inquiry,
@@ -1325,14 +1366,15 @@ class AdminController extends Controller
 
     public function noticeList()
     {
+        $permission = get_permission('Notice');
         $noticescount = Notice::count();
-        return view('admin.notice_list', compact('noticescount'));
+        return view('admin.notice_list', compact('noticescount', 'permission'));
     }
 
     public function datatable_notice_list(Request $request)
     {
+        $permission = get_permission('Notice');
         $totalRecords = Notice::count();
-
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
@@ -1350,7 +1392,13 @@ class AdminController extends Controller
             $i++;
 
             $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
-            $correction = '<a href="' . route('admin.noticemodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+
+            if($permission == 1){
+                $correction = '<a href="' . route('admin.noticemodification', ['id' => $record->id]) . '" class="btn  btn-correction">Correction</a>';
+            }else{
+                $correction = '';
+            }
+            
 
             if($record->used == 1){
                 $use = 'used';
@@ -1360,7 +1408,7 @@ class AdminController extends Controller
             
             $data_arr[] = array(
                 "No" => $i,
-                "PK" => 3235,
+                "PK" => $record->id,
                 "Notice_Title" => $record->title,
                 "Used" => $use,
                 "Views" => $record->views,
@@ -1459,8 +1507,7 @@ class AdminController extends Controller
     }
 
 
-    public function registerAdmin(Request $request
-    )
+    public function registerAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'admin_id' => 'required|string|min:5|unique:admins,admin_id',
@@ -1527,8 +1574,486 @@ class AdminController extends Controller
 
     public function tPointDetailsByMember()
     {
-        $histories = TpointDetailsByMember::all();
-        return view('admin.t_point_details_by_member', compact('histories'));
+        $historycount = TpointDetailsByMember::count();
+        return view('admin.t_point_details_by_member', compact('historycount'));
+    }
+
+    public function datatable_t_point_member(Request $request){
+       
+        $totalRecords = TpointDetailsByMember::count();
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = TpointDetailsByMember::select('count(*) as allcount')->where('user_id', 'like', '%' . $searchValue . '%')->count();
+
+        $records = TpointDetailsByMember::skip($start)
+            ->take($rowperpage)
+            ->get();
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+            if($record->user->type == 'General Member'){
+                $mtype = 'General Membership';
+            }else{
+                $mtype = 'MLM member';
+            }
+
+            if($record->increase == 1){
+                $inc = '<span class="inc-text-changes">increase</span>';
+            }else{
+                $inc = '<span class="inc-text-change">decrease</span>';
+            }
+
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $record->id,
+                "Member_Type" => $mtype,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Increase" => $inc,
+                "Quantity" => $record->quantity,
+                "Contents" => $record->contents,
+                "Application_Date_And_Time" => $rdate
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
+    }
+
+    public function t_point_member_search(Request $request){
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = TpointDetailsByMember::join('users', 'users.id', '=', 'tpoint_details_by_members.user_id')->when($field != '', function ($query) use ($request) {
+                $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($status != '', function ($query) use ($request) {
+                $query->where('tpoint_details_by_members.increase', '=', $request->status);
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('users.type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('tpoint_details_by_members.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('tpoint_details_by_members.created_at', '<=', $request->enddate);
+            })
+            ->get(['tpoint_details_by_members.*', 'users.nickname', 'users.user_id','users.type']);
+
+        $hdata = view('admin.ajax_t_point_member_search', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function datatable_point_recharge_list(Request $request)
+    {
+        $permission = get_permission('Elim Point Application Details');
+        $totalRecords = ElimPointApplication::count();
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = ElimPointApplication::select('count(*) as allcount')->where('user_id', 'like', '%' . $searchValue . '%')->count();
+
+        $records = ElimPointApplication::with(['user'])->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+            if ($record->status == 'pending') {
+                $status = '<span class="inc-text-change1">Pending</span>';
+            } else if ($record->status == 'approved') {
+                $status = '<span class="incas-text-changes">Approved</span>';
+            } else {
+                $status = '<span class="incas-text-changes text-danger">Cancelled</span>';
+            }
+
+            $viewdeposite = '<a href="#" class="btn  btn-correction" onclick="viewelimpointapplicationdetail('.$record->id.')">
+            Look</a>';
+
+            if ($record->status == 'pending') {
+                if($permission == 1){
+                    $Approval = ' <a href="#" class="btn  btn-correction" onclick="openapprovemodal('.$record->id.')">
+                    Approval </a>
+                    <a href="#" class="btn  btn-ends" onclick="opencancelmodal('.$record->id.')">
+                    cancellation
+                    </a>';
+                }else{
+                    $Approval = '';
+                }
+            } else {
+                $Approval = '-';
+            }
+
+
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $record->id,
+                "Member_Type" => $record->user->type,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Amount" => $record->amount,
+                "Status" => $status,
+                "Viewdeposite" => $viewdeposite,
+                "Approval" => $Approval,
+                "Application_Date_And_Time" => $rdate
+               
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
+    }
+
+    public function view_elim_recharge_detail(Request $request){
+        $id = $request->id;
+    
+        $recharge = ElimPointApplication::with(['user'])
+            ->where('id', $id)
+            ->get();
+
+        $rechargedata = view('admin.ajax_view_elim_recharge_detail', compact('recharge'))->render();
+        return response()->json(['status' => '200', 'msg' => $rechargedata]); 
+    }
+
+    public function elim_recharge_action(Request $request){
+        $id = $request->id;
+        $password = $request->password;
+        $status = $request->status;
+
+        $admin = Auth::guard('admin')->user();
+        $user = User::find($admin->id);
+        $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
+        if (!Hash::check($password, $user->password)) {
+            return response()->json(['status' => 500, 'msg' => 'password is incorrect']);
+        }
+
+        $PvConversionApplication = ElimPointApplication::findOrFail($id);
+        $PvConversionApplication->status = $status;
+        $PvConversionApplication->save();
+
+        $historydatas = ElimPointApplication::with(['user'])->get();
+        $hdata = view('admin.ajax_elim_recharge_detail', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function elim_point_recharge_search(Request $request){
+        
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydatas = ElimPointApplication::join('users', 'users.id', '=', 'elim_point_applications.user_id')->when($field != '', function ($query) use ($request) {
+                $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($status != '', function ($query) use ($request) {
+                $query->where('elim_point_applications.status', '=', $request->status);
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('users.type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('elim_point_applications.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('elim_point_applications.created_at', '<=', $request->enddate);
+            })
+            ->get(['elim_point_applications.*', 'users.nickname', 'users.user_id','users.type']);
+
+        $hdata = view('admin.ajax_elim_point_application_details_search', compact('historydatas'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function datatable_point_exchange_list(Request $request){
+       
+        $totalRecords = ElimPointExchangeHistory::count();
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = ElimPointExchangeHistory::select('count(*) as allcount')->where('user_id', 'like', '%' . $searchValue . '%')->count();
+
+        $records = ElimPointExchangeHistory::with(['user'])->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+            $look = '<a href="#" class="btn  btn-correction" onclick="viewelimpointexchangedetail('.$record->id.')">
+            Look</a>';
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $record->id,
+                "Member_Type" => $record->user->type,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Elim_Quantity_Before_Exhange" => $record->elim_points,
+                "Tp_Quantity_After_Exhange" => $record->t_points,
+                "Look" => $look,
+                "Exchange_Date_And_Time" => $rdate
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
+    }
+
+    public function view_elim_point_exchange_detail(Request $request){
+        $id = $request->id;
+    
+        $exchange = ElimPointExchangeHistory::with(['user'])
+            ->where('id', $id)
+            ->get();
+
+        $exchangedata = view('admin.ajax_view_elim_point_exchange_detail', compact('exchange'))->render();
+        return response()->json(['status' => '200', 'msg' => $exchangedata]);
+    }
+
+    public function elim_point_exchange_search(Request $request){
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydata = ElimPointExchangeHistory::join('users', 'users.id', '=', 'elim_point_exchange_histories.user_id')->when($field != '', function ($query) use ($request) {
+                $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('users.type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('elim_point_exchange_histories.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('elim_point_exchange_histories.created_at', '<=', $request->enddate);
+            })
+            ->get(['elim_point_exchange_histories.*', 'users.nickname', 'users.user_id','users.type']);
+
+        $hdata = view('admin.ajax_elim_point_exchange_details', compact('historydata'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function datatable_point_transfer_list(Request $request){
+        $totalRecords = ElimPointTransferHistory::count();
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = ElimPointTransferHistory::select('count(*) as allcount')->where('user_id', 'like', '%' . $searchValue . '%')->count();
+
+        $records = ElimPointTransferHistory::with(['user'])->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+            $look = '<a href="#" class="btn  btn-correction" onclick="viewelimpointtransferdetail('.$record->id.')">
+            Look</a>';
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $record->id,
+                "Member_Type" => $record->user->type,
+                "ID" => $record->user->user_id,
+                "Nickname" => $record->user->nickname,
+                "Quantity" => $record->quantity,
+                "Look" => $look,
+                "Exchange_Date_And_Time" => $rdate
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
+    }
+
+    public function view_elim_point_transfer_detail(Request $request){
+        $id = $request->id;
+    
+        $transfer = ElimPointTransferHistory::with(['user'])
+            ->where('id', $id)
+            ->get();
+
+        $exchangedata = view('admin.ajax_view_elim_point_transfer_detail', compact('transfer'))->render();
+        return response()->json(['status' => '200', 'msg' => $exchangedata]);
+    }
+
+    public function elim_point_transfer_search(Request $request){
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydata = ElimPointTransferHistory::join('users', 'users.id', '=', 'elim_point_transfer_histories.user_id')->when($field != '', function ($query) use ($request) {
+                $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($type != '', function ($query) use ($request) {
+                $query->where('users.type', '=', $request->type);
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('elim_point_transfer_histories.created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('elim_point_transfer_histories.created_at', '<=', $request->enddate);
+            })
+            ->get(['elim_point_transfer_histories.*', 'users.nickname', 'users.user_id','users.type']);
+
+        $hdata = view('admin.ajax_elim_point_transfer_details', compact('historydata'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function mlm_member_search(Request $request){
+      
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+
+        $historydata =  User::where('type', User::MLM_MEMBER)
+            ->when($field != '', function ($query) use ($request) {
+                $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+            })
+            ->when($startdate != '', function ($query) use ($request) {
+                $query->where('created_at', '>=', $request->startdate);
+            })
+            ->when($enddate != '', function ($query) use ($request) {
+                $query->where('created_at', '<=', $request->enddate);
+            })
+            ->get();
+
+
+        $hdata = view('admin.ajax_mlm_member_list', compact('historydata'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    public function datatable_mlmmemberlist(Request $request){
+        $permission = get_permission('MLM Membership Management');
+        $totaldata = User::where('type', User::MLM_MEMBER)->get();
+        $totalRecords = count($totaldata);
+       
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $totalRecordswithFilter = User::select('count(*) as allcount')->where('user_id', 'like', '%' . $searchValue . '%')->count();
+
+        $records = User::where('type', User::MLM_MEMBER)->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record->created_at));
+
+            if($record->available_pv != 0){
+                $ap = $record->available_pv;
+            }else{
+                $ap = '-';
+            }
+
+            if($record->earned_pv != 0){
+                $ep = $record->earned_pv;
+            }else{
+                $ep = '-';
+            }
+
+            if($record->status != 0){
+                $state = 'active';
+            }else{
+                $state = 'inactive';
+            }
+
+            $view_tree = '';
+
+            if($permission == 1){
+                $view_tree = '<a href="' . route('admin.member-tree-sturcture', ['id' => $record->id]) . '" class="btn  btn-correction">View Tree</a>';
+            }
+
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $record->id,
+                "Member_Type" => $record->type,
+                "ID" => $record->user_id,
+                "Nickname" => $record->nickname,
+                "Email" => $record->email,
+                "Elim_Points" => $record->elim_points,
+                "T_Points" => $record->t_points,
+                "AP" => $ap,
+                "EP" => $ep,
+                "State" => $state,
+                "Rdate" => $rdate,
+                "View_Tree" => $view_tree
+               
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
     }
     
 

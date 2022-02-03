@@ -123,12 +123,12 @@
                                             <label for="inputMyid" class=" col-form-label ">image file</label>
                                             
                                             <div class="input-group ">
-                                                <input type="text" class="form-control ff-con" placeholder="" id="filename">
+                                                <input type="text" class="form-control ff-con" placeholder="" id="filename" readonly>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mt-12">
+                                        <div class="col-md-2 mt-12 mt-2">
                                             <label class="mx-5 mt-4 edit-user-select"> SELECT
-                                                <input type="file" size="60" id="file-upload" name="image">
+                                                <input type="file" size="60" id="file-upload" name="image" onchange="filenameget()">
                                             </label>
 
                                         </div>
@@ -173,91 +173,17 @@
 </div>
 
 
-<!-- -----------------to modify avtar modal--------------- -->
 
-
-<div class="modal fade" id="to_change" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content mod-sub">
-            <div class="modal-header border-bottom-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-title text-center">
-                    <div class="mod-head">Changing your avatar</div>
-                </div>
-                <div class="d-flex flex-column text-center">
-                    <div class="row mt-4">
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m01.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m02.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m03.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m04.png">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m05.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m04.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m01.png">
-                            </div>
-                        </div>
-                        <div class=" col-3 ">
-                            <div class="mod-img">
-                                <img src="assets/images/m02.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3 mb-2 justify-content-center">
-                        <div class="col-4">
-                            <a href="#" class="btn  btn-select mt-3"> select
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="#" class="btn  btn-cancel mt-3"> cancel
-                            </a>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 
 
 <script>
+    function filenameget(){
+        var name = $('#file-upload')[0].files[0].name;
+        $("#filename").val(name);
+    }
+
     function copyToClipboard(text) {
         var sampleTextarea = document.createElement("textarea");
         document.body.appendChild(sampleTextarea);

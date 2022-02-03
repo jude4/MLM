@@ -1,0 +1,38 @@
+@foreach($historydatas as $index => $item)
+     <tr>
+         <td>{{ $index+1 }}</td>
+         <td>{{ $item->id }}</td>
+         <td>{{ $item->user->type }}</td>
+         <td>{{$item->user->user_id}}</td>
+         <td>{{ $item->user->nickname }}</td>
+         <td>{{ $item->amount }}</td>
+         @if($item->status == 'pending')
+         <td class="inc-text-changes">{{$item->status}}</td>
+         @elseif($item->status == 'approved')
+         <td class="incas-text-changes">{{$item->status}}</td>
+         @else
+         <td class="incas-text-changes text-danger">{{$item->status}}</td>
+         @endif
+
+         <td class="">
+         <a href="#" class="btn  btn-correction" onclick="viewelimpointapplicationdetail('{{ $item->id }}')">
+            Look</a>
+         </td>
+         <td class="">
+             @if ($item->status == 'pending')
+             <a href="#" class="btn  btn-correction" onclick="openapprovemodal('{{ $item->id }}')">
+                    Approval </a>
+                    <a href="#" class="btn  btn-ends" onclick="opencancelmodal('{{ $item->id }}')">
+                    cancellation
+                    </a>
+             @else
+            
+                 - 
+
+             @endif
+         </td>
+         <td>{{ $item->created_at }}</td>
+
+     </tr>
+ @endforeach
+ 

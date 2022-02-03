@@ -1,7 +1,7 @@
 @foreach ($notices as $index => $notice)
 <tr>
     <td>{{$index+1}}</td>
-    <td>3235</td>
+    <td>{{$notice->id}}</td>
     <td>{{$notice->title}}</td>
     <td>{{$notice->used?'used':'not used'}}</td>
     <td>{{$notice->views}}</td>

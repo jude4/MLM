@@ -25,6 +25,7 @@ class MlmMemberTreeList extends Component
     public function render()
     {
         $users = User::where('type', User::MLM_MEMBER)->search($this->search)->latest()->get();
-        return view('livewire.admin.mlm-member-tree-list', compact('users'));
+        $countuser = count($users);
+        return view('livewire.admin.mlm-member-tree-list', compact('users','countuser'));
     }
 }

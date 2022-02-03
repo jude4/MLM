@@ -162,8 +162,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
-    
-    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1')
+    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1' && request()->routeIs(['admin.elimpointapplicatondetails']) != '1' && request()->routeIs(['admin.elimpointapplicatiionhistory']) != '1' && request()->routeIs(['admin.elimpointtransferhistory']) != '1' && request()->routeIs(['admin.tpointdetailsbymember']) != '1' && request()->routeIs(['admin.mlmusermanagement']) != '1')
     <script>
         $('table').dataTable({
             "pageLength": 30
@@ -172,6 +171,19 @@
     @else
     @endif
 
+    @if(request()->routeIs(['admin.administratorlist']) == '1')
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".swal2-container").hide('blind', {}, 400)
+            }, 3000);
+        });
+    </script>
+    @else
+    @endif
+
+
+
     <script>
         var table = $('#admin_table').DataTable({
             autoWidth: false,
@@ -179,6 +191,7 @@
             processing: true,
             serverSide: true,
             dom: 'Bflrtip',
+            pagingType: "full_numbers",
             pageLength: 30,
             ajax: {
                 url: '{{ route("admin.datatable_administratorlist") }}',
@@ -700,6 +713,290 @@
         });
     </script>
 
+    <script>
+        var table = $('#point_recharge_detail').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_point_recharge_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Member_Type',
+                    name: 'member_type'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Amount',
+                    name: 'amount'
+                },
+                {
+                    data: 'Status',
+                    name: 'status'
+                },
+                {
+                    data: 'Viewdeposite',
+                    name: 'viewdeposite'
+                },
+                {
+                    data: 'Approval',
+                    name: 'approval'
+                },
+                {
+                    data: 'Application_Date_And_Time',
+                    name: 'Application_Date_And_Time'
+                }
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#elim_point_exchange_table').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_point_exchange_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Member_Type',
+                    name: 'member_type'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Elim_Quantity_Before_Exhange',
+                    name: 'elim_quantity_before_exhange'
+                },
+                {
+                    data: 'Tp_Quantity_After_Exhange',
+                    name: 'tp_quantity_after_exhange'
+                },
+                {
+                    data: 'Look',
+                    name: 'look'
+                },
+                {
+                    data: 'Exchange_Date_And_Time',
+                    name: 'exchange_date_and_time'
+                },
+
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#elim_point_transfer_history').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_point_transfer_list") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Member_Type',
+                    name: 'member_type'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Quantity',
+                    name: 'quantity'
+                },
+                {
+                    data: 'Look',
+                    name: 'look'
+                },
+                {
+                    data: 'Exchange_Date_And_Time',
+                    name: 'exchange_date_and_time'
+                },
+
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#t_point_table').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_t_point_member") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Member_Type',
+                    name: 'member_type'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Increase',
+                    name: 'increase'
+                },
+                {
+                    data: 'Quantity',
+                    name: 'quantity'
+                },
+                {
+                    data: 'Contents',
+                    name: 'contents'
+                },
+                {
+                    data: 'Application_Date_And_Time',
+                    name: 'application_date_and_time'
+                }
+
+            ]
+
+        });
+    </script>
+
+    <script>
+        var table = $('#mlmmemberlist').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_mlmmemberlist") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'Member_Type',
+                    name: 'member_type'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Email',
+                    name: 'email'
+                },
+                {
+                    data: 'Elim_Points',
+                    name: 'elim_points'
+                },
+                {
+                    data: 'T_Points',
+                    name: 't_points'
+                },
+                {
+                    data: 'AP',
+                    name: 'ap'
+                },
+                {
+                    data: 'EP',
+                    name: 'ep'
+                },
+                {
+                    data: 'State',
+                    name: 'state'
+                },
+                {
+                    data: 'Rdate',
+                    name: 'rdate'
+                },
+                {
+                    data: 'View_Tree',
+                    name: 'view_tree'
+                }
+
+            ]
+
+        });
+    </script>
 
     <script>
         var mindate = new Date();
