@@ -118,17 +118,40 @@
                                  @endif
                              </td>
                              <td class="">
-                                 <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-detail-modal">
+                                 @if ($history->subject == 'section trade')
+                                 <a href="#" wire:click="$emit('sectionTradeForm', '{{ $history->id }}')" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-detail-modal">
                                      Look
                                  </a>
+                                 @else
+                                 <a href="#" wire:click="$emit('pursueTradeForm', '{{ $history->id }}')" class="btn  btn-correction" data-toggle="modal" data-target="#chase-trading-modal">
+                                     Look
+                                 </a>
+
+                                 @endif
                              </td>
                              <td class="">
-                                 <a href="#" wire:click="$emit('pauseTrade', {{ $history->id }}, {{ $history->subject }})" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-pause-modal">
+                                 @if ($history->subject == 'section trade')
+                                 <a href="#" wire:click="$emit('pauseSectionTrade', '{{ $history->id }}')" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-pause-modal">
                                      Pause
                                  </a>
-                                 <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
+                                 @else
+                                 <a href="#" wire:click="$emit('pausePursueTrade', {{ $history->id }})" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-pause-modal">
+                                     Pause
+                                 </a>
+
+                                 @endif
+                                 @if ($history->subject == 'section trade')
+                                 <a href="#" wire:click="$emit('endSectionTrade', '{{ $history->id }}')" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
                                      End
                                  </a>
+
+                                 @else
+                                 <a href="#" wire:click="$emit('endPursueTrade', '{{ $history->id }}')" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
+                                     End
+                                 </a>
+
+                                 @endif
+
                              </td>
                              <td>{{ $history->created_at }}</td>
 

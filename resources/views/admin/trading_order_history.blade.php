@@ -18,7 +18,7 @@
 
                         </div>
 
-                       @livewire('admin.trading-order-history')
+                        @livewire('admin.trading-order-history')
                     </div>
                 </div>
                 <!-- Page-body end -->
@@ -29,16 +29,19 @@
 </div>
 
 
-@livewire('admin.modals.pause-trade')
 
-
-<!-- ------------trading cancel modal----------------- -->
-@livewire('admin.modals.cancel-trade')
-  
 <!-- ------------trading order detail modal----------------- -->
 @livewire('admin.modals.trade-order-details')
 
-<!-- ------------pause modal----------------- -->
+@livewire('admin.modals.pursue-trading')
 
+<!-- ------------trading cancel modal----------------- -->
+@livewire('admin.modals.cancel-trade')
+
+<!-- ------------pause modal----------------- -->
+@livewire('admin.modals.pause-trade')
+
+<!-- ------------Restart modal----------------- -->
+@livewire('admin.modals.restart-trade')
 
 @endsection

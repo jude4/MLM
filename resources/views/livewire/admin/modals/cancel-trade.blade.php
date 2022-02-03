@@ -1,4 +1,6 @@
-{{-- <div class="modal fade" id="trading-cancel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div id="trading-order-pause-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" @if ($editMode==true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true" @endif>
+
+<div id="trading-cancel-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" @if ($editMode==true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true" @endif>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header mod-disp">
@@ -23,12 +25,18 @@
 
                     <div class="form-group row justify-content-center mt-5 mb-0">
                         <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10 @error('password') is-invalid @enderror" placeholder="" wire:model.defer='password'>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
                     </div>
                     <div class="row justify-content-center mt-8">
                         <div class="col-6">
-                            <a href="#" class="btn-mod-end">Trading End</a>
-                            </a>
+                            <button type="submit" wire:click="endTrade" class="btn-mod-end">Trading End</a>
+                            </button>
                         </div>
                     </div>
 
@@ -37,5 +45,4 @@
             </div>
         </div>
     </div>
-</div> --}}
-
+</div>
