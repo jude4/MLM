@@ -36,7 +36,7 @@ aria-hidden="true"
 
                             <div class="form-group  mt-2 mb-0">
                                 <label class="lbl-mod-text">Total trading and operating capital</label>
-                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000" wire:model='operating_capital'>
+                                <input type="text" class="form-control lbl-inp-mod" placeholder="2,000,000" wire:model='opertaional_capital'>
                             </div>
 
                             <div class="form-group  mt-2 mb-0">
@@ -120,7 +120,7 @@ aria-hidden="true"
                                 <input type="text" class="form-control lbl-inp-mod" placeholder="" wire:model.debounce.1000ms='fourth_purchase_price'>
                             </div>                               
                             <div class="d-flex justify-content-between my-4">
-                                <a href="#" class="btn-mod-place-ord">Place an order</a>
+                                <a href="#" class="btn-mod-place-ord" wire:click='placeOrder'>Place an order</a>
                                 <a rel="modal:close" href="#" class="btn-mod-cancle" data-dismiss="modal" aria-label="Close">Cancellation</a>
                             </div>
                        </div>
