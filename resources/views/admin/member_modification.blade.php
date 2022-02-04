@@ -126,12 +126,12 @@
                                                 <input type="text" class="form-control ff-con" placeholder="" id="filename" readonly>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mt-12 mt-2">
+                                        <div class="col-md-2 mt-12 mt-2 float-left">
                                             <label class="mx-5 mt-4 edit-user-select"> SELECT
                                                 <input type="file" size="60" id="file-upload" name="image" onchange="filenameget()">
                                             </label>
-
                                         </div>
+                                        <img src="{{asset('image/').'/'.$user->image}}" class="float-right" width="100">
                                     </div>
 
                                     <div class="form-group row">

@@ -121,6 +121,8 @@ Route::prefix('/admin')->name('admin.')->middleware('web', 'admin.auth')->namesp
     Route::get('/trading_order', function () {
         return view('admin.trading_order_history');
     })->name('tradingorderhistory');
+    Route::get('/datatable_trading_order_table', [AdminController::class, 'datatable_trading_order_table'])->name('datatable_trading_order_table');
+    Route::get('/trading_order_history', [AdminController::class, 'trading_order_history'])->name('search.trading_order_history');
 
     Route::get('/trading_setting', [AdminController::class, 'tradingSettings'])->name('tradingsetting');
     Route::post('/set/trading_setting', [AdminController::class, 'setTradingSettings'])->name('settradingsetting');

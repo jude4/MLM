@@ -24,9 +24,9 @@
                     <div class="lft-sid-detail text-right">
                         <div>{{ $exchange[0]->user->user_id ?? null }}</div>
                         <div>{{ $exchange[0]->user->nickname ?? null }}</div>
-                        <div>{{ $exchange[0]->elim_points ?? null }}</div>
-                        <div>{{ $exchange[0]->fee ?? null }} P</div>
-                        <div>{{ $exchange[0]->t_points ?? null }} won</div>
+                        <div>{{ $exchange[0]->elim_points ?? null }} won</div>
+                        <div>{{ $exchange[0]->fee ?? null }} won</div>
+                        <div>{{ $exchange[0]->t_points ?? null }} p</div>
                     </div>
                 </div>
             </div>

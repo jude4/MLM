@@ -13,7 +13,7 @@
                         <div class="card-header">
                             <h5>Total PV usage history</h5>
                             <div class="">
-                                <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">Exel  download</a>
+                                <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">EXCEL Download</a>
                             </div>
 
                         </div>

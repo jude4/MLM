@@ -19,6 +19,8 @@ use App\Models\PvTransmissionApplication;
 use App\Models\ElimPointApplication;
 use App\Models\ElimPointExchangeHistory;
 use App\Models\ElimPointTransferHistory;
+use App\Models\PursueTrade;
+use App\Models\SectionTrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -1699,11 +1701,11 @@ class AdminController extends Controller
            
             if ($record->status == 'pending') {
                 if($permission == 1){
-                    $Approval = ' <a href="#" class="btn  btn-correction" onclick="openapprovemodal('.$record->id.')">
+                    $Approval = '<span class="d-flex"><a href="#" class="btn  btn-correction mr-3" onclick="openapprovemodal('.$record->id.')">
                     Approval </a>
                     <a href="#" class="btn  btn-ends" onclick="opencancelmodal('.$record->id.')">
                     cancellation
-                    </a>';
+                    </a></span>';
                 }else{
                     $Approval = '';
                 }
@@ -2059,6 +2061,125 @@ class AdminController extends Controller
             "aaData" => $data_arr
         );
         return response()->json($response);
+    }
+
+    public function datatable_trading_order_table(Request $request){
+        $sectionTrade = SectionTrade::with('user')
+        ->latest()->get()->toArray();
+        $pursueTrade = PursueTrade::with('user')
+            ->latest()->get()->toArray();
+
+        $histories = array_merge($sectionTrade,$pursueTrade);
+        $totalRecords = count($histories);
+
+
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length");
+        $search_arr = $request->get('search');
+
+        $searchValue = $search_arr['value']; // Search value
+        $records = array_slice($histories, $start, $rowperpage);
+        $records = (array)$records;
+
+        
+
+        $data_arr = array();
+        $i = 0;
+        foreach ($records as $key => $record) {
+            $i++;
+
+            $rdate = date('Y-m-d h:i:s', strtotime($record['created_at']));
+
+            $look = '<a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-detail-modal">
+            Look</a>';
+            $statechance = ' <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-pause-modal">
+                Pause
+                </a> 
+                <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
+                End
+            </a>';
+
+            if($record['user']['pk'] != ''){
+                $pk =  $record['user']['pk'];
+            }else{
+                $pk = '-';
+            }
+
+            if($record['state'] == 0){
+                $state = 'Processing';
+            }elseif($record['state'] == 1){
+                $state = 'Paused';
+            }else{
+                $state = 'Completed';
+            }
+
+            $data_arr[] = array(
+                "No" => $i,
+                "PK" => $pk,
+                "ID" => $record['user']['user_id'],
+                "Nickname" => $record['user']['nickname'],
+                "Trading_Type" => $record['currency'],
+                "Subject" => $record['subject'],
+                "State" => $state,
+                "Detail" => $look,
+                "Statechance" => $statechance,
+                "Date" => $rdate
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecords,
+            "aaData" => $data_arr
+        );
+        return response()->json($response);
+
+    }
+
+    public function trading_order_history(Request $request){
+        $status = $request->status;
+        $type = $request->type;
+        $field = $request->field;
+        $fieldvalue = $request->fieldvalue;
+        $startdate = $request->startdate;
+        $enddate = $request->enddate;
+        
+        $sectiondata = SectionTrade::join('users', 'users.id', '=', 'section_trades.user_id')->when($field != '', function ($query) use ($request) {
+            $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('section_trades.state', '=', $request->status);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('section_trades.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('section_trades.created_at', '<=', $request->enddate);
+        })
+        ->get(['section_trades.*', 'users.*'])->toArray();
+
+        $pursuetradedata = PursueTrade::join('users', 'users.id', '=', 'pursue_trades.user_id')->when($field != '', function ($query) use ($request) {
+            $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
+        })
+        ->when($status != '', function ($query) use ($request) {
+            $query->where('pursue_trades.state', '=', $request->status);
+        })
+        ->when($startdate != '', function ($query) use ($request) {
+            $query->where('pursue_trades.created_at', '>=', $request->startdate);
+        })
+        ->when($enddate != '', function ($query) use ($request) {
+            $query->where('pursue_trades.created_at', '<=', $request->enddate);
+        })
+        ->get(['pursue_trades.*', 'users.*'])->toArray();
+
+        $historydata = array_merge($sectiondata,$pursuetradedata);
+        
+        $hdata = view('admin.ajax_trading_order_history', compact('historydata'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+
+        
     }
     
 

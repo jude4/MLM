@@ -48,7 +48,8 @@ class TradingOrderHistory extends Component
             ->latest()->get();
 
         $histories = $sectionTrade->concat($pursueTrade);
+        $historycount = count($histories);
 
-        return view('livewire.admin.trading-order-history', compact('histories'));
+        return view('livewire.admin.trading-order-history', compact('histories', 'historycount'));
     }
 }

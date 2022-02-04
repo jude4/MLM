@@ -1856,6 +1856,7 @@ input:focus
     position: absolute;
     top: 40px;
     right: 19px;
+    cursor: pointer;
 }
 .pns-chang
 {
@@ -2808,9 +2809,9 @@ li::marker
 .first-select-option select {
     width: 125px !important;
     height: 40px !important;
-    background: #47A4B2 !important;
+    /* background: #47A4B2 !important; */
     font-size: 13px !important;
-    border: 1px solid #47A4B2 !important;
+    /* border: 1px solid #47A4B2 !important; */
 }
  .second-select-option select {
     width: 125px !important;

@@ -23,10 +23,12 @@
                         <div class="card-block table-border-style overflow-auto">
                             <div class="container-fluid">
                                 <form>
-
+                                
                                     <div class="row justify-content-md-end">
                                         <div class="px-3">
+                                            
                                             <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
+                                                <label class="text-black pr-3 fontweight500">Registration Date Period Search</label>    
                                                 <div class="start-date-input">
                                                     <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">
                                                 </div>

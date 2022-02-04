@@ -15,7 +15,7 @@
                                 <div class="card-header">
                                     <h5>MLM Membership Management</h5>
                                     <div class="">
-                                        <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">EXEL DOWNLOAD</a>
+                                        <a href="#" class="btn btn-enrollment mt-3" onclick="exportData()">EXCEL Download</a>
                                     </div>
                                 </div>
 

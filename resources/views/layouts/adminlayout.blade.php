@@ -162,7 +162,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
-    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1' && request()->routeIs(['admin.elimpointapplicatondetails']) != '1' && request()->routeIs(['admin.elimpointapplicatiionhistory']) != '1' && request()->routeIs(['admin.elimpointtransferhistory']) != '1' && request()->routeIs(['admin.tpointdetailsbymember']) != '1' && request()->routeIs(['admin.mlmusermanagement']) != '1')
+    @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1' && request()->routeIs(['admin.elimpointapplicatondetails']) != '1' && request()->routeIs(['admin.elimpointapplicatiionhistory']) != '1' && request()->routeIs(['admin.elimpointtransferhistory']) != '1' && request()->routeIs(['admin.tpointdetailsbymember']) != '1' && request()->routeIs(['admin.mlmusermanagement']) != '1' && request()->routeIs(['admin.tradingorderhistory']) != '1')
     <script>
         $('table').dataTable({
             "pageLength": 30
@@ -999,6 +999,64 @@
     </script>
 
     <script>
+        var table = $('#trading_order_table').DataTable({
+            autoWidth: false,
+            ordering: false,
+            processing: true,
+            serverSide: true,
+            dom: 'Bflrtip',
+            pageLength: 30,
+            ajax: {
+                url: '{{ route("admin.datatable_trading_order_table") }}',
+                'data': function(data) {}
+            },
+            columns: [{
+                    data: 'No',
+                    name: 'no'
+                },
+                {
+                    data: 'PK',
+                    name: 'pk'
+                },
+                {
+                    data: 'ID',
+                    name: 'id'
+                },
+                {
+                    data: 'Nickname',
+                    name: 'nickname'
+                },
+                {
+                    data: 'Trading_Type',
+                    name: 'trading_type'
+                },
+                {
+                    data: 'Subject',
+                    name: 'subject'
+                },
+                {
+                    data: 'State',
+                    name: 'state'
+                },
+                {
+                    data: 'Detail',
+                    name: 'detail'
+                },
+                {
+                    data: 'Statechance',
+                    name: 'statechance'
+                },
+                {
+                    data: 'Date',
+                    name: 'date'
+                }
+
+            ]
+
+        });
+    </script>
+
+    <script>
         var mindate = new Date();
         mindate.setDate(mindate.getDate() - 8);
         var maxdate = new Date();
@@ -1027,6 +1085,7 @@
             multipleDatesSeparator: " - "
         })
     </script>
+
 
 </body>
 

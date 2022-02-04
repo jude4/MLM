@@ -12398,11 +12398,14 @@ span.badge {
 	color: #C92222 !important;
 }
 
-
-
 .pt-10 {
 	padding-top: 20px;
 }
+
+.fontweight500{
+    font-weight: 500;
+}
+
 
 /*.page-item .page-link {
 	margin-right: 10px;

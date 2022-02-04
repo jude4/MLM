@@ -18,9 +18,9 @@
         <a href="#" class="btn  btn-correction" onclick="viewelimpointapplicationdetail('{{ $item->id }}')">
             Look</a>
     </td>
-    <td class="">
+    <td class="d-flex">
         @if ($item->status == 'pending')
-        <a href="#" class="btn  btn-correction" onclick="openapprovemodal('{{ $item->id }}')">
+        <a href="#" class="btn  btn-correction mr-3" onclick="openapprovemodal('{{ $item->id }}')">
             Approval </a>
         <a href="#" class="btn  btn-ends" onclick="opencancelmodal('{{ $item->id }}')">
             cancellation
