@@ -1696,6 +1696,7 @@ class AdminController extends Controller
             $viewdeposite = '<a href="#" class="btn  btn-correction" onclick="viewelimpointapplicationdetail('.$record->id.')">
             Look</a>';
 
+           
             if ($record->status == 'pending') {
                 if($permission == 1){
                     $Approval = ' <a href="#" class="btn  btn-correction" onclick="openapprovemodal('.$record->id.')">
@@ -1706,8 +1707,12 @@ class AdminController extends Controller
                 }else{
                     $Approval = '';
                 }
-            } else {
-                $Approval = '-';
+            }else if($record->status == 'approved'){
+                $Approval = '<a href="#" class="btn btn-correction">
+                Confirmed
+                </a>';
+            }else {
+                $Approval = '';
             }
 
 

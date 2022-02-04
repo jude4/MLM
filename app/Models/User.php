@@ -216,6 +216,11 @@ class User extends Authenticatable
         return $this->hasMany(PvUsageHistory::class);
     }
 
+    public function rankings() : HasMany
+    {
+        return $this->hasMany(Ranking::class);
+    }
+
     public function tPointDetails()
     {
         return $this->hasMany(TpointDetailsByMember::class);
@@ -316,6 +321,16 @@ class User extends Authenticatable
     public function hasApiKeys()
     {
         return (!empty($this->upbit_access_key) && !empty($this->upbit_secret_key));
+    }
+
+    public function generateRankings($howMany)
+    {
+        for($i = 0; $i < $howMany; $i++){
+            $this->rankings()->create([
+                'yield' => rand(0, 3),
+                'reward' => rand(100000, 999999)
+            ]);
+        }
     }
 
 }

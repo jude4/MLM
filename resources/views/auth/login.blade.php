@@ -37,8 +37,8 @@
                                 <span class="login100-form-subtitle m-b-8 mt-3">V-Elim </span>
                                 <span class="log-sub-title">Log in</span>
                                 <div class="wrap-input100 validate-input m-b-16" > 
-                                    <label  class=" col-form-label lb-txt text-black mb-0 font-weight-bold">EMAIL</label>
-                                    <input class="form-control input100 @error('email') is-invalid @enderror" type="email" value="{{ old('email') }}"  placeholder="Please enter your email." name="email">
+                                    <label  class=" col-form-label lb-txt text-black mb-0 font-weight-bold">ID</label>
+                                    <input class="form-control input100 @error('email') is-invalid @enderror" type="email" value="{{ old('id') }}"  placeholder="Please enter your EMAIL." name="email">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
