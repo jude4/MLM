@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Ranking;
 use App\Models\SectionTrade;
+use App\Models\TradingSetting;
 use App\Traits\TradeStatus;
 use Illuminate\Console\Command;
 
@@ -52,7 +53,8 @@ class SegmentTradingBot extends Command
 
                 $api = new \Binance\API($apiKey, $secretKey);
                 $ticker = $api->prices();
-                $currentPrice = $api->bookPrices()[$trade->currency]['available'];
+                $currentBuyingPrice = $api->bookPrices()[$trade->currency]['bid'];
+                $currentSellingPrice = $api->bookPrices()[$trade->currency]['ask'];
 
                 $price = $trade->amount_by_segment;
 
@@ -70,10 +72,20 @@ class SegmentTradingBot extends Command
 
                 $sixthSellingPrice = $trade->sixth_selling_price;
 
-                if ($startingPrice == $currentPrice) {
+                if ($startingPrice == $currentBuyingPrice) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
-                } elseif ($firstSellingPrice == $currentPrice && $trade->segment_sold == 0) {
+                    $tradingSettings = TradingSetting::first();
+                    $trade->user->tPointDetails()->create([
+                        'increase' => false,
+                        'qunatity' => $tradingSettings->section_transaction_fee,
+                        'contents' => 'buy elim  bot',
+                    ]);
+
+                    $trade->user->t_points = $trade->user->t_points - $tradingSettings->section_transaction_fee;
+                    $trade->user->save();
+                    
+                } elseif ($firstSellingPrice == $currentBuyingPrice && $trade->segment_sold == 0) {
 
                     if ($trade->number_of_segments == 1) {
 
@@ -100,7 +112,7 @@ class SegmentTradingBot extends Command
                     $trade->segment_sold++;
 
                     $trade->save();
-                } elseif ($secondSellingPrice == $currentPrice && $trade->segment_sold == 1) {
+                } elseif ($secondSellingPrice == $currentBuyingPrice && $trade->segment_sold == 1) {
 
                     if ($trade->number_of_segments == 2) {
 
@@ -127,7 +139,7 @@ class SegmentTradingBot extends Command
                     $trade->segment_sold++;
 
                     $trade->save();
-                } elseif ($thirdSellingPrice == $currentPrice && $trade->segment_sold == 2) {
+                } elseif ($thirdSellingPrice == $currentBuyingPrice && $trade->segment_sold == 2) {
 
                     if ($trade->number_of_segments == 3) {
 
@@ -154,7 +166,7 @@ class SegmentTradingBot extends Command
                     $trade->segment_sold++;
 
                     $trade->save();
-                } elseif ($fourthSelingPrice == $currentPrice && $trade->segment_sold == 3) {
+                } elseif ($fourthSelingPrice == $currentBuyingPrice && $trade->segment_sold == 3) {
 
                     if ($trade->number_of_segments == 4) {
 
@@ -181,7 +193,7 @@ class SegmentTradingBot extends Command
                     $trade->segment_sold++;
 
                     $trade->save();
-                } elseif ($fifthSellingPrice == $currentPrice && $trade->segment_sold == 4) {
+                } elseif ($fifthSellingPrice == $currentBuyingPrice && $trade->segment_sold == 4) {
 
                     if ($trade->number_of_segments == 5) {
 
@@ -206,7 +218,7 @@ class SegmentTradingBot extends Command
                     $trade->segment_sold++;
 
                     $trade->save();
-                } elseif ($sixthSellingPrice == $currentPrice && $trade->segment_sold == 5) {
+                } elseif ($sixthSellingPrice == $currentBuyingPrice && $trade->segment_sold == 5) {
 
                     $api->buy($trade->currency, $this->quantity, $price);
 
