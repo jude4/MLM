@@ -125,14 +125,14 @@ class PursueTrading extends Component
         }
 
 
-        $user->tPointDetails()->create([
-            'increase' => false,
-            'quantity' => $tradingSettings->pursuit_transaction_fee,
-            'contents' => 'buy elim bot'
-        ]);
+        // $user->tPointDetails()->create([
+        //     'increase' => false,
+        //     'quantity' => $tradingSettings->pursuit_transaction_fee,
+        //     'contents' => 'buy elim bot'
+        // ]);
 
-        $user->t_points = $user->t_points - $tradingSettings->pursuit_transaction_fee;
-        $user->save();
+        // $user->t_points = $user->t_points - $tradingSettings->pursuit_transaction_fee;
+        // $user->save();
 
         $attributes = $this->validate();
         $attributes['user_id'] = auth()->id();

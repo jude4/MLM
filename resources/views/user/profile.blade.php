@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">password</label>
-                    <input type="password" class="form-control pro-pg-inputs" name="password" >
+                    <input type="password" class="form-control pro-pg-inputs" name="password" placeholder="Password will be changed upon input" >
                 </div>
                 <div class="form-group">
                     <label class="txt-td" for="usr">nickname</label>

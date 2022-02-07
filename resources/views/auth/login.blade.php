@@ -57,14 +57,14 @@
                                 <div class="d-sm-flex justify-content-between w-full p-b-30">
                                     <div class="contact100-form-checkbox">
                                     	<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 
-                                    	<label class="label-checkbox100 "> Automatic login </label>
+                                    	<label class="label-checkbox100 "> Log in automatically </label>
                                     </div>
                                     <div class="mt-sm-2 mt-0 d-flex"><a href="{{route('user.findid')}}" class="forgot-txt1"> Find ID /  </a> <a href="{{route('user.findpassword')}}" class="forgot-txt1">&nbsp; Find Password </a> </div>
                                 </div>
                                 <div class="login-sec-btn p-t-25">
                                  	<button class="login-btn-frt"> Login </button>
                                 </div>
-                                <div class="log-acc-detail mt-2">Don't have an account yet? <a href="{{route('register')}}"class="log-ac-join">join the membership</a></div>
+                                <div class="log-acc-detail mt-2">Don't have an account yet? <a href="{{route('register')}}"class="log-ac-join">Sign Up</a></div>
                                
                             </form>
                         </div>

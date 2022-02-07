@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\PursueTrade;
 use App\Models\Ranking;
+use App\Models\TradingSetting;
 use App\Traits\TradeStatus;
 use Illuminate\Console\Command;
 
@@ -59,6 +60,18 @@ class PursueTradeingBot extends Command
                 if ($currentPrice == $trade->first_av_purchase_price && $trade->segment_bought == 0) {
 
                     $this->buy($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
+
+                    $tradingSettings = TradingSetting::first();
+                    
+                    $trade->user->tPointDetails()->create([
+                        'increase' => false,
+                        'quantity' => $tradingSettings->pursuit_transaction_fee,
+                        'contents' => 'buy elim bot'
+                    ]);
+
+                    $trade->user->t_points = $trade->user->t_points - $tradingSettings->pursuit_transaction_fee;
+                    $trade->user->save();
+                    
                 } elseif ($currentPrice == $trade->first_selling_price && $trade->segment_bought == 1) {
 
                     $this->sell($api, $trade->currency, $this->quantity, $trade->opertaional_capital, $trade);
