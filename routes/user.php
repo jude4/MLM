@@ -24,10 +24,12 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
     Route::get('/restart-trade/{id}/{subject}', [RestartTradeController::class, 'restartTrade'])->name('restart-trade');
 
     Route::get('/first-inquiry', [UserController::class, 'firstInquiry'])->name('firstinquiry');
+    Route::get('/search_inquiry', [UserController::class, 'search_inquiry'])->name('search_inquiry');
 
     Route::get('/faq', function () {
         return view('user.faq');
     })->name('faq');
+    Route::get('/search_faq', [UserController::class, 'search_faq'])->name('search_faq');
 
     Route::get('/service_center_registration', [UserController::class, 'serviceCenterRegistration'])->name('servicecenterregistration');
 
@@ -40,6 +42,7 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
     })->name('serviccenterviewname');
 
     Route::get('/service_center', [UserController::class, 'serviceCenter'])->name('servicecenter');
+    Route::get('/search_notice', [UserController::class, 'search_notice'])->name('search_notice');
 
     Route::get('/ranking', function () {
         return view('user.ranking');

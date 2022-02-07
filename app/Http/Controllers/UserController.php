@@ -6,6 +6,7 @@ use App\Models\Inquiry;
 use App\Models\Notice;
 use App\Models\Ranking;
 use App\Models\User;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -98,13 +99,29 @@ class UserController extends Controller
     public function firstInquiry()
     {
         $inquiries = Auth::user()->inquiries;
-        return view('user.first_inquiry', compact('inquiries'));
+        $inquiriescount = count($inquiries);
+        return view('user.first_inquiry', compact('inquiries','inquiriescount'));
+    }
+
+    public function search_inquiry(Request $request){
+        $type = $request->type;
+        $serachvalue = $request->serachvalue;
+
+        $notices = Auth::user()->inquiries
+        ->when($type == 'Contents', function ($query) use ($request) {
+            $query->where('inquiry', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->when($type == 'Writer', function ($query) use ($request) {
+            $query->where('nickname', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->get();
     }
 
     public function serviceCenter()
     {
         $notices = Notice::where('used', true)->get();
-        return view('user.service_center', compact('notices'));
+        $noticecount = count($notices);
+        return view('user.service_center', compact('notices','noticecount'));
     }
 
     public function serviceCenterDetail($id)
@@ -113,6 +130,43 @@ class UserController extends Controller
         $notice->views++;
         $notice->save();
         return view('user.service_center_detail', compact('notice'));
+    }
+
+    public function search_notice(Request $request){
+        $type = $request->type;
+        $serachvalue = $request->serachvalue;
+
+        $notices = Notice::where('used', true)
+        ->when($type == 'Contents', function ($query) use ($request) {
+            $query->where('content', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->when($type == 'Subject', function ($query) use ($request) {
+            $query->where('title', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->get();
+
+        $hdata = view('user.ajax_service_center_detail', compact('notices'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+
+    }
+
+    public function search_faq(Request $request){
+        $type = $request->type;
+        $serachvalue = $request->serachvalue;
+        $category = $request->category;
+
+
+        $faqdata = Faq::where('category', $category)
+        ->when($type == 'Contents', function ($query) use ($request) {
+            $query->where('answer', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->when($type == 'Subject', function ($query) use ($request) {
+            $query->where('question', 'LIKE', '%' .$request->serachvalue. '%');
+        })
+        ->get();
+
+        $hdata = view('user.ajax_faq_detail', compact('faqdata'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
     }
 
     public function pvMyTree()

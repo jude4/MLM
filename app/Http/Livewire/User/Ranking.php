@@ -47,6 +47,7 @@ class Ranking extends Component
                 break;
         }
 
+
         $this->rankings = ModelsRanking::where('created_at', '>=', $this->timeInstance)
                 ->orderBy('yield', 'DESC')
                 ->get();
@@ -56,6 +57,9 @@ class Ranking extends Component
     {
         $startDate = Carbon::parse($this->startDate)->toDateTimeString() ?? now();
         $endDate = Carbon::parse($this->endDate)->toDateTimeString() ?? now();
+
+       $startDate = date('Y-m-d', strtotime($startDate));
+       $endDate = date('Y-m-d', strtotime($endDate));
 
         $this->rankings = ModelsRanking::where('created_at', '>=', $startDate)
         ->where('created_at', '<=', $endDate)
