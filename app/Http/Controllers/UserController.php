@@ -107,14 +107,23 @@ class UserController extends Controller
         $type = $request->type;
         $serachvalue = $request->serachvalue;
 
-        $notices = Auth::user()->inquiries
+        $loginuser = Auth::user();
+        $loginid = $loginuser['id'];
+
+       
+
+        $inquiries = Inquiry::join('users', 'users.id', '=', 'inquiries.user_id')->where('inquiries.user_id', $loginid)
         ->when($type == 'Contents', function ($query) use ($request) {
-            $query->where('inquiry', 'LIKE', '%' .$request->serachvalue. '%');
+            $query->where('inquiries.inquiry', 'LIKE', '%' .$request->serachvalue. '%');
         })
         ->when($type == 'Writer', function ($query) use ($request) {
-            $query->where('nickname', 'LIKE', '%' .$request->serachvalue. '%');
+            $query->where('users.nickname', 'LIKE', '%' .$request->serachvalue. '%');
         })
         ->get();
+
+        $hdata = view('user.ajax_first_inquiry', compact('inquiries'))->render();
+        return response()->json(['status' => '200', 'msg' => $hdata]);
+
     }
 
     public function serviceCenter()
