@@ -44,6 +44,7 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
     @livewireStyles
 
@@ -160,6 +161,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <script>
+        $(function() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-mm-yy',
+                clickInput: true,
+            });
+        });
+    </script>
 
 
     @if(request()->routeIs(['admin.administratorlist']) != '1' && request()->routeIs(['admin.memberlist']) != '1' && request()->routeIs(['admin.pvaccumulationhistory']) != '1' && request()->routeIs(['admin.pvusagehistory']) != '1' && request()->routeIs(['admin.pvwithdrawalrequesthistory']) != '1' && request()->routeIs(['admin.pvconversionapplicationdetails']) != '1' && request()->routeIs(['admin.pvtransmissionapplicationdetails']) != '1' && request()->routeIs(['admin.noticelist']) != '1' && request()->routeIs(['admin.faqlist']) != '1' && request()->routeIs(['admin.oneononeinquiry']) != '1' && request()->routeIs(['admin.elimpointapplicatondetails']) != '1' && request()->routeIs(['admin.elimpointapplicatiionhistory']) != '1' && request()->routeIs(['admin.elimpointtransferhistory']) != '1' && request()->routeIs(['admin.tpointdetailsbymember']) != '1' && request()->routeIs(['admin.mlmusermanagement']) != '1' && request()->routeIs(['admin.tradingorderhistory']) != '1')

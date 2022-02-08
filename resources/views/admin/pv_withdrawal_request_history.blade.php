@@ -36,7 +36,7 @@
 
 
 <!-- ------------Approval modal----------------- -->
-@livewire('admin.modals.approve-elim-point-withdrawal')
+  @livewire('admin.modals.approve-elim-point-withdrawal')
 
 
 

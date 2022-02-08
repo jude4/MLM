@@ -6,13 +6,13 @@
                     <div class="start-end-date-group d-inline-block d-flex justify-content-end mb-4">
                     <label class="text-black pr-3 fontweight500">Search by date of use</label>
                         <div class="start-date-input">
-                            <input type="date" class="form-control" id="startdate" aria-describedby="date-design-prepend">
+                            <input type="text" class="form-control datepicker" id="startdate" aria-describedby="date-design-prepend" readonly>
                         </div>
                         <div class="exchage-icon align-items-center d-flex justify-content-center">
                             ~
                         </div>
                         <div class="end-date-input">
-                            <input type="date" class="form-control" id="enddate" aria-describedby="date-design-prepend">
+                            <input type="text" class="form-control datepicker" id="enddate" aria-describedby="date-design-prepend" readonly>
                         </div>
                     </div>
                 </div>
@@ -197,7 +197,9 @@
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#pvusagehistorylist').dataTable().fnDestroy();
                     $("#pvusagehistorydata").html(response.msg);
+                    $('#pvusagehistorylist').dataTable();
                 }
             }
         });

@@ -96,7 +96,9 @@
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#elim_point_exchange_table').dataTable().fnDestroy();
                     $("#elim_point_exchange_detail_data").html(response.msg);
+                    $('#elim_point_exchange_table').dataTable();
                 }
             }
         });

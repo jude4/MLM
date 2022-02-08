@@ -110,8 +110,6 @@ class UserController extends Controller
         $loginuser = Auth::user();
         $loginid = $loginuser['id'];
 
-       
-
         $inquiries = Inquiry::join('users', 'users.id', '=', 'inquiries.user_id')->where('inquiries.user_id', $loginid)
         ->when($type == 'Contents', function ($query) use ($request) {
             $query->where('inquiries.inquiry', 'LIKE', '%' .$request->serachvalue. '%');
@@ -153,6 +151,7 @@ class UserController extends Controller
             $query->where('title', 'LIKE', '%' .$request->serachvalue. '%');
         })
         ->get();
+        
 
         $hdata = view('user.ajax_service_center_detail', compact('notices'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);

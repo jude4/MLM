@@ -49,7 +49,7 @@
                                        Save
                                     </button>
 
-                                    <a href="{{route('admin.noticelist')}}" class="btn btn-list mt-3 ml-3">
+                                    <a href="{{route('admin.tradingorderhistory')}}" class="btn btn-list mt-3 ml-3">
                                         List
                                     </a>
                                 </div>

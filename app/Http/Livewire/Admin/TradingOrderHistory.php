@@ -26,6 +26,7 @@ class TradingOrderHistory extends Component
 
     public function render()
     {
+        
         $sectionTrade = SectionTrade::with('user')
             ->whereHas('user', function ($query) {
                 $query->where('nickname', 'like', '%' . $this->search . '%')
@@ -46,6 +47,7 @@ class TradingOrderHistory extends Component
                 $query->where('created_at', 'like', '%' . $this->date . '%');
             })
             ->latest()->get();
+
 
         $histories = $sectionTrade->concat($pursueTrade);
         $historycount = count($histories);

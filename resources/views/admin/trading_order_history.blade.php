@@ -127,7 +127,9 @@
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#trading_order_table').dataTable().fnDestroy();
                     $("#trading_order_history_data").html(response.msg);
+                    $('#trading_order_table').dataTable();
                 }
             }
         });

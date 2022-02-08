@@ -101,6 +101,8 @@ class AdminController extends Controller
         $startdate = $request->startdate;
         $enddate = $request->enddate;
 
+        
+
 
         $admins = Admin::when($field != '', function ($query) use ($request) {
                 $query->where($request->field, 'LIKE', '%' . $request->fieldvalue . '%');
@@ -109,10 +111,12 @@ class AdminController extends Controller
                 $query->where('status', '=', $request->status);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('created_at', '<=', $enddate);
             })
             ->get();
 
@@ -450,10 +454,12 @@ class AdminController extends Controller
                 $query->where('type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('created_at', '<=', $enddate);
             })
             ->get();
 
@@ -593,10 +599,12 @@ class AdminController extends Controller
                 $query->where('pv_accumulation_histories.earning_type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('pv_accumulation_histories.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('pv_accumulation_histories.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('pv_accumulation_histories.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('pv_accumulation_histories.created_at', '<=', $enddate);
             })
             ->get();
 
@@ -678,10 +686,12 @@ class AdminController extends Controller
                 $query->where('pv_usage_histories.pv_type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('pv_usage_histories.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('pv_usage_histories.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('pv_usage_histories.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('pv_usage_histories.created_at', '<=', $enddate);
             })
             ->get();
 
@@ -775,10 +785,12 @@ class AdminController extends Controller
                 $query->where('pv_with_drawal_request_histories.status', '=', $request->status);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('pv_with_drawal_request_histories.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('pv_with_drawal_request_histories.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('pv_with_drawal_request_histories.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('pv_with_drawal_request_histories.created_at', '<=', $enddate);
             })
             ->get(['pv_with_drawal_request_histories.*', 'users.nickname', 'users.user_id']);
 
@@ -955,10 +967,12 @@ class AdminController extends Controller
                 $query->where('pv_conversion_applications.status', '=', $request->status);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('pv_conversion_applications.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('pv_conversion_applications.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('pv_conversion_applications.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('pv_conversion_applications.created_at', '<=', $enddate);
             })
             ->get(['pv_conversion_applications.*', 'users.nickname', 'users.user_id']);
 
@@ -1077,10 +1091,12 @@ class AdminController extends Controller
                 $query->where('pv_transmission_applications.status', '=', $request->status);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('pv_transmission_applications.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('pv_transmission_applications.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('pv_transmission_applications.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('pv_transmission_applications.created_at', '<=', $enddate);
             })
             ->get(['pv_transmission_applications.*', 'users.nickname', 'users.user_id']);
 
@@ -1206,10 +1222,12 @@ class AdminController extends Controller
                 $query->where('used', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('created_at', '<=', $enddate);
             })
             ->get();
 
@@ -1333,10 +1351,12 @@ class AdminController extends Controller
                 }
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('inquiries.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('inquiries.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('inquiries.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('inquiries.created_at', '<=', $enddate);
             })
             ->get('inquiries.*', 'users.user_id', 'users.nickname', 'users.created_at as cdate');
 
@@ -1443,10 +1463,12 @@ class AdminController extends Controller
                 $query->where('used', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('created_at', '<=', $enddate);
             })
             ->get();
 
@@ -1653,10 +1675,12 @@ class AdminController extends Controller
                 $query->where('users.type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('tpoint_details_by_members.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('tpoint_details_by_members.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('tpoint_details_by_members.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('tpoint_details_by_members.created_at', '<=', $enddate);
             })
             ->get(['tpoint_details_by_members.*', 'users.nickname', 'users.user_id','users.type']);
 
@@ -1793,10 +1817,12 @@ class AdminController extends Controller
                 $query->where('users.type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('elim_point_applications.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('elim_point_applications.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('elim_point_applications.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('elim_point_applications.created_at', '<=', $enddate);
             })
             ->get(['elim_point_applications.*', 'users.nickname', 'users.user_id','users.type']);
 
@@ -1874,10 +1900,12 @@ class AdminController extends Controller
                 $query->where('users.type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('elim_point_exchange_histories.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('elim_point_exchange_histories.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('elim_point_exchange_histories.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('elim_point_exchange_histories.created_at', '<=', $enddate);
             })
             ->get(['elim_point_exchange_histories.*', 'users.nickname', 'users.user_id','users.type']);
 
@@ -1953,10 +1981,12 @@ class AdminController extends Controller
                 $query->where('users.type', '=', $request->type);
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('elim_point_transfer_histories.created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('elim_point_transfer_histories.created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('elim_point_transfer_histories.created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('elim_point_transfer_histories.created_at', '<=', $enddate);
             })
             ->get(['elim_point_transfer_histories.*', 'users.nickname', 'users.user_id','users.type']);
 
@@ -1976,10 +2006,12 @@ class AdminController extends Controller
                 $query->where('users.' . $request->field, 'LIKE', '%' . $request->fieldvalue . '%');
             })
             ->when($startdate != '', function ($query) use ($request) {
-                $query->where('created_at', '>=', $request->startdate);
+                $startdate = date('Y-m-d', strtotime($request->startdate));
+                $query->where('created_at', '>=', $startdate);
             })
             ->when($enddate != '', function ($query) use ($request) {
-                $query->where('created_at', '<=', $request->enddate);
+                $enddate = date('Y-m-d', strtotime($request->enddate));
+                $query->where('created_at', '<=', $enddate);
             })
             ->get();
 
@@ -2069,6 +2101,7 @@ class AdminController extends Controller
         $pursueTrade = PursueTrade::with('user')
             ->latest()->get()->toArray();
 
+
         $histories = array_merge($sectionTrade,$pursueTrade);
         $totalRecords = count($histories);
 
@@ -2153,10 +2186,12 @@ class AdminController extends Controller
             $query->where('section_trades.state', '=', $request->status);
         })
         ->when($startdate != '', function ($query) use ($request) {
-            $query->where('section_trades.created_at', '>=', $request->startdate);
+            $startdate = date('Y-m-d', strtotime($request->startdate));
+            $query->where('section_trades.created_at', '>=', $startdate);
         })
         ->when($enddate != '', function ($query) use ($request) {
-            $query->where('section_trades.created_at', '<=', $request->enddate);
+            $enddate = date('Y-m-d', strtotime($request->enddate));
+            $query->where('section_trades.created_at', '<=', $enddate);
         })
         ->get(['section_trades.*', 'users.*'])->toArray();
 
@@ -2167,10 +2202,12 @@ class AdminController extends Controller
             $query->where('pursue_trades.state', '=', $request->status);
         })
         ->when($startdate != '', function ($query) use ($request) {
-            $query->where('pursue_trades.created_at', '>=', $request->startdate);
+            $startdate = date('Y-m-d', strtotime($request->startdate));
+            $query->where('pursue_trades.created_at', '>=', $startdate);
         })
         ->when($enddate != '', function ($query) use ($request) {
-            $query->where('pursue_trades.created_at', '<=', $request->enddate);
+            $enddate = date('Y-m-d', strtotime($request->enddate));
+            $query->where('pursue_trades.created_at', '<=', $enddate);
         })
         ->get(['pursue_trades.*', 'users.*'])->toArray();
 

@@ -65,7 +65,7 @@
                     </form>
                     <div class="row mt-4 mb-20">  
                         <div class="col-12 table-start">  
-                          <table class="table dt-responsive ">  
+                          <table class="table dt-responsive " id="NoticeTable">  
                             <thead class="table-header-bg">
                                 <tr class="text-center">
                                     <th class="border-bottom-0">TDX.</th>
@@ -145,7 +145,10 @@ $('table').DataTable();
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#NoticeTable').dataTable().fnDestroy();
                     $("#noticedetail").html(response.msg);
+                    $('#NoticeTable').dataTable();
+                     
                 }
             }
         });

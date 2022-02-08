@@ -14,7 +14,7 @@
     <td class="incas-text-changes text-danger">Cancellation</td>
     @endif
 
-    @if($history->status == '0')
+    @if($history->status == 'pending')
     <td class="">
         <a href="#" class="btn  btn-correction" onclick="approvalmodalopen('{{ $history->id }}')">
             Approval </a>

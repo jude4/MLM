@@ -26,7 +26,7 @@
 
                   <div class="form-group row justify-content-center mt-5 mb-0">
                       <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                      <input type="Password" id="cancelpassword" name="cancelpassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                      <input type="text" id="cancelpassword" name="cancelpassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
                       </div>
                   <div class="row justify-content-center mt-8">
                       <div class="col-6">

@@ -193,7 +193,9 @@ function exportData() {
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#point_recharge_detail').dataTable().fnDestroy();
                     $("#elim_recharge_detail_data").html(response.msg);
+                    $('#point_recharge_detail').dataTable();
                 }
             }
         });

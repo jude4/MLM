@@ -139,7 +139,9 @@
             dataType: "json",
             success: function(response) {
                 if (response.status == 200) {
+                    $('#elim_point_transfer_history').dataTable().fnDestroy();
                     $("#elim_point_transfer_detail_data").html(response.msg);
+                    $('#elim_point_transfer_history').dataTable();
                 }
             }
         });

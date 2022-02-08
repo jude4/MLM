@@ -28,6 +28,7 @@ class PursueTrading extends Component
 
     public function render()
     {
+        
         return view('livewire.admin.modals.pursue-trading');
     }
 }

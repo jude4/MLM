@@ -37,7 +37,7 @@
                 <div class="lft-sid-detail text-right">
                     <div>{{$recharge[0]->user->user_id ?? null}}</div>
                     <div>{{$recharge[0]->user->nickname ?? null}}</div>
-                    <div>{{$recharge[0]->user->name_of_depositor ?? null}}</div>
+                    <div>{{$recharge[0]->name_of_depositor ?? null}}</div>
                     <div>{{$recharge[0]->account_number ?? null}}</div>
                     <div>{{$recharge[0]->bank_name ?? null}}</div>
                 </div>
