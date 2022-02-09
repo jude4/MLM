@@ -32,16 +32,12 @@
                                     </div>
                                     <div class="col-xl-3 col-lg-4 col-md-4">
                                         <i class="fas fa-caret-right"></i>
-                                        <label for="inputMyid" class=" col-form-label ">Admin mobile number</label>
+                                        <label for="inputMyid" class=" col-form-label ">Adminsss mobile number</label>
                                             <div class="phone-list">
                                                 <div class="input-group phone-input">
                                                     <span class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle btn-mob" data-toggle="dropdown" aria-expanded="false"><span class="type-text  mb-tds">KOR +82</span> <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a class="changeType" href="javascript:;" data-type-value="phone">Phone</a></li>
-                                                            <li><a class="changeType" href="javascript:;" data-type-value="fax">Fax</a></li>
-                                                            <li><a class="changeType" href="javascript:;" data-type-value="mobile">Mobile</a></li>
-                                                        </ul>
+                                                       
                                                     </span>
                                                     <input type="hidden" name="phone[1][type]" class="type-input" value="" />
                                                     <input type="text" name="mobile" value="{{old('mobile')}}" class="form-control" placeholder="Please enter your mobile number" />

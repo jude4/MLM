@@ -1,5 +1,8 @@
 <div class="container">
-    <div class="trad-details">
+    <div class="form-outline mt-5">
+        <input type="text" id="searchcurrencies" class="form-control" placeholder="Search" aria-label="Search" style="width:90%" />
+    </div>
+    <div class="trad-details" id="trad-details">
         @foreach($currencies as $index => $currency)
 
         <div class="row mb-4">
@@ -66,3 +69,4 @@
 
     </div>
 </div>
+

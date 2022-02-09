@@ -320,7 +320,7 @@ class AdminController extends Controller
 
         if ($request->password) {
             $validator = Validator::make($request->all(), [
-                'password' => 'required|alpha_dash|min:8',
+                'password' => 'required|string|min:8|regex:/[0-9]/|regex:/[@$!%*#?&]/',
             ]);
             if ($validator->fails()) {
                 return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
@@ -1538,7 +1538,7 @@ class AdminController extends Controller
             'name' => 'required|string|min:5',
             'department' => 'required|string|min:5',
             'notes' => 'required|string|min:5',
-            'password' => 'required|string|min:8|alpha_dash',
+            'password' => 'required|string|min:8|regex:/[0-9]/|regex:/[@$!%*#?&]/',
             'mobile' => 'required|string|min:9',
             'active' => 'required',
         ]);

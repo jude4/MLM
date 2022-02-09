@@ -54,7 +54,7 @@
 
                     <div class="form-group row justify-content-center mt-5 mb-0">
                         <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                        <input type="Password" name="password" id="approvepassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="">
+                        <input type="password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" name="password" id="approvepassword" autocomplete="off">
                     </div>
 
                    
@@ -99,7 +99,7 @@
 
                     <div class="form-group row justify-content-center mt-5 mb-0">
                         <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" id="cancelpassword" name="cancelpassword">
+                        <input type="password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10" placeholder="" id="cancelpassword" name="cancelpassword" autocomplete="off">
                     </div>
                     
                     <div class="row justify-content-center mt-8">

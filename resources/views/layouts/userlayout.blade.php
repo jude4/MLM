@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title> V-Elim </title>
 <!-- ==========x==========x========== START UI BOOTSTRAP CSS ==========x======== -->
 {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
@@ -52,6 +53,7 @@
 <script src="{{asset('js/jquery-latest.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
 
    
 <!-- ==========x==========x========== END JS ==========x==========x========== -->
@@ -92,6 +94,31 @@ $('body').on('mouseenter mouseleave','.nav-item',function(e){
    </script>
  
  <!-- ==========x==========x========== collapse script End ==========x==========x========== -->
+
+ <script>
+   $("#searchcurrencies").keyup(function() {
+     var searchvalue = $("#searchcurrencies").val();
+     _data = {};
+     _data['searchvalue'] = searchvalue;
+     $.ajax({
+            type: "POST",
+            url: "{{route('user.search_currencies')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+              $("#trad-details").html('');
+                if (response.status == 200) {
+                    $("#trad-details").html(response.msg);
+                } else {
+                    toastr.error(response.msg);
+                }
+            }
+        });
+  });
+ </script>
 
 
 @yield('scripts')

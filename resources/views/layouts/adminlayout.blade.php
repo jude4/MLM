@@ -182,7 +182,7 @@
     @else
     @endif
 
-    @if(request()->routeIs(['admin.administratorlist']) == '1')
+   
     <script>
         $(document).ready(function() {
             setTimeout(function() {
@@ -190,8 +190,7 @@
             }, 3000);
         });
     </script>
-    @else
-    @endif
+  
 
 
 

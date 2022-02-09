@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Traits\TradeStatus;
+use Livewire\Component;
+use GuzzleHttp\Client;
 use App\Models\Inquiry;
 use App\Models\Notice;
 use App\Models\Ranking;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
+    use TradeStatus;
 
     public function dashboard()
     {
@@ -175,6 +178,45 @@ class UserController extends Controller
 
         $hdata = view('user.ajax_faq_detail', compact('faqdata'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
+    }
+
+    
+
+    public function search_currencies(Request $request){
+       $searchvalue = $request->searchvalue;
+
+       $api = new \Binance\API($this->default_api_key, $this->default_secret_key);
+
+        if($searchvalue == ''){
+            $url = $api->base . 'v3/ticker/24hr';
+            $client = new Client();
+
+            $request = $client->request('GET', $url);
+            $dataBody = json_decode($request->getBody()->getContents());
+            $currencies = [];
+            $currenciesdata = collect($dataBody);
+            $hdata = view('user.ajax_trading_second', compact('currenciesdata'))->render();
+        }else{
+            $searchvalue = strtoupper($searchvalue);
+            $url = $api->base . 'v3/ticker/24hr?symbol='.$searchvalue;
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);
+
+            $result = curl_exec($ch);
+            $result = json_decode($result, true);
+
+            if(isset($result['code'])){
+                $currency = array();
+                $hdata = view('user.ajax_trading', compact('currency'))->render();
+            }else{
+                $currency = (array) $result;
+                $hdata = view('user.ajax_trading', compact('currency'))->render();
+            } 
+        }
+       
+       return response()->json(['status' => '200', 'msg' => $hdata]);
     }
 
     public function pvMyTree()
