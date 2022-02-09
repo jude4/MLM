@@ -87,7 +87,7 @@ class User extends Authenticatable
 
     public static function generateUUID()
     {
-        $unique_id = "ELIM" . rand(1000000, 9999999);
+        $unique_id = "elim" . rand(1000000, 9999999);
         return self::uuidExists($unique_id) ? self::generateUUID() : $unique_id;
     }
 
