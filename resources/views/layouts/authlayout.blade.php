@@ -20,13 +20,37 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('font/noto-sans/noto-sans.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('font/font-awesome-pro-master/css/all.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('font/bootstrap-icons/bootstrap-icon.css')}}">
-	
+	<style>
+		.loader {
+			z-index: 20;
+		position: absolute;
+		left: 40%;
+		top: 40%;
+		  border: 16px solid #f3f3f3;
+		  border-radius: 50%;
+		  border-top: 16px solid #325C8E;
+		  width: 120px;
+		  height: 120px;
+		  -webkit-animation: spin 2s linear infinite; /* Safari */
+		  animation: spin 2s linear infinite;
+		}
+		
+		/* Safari */
+		@-webkit-keyframes spin {
+		  0% { -webkit-transform: rotate(0deg); }
+		  100% { -webkit-transform: rotate(360deg); }
+		}
+		
+		@keyframes spin {
+		  0% { transform: rotate(0deg); }
+		  100% { transform: rotate(360deg); }
+		}
+		</style>
 
     @livewireStyles
 <!-- ==========x==========x========== END FONT ==========x==========x========== -->
 </head>
 <body>
-
 <!-- START Login Page-->
 
 @yield('content')

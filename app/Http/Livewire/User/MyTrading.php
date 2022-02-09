@@ -5,6 +5,7 @@ namespace App\Http\Livewire\User;
 use App\Models\PursueTrade;
 use App\Models\SectionTrade;
 use App\Traits\TradeStatus;
+use GuzzleHttp\Client;
 use Livewire\Component;
 
 class MyTrading extends Component
@@ -14,7 +15,7 @@ class MyTrading extends Component
     public $mergedTrade = [];
     public $transaction = [];
 
-    public function mout()
+    public function mount()
     {
         $segmentTrade = SectionTrade::where('user_id', auth()->id())->distinct()->latest()->get();
         $pursueTrade = PursueTrade::where('user_id', auth()->id())->distinct()->latest()->get();
@@ -27,6 +28,23 @@ class MyTrading extends Component
     
     public function render()
     {
-        return view('livewire.user.my-trading');
+        $api = new \Binance\API($this->default_api_key, $this->default_secret_key);
+
+        $url = $api->base . 'v3/ticker/24hr';
+
+        $client = new Client();
+
+        $request = $client->request('GET', $url);
+
+
+        $dataBody = json_decode($request->getBody()->getContents());
+
+        $currencies = [];
+
+        $currencies = collect($dataBody);
+
+        $currencies = $currencies->take(10);
+
+        return view('livewire.user.my-trading', compact('currencies'));
     }
 }
