@@ -1,4 +1,5 @@
 <div class="limiter" id="login">
+    <div wire:loading class="loader"></div>
     <div class="login-top-sec">
         <div class="container">
             <div class="row lg-sp">                 
