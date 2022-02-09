@@ -1,4 +1,4 @@
-<div id="trading-order-pause-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" @if ($editMode==true) style="display: block" class="modal fade pr-0 show in" aria-modal="true" @else class="modal fade pr-0 in" aria-hidden="true" @endif>
+<div id="trading-order-pause-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
 
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -23,17 +23,13 @@
 
                     <div class="form-group row justify-content-center mt-5 mb-0">
                         <label class="lble-chrg-inpds col-lg-3 col-md-10 col-sm-10 col-10 align-self-center text-left pl-0 p-lg-1">admin password</label>
-                        <input type="Password" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10 @error('password') is-invalid @enderror" placeholder="" wire:model.defer='password'>
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <input type="password" id="approvepassword" name="approvepassword" class="form-control inp-chrgs-boxd col-lg-7 col-md-10 col-sm-10 col-10">
+                       
 
                     </div>
                     <div class="row justify-content-center mt-8">
                         <div class="col-6">
-                            <button type="submit" wire:click="pauseTrade" class="btn-mod-conf">Pause</a>
+                            <button type="button" class="btn-mod-conf" id="pausebtn" onclick="pausetrade()">Pause</a>
 
 
                             </button>

@@ -58,4 +58,9 @@
         </div>
     </div>
 </div>
+
+@else
+<div class="col-12 no-data text-center my-5">
+    <h4 class="d-inline-block">No Record Found</h4>
+</div>
 @endif

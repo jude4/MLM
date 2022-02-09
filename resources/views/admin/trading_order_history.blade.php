@@ -136,12 +136,55 @@
     }
 
 
-    function clearsearchfield(){
+    function clearsearchfield() {
         $("#status").val('');
         $("#type").val('');
         $("#field").val('');
         $("#fieldvalue").val('');
         $("#startdate").val('');
         $("#enddate").val('');
+    }
+
+    function pausetrademodalopen(id, type) {
+        $("#trading-order-pause-modal").modal('show');
+        $("#pausebtn").attr('data-id', id);
+        $("#pausebtn").attr('data-type', type);
+    }
+
+    function pausetrade() {
+        var password = $("#approvepassword").val();
+
+        if (password == '') {
+            toastr.error("Please add password");
+            return false;
+        }
+
+        _data = {};
+        _data['id'] = $('#pausebtn').attr('data-id');
+        _data['type'] = $('#pausebtn').attr('data-type');
+        _data['password'] = password;
+        _data['status'] = 1;
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.trade_action')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: _data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 200) {
+                    $("#approvepassword").val('');
+                    $("#trading-order-pause-modal").modal('hide');
+                } else {
+                    toastr.error(response.msg);
+                }
+            }
+        });
+    }
+
+    function restarttrademodalopen(id, type) {
+        $("#trading-restart-modal").modal('show');
     }
 </script>

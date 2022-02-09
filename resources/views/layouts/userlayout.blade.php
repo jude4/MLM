@@ -125,6 +125,7 @@ $('body').on('mouseenter mouseleave','.nav-item',function(e){
      var searchvalue = $("#searchcurrencies").val();
      _data = {};
      _data['searchvalue'] = searchvalue;
+     $(".loadersecond").removeClass('hidden');
      $.ajax({
             type: "POST",
             url: "{{route('user.search_currencies')}}",
@@ -137,8 +138,7 @@ $('body').on('mouseenter mouseleave','.nav-item',function(e){
               $("#trad-details").html('');
                 if (response.status == 200) {
                     $("#trad-details").html(response.msg);
-                } else {
-                    toastr.error(response.msg);
+                    $(".loadersecond").addClass('hidden');
                 }
             }
         });

@@ -1,3 +1,45 @@
+<style>
+    .hidden{
+	display: none;
+}
+    .loadersecond {
+        z-index: 20;
+        position: absolute;
+        left: 40%;
+        top: 60%;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #325C8E;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+
 <div class="container">
     <div class="form-outline mt-5">
         <input type="text" id="searchcurrencies" class="form-control" placeholder="Search" aria-label="Search" style="width:90%" />
@@ -65,8 +107,8 @@
         </div>
 
         @endforeach
-
+        
 
     </div>
+    <div class="loadersecond hidden"></div>
 </div>
-

@@ -46,10 +46,10 @@
                                  <option value="" selected>
                                      =Trading Type=
                                  </option>
-                                 <option value="activation" class="text-left">
+                                 <option value="Pursue Trading" class="text-left">
                                      chase transaction
                                  </option>
-                                 <option value="inactive" class="text-left">
+                                 <option value="segment trading" class="text-left">
                                      segment trading
                                  </option>
                              </select>

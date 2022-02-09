@@ -805,7 +805,6 @@ class AdminController extends Controller
         $status = $request->status;
 
         $admin = Auth::guard('admin')->user();
-        $user = User::find($admin->id);
         $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
         if (!Hash::check($password, $user->password)) {
             return response()->json(['status' => 500, 'msg' => 'password is incorrect']);
@@ -815,6 +814,16 @@ class AdminController extends Controller
         $withdrawalhistory->status = $status;
         $withdrawalhistory->save();
 
+        if($status == 1){
+            $amount = $withdrawalhistory->amount;
+            $userid = $withdrawalhistory->user_id;
+            $userdata = User::find($userid);
+            $availablepv = $userdata['available_pv'];
+            $updpv = $availablepv+$amount;
+            $userdata->available_pv = $updpv;
+            $userdata->save();
+        }
+        
         $historydatas = PvWithDrawalRequestHistory::with(['user'])->get();
         $hdata = view('admin.ajax_pv_withdrawal_request_history', compact('historydatas'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
@@ -2126,12 +2135,26 @@ class AdminController extends Controller
 
             $look = '<a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-detail-modal">
             Look</a>';
-            $statechance = ' <a href="#" class="btn  btn-correction" data-toggle="modal" data-target="#trading-order-pause-modal">
+
+            if($record['state'] == 0){
+                $statechance = ' <a href="#" class="btn  btn-correction" onclick="pausetrademodalopen('.$record['id'].',\''.$record['subject'].'\')">
                 Pause
                 </a> 
                 <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
                 End
-            </a>';
+                </a>';
+            }elseif($record['state'] == 1){
+                $statechance = ' <a href="#" class="btn  btn-correction"  onclick="restarttrademodalopen('.$record['id'].',\''.$record['subject'].'\')">
+                Restart
+                </a> 
+                <a href="#" class="btn  btn-ends" data-toggle="modal" data-target="#trading-cancel-modal">
+                End
+                </a>';
+            }else{
+
+            }
+
+           
 
             if($record['user']['pk'] != ''){
                 $pk =  $record['user']['pk'];
@@ -2171,6 +2194,30 @@ class AdminController extends Controller
 
     }
 
+    public function trade_action(Request $request){
+        $id = $request->id;
+        $type = $request->type;
+        $password = $request->password;
+        $status = $request->status;
+
+        $admin = Auth::guard('admin')->user();
+        $user = Admin::where('admin_id', '=', $admin->admin_id)->first();   //get db User data   
+        if (!Hash::check($password, $user->password)) {
+            return response()->json(['status' => 500, 'msg' => 'password is incorrect']);
+        }
+
+        if($type == 'segment trading'){
+            $sectionTrade = SectionTrade::where('id', '=', $id)->first(); 
+            $sectionTrade->state =  $status;
+            $sectionTrade->save();
+        }else{
+
+        }
+
+        return response()->json(['status' => '200', 'msg' => 'status change successfully']);
+
+    }
+
     public function trading_order_history(Request $request){
         $status = $request->status;
         $type = $request->type;
@@ -2184,6 +2231,9 @@ class AdminController extends Controller
         })
         ->when($status != '', function ($query) use ($request) {
             $query->where('section_trades.state', '=', $request->status);
+        })
+        ->when($type != '', function ($query) use ($request) {
+            $query->where('section_trades.subject', '=', $request->type);
         })
         ->when($startdate != '', function ($query) use ($request) {
             $startdate = date('Y-m-d', strtotime($request->startdate));
@@ -2201,6 +2251,9 @@ class AdminController extends Controller
         ->when($status != '', function ($query) use ($request) {
             $query->where('pursue_trades.state', '=', $request->status);
         })
+        ->when($type != '', function ($query) use ($request) {
+            $query->where('pursue_trades.subject', '=', $request->type);
+        })
         ->when($startdate != '', function ($query) use ($request) {
             $startdate = date('Y-m-d', strtotime($request->startdate));
             $query->where('pursue_trades.created_at', '>=', $startdate);
@@ -2215,8 +2268,6 @@ class AdminController extends Controller
         
         $hdata = view('admin.ajax_trading_order_history', compact('historydata'))->render();
         return response()->json(['status' => '200', 'msg' => $hdata]);
-
-        
     }
     
 

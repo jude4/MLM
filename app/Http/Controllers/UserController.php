@@ -215,7 +215,7 @@ class UserController extends Controller
                 $hdata = view('user.ajax_trading', compact('currency'))->render();
             } 
         }
-       
+
        return response()->json(['status' => '200', 'msg' => $hdata]);
     }
 
