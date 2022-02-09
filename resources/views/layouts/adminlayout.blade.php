@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
     @livewireStyles
+<<<<<<< HEAD
      
    <style>
     .loader {
@@ -75,6 +76,8 @@
     }
     </style>
    @livewireStyles
+=======
+>>>>>>> ad7103ac6443ef10f88e238ca74bbc68120d7281
 
 </head>
 
@@ -218,7 +221,10 @@
             }, 3000);
         });
     </script>
+<<<<<<< HEAD
   
+=======
+>>>>>>> ad7103ac6443ef10f88e238ca74bbc68120d7281
 
 
 
