@@ -19,6 +19,7 @@ Route::prefix('/user')->name('user.')->middleware('auth')->namespace('User')->gr
     Route::get('/trading-history', function () {
         return view('user.trading_history');
     })->name('tradinghistory');
+    Route::post('/search_currencies', [UserController::class, 'search_currencies'])->name('search_currencies');
 
     Route::get('/suspend-trade/{id}/{subject}', [SuspendTradeController::class, 'suspendTrade'])->name('suspend-trade');
     Route::get('/restart-trade/{id}/{subject}', [RestartTradeController::class, 'restartTrade'])->name('restart-trade');
